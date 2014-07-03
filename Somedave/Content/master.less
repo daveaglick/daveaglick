@@ -1,0 +1,89 @@
+﻿@import "bootstrap\\variables.less";
+@import "bootstrap\\mixins.less";
+
+body {
+	background-color: #fafafa;
+    border-top: 12px solid @gray-dark;
+}
+
+.logo-col {
+    padding-bottom: 6px;
+    background-color: @gray-dark;
+    font-family: @font-family-sans-serif;
+    font-weight: 900;
+    color: @gray-lighter;
+    font-size: @font-size-h3;
+}
+
+.nav-col, .proj-col, .collapse-row {
+    font-family: @font-family-sans-serif;
+    font-weight: 700;
+
+    & strong {
+        font-weight: 900;
+    }
+
+    & .navbar-toggle {
+        margin-right: 0;
+    }
+}
+
+.nav-col, .proj-col {
+    padding-top: 6px;
+}
+
+.icon-bar {
+    background-color: @gray-lighter;
+}
+
+.collapse-row {
+    background-color: @gray-dark;
+    color: @gray-lighter;
+}
+
+.hero-row {
+    border-top: 1px solid @gray-lighter;
+    border-bottom: 1px solid @gray-lighter;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    & .hello {
+        font-family: 'Dancing Script', cursive;
+        font-weight: 700;
+        font-size: floor((@font-size-h1 * 2));
+    }
+
+    & .intro {
+        font-family: @font-family-serif;
+        font-size: @font-size-h1;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    body {
+        border-top: none;
+    }
+    .nav-row {
+        background-color: @gray-dark;
+    }
+
+    .logo-col {
+        padding-top: 6px;
+        padding-bottom: 0;
+    }
+
+    .nav-col, .proj-col {
+        padding-top: 0;
+    }
+
+    .hero-row {
+        border-top: none;
+        border-bottom: 1px solid @gray-lighter;
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+}

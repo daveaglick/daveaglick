@@ -1,0 +1,9 @@
+﻿@using RazorDatabase
+
+<div>Testing!</div>
+<ul>
+    @foreach (BlogPost blogPost in RazorDb.Get<BlogPost>())
+    {
+        <li>@blogPost.Published.ToString()</li> 
+    }
+</ul>

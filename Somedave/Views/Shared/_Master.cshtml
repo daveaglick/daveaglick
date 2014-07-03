@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		<title>Somedave</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="@Links.Content.bootstrap.bootstrap_less" rel="stylesheet">
+        <link href="@Links.Content.master_less" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Lato:700,900' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
+        <script src="@Links.Scripts.jquery_1_9_0_min_js"></script>
+        <script src="@Links.Scripts.bootstrap_min_js"></script>
+	</head>
+	<body>
+        @using (var container = Bootstrap.Container())
+        {
+            using (var row = container.GridRow().AddCssClass("nav-row"))
+            {
+                using (row.GridColumn().Xs(3).Sm(4).AddCssClass("logo-col"))
+                { 
+                    <div>&lt;somedave/&gt;</div>
+                }
+                using (row.GridColumn().Xs(9).Sm(4).AddCssClass("nav-col"))
+                { 
+                    <div class="hidden-xs">
+                        @using (var nav = Bootstrap.List())
+                        {
+                            @nav.ListItem("About") 
+                            @nav.ListItem("Blog") 
+                            @nav.ListItem("Archive") 
+                        }     
+                    </div> 
+                    <div class="visible-xs">         
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                } 
+                using (row.GridColumn().Xs(0).Sm(4).AddCssClass("proj-col", "hidden-xs"))
+                { 
+                    <div><strong>Projects</strong></div>
+                    using (var nav = Bootstrap.List())
+                    {
+                        @nav.ListItem("FluentBootstrap") 
+                        @nav.ListItem("RazorDatabase") 
+                    }    
+                } 
+            }
+            using (var row = container.GridRow().AddCssClass("collapse-row"))
+            {
+                using (row.GridColumn().Xs(12).AddCssClass("collapse"))
+                {
+                    using (var nav = Bootstrap.List())
+                    {
+                        @nav.ListItem("About") 
+                        @nav.ListItem("Blog") 
+                        @nav.ListItem("Archive") 
+                    }     
+                    <div><strong>Projects</strong></div>
+                    using (var nav = Bootstrap.List())
+                    {
+                        @nav.ListItem("FluentBootstrap") 
+                        @nav.ListItem("RazorDatabase") 
+                    }  
+                }
+            }
+            using (var row = container.GridRow().AddCssClass("hero-row"))
+            {
+                using (row.GridColumn().Xs(12))
+                {
+                    <div class="hello">Hello.</div>
+                    <div class="intro">My name is Dave Glick. I write code and sometimes I design stuff.</div>
+                }                
+            }
+            
+		    @RenderBody()
+        }
+	</body>
+</html>
+
