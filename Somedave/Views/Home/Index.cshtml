@@ -1,9 +1,8 @@
-﻿@using RazorDatabase
-
-<div>Testing!</div>
-<ul>
-    @foreach (BlogPost blogPost in RazorDb.Get<BlogPost>())
+﻿@using (var row = Bootstrap.GridRow().AddCssClass("hero-row"))
+{
+    using (row.GridColumn().Xs(12))
     {
-        <li>@blogPost.Published.ToString()</li> 
-    }
-</ul>
+        <div class="hello">Hello.</div>
+        <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
+    }                
+}

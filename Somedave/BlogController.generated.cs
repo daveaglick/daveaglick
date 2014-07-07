@@ -73,11 +73,13 @@ namespace Somedave.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Archive = "Archive";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Archive = "Archive";
         }
 
 
@@ -91,7 +93,9 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Archive = "Archive";
             }
+            public readonly string Archive = "~/Views/Blog/Archive.cshtml";
             static readonly _PostsClass s_Posts = new _PostsClass();
             public _PostsClass Posts { get { return s_Posts; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -116,6 +120,17 @@ namespace Somedave.Controllers
     public partial class T4MVC_BlogController : Somedave.Controllers.BlogController
     {
         public T4MVC_BlogController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void ArchiveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Archive()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
+            ArchiveOverride(callInfo);
+            return callInfo;
+        }
 
     }
 }

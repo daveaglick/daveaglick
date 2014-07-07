@@ -266,6 +266,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Blog\Archive.cshtml" />
+    <Content Include="Views\Home\FluentBootstrapProject.cshtml" />
+    <Content Include="Views\Home\RazorDatabaseProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

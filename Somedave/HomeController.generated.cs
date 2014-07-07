@@ -74,12 +74,18 @@ namespace Somedave.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string About = "About";
+            public readonly string FluentBootstrapProject = "FluentBootstrapProject";
+            public readonly string RazorDatabaseProject = "RazorDatabaseProject";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string About = "About";
+            public const string FluentBootstrapProject = "FluentBootstrapProject";
+            public const string RazorDatabaseProject = "RazorDatabaseProject";
         }
 
 
@@ -93,9 +99,15 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string About = "About";
+                public readonly string FluentBootstrapProject = "FluentBootstrapProject";
                 public readonly string Index = "Index";
+                public readonly string RazorDatabaseProject = "RazorDatabaseProject";
             }
+            public readonly string About = "~/Views/Home/About.cshtml";
+            public readonly string FluentBootstrapProject = "~/Views/Home/FluentBootstrapProject.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string RazorDatabaseProject = "~/Views/Home/RazorDatabaseProject.cshtml";
         }
     }
 
@@ -112,6 +124,39 @@ namespace Somedave.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void AboutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult About()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.About);
+            AboutOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FluentBootstrapProjectOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult FluentBootstrapProject()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.FluentBootstrapProject);
+            FluentBootstrapProjectOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void RazorDatabaseProjectOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult RazorDatabaseProject()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RazorDatabaseProject);
+            RazorDatabaseProjectOverride(callInfo);
             return callInfo;
         }
 

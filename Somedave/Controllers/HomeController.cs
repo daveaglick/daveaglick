@@ -14,5 +14,23 @@ namespace Somedave.Controllers
         {
             return View();
         }
+
+        [GET("about")]
+        public virtual ActionResult About()
+        {
+            return View();
+        }
+
+        [GET("fluentbootstrap")]
+        public virtual ActionResult FluentBootstrapProject()
+        {
+            return View();
+        }
+
+        [GET("razordatabase")]
+        public virtual ActionResult RazorDatabaseProject()
+        {
+            return View();
+        }
     }
 }

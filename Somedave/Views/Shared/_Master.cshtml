@@ -14,13 +14,13 @@
         <script src="@Links.Scripts.bootstrap_min_js"></script>
 	</head>
 	<body>
-        @using (var container = Bootstrap.Container())
+        @using (var container = Bootstrap.Container().AddCssClass("container-sm-height"))
         {
-            using (var row = container.GridRow().AddCssClass("nav-row"))
+            using (var row = container.GridRow().AddCssClass("nav-row", "row-sm-height"))
             {
-                using (row.GridColumn().Xs(3).Sm(8).AddCssClass("logo-col"))
+                using (row.GridColumn().Xs(3).Sm(8).AddCssClass("logo-col", "col-sm-height", "col-bottom"))
                 { 
-                    <div>&lt;somedave/&gt;</div>
+                    <div>@Html.ActionLink("<somedave/>", MVC.Home.Index())</div>
                 }
                 using (row.GridColumn().Xs(9).AddCssClass("visible-xs"))
                 { 
@@ -33,35 +33,28 @@
                     </div>
                 }
                 <div class="clearfix visible-xs-block"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("nav-col", "collapse"))
+                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("nav-col", "collapse", "col-sm-height"))
                 { 
                     using (var nav = Bootstrap.List())
                     {
-                        @nav.ListItem("About") 
-                        @nav.ListItem("Blog") 
-                        @nav.ListItem("Archive") 
+                        @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
+                        @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Archive())) 
                     }     
                 } 
                 <div class="clearfix visible-xs-block"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("proj-col", "collapse"))
+                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("proj-col", "collapse", "col-sm-height"))
                 { 
                     <div><strong>Projects</strong></div>
                     using (var nav = Bootstrap.List())
                     {
-                        @nav.ListItem("FluentBootstrap") 
-                        @nav.ListItem("RazorDatabase") 
+                        @nav.ListItem(Html.ActionLink("FluentBootstrap", MVC.Home.FluentBootstrapProject())) 
+                        @nav.ListItem(Html.ActionLink("RazorDatabase", MVC.Home.RazorDatabaseProject())) 
                     }    
                 } 
             }
-            using (var row = container.GridRow().AddCssClass("hero-row"))
-            {
-                using (row.GridColumn().Xs(12))
-                {
-                    <div class="hello">Hello.</div>
-                    <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
-                }                
-            }
-            
+        }            
+        @using (var container = Bootstrap.Container())
+        {
 		    @RenderBody()
         }
 	</body>
