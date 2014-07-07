@@ -259,8 +259,6 @@
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Blog\Posts\Web.config" />
-    <Content Include="Views\Blog\Posts\TestPost.cshtml" />
-    <Content Include="Views\Blog\Posts\AnotherTestPost.cshtml" />
     <None Include="T4MVC.tt.hooks.t4" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -270,6 +268,7 @@
     <Content Include="Views\Blog\Archive.cshtml" />
     <Content Include="Views\Home\FluentBootstrapProject.cshtml" />
     <Content Include="Views\Home\RazorDatabaseProject.cshtml" />
+    <Content Include="Views\Blog\Posts\exporting-a-gtksharp-treeview-to-csv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

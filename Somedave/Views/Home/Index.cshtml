@@ -4,5 +4,19 @@
     {
         <div class="hello">Hello.</div>
         <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
+        <hr />
     }                
+}
+
+@using (var row = Bootstrap.GridRow())
+{
+    using (row.GridColumn().Sm(4).AddCssClass("col-sm-push-8"))
+    {
+        <span>Links and Stuff</span>
+        <hr class="visible-xs" />
+    } 
+    using (row.GridColumn().Sm(8).AddCssClass("col-sm-pull-4"))
+    {
+        <span>Most Recent Blog Post</span>
+    }
 }

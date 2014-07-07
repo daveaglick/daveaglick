@@ -105,12 +105,10 @@ namespace Somedave.Controllers
                 public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
                 public class _ViewNamesClass
                 {
-                    public readonly string AnotherTestPost = "AnotherTestPost";
-                    public readonly string TestPost = "TestPost";
+                    public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
                     public readonly string Web = "Web";
                 }
-                public readonly string AnotherTestPost = "~/Views/Blog/Posts/AnotherTestPost.cshtml";
-                public readonly string TestPost = "~/Views/Blog/Posts/TestPost.cshtml";
+                public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
             }
         }
