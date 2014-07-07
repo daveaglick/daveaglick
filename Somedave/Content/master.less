@@ -15,9 +15,11 @@ body {
     font-size: @font-size-h3;
 }
 
-.nav-col, .proj-col, .collapse-row {
+.nav-col, .proj-col {
     font-family: @font-family-sans-serif;
     font-weight: 700;
+    padding-top: 6px;
+    display: block;
 
     & strong {
         font-weight: 900;
@@ -28,23 +30,12 @@ body {
     }
 }
 
-.nav-col, .proj-col {
-    padding-top: 6px;
-}
-
 .icon-bar {
     background-color: @gray-lighter;
 }
 
-.collapse-row {
-    background-color: @gray-dark;
-    color: @gray-lighter;
-}
-
 .hero-row {
-    border-top: 1px solid @gray-lighter;
     border-bottom: 1px solid @gray-lighter;
-    margin-top: 20px;
     margin-bottom: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -76,12 +67,19 @@ body {
 
     .nav-col, .proj-col {
         padding-top: 0;
+        color: @gray-lighter;
+
+        &.collapse {
+            display: none;
+
+            &.in {
+                display: block;
+            }
+        }
     }
 
     .hero-row {
-        border-top: none;
         border-bottom: 1px solid @gray-lighter;
-        margin-top: 0;
         margin-bottom: 10px;
         padding-top: 6px;
         padding-bottom: 6px;
