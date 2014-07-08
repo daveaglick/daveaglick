@@ -55,6 +55,9 @@
     <Reference Include="FluentBootstrap">
       <HintPath>..\lib\FluentBootstrap.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="RazorGenerator.Mvc">
       <HintPath>..\packages\RazorGenerator.Mvc.2.2.3\lib\net40\RazorGenerator.Mvc.dll</HintPath>
@@ -269,6 +272,7 @@
     <Content Include="Views\Home\FluentBootstrapProject.cshtml" />
     <Content Include="Views\Home\RazorDatabaseProject.cshtml" />
     <Content Include="Views\Blog\Posts\exporting-a-gtksharp-treeview-to-csv.cshtml" />
+    <Content Include="Views\Blog\Posts\right-click-context-menus-in-gtksharp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

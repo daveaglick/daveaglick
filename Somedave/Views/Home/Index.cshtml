@@ -1,22 +1,78 @@
-﻿@using (var row = Bootstrap.GridRow().AddCssClass("hero-row"))
+﻿@using HtmlAgilityPack;
+@using RazorDatabase;
+
+@using (var container = Bootstrap.Container())
 {
-    using (row.GridColumn().Xs(12))
+    using (var row = Bootstrap.GridRow().AddCssClass("hero-row"))
     {
-        <div class="hello">Hello.</div>
-        <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
-        <hr />
-    }                
+        using (row.GridColumn().Xs(12))
+        {
+            <div class="hello">Hello.</div>
+            <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
+            <hr />
+        }                
+    }
 }
 
-@using (var row = Bootstrap.GridRow())
+@using (var container = Bootstrap.Container())
 {
-    using (row.GridColumn().Sm(4).AddCssClass("col-sm-push-8"))
+    using (var row = Bootstrap.GridRow())
     {
-        <span>Links and Stuff</span>
-        <hr class="visible-xs" />
-    } 
-    using (row.GridColumn().Sm(8).AddCssClass("col-sm-pull-4"))
-    {
-        <span>Most Recent Blog Post</span>
+        using (row.GridColumn().Sm(4).SmPush(8))
+        {
+            <h5>Tags</h5>
+            int c = 0;
+            foreach (string tag in RazorDb.Get<BlogPost>()
+                .Where(x => x.Tags != null)
+                .SelectMany(x => x.Tags)
+                .OrderByDescending(x => RazorDb.Get<BlogPost>()
+                    .Where(y => y.Tags != null)
+                    .Count(y => y.Tags.Contains(x))))
+            { 
+                if (c == 10)
+                {
+                    <div><a href="#" data-toggle="collapse" data-target="#more-tags" style="margin-bottom: 6px;">More...</a></div>
+                    @:<div id="more-tags" class="collapse">
+                }
+                <a class="btn btn-default btn-sm" href="#" role="button" style="margin-bottom: 6px;">@tag</a>
+                c++;
+            }
+            if (c >= 10)
+            {
+                @:</div> 
+            }
+            <hr class="visible-xs" />
+        } 
+        using (row.GridColumn().Sm(8).SmPull(4).AddCssClass("right-border"))
+        {
+            bool first = true;
+            foreach (BlogPost blogPost in RazorDb.Get<BlogPost>().Where(x => x.Published != null && x.Published < DateTime.Today).OrderByDescending(x => x.Published).Take(3))
+            {
+                if (!first)
+                {
+                    <hr /> 
+                }
+                first = false;
+                <div><h3>@blogPost.Title</h3></div>
+                if(!string.IsNullOrWhiteSpace(blogPost.Lead))
+                {
+                    <div class="lead">@blogPost.Lead</div>
+                }
+                try
+                {
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(blogPost.Rendered);
+                    HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
+                    if (p != null)
+                    {
+                        @Html.Raw(p.OuterHtml)
+                    }
+                }
+                catch(Exception)
+                {            
+                }
+                <a class="btn btn-default" href="#" role="button">Read More &rarr;</a>
+            }
+        }
     }
 }

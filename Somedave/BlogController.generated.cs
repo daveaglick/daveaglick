@@ -106,9 +106,11 @@ namespace Somedave.Controllers
                 public class _ViewNamesClass
                 {
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
+                    public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
                     public readonly string Web = "Web";
                 }
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
+                public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
             }
         }
