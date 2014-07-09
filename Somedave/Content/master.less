@@ -12,10 +12,16 @@ body {
     font-weight: 900;
     color: @gray-lighter;
     font-size: @font-size-h3;
-    height: 100%;
+    .border-bottom-radius(6px);
 
     & a, & a:hover, & a:focus, & a:active {
         color: @gray-lighter;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    & a, & a:hover, & a:focus, & a:active {
+        color: @headings-color;
     }
 }
 
@@ -80,6 +86,7 @@ strong {
     .logo-col {
         padding-top: 6px;
         padding-bottom: 0;
+    .border-bottom-radius(none);
     }
 
     .nav-col, .proj-col {

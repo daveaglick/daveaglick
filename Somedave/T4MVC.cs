@@ -178,6 +178,7 @@ namespace Links
         }
     
         public static readonly string master_less = Url("master.less");
+        public static readonly string me_jpg = Url("me.jpg");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

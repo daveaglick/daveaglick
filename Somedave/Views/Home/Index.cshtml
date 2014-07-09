@@ -3,20 +3,25 @@
 
 @using (var container = Bootstrap.Container())
 {
-    using (var row = Bootstrap.GridRow().AddCss("hero-row"))
+    using (var row = container.GridRow().AddCss("hero-row"))
     {
-        using (row.GridColumn().Xs(12))
+        using (row.GridColumn().Sm(2))
+        {
+            @Bootstrap.Image(Links.Content.me_jpg, "Me").Responsive().Circle().AddAttribute("style", "margin-top: 6px;")
+        }
+        using (row.GridColumn().Sm(10))
         {
             <div class="hello">Hello.</div>
             <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
-            <hr />
         }                
     }
+    <hr />
 }
+
 
 @using (var container = Bootstrap.Container())
 {
-    using (var row = Bootstrap.GridRow())
+    using (var row = container.GridRow())
     {
         using (row.GridColumn().Sm(8).AddCss("right-border"))
         {
@@ -28,7 +33,7 @@
                     <hr /> 
                 }
                 first = false;
-                <div><h3>@blogPost.Title</h3></div>
+                <div><h3>@Bootstrap.Link(blogPost.Title)</h3></div>
                 if(!string.IsNullOrWhiteSpace(blogPost.Lead))
                 {
                     <div class="@Css.Lead">@blogPost.Lead</div>
