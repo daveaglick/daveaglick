@@ -14,17 +14,17 @@
         <script src="@Links.Scripts.bootstrap_min_js"></script>
 	</head>
 	<body>
-        @using (var container = Bootstrap.Container().AddCssClass("container-sm-height"))
+        @using (var container = Bootstrap.Container().AddCss("container-sm-height"))
         {
-            using (var row = container.GridRow().AddCssClass("nav-row", "row-sm-height"))
+            using (var row = container.GridRow().AddCss("nav-row", "row-sm-height"))
             {
-                using (row.GridColumn().Xs(3).Sm(8).AddCssClass("logo-col", "col-sm-height", "col-bottom"))
+                using (row.GridColumn().Xs(3).Sm(8).AddCss("logo-col", "col-sm-height", "col-bottom"))
                 { 
                     <div>@Html.ActionLink("<somedave/>", MVC.Home.Index())</div>
                 }
-                using (row.GridColumn().Xs(9).AddCssClass("visible-xs"))
+                using (row.GridColumn().Xs(9).VisibleXsBlock())
                 { 
-                    <div class="visible-xs">         
+                    <div class="@Css.VisibleXsBlock">         
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -32,17 +32,18 @@
                         </button>
                     </div>
                 }
-                <div class="clearfix visible-xs-block"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("nav-col", "collapse", "col-sm-height"))
+                <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                using (row.GridColumn().Xs(12).Sm(2).AddCss("nav-col", "collapse", "col-sm-height"))
                 { 
                     using (var nav = Bootstrap.List())
                     {
                         @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
                         @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Archive())) 
+                        @nav.ListItem(Html.ActionLink("Likes", MVC.Home.Likes())) 
                     }     
                 } 
-                <div class="clearfix visible-xs-block"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCssClass("proj-col", "collapse", "col-sm-height"))
+                <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                using (row.GridColumn().Xs(12).Sm(2).AddCss("proj-col", "collapse", "col-sm-height"))
                 { 
                     <div><strong>Projects</strong></div>
                     using (var nav = Bootstrap.List())

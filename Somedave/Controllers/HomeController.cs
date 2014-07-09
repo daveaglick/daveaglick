@@ -21,6 +21,12 @@ namespace Somedave.Controllers
             return View();
         }
 
+        [GET("likes")]
+        public virtual ActionResult Likes()
+        {
+            return View();
+        }
+
         [GET("fluentbootstrap")]
         public virtual ActionResult FluentBootstrapProject()
         {

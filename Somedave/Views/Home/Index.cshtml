@@ -3,7 +3,7 @@
 
 @using (var container = Bootstrap.Container())
 {
-    using (var row = Bootstrap.GridRow().AddCssClass("hero-row"))
+    using (var row = Bootstrap.GridRow().AddCss("hero-row"))
     {
         using (row.GridColumn().Xs(12))
         {
@@ -18,32 +18,7 @@
 {
     using (var row = Bootstrap.GridRow())
     {
-        using (row.GridColumn().Sm(4).SmPush(8))
-        {
-            <h5>Tags</h5>
-            int c = 0;
-            foreach (string tag in RazorDb.Get<BlogPost>()
-                .Where(x => x.Tags != null)
-                .SelectMany(x => x.Tags)
-                .OrderByDescending(x => RazorDb.Get<BlogPost>()
-                    .Where(y => y.Tags != null)
-                    .Count(y => y.Tags.Contains(x))))
-            { 
-                if (c == 10)
-                {
-                    <div><a href="#" data-toggle="collapse" data-target="#more-tags" style="margin-bottom: 6px;">More...</a></div>
-                    @:<div id="more-tags" class="collapse">
-                }
-                <a class="btn btn-default btn-sm" href="#" role="button" style="margin-bottom: 6px;">@tag</a>
-                c++;
-            }
-            if (c >= 10)
-            {
-                @:</div> 
-            }
-            <hr class="visible-xs" />
-        } 
-        using (row.GridColumn().Sm(8).SmPull(4).AddCssClass("right-border"))
+        using (row.GridColumn().Sm(8).AddCss("right-border"))
         {
             bool first = true;
             foreach (BlogPost blogPost in RazorDb.Get<BlogPost>().Where(x => x.Published != null && x.Published < DateTime.Today).OrderByDescending(x => x.Published).Take(3))
@@ -56,7 +31,7 @@
                 <div><h3>@blogPost.Title</h3></div>
                 if(!string.IsNullOrWhiteSpace(blogPost.Lead))
                 {
-                    <div class="lead">@blogPost.Lead</div>
+                    <div class="@Css.Lead">@blogPost.Lead</div>
                 }
                 try
                 {
@@ -71,8 +46,44 @@
                 catch(Exception)
                 {            
                 }
-                <a class="btn btn-default" href="#" role="button">Read More &rarr;</a>
+                @Bootstrap.LinkButton("Read More &rarr;")
             }
         }
+        using (row.GridColumn().Sm(4))
+        {
+            <hr class="@Css.VisibleXsBlock" />
+            <h5>Tags</h5>
+            int c = 0;
+            foreach (string tag in RazorDb.Get<BlogPost>()
+                .Where(x => x.Tags != null)
+                .SelectMany(x => x.Tags)
+                .OrderByDescending(x => RazorDb.Get<BlogPost>()
+                    .Where(y => y.Tags != null)
+                    .Count(y => y.Tags.Contains(x))))
+            { 
+                if (c == 10)
+                {
+                    <div>@Bootstrap.Link("More...").AddAttribute("data-toggle", "collapse").AddAttribute("data-target", "#more-tags").AddAttribute("style", "margin-bottom: 6px;")</div>
+                    @:<div id="more-tags" class="collapse">
+                }
+                @Bootstrap.LinkButton(tag).BtnSm().AddAttribute("style", "margin-bottom: 6px;")
+                c++;
+            }
+            if (c >= 10)
+            {
+                @:</div> 
+            }
+            <hr />
+            <h5>On The Interwebs</h5>
+            using (var list = Bootstrap.List())
+            {
+                @list.ListItem(Bootstrap.Link("LinkedIn"))
+                @list.ListItem(Bootstrap.Link("GitHub (somedave)"))
+                @list.ListItem(Bootstrap.Link("Stack Overflow (somedave)"))
+                @list.ListItem(Bootstrap.Link("Twitter (somedaveg)"))
+                @list.ListItem(Bootstrap.Link("Flickr (somedave)"))
+                @list.ListItem(Bootstrap.Link("Goodreads (somedave)"))
+            }
+        } 
     }
 }

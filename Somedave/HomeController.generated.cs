@@ -75,6 +75,7 @@ namespace Somedave.Controllers
         {
             public readonly string Index = "Index";
             public readonly string About = "About";
+            public readonly string Likes = "Likes";
             public readonly string FluentBootstrapProject = "FluentBootstrapProject";
             public readonly string RazorDatabaseProject = "RazorDatabaseProject";
         }
@@ -84,6 +85,7 @@ namespace Somedave.Controllers
         {
             public const string Index = "Index";
             public const string About = "About";
+            public const string Likes = "Likes";
             public const string FluentBootstrapProject = "FluentBootstrapProject";
             public const string RazorDatabaseProject = "RazorDatabaseProject";
         }
@@ -102,11 +104,13 @@ namespace Somedave.Controllers
                 public readonly string About = "About";
                 public readonly string FluentBootstrapProject = "FluentBootstrapProject";
                 public readonly string Index = "Index";
+                public readonly string Likes = "Likes";
                 public readonly string RazorDatabaseProject = "RazorDatabaseProject";
             }
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string FluentBootstrapProject = "~/Views/Home/FluentBootstrapProject.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string Likes = "~/Views/Home/Likes.cshtml";
             public readonly string RazorDatabaseProject = "~/Views/Home/RazorDatabaseProject.cshtml";
         }
     }
@@ -135,6 +139,17 @@ namespace Somedave.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.About);
             AboutOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LikesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Likes()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Likes);
+            LikesOverride(callInfo);
             return callInfo;
         }
 
