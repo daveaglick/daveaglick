@@ -57,6 +57,12 @@ namespace Somedave.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Post()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Post);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BlogController Actions { get { return MVC.Blog; } }
@@ -73,16 +79,26 @@ namespace Somedave.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Post = "Post";
             public readonly string Archive = "Archive";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Post = "Post";
             public const string Archive = "Archive";
         }
 
 
+        static readonly ActionParamsClass_Post s_params_Post = new ActionParamsClass_Post();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Post PostParams { get { return s_params_Post; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Post
+        {
+            public readonly string viewName = "viewName";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -105,10 +121,14 @@ namespace Somedave.Controllers
                 public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
                 public class _ViewNamesClass
                 {
+                    public readonly string _Layout = "_Layout";
+                    public readonly string _ViewStart = "_ViewStart";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
                     public readonly string Web = "Web";
                 }
+                public readonly string _Layout = "~/Views/Blog/Posts/_Layout.cshtml";
+                public readonly string _ViewStart = "~/Views/Blog/Posts/_ViewStart.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
@@ -120,6 +140,18 @@ namespace Somedave.Controllers
     public partial class T4MVC_BlogController : Somedave.Controllers.BlogController
     {
         public T4MVC_BlogController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void PostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string viewName);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Post(string viewName)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Post);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewName", viewName);
+            PostOverride(callInfo, viewName);
+            return callInfo;
+        }
 
         [NonAction]
         partial void ArchiveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);

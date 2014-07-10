@@ -28,17 +28,16 @@ namespace RazorDatabase
 
         public static string Render(this WebViewPage view, HttpContextBase httpContext, object model = null)
         {
-            view.Initialize(httpContext);
-
-            view.ViewData.Model = model;
-
-            var webPageContext = new WebPageContext(view.ViewContext.HttpContext, null, null);
             var writer = new StringWriter();
+            view.Initialize(httpContext, writer);
+            view.ViewData.Model = model;
+            var webPageContext = new WebPageContext(view.ViewContext.HttpContext, null, null);
 
             // Using private reflection to access some internals
+            // Also make sure the use the same writer used for initializing the ViewContext in the OutputStack
             // Note: ideally we would not have to do this, but WebPages is just not mockable enough :(
             var dynamicPageContext = webPageContext.AsDynamic();
-            dynamicPageContext.OutputStack.Push(writer);
+            dynamicPageContext.OutputStack.Push(writer);            
 
             // Push some section writer dictionary onto the stack. We need two, because the logic in WebPageBase.RenderBody
             // checks that as a way to make sure the layout page is not called directly
@@ -55,14 +54,14 @@ namespace RazorDatabase
             return writer.ToString();
         }
 
-        private static void Initialize(this WebViewPage view, HttpContextBase httpContext)
+        private static void Initialize(this WebViewPage view, HttpContextBase httpContext, TextWriter writer)
         {
             var context = httpContext ?? CreateMockContext();
             var routeData = new RouteData();
 
             var controllerContext = new ControllerContext(context, routeData, new Mock<ControllerBase>().Object);
 
-            view.ViewContext = new ViewContext(controllerContext, new Mock<IView>().Object, view.ViewData, new TempDataDictionary(), new StringWriter());
+            view.ViewContext = new ViewContext(controllerContext, new Mock<IView>().Object, view.ViewData, new TempDataDictionary(), writer);
 
             view.InitHelpers();
         }

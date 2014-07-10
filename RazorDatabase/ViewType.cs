@@ -12,6 +12,7 @@ namespace RazorDatabase
     {
         IEnumerable<WebViewPage> GetViews();
         object GetModel(WebViewPage webViewPage);
+        void SetViewTypeName(string viewName);
         void SetRendered(string rendered);
         void MapProperties(WebViewPage webViewPage);
     }
@@ -23,7 +24,16 @@ namespace RazorDatabase
     public abstract class ViewType<TViewPage> : IInternalViewType, IViewType
         where TViewPage : WebViewPage
     {
+        // Note that this is the name of the view type and not the view itself
+        // any hyphens will have been converted to underscores, etc.
+        public string ViewTypeName { get; set; }
+
         public string Rendered { get; set; }
+
+        void IInternalViewType.SetViewTypeName(string viewName)
+        {
+            ViewTypeName = viewName;
+        }
 
         void IInternalViewType.SetRendered(string rendered)
         {
@@ -41,10 +51,6 @@ namespace RazorDatabase
             List<TViewPage> views = new List<TViewPage>();
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (assembly.FullName.Contains("Somedave"))
-                {
-                    int test = 0;
-                }
                 try
                 {
                     foreach (Type viewType in assembly.GetTypes().Where(x => typeof(TViewPage).IsAssignableFrom(x) && GetView(x)))

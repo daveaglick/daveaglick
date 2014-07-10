@@ -79,6 +79,7 @@ namespace RazorDatabase
                     IInternalViewType instance = (IInternalViewType)Activator.CreateInstance(viewType);
                     object model = instance.GetModel(view);
                     string rendered = view.Render(model);
+                    instance.SetViewTypeName(view.GetType().Name);
                     instance.SetRendered(rendered);
                     instance.MapProperties(view);
                     bag.Add(instance);

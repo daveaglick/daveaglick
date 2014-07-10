@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using RazorDatabase;
+using System.Web.Mvc;
 
 namespace Somedave
 {
@@ -13,5 +14,17 @@ namespace Somedave
         public DateTime Published { get; set; }
         public DateTime Edited { get; set; }
         public string[] Tags { get; set; }
+
+        public ActionResult Action()
+        {
+            // Replace the underscores with hyphens since they got substituted in the type name
+            return MVC.Blog.Post(ViewTypeName.Replace('_', '-'));
+        }
+
+        // Exclude the layout view
+        protected override bool GetView(Type x)
+        {
+            return x.Name != "Layout";
+        }
     }
 }

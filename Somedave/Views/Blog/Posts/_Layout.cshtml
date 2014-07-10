@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/_Master.cshtml";
+}
+
+@using (var container = Bootstrap.Container().AddCss("container-sm-height"))
+{
+    using (var row = container.GridRow().AddCss("hero-row", "row-sm-height"))
+    {
+        using (row.GridColumn().Sm(8).AddCss("col-sm-height", "col-bottom"))
+        {
+            <div class="hello">@Title</div>
+            if (!string.IsNullOrWhiteSpace(Lead))
+            {
+                <div class="intro">@Lead</div>
+            }
+        }
+        using (row.GridColumn().Sm(4).AddCss("col-sm-height", "col-bottom"))
+        {
+            <div>Date, tags, etc. go here.</div>
+        }                
+    }
+    <hr />
+}
+
+@using (var container = Bootstrap.Container())
+{
+    using (var row = container.GridRow())
+    {
+        using (row.GridColumn().Sm(12))
+        {
+            @RenderBody()
+        }         
+    }
+}

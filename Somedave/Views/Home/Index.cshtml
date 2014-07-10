@@ -26,22 +26,22 @@
         using (row.GridColumn().Sm(8).AddCss("right-border"))
         {
             bool first = true;
-            foreach (BlogPost blogPost in RazorDb.Get<BlogPost>().Where(x => x.Published != null && x.Published < DateTime.Today).OrderByDescending(x => x.Published).Take(3))
+            foreach (BlogPost post in RazorDb.Get<BlogPost>().Where(x => x.Published != null && x.Published < DateTime.Today).OrderByDescending(x => x.Published).Take(3))
             {
                 if (!first)
                 {
                     <hr /> 
                 }
                 first = false;
-                <div><h3>@Bootstrap.Link(blogPost.Title)</h3></div>
-                if(!string.IsNullOrWhiteSpace(blogPost.Lead))
+                <div><h3>@Bootstrap.Link(post.Title, Url.Action(post.Action()))</h3></div>
+                if(!string.IsNullOrWhiteSpace(post.Lead))
                 {
-                    <div class="@Css.Lead">@blogPost.Lead</div>
+                    <div class="@Css.Lead">@post.Lead</div>
                 }
                 try
                 {
                     HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(blogPost.Rendered);
+                    doc.LoadHtml(post.Rendered);
                     HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
                     if (p != null)
                     {
@@ -51,7 +51,7 @@
                 catch(Exception)
                 {            
                 }
-                @Bootstrap.LinkButton("Read More &rarr;")
+                @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.Action()))
             }
         }
         using (row.GridColumn().Sm(4))

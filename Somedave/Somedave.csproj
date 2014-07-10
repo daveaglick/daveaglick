@@ -275,6 +275,8 @@
     <Content Include="Views\Blog\Posts\exporting-a-gtksharp-treeview-to-csv.cshtml" />
     <Content Include="Views\Blog\Posts\right-click-context-menus-in-gtksharp.cshtml" />
     <Content Include="Views\Home\Likes.cshtml" />
+    <Content Include="Views\Blog\Posts\_Layout.cshtml" />
+    <Content Include="Views\Blog\Posts\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
