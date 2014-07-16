@@ -7,7 +7,16 @@ using System.Web.Mvc;
 
 namespace Somedave
 {
-    public class BlogPost : ViewType<BlogPostViewPage<dynamic>>
+    public interface IBlogPost
+    {
+        string Title { get; set; }
+        string Lead { get; set; }
+        DateTime Published { get; set; }
+        DateTime Edited { get; set; }
+        string[] Tags { get; set; }
+    }
+
+    public class BlogPost : ViewType<BlogPostViewPage<dynamic>>, IBlogPost
     {
         public string Title { get; set; }
         public string Lead { get; set; }
@@ -29,7 +38,7 @@ namespace Somedave
         public ActionResult GetAction()
         {
             // Replace the underscores with hyphens since they got substituted in the type name
-            return MVC.Blog.Post(GetViewName());
+            return MVC.Blog.Posts(GetViewName());
         }
 
         // Check if this should be published

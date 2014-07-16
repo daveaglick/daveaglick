@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Somedave
 {
-    public abstract class BlogPostViewPage<T> : SomedaveViewPage<T>
+    public abstract class BlogPostViewPage<T> : SomedaveViewPage<T>, IBlogPost
     {
         public string Title
         {

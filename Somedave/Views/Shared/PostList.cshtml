@@ -1,0 +1,42 @@
+﻿@using HtmlAgilityPack;
+
+@model IEnumerable<BlogPost>
+
+@{    
+    bool first = true;
+    foreach (BlogPost post in Model)
+    {
+        if (!first)
+        {
+            <hr /> 
+        }
+        first = false;
+        <div>
+            <h3>
+                @Bootstrap.Link(post.Title, Url.Action(post.GetAction()))
+                @if (post.Published != default(DateTime))
+                {
+                    <small><span class="label label-default">@post.Published.ToShortDateString()</span></small>
+                }
+            </h3>
+        </div>
+        if(!string.IsNullOrWhiteSpace(post.Lead))
+        {
+            <div class="@Css.Lead">@post.Lead</div>
+        }
+        try
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(post.Rendered);
+            HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
+            if (p != null)
+            {
+                @Html.Raw(p.OuterHtml)
+            }
+        }
+        catch(Exception)
+        {            
+        }
+        @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
+    }
+}

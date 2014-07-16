@@ -2,9 +2,9 @@
     Layout = "~/Views/Shared/_Master.cshtml";
 }
 
-@using (var container = Bootstrap.Container().AddCss("container-sm-height"))
+@using (var container = Bootstrap.Container().AddCss("banner", "container-sm-height"))
 {
-    using (var row = container.GridRow().AddCss("hero-row", "row-sm-height"))
+    using (var row = container.GridRow().AddCss("row-sm-height"))
     {
         using (row.GridColumn().Sm(8).AddCss("col-sm-height", "col-bottom"))
         {
@@ -16,27 +16,40 @@
         }
         using (row.GridColumn().Sm(4).AddCss("col-sm-height", "col-bottom", "stats"))
         {
-            if (Published != default(DateTime))
+            using (var statRow = Bootstrap.GridRow())
             {
-                using (var statRow = Bootstrap.GridRow())
+                using (statRow.GridColumn().Sm(12))
                 {
-                    using (statRow.GridColumn().Sm(6).AddCss("stat-heading"))
+                    <hr class="@Css.VisibleXsBlock" />
+                    if (Tags != null)
                     {
-                        <strong>Published</strong>
+                        <div><strong>Tags</strong></div>
+                        <div>
+                            @foreach (string tag in Tags)
+                            {
+                                @Html.TagButton(tag)
+                            }
+                        </div>     
+                    }     
+                    if (Published != default(DateTime))
+                    {
+                        <div><strong>Published</strong></div>
+                        <div>@Published.ToLongDateString()</div>
                     }
-                    using (statRow.GridColumn().Sm(6))
+                    if (Edited != default(DateTime))
                     {
-                        @Published.ToLongDateString()
-                    }                
+                        <div><strong>Edited</strong></div>
+                        <div>@Edited.ToLongDateString()</div>
+                    }
                 }
             }
         }                
     }
-    <hr />
 }
 
 @using (var container = Bootstrap.Container())
 {
+    <hr />
     using (var row = container.GridRow())
     {
         using (row.GridColumn().Sm(12))

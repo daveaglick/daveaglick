@@ -59,9 +59,15 @@ namespace Somedave.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Post()
+        public virtual System.Web.Mvc.ActionResult Posts()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Post);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Posts);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Tags()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tags);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -79,25 +85,33 @@ namespace Somedave.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Post = "Post";
-            public readonly string Archive = "Archive";
+            public readonly string Posts = "Posts";
+            public readonly string Tags = "Tags";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Post = "Post";
-            public const string Archive = "Archive";
+            public const string Posts = "Posts";
+            public const string Tags = "Tags";
         }
 
 
-        static readonly ActionParamsClass_Post s_params_Post = new ActionParamsClass_Post();
+        static readonly ActionParamsClass_Posts s_params_Posts = new ActionParamsClass_Posts();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Post PostParams { get { return s_params_Post; } }
+        public ActionParamsClass_Posts PostsParams { get { return s_params_Posts; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Post
+        public class ActionParamsClass_Posts
         {
             public readonly string viewName = "viewName";
+        }
+        static readonly ActionParamsClass_Tags s_params_Tags = new ActionParamsClass_Tags();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Tags TagsParams { get { return s_params_Tags; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Tags
+        {
+            public readonly string tag = "tag";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -110,8 +124,10 @@ namespace Somedave.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Archive = "Archive";
+                public readonly string Tags = "Tags";
             }
             public readonly string Archive = "~/Views/Blog/Archive.cshtml";
+            public readonly string Tags = "~/Views/Blog/Tags.cshtml";
             static readonly _PostsClass s_Posts = new _PostsClass();
             public _PostsClass Posts { get { return s_Posts; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -142,25 +158,26 @@ namespace Somedave.Controllers
         public T4MVC_BlogController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void PostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string viewName);
+        partial void PostsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string viewName);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Post(string viewName)
+        public override System.Web.Mvc.ActionResult Posts(string viewName)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Post);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Posts);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewName", viewName);
-            PostOverride(callInfo, viewName);
+            PostsOverride(callInfo, viewName);
             return callInfo;
         }
 
         [NonAction]
-        partial void ArchiveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void TagsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string tag);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Archive()
+        public override System.Web.Mvc.ActionResult Tags(string tag)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
-            ArchiveOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tags);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tag", tag);
+            TagsOverride(callInfo, tag);
             return callInfo;
         }
 

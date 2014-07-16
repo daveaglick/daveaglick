@@ -1,1 +1,38 @@
-﻿
+﻿@model IEnumerable<IGrouping<int, BlogPost>>
+
+@using (var container = Bootstrap.Container().AddCss("banner"))
+{
+    using (var row = container.GridRow())
+    {
+        using (row.GridColumn().Sm(12))
+        { 
+            <div class="title">Post Archive</div>
+        }
+    }
+    <hr />
+}
+
+@using (var container = Bootstrap.Container())
+{
+    foreach (IGrouping<int, BlogPost> year in Model)
+    {
+        if (year.Key != Int32.MaxValue)
+        {
+            <h3>@year.Key</h3>
+        }
+        using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered))
+        {          
+            foreach (BlogPost post in year)
+            {
+                using (list.ListItem())
+                {
+                    <strong>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</strong>
+                    if (post.Published != default(DateTime))
+                    {
+                        <span class="label label-default">@post.Published.ToShortDateString()</span>
+                    }
+                }
+            }
+        }
+    }
+}

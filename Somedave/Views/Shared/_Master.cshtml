@@ -38,7 +38,8 @@
                     using (var nav = Bootstrap.List())
                     {
                         @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
-                        @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Archive())) 
+                        @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Posts(null))) 
+                        @nav.ListItem(Html.ActionLink("Tags", MVC.Blog.Tags(null))) 
                         @nav.ListItem(Html.ActionLink("Likes", MVC.Home.Likes())) 
                     }     
                 } 

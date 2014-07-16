@@ -25,6 +25,11 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.btn-default .badge {
+    background-color: @gray-lighter;
+    color: @gray-light;
+}
+
 .nav-col, .proj-col {
     padding-top: 6px;
     display: block;
@@ -42,8 +47,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color: @gray-lighter;
 }
 
-.hero-row {
-    padding-top: 12px;
+.banner {
+    margin-top: 12px;
 
     & .hello {
         font-family: 'Dancing Script', cursive;
@@ -91,6 +96,10 @@ strong {
 
 .right-border {
     border-right: 1px solid @gray-lighter;
+}
+
+.tag-button {
+    margin-bottom: 6px;
 }
 
 @media (max-width: @screen-xs-max) {

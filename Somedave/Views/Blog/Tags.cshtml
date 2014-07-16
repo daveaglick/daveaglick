@@ -1,0 +1,43 @@
+﻿@model Somedave.Models.Blog.Tags
+
+@using (var container = Bootstrap.Container().AddCss("banner"))
+{
+    using (var row = container.GridRow())
+    {
+        using (row.GridColumn().Sm(12))
+        {
+            if (Model.Tag == null)
+            {                
+                <div class="title">All Tags</div>
+            }
+            else
+            {
+                <div class="title">@Model.Tag</div>
+            }
+        }
+    }
+    <hr />
+}
+
+@using (var container = Bootstrap.Container())
+{
+    using (var row = container.GridRow())
+    {
+        if (Model.Tag != null)
+        {
+            using (row.GridColumn().Sm(8).AddCss("right-border"))
+            {
+                @Html.Partial(MVC.Shared.Views.PostList, Model.Posts)
+                <hr class="@Css.VisibleXsBlock" />
+            }
+        }
+
+        using (row.GridColumn().Sm(Model.Tag == null ? 12 : 4))
+        {
+            foreach (KeyValuePair<string, int> tag in Model.AllTags)
+            { 
+                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default)
+            }
+        }
+    }
+}

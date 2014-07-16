@@ -1,9 +1,10 @@
 ﻿@using HtmlAgilityPack;
-@using RazorDatabase;
 
-@using (var container = Bootstrap.Container())
+@model Somedave.Models.Home.Index
+
+@using (var container = Bootstrap.Container().AddCss("banner"))
 {
-    using (var row = container.GridRow().AddCss("hero-row"))
+    using (var row = container.GridRow())
     {
         using (row.GridColumn().Sm(2))
         {
@@ -12,12 +13,11 @@
         using (row.GridColumn().Sm(10))
         {
             <div class="hello">Hello.</div>
-            <div class="intro">My name is Dave Glick. I make software and sometimes I write about it.</div>
+            <div class="intro">My name is Dave Glick. I craft software and sometimes I write about it.</div>
         }                
     }
     <hr />
 }
-
 
 @using (var container = Bootstrap.Container())
 {
@@ -25,61 +25,21 @@
     {
         using (row.GridColumn().Sm(8).AddCss("right-border"))
         {
-            bool first = true;
-            foreach (BlogPost post in RazorDb.Get<BlogPost>().Where(x => x.IsPublished()).OrderByDescending(x => x.Published).Take(3))
-            {
-                if (!first)
-                {
-                    <hr /> 
-                }
-                first = false;
-                <div><h3>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</h3></div>
-                if(!string.IsNullOrWhiteSpace(post.Lead))
-                {
-                    <div class="@Css.Lead">@post.Lead</div>
-                }
-                try
-                {
-                    HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(post.Rendered);
-                    HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
-                    if (p != null)
-                    {
-                        @Html.Raw(p.OuterHtml)
-                    }
-                }
-                catch(Exception)
-                {            
-                }
-                @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
-            }
+            @Html.Partial(MVC.Shared.Views.PostList, Model.Posts)
             <hr />
-            @Bootstrap.LinkButton("Archive", Url.Action(MVC.Blog.Archive()))
+            <div><strong>@Bootstrap.Link("Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
         }
         using (row.GridColumn().Sm(4))
         {
             <hr class="@Css.VisibleXsBlock" />
             <h5>Tags</h5>
-            int c = 0;
-            foreach (string tag in RazorDb.Get<BlogPost>()
-                .Where(x => x.Tags != null)
-                .SelectMany(x => x.Tags)
-                .OrderByDescending(x => RazorDb.Get<BlogPost>()
-                    .Where(y => y.Tags != null)
-                    .Count(y => y.Tags.Contains(x))))
-            { 
-                if (c == 10)
-                {
-                    <div>@Bootstrap.Link("More...").AddAttribute("data-toggle", "collapse").AddAttribute("data-target", "#more-tags").AddAttribute("style", "margin-bottom: 6px;")</div>
-                    @:<div id="more-tags" class="collapse">
+            <div>
+                @foreach (KeyValuePair<string, int> tag in Model.Tags)
+                { 
+                    @Html.TagButton(tag.Key, tag.Value)
                 }
-                @Bootstrap.LinkButton(tag).BtnSm().AddAttribute("style", "margin-bottom: 6px;")
-                c++;
-            }
-            if (c >= 10)
-            {
-                @:</div> 
-            }
+            </div>
+            <div><strong>@Bootstrap.Link("View All Tags", Url.Action(MVC.Blog.Tags(null)))</strong></div>
             <hr />
             <h5>On The Interwebs</h5>
             using (var list = Bootstrap.List())

@@ -37,8 +37,10 @@ namespace T4MVC
             public class _ViewNamesClass
             {
                 public readonly string _Master = "_Master";
+                public readonly string PostList = "PostList";
             }
             public readonly string _Master = "~/Views/Shared/_Master.cshtml";
+            public readonly string PostList = "~/Views/Shared/PostList.cshtml";
         }
     }
 
