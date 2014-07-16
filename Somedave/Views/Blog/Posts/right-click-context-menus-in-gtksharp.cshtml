@@ -8,8 +8,7 @@
 <p>The situation is complicated a little bit by the existing behavior of Widget.PopupMenu. According to the <a href="http://library.gnome.org/devel/gtk/unstable/gtk-migrating-checklist.html#checklist-popup-menu">Gtk manual</a>, "By default, the key binding mechanism is set to emit this signal when the Shift+F10 or Menu keys are pressed while a widget has the focus." There is a recommendation in the manual that if a developer wants context menus on right-click they should handle the Widget.ButtonPressEvent, listen for the appropriate clicks, and launch the menu using the Menu.Popup method. This is all fine except that now you've got two things to listen to to get proper context menu handling: Widget.PopupMenu and Widget.ButtonPressEvent. It would be nice if there were just one event to handle that got raised anytime a context menu needed to be displayed.</p>
 <p>The following class does just that. You can "attach" it to any Widget and it will listen for the Widget.PopupMenu event to work with the default context menu handling and the Widget.ButtonPressEvent to also work with right-clicks. When either of these occur, it will first propagate the event through to the underlying Widget (in case there are other things that are supposed to be triggered by whatever event caused the context menu) and then raise a ContextMenuHelper.ContextMenu event that you can handle and use to display the context menu regardless of what triggered it. This method should ensure proper event handling and ordering while reducing duplication of code by enabling a single event for context menu handling.</p>
 
-<code>
-using System;
+<pre><code class="language-csharp">using System;
 using Gdk;
 using GLib;
 using Gtk;
@@ -99,4 +98,4 @@ namespace Somedave
   }
  }
 }
-</code>
+</code></pre>

@@ -75,6 +75,7 @@ namespace Links
         public static readonly string jquery_1_9_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.0.min.js") ? Url("jquery-1.9.0.min.js") : Url("jquery-1.9.0.js");
         public static readonly string jquery_1_9_0_min_js = Url("jquery-1.9.0.min.js");
         public static readonly string jquery_1_9_0_min_map = Url("jquery-1.9.0.min.map");
+        public static readonly string prism_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.js") ? Url("prism.min.js") : Url("prism.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -179,6 +180,8 @@ namespace Links
     
         public static readonly string master_less = Url("master.less");
         public static readonly string me_jpg = Url("me.jpg");
+        public static readonly string prism_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.css") ? Url("prism.min.css") : Url("prism.css");
+             
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
