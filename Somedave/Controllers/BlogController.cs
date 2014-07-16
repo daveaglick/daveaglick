@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
+using RazorDatabase;
 
 namespace Somedave.Controllers
 {
@@ -12,7 +13,12 @@ namespace Somedave.Controllers
         [GET("{viewName}")]
         public virtual ActionResult Post(string viewName)
         {
-            // Convert underscores back to hyphens since they get converted the other way for the type name
+            // Make sure this post is actually published
+            BlogPost post = RazorDb.Get<BlogPost>().FirstOrDefault(x => x.GetViewName() == viewName);
+            if (post == null || !post.IsPublished())
+            {
+                return HttpNotFound();
+            }
             return View("Posts/" + viewName);
         }
 

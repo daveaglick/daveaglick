@@ -26,14 +26,14 @@
         using (row.GridColumn().Sm(8).AddCss("right-border"))
         {
             bool first = true;
-            foreach (BlogPost post in RazorDb.Get<BlogPost>().Where(x => x.Published != null && x.Published < DateTime.Today).OrderByDescending(x => x.Published).Take(3))
+            foreach (BlogPost post in RazorDb.Get<BlogPost>().Where(x => x.IsPublished()).OrderByDescending(x => x.Published).Take(3))
             {
                 if (!first)
                 {
                     <hr /> 
                 }
                 first = false;
-                <div><h3>@Bootstrap.Link(post.Title, Url.Action(post.Action()))</h3></div>
+                <div><h3>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</h3></div>
                 if(!string.IsNullOrWhiteSpace(post.Lead))
                 {
                     <div class="@Css.Lead">@post.Lead</div>
@@ -51,8 +51,10 @@
                 catch(Exception)
                 {            
                 }
-                @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.Action()))
+                @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
             }
+            <hr />
+            @Bootstrap.LinkButton("Archive", Url.Action(MVC.Blog.Archive()))
         }
         using (row.GridColumn().Sm(4))
         {

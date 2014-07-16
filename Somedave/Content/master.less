@@ -55,6 +55,24 @@ h1, h2, h3, h4, h5, h6 {
         font-family: @font-family-serif;
         font-size: @font-size-h1;
     }
+
+    & .title {
+        font-weight: 900;
+        font-size: floor((@font-size-h1 * 1.2));
+    }
+
+    & .lead {
+        font-size: @font-size-h1;
+        margin-bottom: 0;
+    }
+
+    & .stats {
+        padding-bottom: 10px;
+
+        & .stat-heading {
+            text-align: right;
+        }
+    }
 }
 
 .lead {
@@ -108,6 +126,10 @@ strong {
 
     .hero-row {
         padding-top: 6px;
+        
+        & .stats .stat-heading {
+            text-align: left;
+        }
     }
 
     .right-border {

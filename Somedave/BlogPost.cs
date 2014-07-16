@@ -15,16 +15,27 @@ namespace Somedave
         public DateTime Edited { get; set; }
         public string[] Tags { get; set; }
 
-        public ActionResult Action()
-        {
-            // Replace the underscores with hyphens since they got substituted in the type name
-            return MVC.Blog.Post(ViewTypeName.Replace('_', '-'));
-        }
-
         // Exclude the layout view
         protected override bool GetView(Type x)
         {
             return x.Name != "Layout";
+        }
+
+        public string GetViewName()
+        {
+            return ViewTypeName.Replace('_', '-');
+        }
+
+        public ActionResult GetAction()
+        {
+            // Replace the underscores with hyphens since they got substituted in the type name
+            return MVC.Blog.Post(GetViewName());
+        }
+
+        // Check if this should be published
+        public bool IsPublished()
+        {
+            return Published == default(DateTime) || Published < DateTime.Now;
         }
     }
 }
