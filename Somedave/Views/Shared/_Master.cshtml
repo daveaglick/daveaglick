@@ -16,6 +16,10 @@
             WebFont.load({
                 google: {
                     families: ['Lato:400,900:latin', 'Droid+Serif::latin', 'Dancing+Script:700:latin']
+                },
+                custom: {
+                    families: ['somedave'],
+                    urls: ['https://fontastic.s3.amazonaws.com/gfxCC547kHqmQZtxrW5KFY/icons.css']
                 }
             });
         </script>
@@ -45,10 +49,10 @@
                     { 
                         using (var nav = Bootstrap.List())
                         {
-                            @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
-                            @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Posts(null))) 
-                            @nav.ListItem(Html.ActionLink("Tags", MVC.Blog.Tags(null))) 
-                            @nav.ListItem(Html.ActionLink("Likes", MVC.Home.Likes())) 
+                            @nav.ListItem(Bootstrap.Link(" About", Url.Action(MVC.Home.About())).AddCss("icon-megaphone")) 
+                            @nav.ListItem(Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).AddCss("icon-archive")) 
+                            @nav.ListItem(Bootstrap.Link(" Tags", Url.Action(MVC.Blog.Tags(null))).AddCss("icon-tags")) 
+                            @nav.ListItem(Bootstrap.Link(" Likes", Url.Action(MVC.Home.Likes())).AddCss("icon-like-filled")) 
                         }     
                     } 
                     <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
@@ -57,8 +61,8 @@
                         <div><strong>Projects</strong></div>
                         using (var nav = Bootstrap.List())
                         {
-                            @nav.ListItem(Html.ActionLink("FluentBootstrap", MVC.Home.FluentBootstrapProject())) 
-                            @nav.ListItem(Html.ActionLink("RazorDatabase", MVC.Home.RazorDatabaseProject())) 
+                            @nav.ListItem(Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Home.FluentBootstrapProject()))) 
+                            @nav.ListItem(Bootstrap.Link("RazorDatabase", Url.Action(MVC.Home.RazorDatabaseProject()))) 
                         }    
                     } 
                 }
@@ -69,7 +73,7 @@
             <div id="sticky-footer">
                 @using (var container = Bootstrap.Container())
                 {
-                    <small>Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small>
+                    <small>Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="icon-creative-commons"></span> Creative Commons Attribution 4.0 International License</a>.</small>
                 }
             </div>
         </div>

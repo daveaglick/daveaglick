@@ -11,7 +11,7 @@
             <strong>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</strong>
             if (post.Published != default(DateTime))
             {
-                <span class="label label-default">@post.Published.ToShortDateString()</span>
+                <span class="label label-default label-date icon-calendar"> @post.Published.ToShortDateString()</span>
             }
             if (!string.IsNullOrWhiteSpace(post.Lead))
             {

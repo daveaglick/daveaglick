@@ -14,11 +14,11 @@ namespace Somedave
         {
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
             return helper.Bootstrap().LinkButton(
-                string.Format("{0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
+                string.Format(" {0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
                 url.Action(MVC.Blog.Tags(tag.ToLowerInvariant().Replace(' ', '-'))),
                 buttonStyle)
                 .BtnSm()
-                .AddCss("tag-button");
+                .AddCss("tag-button", "icon-tag-2");
         }
     }
 }

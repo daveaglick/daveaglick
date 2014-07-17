@@ -38,7 +38,7 @@
                         @Bootstrap.Link(post.Title, Url.Action(post.GetAction()))
                         @if (post.Published != default(DateTime))
                         {
-                            <small><span class="label label-default">@post.Published.ToShortDateString()</span></small>
+                            <small><span class="label label-default label-date icon-calendar"> @post.Published.ToShortDateString()</span></small>
                         }
                     </h3>
                 </div>
@@ -62,7 +62,7 @@
                 @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
             }
             <hr />
-            <div><strong>@Bootstrap.Link("Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
+            <div><strong>@Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).AddCss("icon-archive")</strong></div>
         }
         using (row.GridColumn().Sm(4))
         {

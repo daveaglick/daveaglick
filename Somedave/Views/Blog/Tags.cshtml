@@ -4,7 +4,7 @@
     Title = Model.Tag == null ? "All Tags" : Model.Tag;
 }
 
-@Html.Partial(MVC.Shared.Views.Title)
+@Html.Partial(MVC.Shared.Views.Title, Model.Tag == null ? "icon-tags" : "icon-tag-2")
 
 @using (var container = Bootstrap.Container().AddCss("container-sm-height"))
 {
