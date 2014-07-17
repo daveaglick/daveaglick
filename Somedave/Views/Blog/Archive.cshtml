@@ -4,17 +4,7 @@
     Title = "Archive";
 }
 
-@using (var container = Bootstrap.Container().AddCss("banner"))
-{
-    using (var row = container.GridRow())
-    {
-        using (row.GridColumn().Sm(12))
-        { 
-            <div class="title">Post Archive</div>
-        }
-    }
-    <hr />
-}
+@Html.Partial(MVC.Shared.Views.Title)
 
 @using (var container = Bootstrap.Container())
 {

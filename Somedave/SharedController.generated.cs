@@ -38,9 +38,13 @@ namespace T4MVC
             {
                 public readonly string _Master = "_Master";
                 public readonly string PostList = "PostList";
+                public readonly string SocialLinks = "SocialLinks";
+                public readonly string Title = "Title";
             }
             public readonly string _Master = "~/Views/Shared/_Master.cshtml";
             public readonly string PostList = "~/Views/Shared/PostList.cshtml";
+            public readonly string SocialLinks = "~/Views/Shared/SocialLinks.cshtml";
+            public readonly string Title = "~/Views/Shared/Title.cshtml";
         }
     }
 

@@ -1,0 +1,11 @@
+﻿@using (var container = Bootstrap.Container().AddCss("banner"))
+{
+    using (var row = container.GridRow())
+    {
+        using (row.GridColumn().Sm(12))
+        { 
+            <div class="title">@ViewData[ViewDataKeys.Title]</div>
+        }
+    }
+    <hr />
+}

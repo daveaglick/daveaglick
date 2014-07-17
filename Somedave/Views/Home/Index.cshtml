@@ -77,15 +77,7 @@
             <div><strong>@Bootstrap.Link("View All Tags", Url.Action(MVC.Blog.Tags(null)))</strong></div>
             <hr />
             <h5>On The Interwebs</h5>
-            using (var list = Bootstrap.List())
-            {
-                @list.ListItem(Bootstrap.Link("LinkedIn"))
-                @list.ListItem(Bootstrap.Link("GitHub (somedave)"))
-                @list.ListItem(Bootstrap.Link("Stack Overflow (somedave)"))
-                @list.ListItem(Bootstrap.Link("Twitter (somedaveg)"))
-                @list.ListItem(Bootstrap.Link("Flickr (somedave)"))
-                @list.ListItem(Bootstrap.Link("Goodreads (somedave)"))
-            }
+            @Html.Partial(MVC.Shared.Views.SocialLinks)
         } 
     }
 }

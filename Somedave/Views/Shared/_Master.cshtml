@@ -8,56 +8,71 @@
         <link href="@Links.Content.bootstrap.bootstrap_less" rel="stylesheet">
         <link href="@Links.Content.prism_css" rel="stylesheet">
         <link href="@Links.Content.master_less" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
         <script src="@Links.Scripts.jquery_1_9_0_min_js"></script>
         <script src="@Links.Scripts.bootstrap_min_js"></script>
         <script src="@Links.Scripts.prism_js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+        <script>
+            WebFont.load({
+                google: {
+                    families: ['Lato:400,900:latin', 'Droid+Serif::latin', 'Dancing+Script:700:latin']
+                }
+            });
+        </script>
 	</head>
 	<body>
-        @using (var container = Bootstrap.Container().AddCss("container-sm-height"))
-        {
-            using (var row = container.GridRow().AddCss("nav-row", "row-sm-height"))
+        <div id="page-wrapper">
+            @using (var container = Bootstrap.Container().AddCss("container-sm-height"))
             {
-                using (row.GridColumn().Xs(3).Sm(8).AddCss("logo-col", "col-sm-height", "col-bottom"))
-                { 
-                    <div>@Html.ActionLink("<somedave/>", MVC.Home.Index())</div>
+                using (var row = container.GridRow().AddCss("nav-row", "row-sm-height"))
+                {
+                    using (row.GridColumn().Xs(3).Sm(8).AddCss("logo-col", "col-sm-height", "col-bottom"))
+                    { 
+                        <div>@Html.ActionLink("<somedave/>", MVC.Home.Index())</div>
+                    }
+                    using (row.GridColumn().Xs(9).VisibleXsBlock())
+                    { 
+                        <div class="@Css.VisibleXsBlock">         
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    }
+                    <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                    using (row.GridColumn().Xs(12).Sm(2).AddCss("nav-col", "collapse", "col-sm-height"))
+                    { 
+                        using (var nav = Bootstrap.List())
+                        {
+                            @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
+                            @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Posts(null))) 
+                            @nav.ListItem(Html.ActionLink("Tags", MVC.Blog.Tags(null))) 
+                            @nav.ListItem(Html.ActionLink("Likes", MVC.Home.Likes())) 
+                        }     
+                    } 
+                    <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                    using (row.GridColumn().Xs(12).Sm(2).AddCss("proj-col", "collapse", "col-sm-height"))
+                    { 
+                        <div><strong>Projects</strong></div>
+                        using (var nav = Bootstrap.List())
+                        {
+                            @nav.ListItem(Html.ActionLink("FluentBootstrap", MVC.Home.FluentBootstrapProject())) 
+                            @nav.ListItem(Html.ActionLink("RazorDatabase", MVC.Home.RazorDatabaseProject())) 
+                        }    
+                    } 
                 }
-                using (row.GridColumn().Xs(9).VisibleXsBlock())
-                { 
-                    <div class="@Css.VisibleXsBlock">         
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
+            }            
+		    @RenderBody()
+        </div>
+        <div id="sticky-footer-wrapper">
+            <div id="sticky-footer">
+                @using (var container = Bootstrap.Container())
+                {
+                    <small>Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small>
                 }
-                <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCss("nav-col", "collapse", "col-sm-height"))
-                { 
-                    using (var nav = Bootstrap.List())
-                    {
-                        @nav.ListItem(Html.ActionLink("About", MVC.Home.About())) 
-                        @nav.ListItem(Html.ActionLink("Archive", MVC.Blog.Posts(null))) 
-                        @nav.ListItem(Html.ActionLink("Tags", MVC.Blog.Tags(null))) 
-                        @nav.ListItem(Html.ActionLink("Likes", MVC.Home.Likes())) 
-                    }     
-                } 
-                <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
-                using (row.GridColumn().Xs(12).Sm(2).AddCss("proj-col", "collapse", "col-sm-height"))
-                { 
-                    <div><strong>Projects</strong></div>
-                    using (var nav = Bootstrap.List())
-                    {
-                        @nav.ListItem(Html.ActionLink("FluentBootstrap", MVC.Home.FluentBootstrapProject())) 
-                        @nav.ListItem(Html.ActionLink("RazorDatabase", MVC.Home.RazorDatabaseProject())) 
-                    }    
-                } 
-            }
-        }            
-		@RenderBody()
+            </div>
+        </div>
 	</body>
 </html>
 

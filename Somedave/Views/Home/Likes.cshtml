@@ -1,1 +1,42 @@
-﻿
+﻿@{
+    Title = "Likes";
+}
+
+@Html.Partial(MVC.Shared.Views.Title)
+
+@using (var container = Bootstrap.Container())
+{
+    <blockquote>
+        <p>Don't dress things up, or try to explain them; just write them down, in a list, in the plainest language possible.</p>
+        <footer>Nick Hornby, <cite title="High Fidelity">High Fidelity</cite></footer>
+    </blockquote>
+    <p>If you've read the book @Bootstrap.Link("High Fidelity", "https://www.goodreads.com/book/show/285092.High_Fidelity") then you know that the protagonist, Rob, is obsessed with making lists of things. I can relate. There are a ton of great tools and resources available to software developers and putting stuff in lists helps make sense of it all. To that end, I've curated a few lists of things that I like and will periodically update them as my likes change.</p>
+    using (var row = container.GridRow())
+    {
+        using (row.GridColumn().Sm(4))
+        {
+            <h3>Tools</h3>
+            <h4>NuGet Packages</h4>
+            <h4>Visual Studio Extensions</h4>
+            <h4>JavaScript Libraries</h4>
+            <h4>Development Tools</h4>
+        }
+        using (row.GridColumn().Sm(4))
+        {
+            <h3>Development Resources</h3>
+            <h4>Blogs</h4>
+            <h4>Websites</h4>
+            <h3>Design Resources</h3>
+            <h4>Blogs</h4>
+            <h4>Websites</h4>
+        }
+        using (row.GridColumn().Sm(4))
+        {
+            <h3>Nothing To Do With Software, Because I Am Vain Enough To Think You Care What I Like</h3>
+            <h4>Authors & Books</h4>
+            <h4>Music Groups & Albums</h4>
+            <h4>Movies</h4>
+            <h4>Television Shows</h4>
+        }
+    }    
+}

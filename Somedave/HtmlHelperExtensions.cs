@@ -17,8 +17,8 @@ namespace Somedave
                 string.Format("{0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
                 url.Action(MVC.Blog.Tags(tag.ToLowerInvariant().Replace(' ', '-'))),
                 buttonStyle)
-                    .BtnSm()
-                    .AddCss("tag-button");
+                .BtnSm()
+                .AddCss("tag-button");
         }
     }
 }

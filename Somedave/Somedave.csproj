@@ -285,6 +285,8 @@
     <Content Include="Views\Blog\Posts\_ViewStart.cshtml" />
     <Content Include="Views\Blog\Tags.cshtml" />
     <Content Include="Views\Shared\PostList.cshtml" />
+    <Content Include="Views\Shared\Title.cshtml" />
+    <Content Include="Views\Shared\SocialLinks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

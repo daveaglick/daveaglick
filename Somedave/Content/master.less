@@ -1,6 +1,40 @@
 ﻿@import "bootstrap\\variables.less";
 @import "bootstrap\\mixins.less";
 
+/* Pure CSS sticky footer concept from http://css-tricks.com/snippets/css/sticky-footer/ */
+
+html, body {
+  height: 100%;
+}
+
+#page-wrapper {
+  min-height: 100%;  
+  margin-bottom: -100px; /* equal to footer height */
+}
+
+#page-wrapper:after {
+  content: "";
+  display: block;
+}
+
+#sticky-footer-wrapper, #page-wrapper:after {  
+  height: 100px; /* must be the same height as footer */
+}
+
+#sticky-footer-wrapper {
+    width: 100%;
+    padding-top: 12px;
+
+    & #sticky-footer {
+        background-color: @gray-dark;
+        color: @gray-light;
+        padding-top: 12px;
+        height: 88px; /* equal to footer height minus padding */
+    }
+}
+
+// ***
+
 body {
 	background-color: #fafafa;
     border-top: 12px solid @gray-dark;
@@ -103,6 +137,21 @@ strong {
 }
 
 @media (max-width: @screen-xs-max) {
+
+    #page-wrapper {
+      margin-bottom: -200px;
+    }
+
+    #sticky-footer-wrapper, #page-wrapper:after {  
+      height: 200px; /* must be the same height as footer */
+    }
+
+    #sticky-footer-wrapper {
+        & #sticky-footer {
+            height: 188px; /* equal to footer height minus padding */
+        }
+    }
+
     body {
         border-top: none;
     }
@@ -113,7 +162,7 @@ strong {
     .logo-col {
         padding-top: 6px;
         padding-bottom: 0;
-    .border-bottom-radius(none);
+        .border-bottom-radius(none);
     }
 
     .nav-col, .proj-col {

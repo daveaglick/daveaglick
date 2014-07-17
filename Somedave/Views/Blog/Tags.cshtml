@@ -4,43 +4,26 @@
     Title = Model.Tag == null ? "All Tags" : Model.Tag;
 }
 
-@using (var container = Bootstrap.Container().AddCss("banner"))
-{
-    using (var row = container.GridRow())
-    {
-        using (row.GridColumn().Sm(12))
-        {
-            if (Model.Tag == null)
-            {                
-                <div class="title">All Tags</div>
-            }
-            else
-            {
-                <div class="title">@Model.Tag</div>
-            }
-        }
-    }
-    <hr />
-}
+@Html.Partial(MVC.Shared.Views.Title)
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().AddCss("container-sm-height"))
 {
-    using (var row = container.GridRow())
+    using (var row = container.GridRow().AddCss("row-sm-height"))
     {
         if (Model.Tag != null)
         {
-            using (row.GridColumn().Sm(8).AddCss("right-border"))
+            using (row.GridColumn().Sm(8).AddCss("right-border", "col-sm-height"))
             {
                 @Html.Partial(MVC.Shared.Views.PostList, Model.Posts)
                 <hr class="@Css.VisibleXsBlock" />
             }
         }
 
-        using (row.GridColumn().Sm(Model.Tag == null ? 12 : 4))
+        using (row.GridColumn().Sm(Model.Tag == null ? 12 : 4).AddCss("col-sm-height"))
         {
             foreach (KeyValuePair<string, int> tag in Model.AllTags)
             { 
-                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default)
+                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default).BtnSm(Model.Tag != null)
             }
         }
     }
