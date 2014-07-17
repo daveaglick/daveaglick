@@ -8,12 +8,6 @@ namespace Somedave
 {
     public abstract class BlogPostViewPage<T> : SomedaveViewPage<T>, IBlogPost
     {
-        public string Title
-        {
-            get { return GetViewDataValue<string>(ViewDataKeys.Title); }
-            set { ViewData[ViewDataKeys.Title] = value; }
-        }
-
         public string Lead
         {
             get { return GetViewDataValue<string>(ViewDataKeys.Lead); }
@@ -36,17 +30,6 @@ namespace Somedave
         {
             get { return GetViewDataValue<string[]>(ViewDataKeys.Tags); }
             set { ViewData[ViewDataKeys.Tags] = value; }
-        }
-
-        // This returns the default value if the key is not present
-        private TType GetViewDataValue<TType>(string key)
-        {
-            object value;
-            if (ViewData.TryGetValue(key, out value) && typeof(TType).IsAssignableFrom(value.GetType()))
-            {
-                return (TType)value;
-            }
-            return default(TType);
         }
     }
 }

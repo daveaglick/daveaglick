@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<IGrouping<int, BlogPost>>
 
+@{
+    Title = "Archive";
+}
+
 @using (var container = Bootstrap.Container().AddCss("banner"))
 {
     using (var row = container.GridRow())
@@ -20,19 +24,6 @@
         {
             <h3>@year.Key</h3>
         }
-        using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered))
-        {          
-            foreach (BlogPost post in year)
-            {
-                using (list.ListItem())
-                {
-                    <strong>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</strong>
-                    if (post.Published != default(DateTime))
-                    {
-                        <span class="label label-default">@post.Published.ToShortDateString()</span>
-                    }
-                }
-            }
-        }
+        @Html.Partial(MVC.Shared.Views.PostList, year)
     }
 }

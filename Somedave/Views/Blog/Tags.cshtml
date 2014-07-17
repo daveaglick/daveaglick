@@ -1,5 +1,9 @@
 ﻿@model Somedave.Models.Blog.Tags
 
+@{
+    Title = Model.Tag == null ? "All Tags" : Model.Tag;
+}
+
 @using (var container = Bootstrap.Container().AddCss("banner"))
 {
     using (var row = container.GridRow())
