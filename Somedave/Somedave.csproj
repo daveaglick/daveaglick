@@ -287,6 +287,9 @@
     <Content Include="Views\Shared\PostList.cshtml" />
     <Content Include="Views\Shared\Title.cshtml" />
     <Content Include="Views\Shared\SocialLinks.cshtml" />
+    <Content Include="Views\Blog\Posts\nested-grabs-in-gtksharp.cshtml" />
+    <Content Include="Views\Blog\Posts\xquery-function-to-get-the-number-of-week-work-days.cshtml" />
+    <Content Include="Views\Blog\Posts\introducing-nicethreads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
