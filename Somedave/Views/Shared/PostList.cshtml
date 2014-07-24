@@ -11,7 +11,8 @@
             @Bootstrap.Strong(Bootstrap.Link(post.Title, Url.Action(post.GetAction())).ToHtmlString())
             if (post.Published != default(DateTime))
             {
-                @Bootstrap.Span("label", "label-default", "label-date", "icon-calendar").Text(" " + post.Published.ToShortDateString())
+                <span class="label label-default label-date icon-calendar">@post.Published.ToShortDateString()</span>
+                <span class="label label-default label-comments icon-talk-chat-2"><a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a></span>
             }
             if (!string.IsNullOrWhiteSpace(post.Lead))
             {

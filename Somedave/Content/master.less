@@ -139,7 +139,26 @@ strong {
 }
 
 .label-date::before {
+    margin-right: 6px;
     color: @gray-lighter;
+}
+
+.label-comments {
+    color: @label-color;
+
+    & a {
+        color: @label-color;
+
+        &:hover,
+        &:focus {
+            color: @label-color;
+        }
+    }
+
+    &::before {
+        margin-right: 6px;
+        color: @gray-lighter;
+    }
 }
 
 @media (max-width: @screen-xs-max) {

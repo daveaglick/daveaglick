@@ -30,7 +30,7 @@ namespace Somedave.Controllers
             {
                 return HttpNotFound();
             }
-            return View("Posts/" + viewName);
+            return View("Posts/" + viewName, post);
         }
 
         [GET("tags/{tag?}")]

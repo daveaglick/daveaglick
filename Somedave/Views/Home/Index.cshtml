@@ -38,7 +38,8 @@
                         @Bootstrap.Link(post.Title, Url.Action(post.GetAction()))
                         @if (post.Published != default(DateTime))
                         {
-                            <small><span class="label label-default label-date icon-calendar"> @post.Published.ToShortDateString()</span></small>
+                            <small><span class="label label-default label-date icon-calendar">@post.Published.ToShortDateString()</span></small>
+                            <small><span class="label label-default label-comments icon-talk-chat-2"><a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a></span></small>
                         }
                     </h3>
                 </div>
