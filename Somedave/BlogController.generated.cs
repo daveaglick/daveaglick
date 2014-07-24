@@ -140,8 +140,11 @@ namespace Somedave.Controllers
                     public readonly string _Layout = "_Layout";
                     public readonly string _ViewStart = "_ViewStart";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
+                    public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string introducing_nicethreads = "introducing-nicethreads";
+                    public readonly string introducing_nxdb = "introducing-nxdb";
                     public readonly string nested_grabs_in_gtksharp = "nested-grabs-in-gtksharp";
+                    public readonly string object_persistence_in_nxdb = "object-persistence-in-nxdb";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
                     public readonly string Web = "Web";
                     public readonly string xquery_function_to_get_the_number_of_week_work_days = "xquery-function-to-get-the-number-of-week-work-days";
@@ -149,8 +152,11 @@ namespace Somedave.Controllers
                 public readonly string _Layout = "~/Views/Blog/Posts/_Layout.cshtml";
                 public readonly string _ViewStart = "~/Views/Blog/Posts/_ViewStart.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
+                public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string introducing_nicethreads = "~/Views/Blog/Posts/introducing-nicethreads.cshtml";
+                public readonly string introducing_nxdb = "~/Views/Blog/Posts/introducing-nxdb.cshtml";
                 public readonly string nested_grabs_in_gtksharp = "~/Views/Blog/Posts/nested-grabs-in-gtksharp.cshtml";
+                public readonly string object_persistence_in_nxdb = "~/Views/Blog/Posts/object-persistence-in-nxdb.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
                 public readonly string xquery_function_to_get_the_number_of_week_work_days = "~/Views/Blog/Posts/xquery-function-to-get-the-number-of-week-work-days.cshtml";

@@ -180,6 +180,14 @@ namespace Links
     
         public static readonly string master_less = Url("master.less");
         public static readonly string me_jpg = Url("me.jpg");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class posts {
+            private const string URLPATH = "~/Content/posts";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string persistenceprocess1_png = Url("persistenceprocess1.png");
+        }
+    
         public static readonly string prism_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.css") ? Url("prism.min.css") : Url("prism.css");
              
     }

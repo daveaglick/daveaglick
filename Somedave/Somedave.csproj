@@ -175,6 +175,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\me.jpg" />
+    <Content Include="Content\posts\persistenceprocess1.png" />
     <Content Include="Content\prism.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -290,6 +291,9 @@
     <Content Include="Views\Blog\Posts\nested-grabs-in-gtksharp.cshtml" />
     <Content Include="Views\Blog\Posts\xquery-function-to-get-the-number-of-week-work-days.cshtml" />
     <Content Include="Views\Blog\Posts\introducing-nicethreads.cshtml" />
+    <Content Include="Views\Blog\Posts\introducing-nxdb.cshtml" />
+    <Content Include="Views\Blog\Posts\object-persistence-in-nxdb.cshtml" />
+    <Content Include="Views\Blog\Posts\getting-an-htmlhelper-for-an-alternate-model-type.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

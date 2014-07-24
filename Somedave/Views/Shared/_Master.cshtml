@@ -15,7 +15,7 @@
         <script>
             WebFont.load({
                 google: {
-                    families: ['Lato:400,900:latin', 'Droid+Serif::latin', 'Dancing+Script:700:latin']
+                    families: ['Lato:400,900:latin', 'Droid+Serif::latin', 'Indie+Flower::latin']
                 },
                 custom: {
                     families: ['somedave'],
@@ -25,26 +25,28 @@
         </script>
 	</head>
 	<body>
-        <div id="page-wrapper">
-            @using (var container = Bootstrap.Container().AddCss("container-sm-height"))
+        @using (Bootstrap.Div().Id("page-wrapper"))
+        {
+            using (var container = Bootstrap.Container().AddCss("container-sm-height"))
             {
                 using (var row = container.GridRow().AddCss("nav-row", "row-sm-height"))
                 {
                     using (row.GridColumn().Xs(3).Sm(8).AddCss("logo-col", "col-sm-height", "col-bottom"))
                     { 
-                        <div>@Html.ActionLink("<somedave/>", MVC.Home.Index())</div>
+                        @Html.ActionLink("<somedave/>", MVC.Home.Index())
                     }
                     using (row.GridColumn().Xs(9).VisibleXsBlock())
-                    { 
-                        <div class="@Css.VisibleXsBlock">         
+                    {
+                        using (Bootstrap.Div().VisibleXsBlock())
+                        {         
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                        </div>
+                        }
                     }
-                    <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                    @Bootstrap.Clearfix().VisibleXsBlock()                    
                     using (row.GridColumn().Xs(12).Sm(2).AddCss("nav-col", "collapse", "col-sm-height"))
                     { 
                         using (var nav = Bootstrap.List())
@@ -55,10 +57,10 @@
                             @nav.ListItem(Bootstrap.Link(" Likes", Url.Action(MVC.Home.Likes())).AddCss("icon-like-filled")) 
                         }     
                     } 
-                    <div class="@Css.Clearfix @Css.VisibleXsBlock"></div>
+                    @Bootstrap.Clearfix().VisibleXsBlock()  
                     using (row.GridColumn().Xs(12).Sm(2).AddCss("proj-col", "collapse", "col-sm-height"))
                     { 
-                        <div><strong>Projects</strong></div>
+                        @Bootstrap.Div().AddChild(x => Bootstrap.Strong("Projects"))
                         using (var nav = Bootstrap.List())
                         {
                             @nav.ListItem(Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Home.FluentBootstrapProject()))) 
@@ -68,15 +70,23 @@
                 }
             }            
 		    @RenderBody()
-        </div>
-        <div id="sticky-footer-wrapper">
-            <div id="sticky-footer">
-                @using (var container = Bootstrap.Container())
+        }
+        @using (Bootstrap.Div().Id("sticky-footer-wrapper"))
+        {
+            using (Bootstrap.Div().Id("sticky-footer"))
+            {
+                using (Bootstrap.Container())
                 {
-                    <small>Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><span class="icon-creative-commons"></span> Creative Commons Attribution 4.0 International License</a>.</small>
+                    using(Bootstrap.Small())
+                    {
+                        <text>
+                            Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a
+                            @Bootstrap.Link(Bootstrap.Span("icon-creative-commons").ToHtmlString() + " Creative Commons Attribution 4.0 International License", "http://creativecommons.org/licenses/by/4.0/").AddAttribute("rel", "license").
+                        </text>
+                    }
                 }
-            </div>
-        </div>
+            }
+        }
 	</body>
 </html>
 

@@ -8,10 +8,10 @@
     {
         using (list.ListItem())
         {
-            <strong>@Bootstrap.Link(post.Title, Url.Action(post.GetAction()))</strong>
+            @Bootstrap.Strong(Bootstrap.Link(post.Title, Url.Action(post.GetAction())).ToHtmlString())
             if (post.Published != default(DateTime))
             {
-                <span class="label label-default label-date icon-calendar"> @post.Published.ToShortDateString()</span>
+                @Bootstrap.Span("label", "label-default", "label-date", "icon-calendar").Text(" " + post.Published.ToShortDateString())
             }
             if (!string.IsNullOrWhiteSpace(post.Lead))
             {

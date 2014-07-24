@@ -6,7 +6,7 @@
     {
         using (row.GridColumn().Sm(12))
         { 
-            <div class="title @Model"> @ViewData[ViewDataKeys.Title]</div>
+            @Bootstrap.Div("title", Model).Text(" " + ViewData[ViewDataKeys.Title])
         }
     }
     <hr />

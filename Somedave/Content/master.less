@@ -85,8 +85,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 12px;
 
     & .hello {
-        font-family: 'Dancing Script', cursive;
-        font-weight: 700;
+        font-family: 'Indie Flower', cursive;
         font-size: floor((@font-size-h1 * 2));
     }
 
@@ -115,13 +114,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .lead {
-    font-family: 'Dancing Script', cursive;
-    font-weight: 700;
+    font-family: 'Indie Flower', cursive;
 }
 
-p {
-    font-family: @font-family-serif;
-    line-height: floor((1.5 * @line-height-base));
+p, .p {
+    font-family: @font-family-serif !important;
+    line-height: floor((1.5 * @line-height-base)) !important;
 }
 
 strong {
