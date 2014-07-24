@@ -295,6 +295,11 @@
     <Content Include="Views\Blog\Posts\object-persistence-in-nxdb.cshtml" />
     <Content Include="Views\Blog\Posts\getting-an-htmlhelper-for-an-alternate-model-type.cshtml" />
     <Content Include="Views\Blog\Posts\automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml" />
+    <Content Include="Views\Blog\Posts\custom-entity-type-configurations-in-entity-framework-code-first-part-1.cshtml" />
+    <Content Include="Views\Blog\Posts\custom-entity-type-configurations-in-entity-framework-code-first-part-2.cshtml" />
+    <Content Include="Views\Blog\Posts\quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml" />
+    <Content Include="Views\Blog\Posts\round-robin-row-selection-from-sql-server.cshtml" />
+    <Content Include="Views\Blog\Posts\strongly-typed-icon-fonts-in-aspnet-mvc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

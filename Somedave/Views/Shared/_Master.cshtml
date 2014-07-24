@@ -27,7 +27,7 @@
 	<body>
         @using (Bootstrap.Div().Id("page-wrapper"))
         {
-            using (var container = Bootstrap.Container().AddCss("container-sm-height"))
+            using (var container = Bootstrap.Container().AddCss("topnav", "container-sm-height"))
             {
                 using (var row = container.GridRow().AddCss("nav-row", "row-sm-height"))
                 {
@@ -51,10 +51,10 @@
                     { 
                         using (var nav = Bootstrap.List())
                         {
-                            @nav.ListItem(Bootstrap.Link(" About", Url.Action(MVC.Home.About())).AddCss("icon-megaphone")) 
-                            @nav.ListItem(Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).AddCss("icon-archive")) 
-                            @nav.ListItem(Bootstrap.Link(" Tags", Url.Action(MVC.Blog.Tags(null))).AddCss("icon-tags")) 
-                            @nav.ListItem(Bootstrap.Link(" Likes", Url.Action(MVC.Home.Likes())).AddCss("icon-like-filled")) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" About", Url.Action(MVC.Home.About())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Tags", Url.Action(MVC.Blog.Tags(null))).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Likes", Url.Action(MVC.Home.Likes())).ToHtmlString()) 
                         }     
                     } 
                     @Bootstrap.Clearfix().VisibleXsBlock()  
@@ -63,8 +63,8 @@
                         @Bootstrap.Div().AddChild(x => Bootstrap.Strong("Projects"))
                         using (var nav = Bootstrap.List())
                         {
-                            @nav.ListItem(Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Home.FluentBootstrapProject()))) 
-                            @nav.ListItem(Bootstrap.Link("RazorDatabase", Url.Action(MVC.Home.RazorDatabaseProject()))) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Home.FluentBootstrapProject())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Home.RazorDatabaseProject())).ToHtmlString()) 
                         }    
                     } 
                 }

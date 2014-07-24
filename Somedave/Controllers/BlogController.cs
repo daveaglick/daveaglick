@@ -51,7 +51,6 @@ namespace Somedave.Controllers
                             .Where(y => y.Tags != null)
                             .Count(y => y.Tags.Contains(x))))
                         .OrderBy(x => x.Key)
-                        .Take(10)
                 }
             );
         }

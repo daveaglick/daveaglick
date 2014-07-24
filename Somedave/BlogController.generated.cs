@@ -140,26 +140,36 @@ namespace Somedave.Controllers
                     public readonly string _Layout = "_Layout";
                     public readonly string _ViewStart = "_ViewStart";
                     public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
+                    public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "custom-entity-type-configurations-in-entity-framework-code-first-part-1";
+                    public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "custom-entity-type-configurations-in-entity-framework-code-first-part-2";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
                     public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string introducing_nicethreads = "introducing-nicethreads";
                     public readonly string introducing_nxdb = "introducing-nxdb";
                     public readonly string nested_grabs_in_gtksharp = "nested-grabs-in-gtksharp";
                     public readonly string object_persistence_in_nxdb = "object-persistence-in-nxdb";
+                    public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "quick-and-dirty-multiple-value-dictionary-using-extension-methods";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
+                    public readonly string round_robin_row_selection_from_sql_server = "round-robin-row-selection-from-sql-server";
+                    public readonly string strongly_typed_icon_fonts_in_aspnet_mvc = "strongly-typed-icon-fonts-in-aspnet-mvc";
                     public readonly string Web = "Web";
                     public readonly string xquery_function_to_get_the_number_of_week_work_days = "xquery-function-to-get-the-number-of-week-work-days";
                 }
                 public readonly string _Layout = "~/Views/Blog/Posts/_Layout.cshtml";
                 public readonly string _ViewStart = "~/Views/Blog/Posts/_ViewStart.cshtml";
                 public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
+                public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1.cshtml";
+                public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
                 public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string introducing_nicethreads = "~/Views/Blog/Posts/introducing-nicethreads.cshtml";
                 public readonly string introducing_nxdb = "~/Views/Blog/Posts/introducing-nxdb.cshtml";
                 public readonly string nested_grabs_in_gtksharp = "~/Views/Blog/Posts/nested-grabs-in-gtksharp.cshtml";
                 public readonly string object_persistence_in_nxdb = "~/Views/Blog/Posts/object-persistence-in-nxdb.cshtml";
+                public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "~/Views/Blog/Posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
+                public readonly string round_robin_row_selection_from_sql_server = "~/Views/Blog/Posts/round-robin-row-selection-from-sql-server.cshtml";
+                public readonly string strongly_typed_icon_fonts_in_aspnet_mvc = "~/Views/Blog/Posts/strongly-typed-icon-fonts-in-aspnet-mvc.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
                 public readonly string xquery_function_to_get_the_number_of_week_work_days = "~/Views/Blog/Posts/xquery-function-to-get-the-number-of-week-work-days.cshtml";
             }

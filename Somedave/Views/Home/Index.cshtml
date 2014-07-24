@@ -63,7 +63,7 @@
                 @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
             }
             <hr />
-            <div><strong>@Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).AddCss("icon-archive")</strong></div>
+            <div><strong>@Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
         }
         using (row.GridColumn().Sm(4))
         {

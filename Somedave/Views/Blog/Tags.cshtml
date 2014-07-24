@@ -23,7 +23,7 @@
         {
             foreach (KeyValuePair<string, int> tag in Model.AllTags)
             { 
-                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default).BtnSm(Model.Tag != null)
+                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default).BtnXs(Model.Tag != null)
             }
         }
     }

@@ -1,0 +1,46 @@
+﻿@{
+    Title = "Quick and Dirty Multiple Value Dictionary Using Extension Methods";
+    Published = new DateTime(2013, 5, 16);
+    Tags = new[] { "DotNet", "CSharp", "Dictionary", "MultiDictionary" };
+}
+
+<p>Though it's not a collection I tend to reach for often, there have been times when I really need a multiple value dictionary (that is, a dictionary that contains more than one value per key). In the past, I've usually reached for the excellent <a href="http://powercollections.codeplex.com/">PowerCollections</a> library to fill the gap. However, that requires bringing in another library and it can be a little heavy-weight for just this one collection class. There are also a ton of other implementations out there. But perhaps there's a better way to fill this need, one that doesn't require a lot of extra code. These two extension methods do most of the work of a multiple value dictionary, but don't require any extra classes or libraries:</p>
+
+<pre><code class="language-csharp">public static void AddMulti&lt;TKey, TCollection, TValue&gt;(
+    this IDictionary&lt;TKey, TCollection&gt; dictionary, TKey key, TValue value)
+    where TCollection : ICollection&lt;TValue&gt;, new()
+{
+    TCollection collection;
+    if (!dictionary.TryGetValue(key, out collection))
+    {
+        collection = new TCollection();
+        dictionary.Add(key, collection);
+    }
+    collection.Add(value);
+}
+
+public static bool ContainsMultiValue&lt;TKey, TCollection, TValue&gt;(
+    this IDictionary&lt;TKey, TCollection&gt; dictionary, TKey key, TValue value)
+    where TCollection : ICollection&lt;TValue&gt;, new()
+{
+    TCollection collection;
+    return dictionary.TryGetValue(key, out collection) &amp;&amp; collection.Contains(value);
+}</code></pre>
+
+<p>The extensions apply to any IDictionary&lt;TKey, TCollection&gt; where TCollection implements ICollection&lt;TValue&gt;. The idea is that you bring your own dictionary with an arbitrary collection for values and the extension manages adding a new collection when the key doesn't exist and adding a value to the collection for a given key. The nice this is that by varying the type of collection you can get different behavior. Use a <code>List&lt;TValue&gt;</code> when you want duplicate values to be allowed and a <code>HashSet&lt;TValue&gt;</code> when you don't. Here's an example:</p>
+
+<pre><code class="language-csharp">Dictionary&lt;string, List&lt;int&gt;&gt; duplicateValuesDictionary
+  = new Dictionary&lt;string, List&lt;int&gt;&gt;();
+duplicateValuesDictionary.AddMulti("foo", 1);
+duplicateValuesDictionary.AddMulti("foo", 1);
+duplicateValuesDictionary.AddMulti("foo", 2);
+duplicateValuesDictionary.ContainsMultiValue(1);  // True
+duplicateValuesDictionary["foo"].Contains(1);     // True
+duplicateValuesDictionary.ContainsMultiValue(3);  // False
+
+Dictionary&lt;string, HashSet&lt;int&gt;&gt; uniqueValuesDictionary
+  = new Dictionary&lt;string, HashSet&lt;int&gt;&gt;();
+uniqueValuesDictionary.AddMulti("foo", 1);
+uniqueValuesDictionary.AddMulti("foo", 1);  // This is throw an exception</code></pre>
+
+<p>Obviously this approach won't work in all cases. For example, you don't have a lot of control over the comparer or construction logic that the inner <code>ICollection&lt;TValue&gt;</code> uses since it gets constructed using the general <code>new()</code> statement. But in general, this can be a good lightweight way to add multiple value dictionary support without the overhead of an additional library.</p>

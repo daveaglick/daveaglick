@@ -81,6 +81,10 @@ h1, h2, h3, h4, h5, h6 {
     background-color: @gray-lighter;
 }
 
+.topnav {
+    color: @gray;
+}
+
 .banner {
     margin-top: 12px;
 
@@ -140,7 +144,7 @@ strong {
 
 .label-date::before {
     margin-right: 6px;
-    color: @gray-lighter;
+    color: @label-color;
 }
 
 .label-comments {
@@ -157,7 +161,7 @@ strong {
 
     &::before {
         margin-right: 6px;
-        color: @gray-lighter;
+        color: @label-color;
     }
 }
 
@@ -242,8 +246,8 @@ pre {
 code,
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-    background-color: @gray-lighter;
-    color: black;
+    background-color: @code-bg;
+    color: @code-color;
 }
 
 code[class*="language-"],
