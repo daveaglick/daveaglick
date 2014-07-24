@@ -139,6 +139,7 @@ namespace Somedave.Controllers
                 {
                     public readonly string _Layout = "_Layout";
                     public readonly string _ViewStart = "_ViewStart";
+                    public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
                     public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string introducing_nicethreads = "introducing-nicethreads";
@@ -151,6 +152,7 @@ namespace Somedave.Controllers
                 }
                 public readonly string _Layout = "~/Views/Blog/Posts/_Layout.cshtml";
                 public readonly string _ViewStart = "~/Views/Blog/Posts/_ViewStart.cshtml";
+                public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
                 public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string introducing_nicethreads = "~/Views/Blog/Posts/introducing-nicethreads.cshtml";

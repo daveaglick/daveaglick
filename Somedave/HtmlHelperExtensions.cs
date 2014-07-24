@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using FluentBootstrap;
 using FluentBootstrap.Buttons;
+using Somedave.Controllers;
 
 namespace Somedave
 {
@@ -19,6 +20,11 @@ namespace Somedave
                 buttonStyle)
                 .BtnSm()
                 .AddCss("tag-button", "icon-tag-2");
+        }
+
+        public static MvcHtmlString Post<TModel>(this HtmlHelper<TModel> helper, string linkText, Func<BlogController.ViewsClass._PostsClass, string> view)
+        {
+            return helper.ActionLink(linkText, MVC.Blog.Posts(System.IO.Path.GetFileNameWithoutExtension(view(MVC.Blog.Views.Posts))));
         }
     }
 }
