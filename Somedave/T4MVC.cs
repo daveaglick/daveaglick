@@ -185,6 +185,7 @@ namespace Links
             private const string URLPATH = "~/Content/posts";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string pdf_process_png = Url("pdf-process.png");
             public static readonly string persistenceprocess1_png = Url("persistenceprocess1.png");
         }
     

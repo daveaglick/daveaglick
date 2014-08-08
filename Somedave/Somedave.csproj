@@ -175,6 +175,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\me.jpg" />
+    <Content Include="Content\posts\pdf-process.png" />
     <Content Include="Content\posts\persistenceprocess1.png" />
     <Content Include="Content\prism.css" />
     <Content Include="Global.asax" />
@@ -300,6 +301,11 @@
     <Content Include="Views\Blog\Posts\quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml" />
     <Content Include="Views\Blog\Posts\round-robin-row-selection-from-sql-server.cshtml" />
     <Content Include="Views\Blog\Posts\strongly-typed-icon-fonts-in-aspnet-mvc.cshtml" />
+    <Content Include="Views\Blog\Posts\how-to-post-data-in-a-kendoui-grid.cshtml" />
+    <Content Include="Views\Blog\Posts\how-i-export-kendo-grids-to-excel-or-csv.cshtml" />
+    <Content Include="Views\Blog\Posts\using-aspnet-mvc-and-razor-to-generate-pdf-files.cshtml" />
+    <Content Include="Views\Blog\Posts\brace-style-convention.cshtml" />
+    <Content Include="Views\Blog\Posts\method-chaining-fluent-interfaces-and-the-finishing-problem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
