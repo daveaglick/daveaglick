@@ -40,6 +40,10 @@ namespace RazorDatabase
 
             // Get the App_Data folder and create a JSON serializer
             string appData = HostingEnvironment.MapPath("~/App_Data");
+            if (!Directory.Exists(appData))
+            {
+                Directory.CreateDirectory(appData);
+            }
             JsonSerializer serializer = new JsonSerializer();
 
             // Check for existing persisted data if requested
