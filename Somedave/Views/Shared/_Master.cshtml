@@ -4,7 +4,9 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 		<title>Somedave@(string.IsNullOrWhiteSpace(Title) ? string.Empty : " - " + Title)</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link type="application/rss+xml" rel="alternate" title="Somedave" href="/feed/rss" />
+        <link type="application/atom+xml" rel="alternate" title="Somedave" href="/feed/atom" />
         <link href="@Links.Content.bootstrap.bootstrap_less" rel="stylesheet">
         <link href="@Links.Content.prism_css" rel="stylesheet">
         <link href="@Links.Content.master_less" rel="stylesheet">
@@ -69,8 +71,8 @@
                         @Bootstrap.Div().AddChild(x => Bootstrap.Strong("Projects"))
                         using (var nav = Bootstrap.List())
                         {
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Home.FluentBootstrapProject())).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Home.RazorDatabaseProject())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", Url.Action(MVC.Projects.FluentBootstrapProject())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
                         }    
                     } 
                 }
@@ -88,6 +90,8 @@
                         <text>
                             Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a
                             @Bootstrap.Link(Bootstrap.Span("icon-creative-commons").ToHtmlString() + " Creative Commons Attribution 4.0 International License", "http://creativecommons.org/licenses/by/4.0/").AddAttribute("rel", "license").
+                            <br />
+                            @Bootstrap.Link(Bootstrap.Span("icon-rss").ToHtmlString() + " RSS Feed", "/feed/rss") | @Bootstrap.Link(Bootstrap.Span("icon-rss").ToHtmlString() + " Atom Feed", "/feed/atom")
                         </text>
                     }
                 }

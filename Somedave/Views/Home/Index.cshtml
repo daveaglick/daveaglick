@@ -47,19 +47,7 @@
                 {
                     <div class="@Css.Lead">@post.Lead</div>
                 }
-                try
-                {
-                    HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(post.Rendered);
-                    HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
-                    if (p != null)
-                    {
-                        @Html.Raw(p.OuterHtml)
-                    }
-                }
-                catch(Exception)
-                {            
-                }
+                @Html.Raw(post.GetExcerpt())
                 @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
             }
             <hr />

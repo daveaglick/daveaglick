@@ -70,7 +70,7 @@
 
 <h1>Buffering</h1>
 
-<p>You may be able to buffer the result of the chained methods until some other action that you know is going to happen takes place. For example, in the log example, the methods <code>Message()</code>, <code>Severity()</code>, and <code>User()</code> could add their respective state information to the <code>Log</code> instance and then output the log message <em>on the next</em> call to <code>Log.Message()</code>. You obviously wouldn't want to do that for this specific example because your log messages would get delayed and possibly never sent, but hopefully you get the idea. As it turns out, I actually used a form of this approach to handle the fluent interfaces in @Html.ActionLink("FluentBootstrap", MVC.Home.FluentBootstrapProject()).</p>
+<p>You may be able to buffer the result of the chained methods until some other action that you know is going to happen takes place. For example, in the log example, the methods <code>Message()</code>, <code>Severity()</code>, and <code>User()</code> could add their respective state information to the <code>Log</code> instance and then output the log message <em>on the next</em> call to <code>Log.Message()</code>. You obviously wouldn't want to do that for this specific example because your log messages would get delayed and possibly never sent, but hopefully you get the idea. As it turns out, I actually used a form of this approach to handle the fluent interfaces in @Html.ActionLink("FluentBootstrap", MVC.Projects.FluentBootstrapProject()).</p>
 
 <h1>Don’t Use a Fluent Interface</h1>
 

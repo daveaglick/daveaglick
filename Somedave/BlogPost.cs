@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using RazorDatabase;
 using System.Web.Mvc;
+using HtmlAgilityPack;
 
 namespace Somedave
 {
@@ -45,6 +46,25 @@ namespace Somedave
         public bool IsPublished()
         {
             return Published == default(DateTime) || Published < DateTime.Now;
+        }
+
+        // Gets the first paragraph
+        public string GetExcerpt()
+        {
+            try
+            {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(Rendered);
+                HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
+                if (p != null)
+                {
+                    return p.OuterHtml;
+                }
+            }
+            catch(Exception)
+            {     
+            }
+            return string.Empty;
         }
     }
 }
