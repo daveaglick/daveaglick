@@ -24,9 +24,9 @@ namespace Somedave.Controllers
                         .OrderByDescending(x => x.Key));
             }
 
-            // Make sure this post is actually published
+            // Uncomment the publish check below to return a 404 if the post isn't published yet
             BlogPost post = RazorDb.Get<BlogPost>().FirstOrDefault(x => x.GetViewName() == viewName);
-            if (post == null || !post.IsPublished())
+            if (post == null /* || !post.IsPublished() */)
             {
                 return HttpNotFound();
             }
