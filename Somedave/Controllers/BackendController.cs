@@ -53,12 +53,6 @@ namespace Somedave.Controllers
                     PublishDate = post.Published
                 };
 
-                string excerpt = post.GetExcerpt();
-                if (!string.IsNullOrWhiteSpace(excerpt))
-                {
-                    item.Summary = new TextSyndicationContent(excerpt);
-                }
-
                 item.Authors.Add(new SyndicationPerson("", "Dave Glick", ""));
                 yield return item;
             }
