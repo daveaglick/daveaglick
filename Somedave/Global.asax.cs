@@ -55,6 +55,7 @@ namespace Somedave
                 RouteData routeData = new RouteData();
                 routeData.Values["controller"] = "Error";
                 routeData.Values["action"] = Context.Response.StatusCode == 404 ? "NotFound" : "Index";
+                Context.Response.TrySkipIisCustomErrors = true;
 
                 // Return the error view
                 ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
