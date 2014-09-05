@@ -24,5 +24,4 @@ ipch
 packages*/
 !lib/*
 *App_Data*
-*/obj/*
-!*/obj/CodeGen
+obj
