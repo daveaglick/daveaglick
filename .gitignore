@@ -24,3 +24,4 @@ ipch
 *UpgradeWizard*
 packages*/
 !lib/*
+*App_Data*
