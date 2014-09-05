@@ -323,7 +323,7 @@
     <Content Include="Views\Blog\Posts\using-aspnet-mvc-and-razor-to-generate-pdf-files.cshtml" />
     <Content Include="Views\Blog\Posts\brace-style-convention.cshtml" />
     <Content Include="Views\Blog\Posts\method-chaining-fluent-interfaces-and-the-finishing-problem.cshtml" />
-    <Content Include="Views\Blog\Posts\my-new-blog.cshtml" />
+    <Content Include="Views\Blog\Posts\new-blog.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
