@@ -13,7 +13,6 @@ _ReSharper*
 .JustCode
 *.suo
 bin
-obj
 .svn
 ipch
 *.ilk
@@ -25,3 +24,5 @@ ipch
 packages*/
 !lib/*
 *App_Data*
+*/obj/*
+!*/obj/CodeGen
