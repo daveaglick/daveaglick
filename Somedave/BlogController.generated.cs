@@ -150,8 +150,8 @@ namespace Somedave.Controllers
                     public readonly string introducing_nicethreads = "introducing-nicethreads";
                     public readonly string introducing_nxdb = "introducing-nxdb";
                     public readonly string method_chaining_fluent_interfaces_and_the_finishing_problem = "method-chaining-fluent-interfaces-and-the-finishing-problem";
+                    public readonly string my_new_blog = "my-new-blog";
                     public readonly string nested_grabs_in_gtksharp = "nested-grabs-in-gtksharp";
-                    public readonly string new_blog = "new-blog";
                     public readonly string object_persistence_in_nxdb = "object-persistence-in-nxdb";
                     public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "quick-and-dirty-multiple-value-dictionary-using-extension-methods";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
@@ -174,8 +174,8 @@ namespace Somedave.Controllers
                 public readonly string introducing_nicethreads = "~/Views/Blog/Posts/introducing-nicethreads.cshtml";
                 public readonly string introducing_nxdb = "~/Views/Blog/Posts/introducing-nxdb.cshtml";
                 public readonly string method_chaining_fluent_interfaces_and_the_finishing_problem = "~/Views/Blog/Posts/method-chaining-fluent-interfaces-and-the-finishing-problem.cshtml";
+                public readonly string my_new_blog = "~/Views/Blog/Posts/my-new-blog.cshtml";
                 public readonly string nested_grabs_in_gtksharp = "~/Views/Blog/Posts/nested-grabs-in-gtksharp.cshtml";
-                public readonly string new_blog = "~/Views/Blog/Posts/new-blog.cshtml";
                 public readonly string object_persistence_in_nxdb = "~/Views/Blog/Posts/object-persistence-in-nxdb.cshtml";
                 public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "~/Views/Blog/Posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
