@@ -1,1 +1,11 @@
-﻿
+﻿@{
+    Title = "FluentBootstrap";
+}
+
+@Html.Partial(MVC.Shared.Views.Title, string.Empty)
+
+@using (var container = Bootstrap.Container())
+{
+    @Bootstrap.Lead("It's what happens when Bootstrap and ASP.NET MVC make sweet, sweet love.")
+    <p>I'm cooking up something special, but it's not quite ready for prime-time. I'll post a blog update when all the bits are baked and ready to go.</p>
+}

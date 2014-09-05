@@ -1,1 +1,11 @@
-﻿
+﻿@{
+    Title = "RazorDatabase";
+}
+
+@Html.Partial(MVC.Shared.Views.Title, string.Empty)
+
+@using (var container = Bootstrap.Container())
+{
+    @Bootstrap.Lead("An in-memory database populated by Razor views and custom metadata.")
+    <p>RazorDatabase is a library designed to make populating and querying for content on a web site or application easier. It takes Razor views, renders them at compile time, and turns them into an in-memory collection that can be queried. It also powers this blog. It's not quite ready for release yet, but I'll post a blog update when all the bits are baked and ready to go.</p>
+}
