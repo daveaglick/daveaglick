@@ -27,6 +27,7 @@ public static partial class MVC
 {
     public static Somedave.Controllers.BackendController Backend = new Somedave.Controllers.T4MVC_BackendController();
     public static Somedave.Controllers.BlogController Blog = new Somedave.Controllers.T4MVC_BlogController();
+    public static Somedave.Controllers.ErrorController Error = new Somedave.Controllers.T4MVC_ErrorController();
     public static Somedave.Controllers.HomeController Home = new Somedave.Controllers.T4MVC_HomeController();
     public static Somedave.Controllers.ProjectsController Projects = new Somedave.Controllers.T4MVC_ProjectsController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();

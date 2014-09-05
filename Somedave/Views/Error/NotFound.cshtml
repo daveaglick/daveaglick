@@ -1,0 +1,11 @@
+﻿@{
+    Title = "Not Found";
+}
+
+@Html.Partial(MVC.Shared.Views.Title, string.Empty)
+
+@using (var container = Bootstrap.Container())
+{
+    @Bootstrap.Lead("Nothing to see here, move along.")
+    <p>I'm sure you were trying to find a page with witty, insightful, and important content. Unfortunately, this isn't it.</p>
+}
