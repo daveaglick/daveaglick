@@ -28,7 +28,7 @@ namespace Somedave.Controllers
             BlogPost post = RazorDb.Get<BlogPost>().FirstOrDefault(x => x.GetViewName() == viewName);
             if (post == null /* || !post.IsPublished() */)
             {
-                return HttpNotFound();
+                throw new HttpException(404, "Page Not Found");
             }
             return View("Posts/" + viewName, post);
         }
