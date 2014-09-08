@@ -54,7 +54,7 @@ namespace Somedave
             try
             {
                 HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(Rendered);
+                doc.LoadHtml(RenderedContent);
                 HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
                 if (p != null)
                 {

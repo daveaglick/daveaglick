@@ -48,7 +48,7 @@ namespace Somedave.Controllers
                 Uri uri = new Uri(baseUri, urlHelper.Action(post.GetAction()));
                 SyndicationItem item = new SyndicationItem(
                     post.Title + (string.IsNullOrWhiteSpace(post.Lead) ? string.Empty : " - " + post.Lead),
-                    post.Rendered, uri, uri.ToString(), post.Edited == default(DateTime) ? post.Published : post.Edited)
+                    post.RenderedContent, uri, uri.ToString(), post.Edited == default(DateTime) ? post.Published : post.Edited)
                 {
                     PublishDate = post.Published
                 };
