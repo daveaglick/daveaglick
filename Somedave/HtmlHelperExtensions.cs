@@ -22,9 +22,25 @@ namespace Somedave
                 .AddCss("tag-button", "icon-tag-2");
         }
 
-        public static MvcHtmlString Post<TModel>(this HtmlHelper<TModel> helper, string linkText, Func<BlogController.ViewsClass._PostsClass, string> view)
+        public static MvcHtmlString PostLink<TModel>(this HtmlHelper<TModel> helper, string linkText, Func<BlogController.ViewsClass._PostsClass, string> view)
         {
-            return helper.ActionLink(linkText, MVC.Blog.Posts(System.IO.Path.GetFileNameWithoutExtension(view(MVC.Blog.Views.Posts))));
+            return helper.ActionLink(linkText, PostAction(helper, view));
+        }
+
+        public static ActionResult PostAction<TModel>(this HtmlHelper<TModel> helper, Func<BlogController.ViewsClass._PostsClass, string> view)
+        {
+            return PostAction(view);
+        }
+
+        // Not really an HtmlHelper, but similar enough to the one above to include it here
+        public static ActionResult PostAction(this Controller controller, Func<BlogController.ViewsClass._PostsClass, string> view)
+        {
+            return PostAction(view);
+        }
+
+        private static ActionResult PostAction(Func<BlogController.ViewsClass._PostsClass, string> view)
+        {
+            return MVC.Blog.Posts(System.IO.Path.GetFileNameWithoutExtension(view(MVC.Blog.Views.Posts)));
         }
     }
 }

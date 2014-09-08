@@ -4,7 +4,7 @@
     Tags = new[] { "Entity Framework", "Entity Framework Code First" };
 }
 
-<p>In @Html.Post("my last post", x => x.custom_entity_type_configurations_in_entity_framework_code_first_part_1) I discussed how to inherit from the <code>EntityTypeConfiguration</code> class and use reflection to dynamically configure Entity Framework. In this post I'll expand on that technique by using a custom interface, reflection, and several helper classes to automatically apply Entity Framework configurations from arbitrary classes.</p>
+<p>In @Html.PostLink("my last post", x => x.custom_entity_type_configurations_in_entity_framework_code_first_part_1) I discussed how to inherit from the <code>EntityTypeConfiguration</code> class and use reflection to dynamically configure Entity Framework. In this post I'll expand on that technique by using a custom interface, reflection, and several helper classes to automatically apply Entity Framework configurations from arbitrary classes.</p>
 
 <p>The first step is to revisit the <code><a href="http://msdn.microsoft.com/en-us/library/gg696117(v=vs.103).aspx">EntityTypeConfiguration&lt;TEntityType&gt;</a></code> that is part of Entity Framework. Recall that by overriding it you can provide your own configurations:</p>
 
@@ -119,7 +119,7 @@ public class EntityTypeConfigurationAdapter&lt;TEntity&gt;
 
 }</code></pre>
 
-<p>The <code>GetTypeConfigurations</code> method uses reflection to scan the same assembly as your <code>DbContext</code>, find all <code>IEntityTypeConfiguration</code> implementers, instantiate them, and record them in a list-per-entity-type. Note that this code uses the @Html.Post("AddMulti extension method", x => x.quick_and_dirty_multiple_value_dictionary_using_extension_methods) for working with multi-value dictionaries. You could just as easily expand that part of the code to check if there is already a <code>List&lt;&gt;</code> available and create one if not.</p>
+<p>The <code>GetTypeConfigurations</code> method uses reflection to scan the same assembly as your <code>DbContext</code>, find all <code>IEntityTypeConfiguration</code> implementers, instantiate them, and record them in a list-per-entity-type. Note that this code uses the @Html.PostLink("AddMulti extension method", x => x.quick_and_dirty_multiple_value_dictionary_using_extension_methods) for working with multi-value dictionaries. You could just as easily expand that part of the code to check if there is already a <code>List&lt;&gt;</code> available and create one if not.</p>
 
 <pre><code class="language-csharp">private Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt; GetTypeConfigurations()
 {  
