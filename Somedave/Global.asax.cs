@@ -22,7 +22,7 @@ namespace Somedave
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            RazorDb.Initialize(false);
+            RazorDb.Initialize();
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace RazorDatabase
     // the mocked default route (since that overwrites our actual routes)
     // the HtmlAgilityPack stuff
     // the dummy view stuff
-    public static class WebViewPageExtensions
+    internal static class WebViewPageExtensions
     {
         public static string Render(this WebViewPage view, object model = null)
         {

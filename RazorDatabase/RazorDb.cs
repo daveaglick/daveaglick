@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Hosting;
+using Newtonsoft.Json.Bson;
 
 namespace RazorDatabase
 {
@@ -51,23 +52,40 @@ namespace RazorDatabase
             {
                 foreach (Type viewType in viewTypes.ToArray())
                 {
-                    string fileName = Path.Combine(appData, "RazorDatabase." + viewType.FullName + ".json");
+                    string fileName = Path.Combine(appData, "RazorDatabase." + viewType.FullName + ".rd");
                     if (File.Exists(fileName))
                     {
-                        // There is an existing JSON file, so deserialize it
-                        using (StreamReader streamReader = new StreamReader(fileName))
+                        // There is an existing file, so attempt to deserialize it
+                        try
                         {
-                            using (JsonReader jsonReader = new JsonTextReader(streamReader))
+                            using (Stream stream = new FileStream(fileName, FileMode.Open))
                             {
-                                Array instanceArray = (Array)serializer.Deserialize(jsonReader, viewType.MakeArrayType());
-                                if (instanceArray != null)
+                                using (BinaryReader binaryReader = new BinaryReader(stream))
                                 {
-                                    ConcurrentBag<IInternalViewType> bag = new ConcurrentBag<IInternalViewType>(instanceArray.Cast<IInternalViewType>());
-                                    _viewTypes.TryAdd(viewType, bag);
+                                    // Make sure the persisted version is the same as the current version
+                                    int persistedAssemblyHash = binaryReader.ReadInt32();
+                                    int assemblyHash = viewType.Assembly.GetHashCode();
+                                    if (persistedAssemblyHash == assemblyHash)
+                                    {
+                                        // Need to set the readRootValueAsArray flag - see http://stackoverflow.com/questions/16910369/bson-array-deserialization-with-json-net
+                                        using (JsonReader jsonReader = new BsonReader(binaryReader, true, DateTimeKind.Utc))
+                                        {
+                                            Array instanceArray = (Array)serializer.Deserialize(jsonReader, viewType.MakeArrayType());
+                                            if (instanceArray != null)
+                                            {
+                                                ConcurrentBag<IInternalViewType> bag = new ConcurrentBag<IInternalViewType>(instanceArray.Cast<IInternalViewType>());
+                                                _viewTypes.TryAdd(viewType, bag);
+                                                viewTypes.Remove(viewType);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                        viewTypes.Remove(viewType);
+                        catch (Exception ex)
+                        {
+                            // TODO: Should probably log something here...
+                        }
                     }
                 }
             }
@@ -95,17 +113,21 @@ namespace RazorDatabase
                 _viewTypes.TryAdd(viewType, bag);
             }
 
-            // Serialize the view types that we rendered if requested
+            // Serialize the view types that we rendered, if requested
             if (persist)
             {
                 foreach (Tuple<Type, Array> serialize in toSerialize)
                 {
-                    string fileName = Path.Combine(appData, "RazorDatabase." + serialize.Item1.FullName + ".json");
-                    using (StreamWriter streamWriter = new StreamWriter(fileName))
+                    string fileName = Path.Combine(appData, "RazorDatabase." + serialize.Item1.FullName + ".rd");
+                    using (Stream stream = new FileStream(fileName, FileMode.Create))
                     {
-                        using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+                        using (BinaryWriter binaryWriter = new BinaryWriter(stream))
                         {
-                            serializer.Serialize(jsonWriter, serialize.Item2);
+                            binaryWriter.Write(serialize.Item1.Assembly.GetHashCode());
+                            using (JsonWriter jsonWriter = new BsonWriter(binaryWriter))
+                            {
+                                serializer.Serialize(jsonWriter, serialize.Item2);
+                            }
                         }
                     }
                 }
