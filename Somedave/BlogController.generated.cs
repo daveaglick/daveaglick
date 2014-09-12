@@ -156,6 +156,7 @@ namespace Somedave.Controllers
                     public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "quick-and-dirty-multiple-value-dictionary-using-extension-methods";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
                     public readonly string round_robin_row_selection_from_sql_server = "round-robin-row-selection-from-sql-server";
+                    public readonly string simple_row_coloring_in_kendo_grid = "simple-row-coloring-in-kendo-grid";
                     public readonly string strongly_typed_icon_fonts_in_aspnet_mvc = "strongly-typed-icon-fonts-in-aspnet-mvc";
                     public readonly string using_aspnet_mvc_and_razor_to_generate_pdf_files = "using-aspnet-mvc-and-razor-to-generate-pdf-files";
                     public readonly string Web = "Web";
@@ -180,6 +181,7 @@ namespace Somedave.Controllers
                 public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "~/Views/Blog/Posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
                 public readonly string round_robin_row_selection_from_sql_server = "~/Views/Blog/Posts/round-robin-row-selection-from-sql-server.cshtml";
+                public readonly string simple_row_coloring_in_kendo_grid = "~/Views/Blog/Posts/simple-row-coloring-in-kendo-grid.cshtml";
                 public readonly string strongly_typed_icon_fonts_in_aspnet_mvc = "~/Views/Blog/Posts/strongly-typed-icon-fonts-in-aspnet-mvc.cshtml";
                 public readonly string using_aspnet_mvc_and_razor_to_generate_pdf_files = "~/Views/Blog/Posts/using-aspnet-mvc-and-razor-to-generate-pdf-files.cshtml";
                 public readonly string Web = "~/Views/Blog/Posts/Web.config";
