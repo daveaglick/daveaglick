@@ -9,7 +9,7 @@ html, body {
 
 #page-wrapper {
   min-height: 100%;  
-  margin-bottom: -180px; /* equal to footer height */
+  margin-bottom: -130px; /* equal to footer height */
 }
 
 #page-wrapper:after {
@@ -18,7 +18,7 @@ html, body {
 }
 
 #sticky-footer-wrapper, #page-wrapper:after {  
-  height: 180px; /* must be the same height as footer */
+  height: 130px; /* must be the same height as footer */
 }
 
 #sticky-footer-wrapper {
@@ -29,7 +29,7 @@ html, body {
         background-color: @gray-dark;
         color: @gray-light;
         padding-top: 12px;
-        height: 168px; /* equal to footer height minus padding */
+        height: 118px; /* equal to footer height minus padding */
     }
 }
 
@@ -169,16 +169,16 @@ strong {
 @media (max-width: @screen-xs-max) {
 
     #page-wrapper {
-      margin-bottom: -200px;
+      margin-bottom: -240px;
     }
 
     #sticky-footer-wrapper, #page-wrapper:after {  
-      height: 200px; /* must be the same height as footer */
+      height: 240px; /* must be the same height as footer */
     }
 
     #sticky-footer-wrapper {
         & #sticky-footer {
-            height: 188px; /* equal to footer height minus padding */
+            height: 228px; /* equal to footer height minus padding */
         }
     }
 
