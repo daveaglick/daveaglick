@@ -143,6 +143,7 @@ namespace Somedave.Controllers
                     public readonly string brace_style_convention = "brace-style-convention";
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "custom-entity-type-configurations-in-entity-framework-code-first-part-1";
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "custom-entity-type-configurations-in-entity-framework-code-first-part-2";
+                    public readonly string deploying_a_public_nuget_package_from_scratch = "deploying-a-public-nuget-package-from-scratch";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
                     public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string how_i_export_kendo_grids_to_excel_or_csv = "how-i-export-kendo-grids-to-excel-or-csv";
@@ -168,6 +169,7 @@ namespace Somedave.Controllers
                 public readonly string brace_style_convention = "~/Views/Blog/Posts/brace-style-convention.cshtml";
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1.cshtml";
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2.cshtml";
+                public readonly string deploying_a_public_nuget_package_from_scratch = "~/Views/Blog/Posts/deploying-a-public-nuget-package-from-scratch.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
                 public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string how_i_export_kendo_grids_to_excel_or_csv = "~/Views/Blog/Posts/how-i-export-kendo-grids-to-excel-or-csv.cshtml";

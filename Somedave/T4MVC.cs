@@ -189,6 +189,13 @@ namespace Links
             private const string URLPATH = "~/Content/posts";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string appveyor_artifacts_png = Url("appveyor-artifacts.png");
+            public static readonly string appveyor_assemblyinfo_patching_png = Url("appveyor-assemblyinfo-patching.png");
+            public static readonly string appveyor_build_png = Url("appveyor-build.png");
+            public static readonly string appveyor_deployment_png = Url("appveyor-deployment.png");
+            public static readonly string appveyor_nuget_package_png = Url("appveyor-nuget-package.png");
+            public static readonly string github_new_repo_png = Url("github-new-repo.png");
+            public static readonly string nuget_apikey_png = Url("nuget-apikey.png");
             public static readonly string pdf_process_png = Url("pdf-process.png");
             public static readonly string persistenceprocess1_png = Url("persistenceprocess1.png");
         }

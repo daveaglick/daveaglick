@@ -68,9 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RazorDatabase, Version=1.0.5364.29890, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RazorDatabase, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RazorDatabase.dll</HintPath>
+      <HintPath>..\packages\RazorDatabase.1.0.0\lib\net45\RazorDatabase.dll</HintPath>
     </Reference>
     <Reference Include="RazorGenerator.Mvc">
       <HintPath>..\packages\RazorGenerator.Mvc.2.2.3\lib\net40\RazorGenerator.Mvc.dll</HintPath>
@@ -205,6 +205,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\me.jpg" />
+    <Content Include="Content\posts\appveyor-artifacts.png" />
+    <Content Include="Content\posts\appveyor-assemblyinfo-patching.png" />
+    <Content Include="Content\posts\appveyor-build.png" />
+    <Content Include="Content\posts\appveyor-deployment.png" />
+    <Content Include="Content\posts\appveyor-nuget-package.png" />
+    <Content Include="Content\posts\github-new-repo.png" />
+    <Content Include="Content\posts\nuget-apikey.png" />
     <Content Include="Content\posts\pdf-process.png" />
     <Content Include="Content\posts\persistenceprocess1.png" />
     <Content Include="Content\prism.css" />
@@ -341,6 +348,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Blog\Posts\simple-row-coloring-in-kendo-grid.cshtml" />
+    <Content Include="Views\Blog\Posts\deploying-a-public-nuget-package-from-scratch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

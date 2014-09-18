@@ -84,8 +84,8 @@
 }</code></pre>
     
     <h2>Precompile Your Razor Views with RazorGenerator</h2>
-    <p>RazorDatabase requires you to precompile your views using <a href="https://razorgenerator.codeplex.com/">RazorGenerator</a>. This is relatively straightforward, just <a href="https://razorgenerator.codeplex.com/">follow the instructions</a>. You can either precompile specific views by changing the "custom tool" property for the views you want to precompile or precompile all views by running <code>Enable-RazorGenerator</code> in the Package Manager Console (which will change some settings in your project file).</p>
-    
+    <p>RazorDatabase requires you to precompile your views using <a href="https://razorgenerator.codeplex.com/">RazorGenerator</a>. You can either precompile specific views by changing the "custom tool" property for the views you want to precompile or precompile all views by running <code>Enable-RazorGenerator</code> in the Package Manager Console. After enabling RazorGenerator, there are two ways to get it to actually compile the views. The first is to install the <a href="http://visualstudiogallery.msdn.microsoft.com/1f6ec6ff-e89b-4c47-8e79-d2d68df894ec">RazorGenerator Visual Studio Extension</a>. This will cause Visual Studio to precompile Razor views at build time. The other approach is to <a href="https://razorgenerator.codeplex.com/wikipage?title=Using%20RazorGenerator.MsBuild">add the RazorGenerator.MsBuild package</a>. This does not require a Visual Studio extension and will cause the views to compile at build time via a target in the project file (read the linked document for details). If you don't manually add either the Visual Studio extension or the RazorGenerator.MsBuild package you views will not get compiled and RazorDatabase will not work.</p>
+
     <h2>Initialize RazorDatabase</h2>
     <p>You will need to initialize RazorGenerator on application start. This is just a single line of code in your <code>Global.asax</code> file.</p>
     <pre><code class="language-csharp">protected void Application_Start()
@@ -124,6 +124,9 @@
         @list.ListItem("<code>GetModel</code> - This allows you to supply a model to the view when rendering during RazorDatabase initialization (since no controller/action is involved in this process). The default behavior is to supply a null model.")
         @list.ListItem("<code>MapProperties</code> - Override this to manually map properties from the view to the mapping class instance.")
     }
+    
+    <h1>Tests</h1>
+    <p>Tests, we don't need no stinkin' tests! But really, of course tests would be nice. Unfortunately, that tends to fall into "things I'll do as soon as I get time" and not "things I'll do upfront instead of doing the things that I think are really cool" like it should. In any case, I'll try to code up some tests as soon as I get time. Or hey, you could do it - open source!</p>
     
     <h1>Help!</h1>
     <p>Send me a tweet @@somedaveg.</p>
