@@ -4,9 +4,10 @@
 @{
     Title = "Getting an HtmlHelper for an Alternate Model Type";
     Published = new DateTime(2012, 10, 17);
-    Edited = new DateTime(2014, 9, 26);
     Tags = new[] { "ASPNET", "ASPNET MVC", "HtmlHelper" };
 }
+
+<p>First off, I'm back and have a lot of little tips to blog about over the next several weeks. Since my last post I have changed jobs and am no longer working with Mono, Gtk#, or XML on a daily basis. However, I am still developing for the .NET platform and have been focusing recently on ASP.NET MVC and Entity Framework. Now, on to the topic at hand...</p>
 
 <p>By default, the Razor view engine for ASP.NET MVC rigs up a nice little object of type <code>HtmlHelper&lt;TModel&gt;</code> for us that can be used as the first argument in extension methods. This convention gets used a lot for all sorts of HTML helpers such as automatic generation of form controls, validation messages, etc. In most cases, you want to operate on the model type that was passed to the view and the default <code>HtmlHelper</code> instance works fine. However, there are some cases when you might need access to a <code>HtmlHelper</code> that has a different generic type than that of the view's model. Some of these include displaying the display name metadata (such as that from a <code>DisplayAttribute</code> on your model) in column headers for a table (in which case the view's model is probably an <code>IEnumerable</code> and not the actual type that you want metadata for) and displaying form controls for models included through encapsulation inside the view's model. Regardless of the reason, it's not easy to create an <code>HtmlHelper</code> for a type other than the specified model - you can't just construct one from scratch because the HtmlHelper class expects a lot of information about the context and data in the view.</p>
 
@@ -16,40 +17,39 @@
 {
     public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(this HtmlHelper helper) where TModel : class, new()
     {
-	    return For&lt;TModel&gt;(helper.ViewContext, helper.ViewDataContainer, helper.RouteCollection);
+        return For&lt;TModel&gt;(helper.ViewContext, helper.ViewDataContainer.ViewData, helper.RouteCollection);
     }
 
     public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(this HtmlHelper helper, TModel model)
     {
-	    return For&lt;TModel&gt;(helper.ViewContext, helper.ViewDataContainer, helper.RouteCollection, model);
+        return For&lt;TModel&gt;(helper.ViewContext, helper.ViewDataContainer.ViewData, helper.RouteCollection, model);
     }
 
-    // Non-extension versions to get a new HtmlHelper from scratch
-    public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection) where TModel : class, new()
+    public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(ViewContext viewContext, ViewDataDictionary viewData, RouteCollection routeCollection) where TModel : class, new()
     {
-	    TModel model = new TModel();
-	    return For&lt;TModel&gt;(viewContext, viewDataContainer, routeCollection, model);
+        TModel model = new TModel();
+        return For&lt;TModel&gt;(viewContext, viewData, routeCollection, model);
     }
 
-    public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection, TModel model)
+    public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(ViewContext viewContext, ViewDataDictionary viewData, RouteCollection routeCollection, TModel model)
     {
-	    ViewContext newViewContext = new ViewContext(
-		    viewContext.Controller.ControllerContext,
-		    viewContext.View,
-		    new ViewDataDictionary(viewDataContainer.ViewData) { Model = model },
-		    viewContext.TempData,
-		    viewContext.Writer);
-	    var newViewDataContainer = new ProxyViewDataContainer(viewDataContainer, newViewContext.ViewData);
-	    return new HtmlHelper&lt;TModel&gt;(newViewContext, newViewDataContainer, routeCollection);
+        var newViewData = new ViewDataDictionary(viewData) { Model = model };
+        ViewContext newViewContext = new ViewContext(
+            viewContext.Controller.ControllerContext,
+            viewContext.View,
+            newViewData,
+            viewContext.TempData,
+            viewContext.Writer);
+        var viewDataContainer = new ViewDataContainer(newViewContext.ViewData);
+        return new HtmlHelper&lt;TModel&gt;(newViewContext, viewDataContainer, routeCollection);
     }
 
-    private class ProxyViewDataContainer : IViewDataContainer
+    private class ViewDataContainer : System.Web.Mvc.IViewDataContainer
     {
-        public IViewDataContainer ViewDataContainer { get; private set; }
-        public ViewDataDictionary ViewData { get; set; }
-        public ProxyViewDataContainer(IViewDataContainer viewDataContainer, ViewDataDictionary viewData)
+        public System.Web.Mvc.ViewDataDictionary ViewData { get; set; }
+
+        public ViewDataContainer(System.Web.Mvc.ViewDataDictionary viewData)
         {
-            ViewDataContainer = viewDataContainer;
             ViewData = viewData;
         }
     }
@@ -62,5 +62,3 @@
 <pre><code class="language-csharp">&lt;td&gt;@@(Html.For(rowItem).TextBoxFor(m => m.ThisColumnProperty))&lt;/td&gt;</code></pre>
 
 <p>By itself this is already a powerful capability and opens up your views to additional model types easily. In my next post I'll detail how to use the non-extension versions with the MVC wrappers for KendoUI to automatically set the title of a bound grid column.</p>
-
-<p>Note that this post was edited on @Edited.ToShortDateString() to provide slightly more robust code that works in situations where access to the underlying <code>IViewDataContainer</code> is needed through the proxy <code>HtmlHelper</code> object.</p>
