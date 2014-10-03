@@ -146,6 +146,7 @@ namespace Somedave.Controllers
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "custom-entity-type-configurations-in-entity-framework-code-first-part-2";
                     public readonly string deploying_a_public_nuget_package_from_scratch = "deploying-a-public-nuget-package-from-scratch";
                     public readonly string exporting_a_gtksharp_treeview_to_csv = "exporting-a-gtksharp-treeview-to-csv";
+                    public readonly string fun_with_fizz_buzz = "fun-with-fizz-buzz";
                     public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string how_i_export_kendo_grids_to_excel_or_csv = "how-i-export-kendo-grids-to-excel-or-csv";
                     public readonly string how_to_post_data_in_a_kendoui_grid = "how-to-post-data-in-a-kendoui-grid";
@@ -173,6 +174,7 @@ namespace Somedave.Controllers
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2.cshtml";
                 public readonly string deploying_a_public_nuget_package_from_scratch = "~/Views/Blog/Posts/deploying-a-public-nuget-package-from-scratch.cshtml";
                 public readonly string exporting_a_gtksharp_treeview_to_csv = "~/Views/Blog/Posts/exporting-a-gtksharp-treeview-to-csv.cshtml";
+                public readonly string fun_with_fizz_buzz = "~/Views/Blog/Posts/fun-with-fizz-buzz.cshtml";
                 public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string how_i_export_kendo_grids_to_excel_or_csv = "~/Views/Blog/Posts/how-i-export-kendo-grids-to-excel-or-csv.cshtml";
                 public readonly string how_to_post_data_in_a_kendoui_grid = "~/Views/Blog/Posts/how-to-post-data-in-a-kendoui-grid.cshtml";

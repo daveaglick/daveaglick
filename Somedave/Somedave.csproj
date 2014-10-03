@@ -350,6 +350,7 @@
     <Content Include="Views\Blog\Posts\simple-row-coloring-in-kendo-grid.cshtml" />
     <Content Include="Views\Blog\Posts\deploying-a-public-nuget-package-from-scratch.cshtml" />
     <Content Include="Views\Blog\Posts\announcing-razordatabase.cshtml" />
+    <Content Include="Views\Blog\Posts\fun-with-fizz-buzz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
