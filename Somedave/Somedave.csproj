@@ -351,6 +351,7 @@
     <Content Include="Views\Blog\Posts\deploying-a-public-nuget-package-from-scratch.cshtml" />
     <Content Include="Views\Blog\Posts\announcing-razordatabase.cshtml" />
     <Content Include="Views\Blog\Posts\fun-with-fizz-buzz.cshtml" />
+    <Content Include="Views\Blog\Posts\a-survey-of-dotnet-static-site-generators.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
