@@ -56,7 +56,7 @@
 
 @using(var table = Bootstrap.Table().Responsive())
 {
-    @table.TableHeadingRow("Generator", "Configuration", "Metadata", "Templating Engine(s)", "Testing Support", "Documentation")
+    @table.TableHeadingRow("Generator", "Configuration", "Metadata Support", "Templating Engine(s)", "Testing Support", "Documentation")
     
     using(var row = table.TableRow())
     {
@@ -117,6 +117,16 @@
         @row.TableData("None")
         @row.TableData("Sparse")
     }
+
+    using (var row = table.TableRow())
+    {
+        @row.TableData("<strong>Sandra.Snow</strong>")
+        @row.TableData("JSON config file")
+        @row.TableData("At top of file")
+        @row.TableData("Razor, Markdown")
+        @row.TableData("None")
+        @row.TableData("Sparse")
+    }
 }
 
 <h2>Pretzel <small><a href="http://code52.org/pretzel.html">Site</a>, <a href="https://github.com/Code52/pretzel">GitHub</a></small></h2>
@@ -155,7 +165,9 @@
 
 <h2>Sandra.Snow <small><a href="https://github.com/Sandra/Sandra.Snow">GitHub</a></small></h2>
 
-<p>Shortly after publishing this article, someone pointed out that I had missed one! And it looks like a very promising tool. In order to make sure it doesn't get overlooked, I'm including Sandra.Snow here as a link until I get a chance to update the post (probably tomorrow).</p>
+<p>Sandra.Snow is a newer tool relative to many of the other ones in this round-up, having started development in early 2013. It also appears to be under heavier development with a large number of commits and other activity. It's described as "a Jekyll inspired static site generation tool that can be run locally, as a CAAS(Compiler as a Service) or setup with Azure to build your site when your repository changes." It's built on <a href="http://nancyfx.org/">Nancy</a> and the two primary contributors are notable members of that community (though Sandra.Snow also seems to have a growing community of it's own). On paper at least, it appears to have many of the traits of a healthy Open Source project that the other generators in this list are lacking.</p>
+<p>Unfortunately, there isn't much by way of documentation. By looking through the source and NuGet packages, I can infer that both Razor and Markdown are supported. It also looks like there is support for an embedded web server for testing. There are also a number of source files dedicated to other aspects of a complete blogging platform such as RSS, tags, etc. and in general the primary focus of Sandra.Snow appears to be blog sites. It also looks like there is support for Yaml-style or plain key/value front matter within page files, though it is unclear whether the particular keys are pre-defined or can be user specified. There also appears to be some interesting markup possibilities using XML-style comments (for example, <code>&lt;!--excerpt--&gt;</code> looks like it helps find excerpts for posts). All in all, the features I can gather from a quick stroll through the code look promising.</p>
+<p>Sandra.Snow can apparently be run in multiple ways, including from within Visual Studio to create the static content on build (which I think is a very nice feature). The project shows a lot of promise and I'm looking forward to seeing where it goes. However, the lack of any real documentation will make it hard for someone to just pick up and use. I assume that's primarily due to the maturity of the tool and an ongoing development effort. Once things get a little more stable and it makes sense to generate some actual documentation, this could be a viable generator for production use.</p>
 
 <h1>Non-.NET Static Site Generators</h1>
 
@@ -197,4 +209,5 @@
 
 <p>It's interesting to me that the two most popular .NET static site generators, Pretzel and Graze, appear to be somewhat less polished than some of the alternatives. I suspect that may be due to a combination of how long ago they were released (relatively speaking) and the general popularity of their creators (both were written by prominent members of the .NET community). That said, <em>polished</em> is relative in this case and I wouldn't call any of the currently available .NET static site generators particularly good in this regard. Why is that? I suspect that writing a static site generator is one of those things that's very easy to start developing and get some baseline functionality in place, but getting beyond that point requires significantly more effort.</p>
 <p>Could or should you use any of these tools for your own site? I suspect that most will work as advertised, but I don't see a particularly good value proposition right now. The only thing that this crop of generators provides that you wouldn't get from one of the more established non-.NET generators is support for Razor parsing. Is that worth the effort to try and use a tool with minimal documentation, stalled development, and basically no community? I don't know, the answer probably depends on the requirements and your situation.</p>
-<p>Regardless, I am disappointed there aren't any better options in the .NET ecosystem. As many .NET developers have lamented before, we're often left with half-built clones that succeed in aspiration and intent if not in implementation. What can be done about it? Not much unless you're interested in developing yet another static site generator. Or perhaps one of these may catch on and begin forming a community. All is not lost, however. Each of these projects serves as a good incremental building block and a source of ideas for the next developer who feels like attempting a .NET static site generator.</p>
+<p>Regardless, I am disappointed there aren't any better options in the .NET ecosystem. As many .NET developers have lamented before, we're often left with half-built clones that succeed in aspiration and intent if not in implementation. What can be done about it? Not much unless you're interested in developing yet another static site generator. Or perhaps one of these may catch on and begin forming a community (as Sandra.Snow appears to be doing).</p>
+<p>There is also cause for optimism. I am encouraged that there is still innovation going on, and Sandra.Snow is a good example of this. While it appears to be in the early stages, it's obvious that the developers have a solid vision and the momentum to follow-through as long as things don't stall out. As static site generation continues to gain in popularity, I wouldn't be surprised to see one or two more reputable projects take on the challenge. If nothing else, each of the tools I've looked at serves as a good incremental building block and a source of ideas for the next developer.</p>
