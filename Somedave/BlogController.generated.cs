@@ -140,6 +140,7 @@ namespace Somedave.Controllers
                     public readonly string _Layout = "_Layout";
                     public readonly string _ViewStart = "_ViewStart";
                     public readonly string a_survey_of_dotnet_static_site_generators = "a-survey-of-dotnet-static-site-generators";
+                    public readonly string a_t4_template_to_get_all_css_class_names = "a-t4-template-to-get-all-css-class-names";
                     public readonly string announcing_razordatabase = "announcing-razordatabase";
                     public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
                     public readonly string brace_style_convention = "brace-style-convention";
@@ -169,6 +170,7 @@ namespace Somedave.Controllers
                 public readonly string _Layout = "~/Views/Blog/Posts/_Layout.cshtml";
                 public readonly string _ViewStart = "~/Views/Blog/Posts/_ViewStart.cshtml";
                 public readonly string a_survey_of_dotnet_static_site_generators = "~/Views/Blog/Posts/a-survey-of-dotnet-static-site-generators.cshtml";
+                public readonly string a_t4_template_to_get_all_css_class_names = "~/Views/Blog/Posts/a-t4-template-to-get-all-css-class-names.cshtml";
                 public readonly string announcing_razordatabase = "~/Views/Blog/Posts/announcing-razordatabase.cshtml";
                 public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
                 public readonly string brace_style_convention = "~/Views/Blog/Posts/brace-style-convention.cshtml";
