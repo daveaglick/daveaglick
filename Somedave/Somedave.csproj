@@ -64,8 +64,9 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NewRelic.Api.Agent">
-      <HintPath>..\packages\NewRelic.Azure.WebSites.x64.3.9.146.0\lib\NewRelic.Api.Agent.dll</HintPath>
+    <Reference Include="NewRelic.Api.Agent, Version=3.9.146.0, Culture=neutral, PublicKeyToken=06552fced0b33d87, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NewRelic.Azure.WebSites.3.9.146.0\lib\NewRelic.Api.Agent.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
