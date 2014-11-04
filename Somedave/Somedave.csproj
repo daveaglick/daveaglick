@@ -64,6 +64,9 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NewRelic.Api.Agent">
+      <HintPath>..\packages\NewRelic.Azure.WebSites.x64.3.9.146.0\lib\NewRelic.Api.Agent.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -291,7 +294,24 @@
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\master.less" />
+    <Content Include="newrelic\extensions\CoreInstrumentation.xml" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Asp\NewRelic.Agent.Extensions.dll" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Asp\NewRelic.Providers.TransactionContext.Asp.Repacked.dll" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Default\NewRelic.Agent.Extensions.dll" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Wcf3\NewRelic.Agent.Extensions.dll" />
+    <Content Include="newrelic\extensions\Providers\TransactionContext\Wcf3\NewRelic.Providers.TransactionContext.Wcf3.Repacked.dll" />
+    <Content Include="newrelic\NewRelic.Agent.Core.dll" />
+    <Content Include="newrelic\NewRelic.Agent.Extensions.dll" />
+    <Content Include="newrelic\newrelic.config" />
+    <Content Include="newrelic\extensions\extension.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="newrelic\newrelic.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="newrelic\NewRelic.Profiler.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
