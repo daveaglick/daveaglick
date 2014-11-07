@@ -152,6 +152,7 @@ namespace Somedave.Controllers
                     public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "getting-an-htmlhelper-for-an-alternate-model-type";
                     public readonly string how_i_export_kendo_grids_to_excel_or_csv = "how-i-export-kendo-grids-to-excel-or-csv";
                     public readonly string how_to_post_data_in_a_kendoui_grid = "how-to-post-data-in-a-kendoui-grid";
+                    public readonly string how_to_value_creative_work_in_the_new_economy = "how-to-value-creative-work-in-the-new-economy";
                     public readonly string introducing_nicethreads = "introducing-nicethreads";
                     public readonly string introducing_nxdb = "introducing-nxdb";
                     public readonly string method_chaining_fluent_interfaces_and_the_finishing_problem = "method-chaining-fluent-interfaces-and-the-finishing-problem";
@@ -182,6 +183,7 @@ namespace Somedave.Controllers
                 public readonly string getting_an_htmlhelper_for_an_alternate_model_type = "~/Views/Blog/Posts/getting-an-htmlhelper-for-an-alternate-model-type.cshtml";
                 public readonly string how_i_export_kendo_grids_to_excel_or_csv = "~/Views/Blog/Posts/how-i-export-kendo-grids-to-excel-or-csv.cshtml";
                 public readonly string how_to_post_data_in_a_kendoui_grid = "~/Views/Blog/Posts/how-to-post-data-in-a-kendoui-grid.cshtml";
+                public readonly string how_to_value_creative_work_in_the_new_economy = "~/Views/Blog/Posts/how-to-value-creative-work-in-the-new-economy.cshtml";
                 public readonly string introducing_nicethreads = "~/Views/Blog/Posts/introducing-nicethreads.cshtml";
                 public readonly string introducing_nxdb = "~/Views/Blog/Posts/introducing-nxdb.cshtml";
                 public readonly string method_chaining_fluent_interfaces_and_the_finishing_problem = "~/Views/Blog/Posts/method-chaining-fluent-interfaces-and-the-finishing-problem.cshtml";

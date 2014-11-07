@@ -353,6 +353,7 @@
     <Content Include="Views\Blog\Posts\fun-with-fizz-buzz.cshtml" />
     <Content Include="Views\Blog\Posts\a-survey-of-dotnet-static-site-generators.cshtml" />
     <Content Include="Views\Blog\Posts\a-t4-template-to-get-all-css-class-names.cshtml" />
+    <Content Include="Views\Blog\Posts\how-to-value-creative-work-in-the-new-economy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
