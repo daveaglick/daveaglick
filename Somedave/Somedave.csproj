@@ -57,11 +57,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FluentBootstrap">
-      <HintPath>..\lib\FluentBootstrap.dll</HintPath>
+    <Reference Include="FluentBootstrap, Version=3.2.0.14, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentBootstrap.3.2.0.14\lib\net40\FluentBootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="FluentBootstrap.Mvc">
+      <HintPath>..\packages\FluentBootstrap.Mvc.3.2.0.14\lib\net45\FluentBootstrap.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -88,6 +93,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -121,10 +130,6 @@
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -316,7 +321,6 @@
     </None>
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Blog\Archive.cshtml" />
-    <Content Include="Views\Projects\FluentBootstrapProject.cshtml" />
     <Content Include="Views\Projects\RazorDatabase.cshtml" />
     <Content Include="Views\Blog\Posts\exporting-a-gtksharp-treeview-to-csv.cshtml" />
     <Content Include="Views\Blog\Posts\right-click-context-menus-in-gtksharp.cshtml" />
@@ -354,6 +358,7 @@
     <Content Include="Views\Blog\Posts\a-survey-of-dotnet-static-site-generators.cshtml" />
     <Content Include="Views\Blog\Posts\a-t4-template-to-get-all-css-class-names.cshtml" />
     <Content Include="Views\Blog\Posts\how-to-value-creative-work-in-the-new-economy.cshtml" />
+    <Content Include="Views\Blog\Posts\introducing-fluentbootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

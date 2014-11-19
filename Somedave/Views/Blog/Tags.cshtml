@@ -6,24 +6,29 @@
 
 @Html.Partial(MVC.Shared.Views.Title, Model.Tag == null ? "icon-tags" : "icon-tag-2")
 
-@using (var container = Bootstrap.Container().AddCss("container-sm-height"))
+@using (var container = Bootstrap.Container().AddCss("container-sm-height").Begin())
 {
-    using (var row = container.GridRow().AddCss("row-sm-height"))
+    using (var row = container.GridRow().AddCss("row-sm-height").Begin())
     {
         if (Model.Tag != null)
         {
-            using (row.GridColumn().Sm(8).AddCss("right-border", "col-sm-height"))
+            using (row.GridColumn().SetSm(8).AddCss("right-border", "col-sm-height").Begin())
             {
                 @Html.Partial(MVC.Shared.Views.PostList, Model.Posts)
                 <hr class="@Css.VisibleXsBlock" />
             }
         }
 
-        using (row.GridColumn().Sm(Model.Tag == null ? 12 : 4).AddCss("col-sm-height"))
+        using (row.GridColumn().SetSm(Model.Tag == null ? 12 : 4).AddCss("col-sm-height").Begin())
         {
             foreach (KeyValuePair<string, int> tag in Model.AllTags)
-            { 
-                @Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonStyle.Primary : ButtonStyle.Default).BtnXs(Model.Tag != null)
+            {
+                var tagButton = Html.TagButton(tag.Key, tag.Value, tag.Key == Model.Tag ? ButtonState.Primary : ButtonState.Default);
+                if(Model.Tag != null)
+                {
+                    tagButton.SetSize(ButtonSize.Xs);
+                }
+                @tagButton
             }
         }
     }

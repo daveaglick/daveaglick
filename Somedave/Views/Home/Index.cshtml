@@ -2,15 +2,15 @@
 
 @model Somedave.Models.Home.Index
 
-@using (var container = Bootstrap.Container().AddCss("banner"))
+@using (var container = Bootstrap.Container().AddCss("banner").Begin())
 {
-    using (var row = container.GridRow())
+    using (var row = container.GridRow().Begin())
     {
-        using (row.GridColumn().Sm(2))
+        using (row.GridColumn().SetSm(2).Begin())
         {
-            @Bootstrap.Image(Links.Content.me_jpg, "Me").Responsive().Circle().AddAttribute("style", "margin-top: 6px;")
+            @Bootstrap.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Circle).AddAttribute("style", "margin-top: 6px;")
         }
-        using (row.GridColumn().Sm(10))
+        using (row.GridColumn().SetSm(10).Begin())
         {
             <div class="hello">Hello.</div>
             <div class="intro">My name is Dave Glick. I craft software. Sometimes I write about it.</div>
@@ -19,11 +19,11 @@
     <hr />
 }
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().Begin())
 {
-    using (var row = container.GridRow())
+    using (var row = container.GridRow().Begin())
     {
-        using (row.GridColumn().Sm(8).AddCss("right-border"))
+        using (row.GridColumn().SetSm(8).AddCss("right-border").Begin())
         {
             bool first = true;
             foreach (BlogPost post in Model.Posts)
@@ -38,14 +38,19 @@
                         @Bootstrap.Link(post.Title, Url.Action(post.GetAction()))
                         @if (post.Published != default(DateTime))
                         {
-                            <small><span class="label label-default label-date icon-calendar">@post.Published.ToShortDateString()</span></small>
-                            <small><span class="label label-default label-comments icon-talk-chat-2"><a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a></span></small>
+                            <small>@Bootstrap.Label(post.Published.ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
+                            <small>
+                                @using (Bootstrap.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
+                                {
+                                    <a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a>
+                                }
+                            </small>
                         }
                     </h3>
                 </div>
                 if(!string.IsNullOrWhiteSpace(post.Lead))
                 {
-                    <div class="@Css.Lead">@post.Lead</div>
+                    @Bootstrap.Lead(post.Lead)
                 }
                 @Html.Raw(post.GetExcerpt())
                 @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
@@ -53,7 +58,7 @@
             <hr />
             <div><strong>@Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
         }
-        using (row.GridColumn().Sm(4))
+        using (row.GridColumn().SetSm(4).Begin())
         {
             <hr class="@Css.VisibleXsBlock" />
             <h5>Tags</h5>

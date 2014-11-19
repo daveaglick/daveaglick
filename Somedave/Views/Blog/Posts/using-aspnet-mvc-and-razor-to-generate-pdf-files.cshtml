@@ -8,7 +8,7 @@
 
 <p>It turns out there is a pretty simple way to enable the generation of PDF files in an ASP.NET MVC application using the same Razor view engine that you’re probably already using. This allows you to make use of view models, HTML helpers, etc. in your PDF logic. The code here is based primarily on the code in MVC itself, specifically the <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.actionresult(v=vs.118).aspx">ActionResult</a></code> and <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.viewresult(v=vs.118).aspx">ViewResult</a></code> classes. It’s also based on general concepts used in two open source projects, <a href="https://github.com/andyhutch77/MvcRazorToPdf">MvcRazorToPdf</a> and <a href="https://github.com/RazorAnt/RazorPDF">RazorPDF</a>. In a nutshell, the commands necessary to create a given PDF file (typically as XML) are placed in a standard .cshtml view, rendered and interpreted as any Razor view would be, passed to a PDF generation library (I use the excellent <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a>, but this approach can also work with <a href="http://sourceforge.net/projects/itextsharp/">iTextSharp</a> or any other PDF generation library that takes markup such as XML), and then returned to the client as PDF content. This is what the process looks like in a nutshell:</p>
 
-@Bootstrap.Image(Links.Content.posts.pdf_process_png).Responsive()
+@Bootstrap.Image(Links.Content.posts.pdf_process_png).SetResponsive()
 
 <h1>The PdfResult Class</h1>
 

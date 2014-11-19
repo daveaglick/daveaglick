@@ -4,7 +4,7 @@
 
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().Begin())
 {
     @Bootstrap.Lead("You broke it!")
     <p>Something went horribly wrong.</p>

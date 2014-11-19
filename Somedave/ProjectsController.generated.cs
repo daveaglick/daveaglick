@@ -95,10 +95,8 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string FluentBootstrapProject = "FluentBootstrapProject";
                 public readonly string RazorDatabase = "RazorDatabase";
             }
-            public readonly string FluentBootstrapProject = "~/Views/Projects/FluentBootstrapProject.cshtml";
             public readonly string RazorDatabase = "~/Views/Projects/RazorDatabase.cshtml";
         }
     }

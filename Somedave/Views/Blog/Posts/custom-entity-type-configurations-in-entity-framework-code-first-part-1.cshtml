@@ -52,13 +52,13 @@ foreach (var type in typesToRegister)
 
 <p>This will allow you to create as many custom EntityTypeConfiguration classes as you need for each entity in your model. However, there are some limitations:</p>
 
-@using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered).AddCss("p"))
+@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
 {
-	using(list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text>The <code><a href="http://msdn.microsoft.com/en-us/library/gg696203(v=vs.103).aspx">ConfigurationRegistrar.Add()</a></code> method only allows one <code>EntityTypeConfiguration</code> class per entity type. This may be a problem in complex models if you have some configurations for a given entity spread out in multiple places (for example, you want to place the responsibility of configuring relationships for a given entity near the entities on the other side of the relationships).</text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     { 
 	    <text>I personally find the idea of placing configuration code inside the constructor of a dedicated class a little awkward. I would prefer to have my custom configurations specified through an interface that I could implement right on the entity, or perhaps use more than once to specify configuration for multiple entities in a single configuration class. That would give more flexibility.</text>
     }

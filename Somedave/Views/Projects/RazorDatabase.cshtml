@@ -6,14 +6,14 @@
 
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().Begin())
 {
     @Bootstrap.Lead("An in-memory collection populated by Razor views and custom metadata.")
     <p>RazorDatabase is a lightweight library designed to make it easier to populate and query content on web sites and web applications. It takes Razor views, precompiled with <a href="https://razorgenerator.codeplex.com/">RazorGenerator</a>, and turns them into an in-memory collection that can be queried at runtime. The posts on this blog are powered by RazorGenerator.</p>
 
     <h1>Why Do I Need It?</h1>
     <p>RazorGenerator comes in handy if you're running a blog, corporate site, storefront, or any other web application where you have some content (I.e., a blog post) and structured data about that content (I.e., the publication date, author, excerpt, etc.). It allows you to use the same Razor syntax and support (such as HtmlHelpers) for your database-like content as you do for your static pages. It also eliminates the need to maintain a database by allowing you to specify your structured data in the same Razor views as you do your content. In essence, your views <em>are</em> your database. The following are some examples of content types that would work well with RazorDatabase:</p>
-    using (var list = Bootstrap.List(ListType.Unordered))
+    using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
     {
         @list.ListItem("Blog Posts")
         @list.ListItem("Press Releases")
@@ -22,7 +22,7 @@
     
     <h1>How Does It Work?</h1>    
     <p>It might be easiest to explain how RazorGenerator works as a sequence of steps:</p>
-    using (var list = Bootstrap.List(ListType.Ordered))
+    using (var list = Bootstrap.List(ListType.Ordered).AddCss("p").Begin())
     {
         @list.ListItem("You write Razor views that inherit from a custom view class.")
         @list.ListItem("<a href='https://razorgenerator.codeplex.com/'>RazorGenerator</a> precompiles your views and includes them in the web assembly.")
@@ -116,7 +116,7 @@
     
     <h2>Fine-Tuning View Location and Rendering</h2>
     <p>There are also a number of ways to fine-tune behavior by overriding methods in your mapping class. These are listed below:</p>
-    using (var list = Bootstrap.List(ListType.Unordered))
+    using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
     {
         @list.ListItem("<code>ShouldRender</code> - Indicates whether a particular view page should be rendered. The default behavior is to render all views.")
         @list.ListItem("<code>GetViews</code> - This allows you to override the selection of views to include in the collection. The default behavior is to use reflection to get all views that can be assigned to TViewType in all loaded assemblies.")

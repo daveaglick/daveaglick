@@ -10,17 +10,17 @@
 <h1>Why Are Static Site Generators Becoming So Popular?</h1>
 
 <p>Before we get to the survey, let's back up a step and consider static site generators in general. Specifically, why are they becoming <em>so</em> popular right now? I think it's a combination of a few factors:</p>
-@using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered).AddCss("p"))
+@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
 {
-    using(list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>An emphasis on site speed.</strong> As web sites get more and more complex, there has been a backlash against the increased delivery times needed by more dynamic site technologies. The modern web user expects content almost instantly and anything that can help meet those performance goals is something worth investigating and implementing. Delivering static content instead of dynamic content certainly helps here, and it moves the burden of generating content away from the user and web server and towards the developer and build environment.</text>
-    }  
-    using(list.ListItem())
+    }
+    using (list.ListItem().Begin())
     {
         <text><strong>A shift to the client for dynamic content.</strong> It used to be that if you wanted dynamic content on your site, you had to rely on the server to generate and deliver it to the user as HTML. However, in the last couple years there has been an explosion of front-end frameworks designed to provide very powerful dynamic capabilities from the client. To this end, it's now possible (and becoming more popular) to shift this burden onto the client and rely on Ajax and DOM changes to retrieve dynamic content through web services and inject it into the page after it's been delivered. This helps with the site speed problem described above, but also helps remove load from the content delivery servers and moves it onto back-end servers that may be more equipped to deal with it.</text>
     }
-    using(list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>A backlash against traditional Content Management Systems (CMS).</strong> With the explosion of new frameworks for managing and delivering content, designers and developers are getting tired of business as usual from the crop of traditional CMS tools. Many are bloated, slow, and out of touch with more modern development tools, techniques, and methodologies. Most have also been designed from the beginning to serve a niche of allowing non-developers to create blogs or web sites. When there weren't many other options, many developers accepted that using a CMS was the most efficient way to get their ideas on the web. Now that a huge variety of tools exist to help even a more entry-level developer craft their vision, many are re-evaluating how much hand-holding they need and how much control they want to retain over their technology stack.</text>
     }
@@ -31,21 +31,21 @@
 
 <p>Many static site generators tend to share similar traits, after all there are only so many ways to accomplish a particular task. For this survey I tried to focus on the following capabilities. Note that I relied heavily on browsing documentation, examples, and source code. This was a survey and not a test, so I didn't have time to install and run each tool.</p>
 
-@using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered).AddCss("p"))
+@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
 {
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>Ease of use.</strong> What installation steps are required? Can the tool be run from the command line? Are the commands easy to learn and use? What kind of configuration file is needed (if any)? Does it work out of the box? Does the tool enforce a strict folder hierarchy or can it be configured? What kind of control is provided over inputs and outputs (include/exclude, file names, etc.)?</text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>Metadata.</strong> Is there a way to use additional metadata and make it available to the templates (I.e., list Jekyll YAML front matter)?</text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>Templating engine(s).</strong> How many and what kind of templates does the tool support? I'm primarily interested in Razor and/or Markdown, but additional template support is welcomed. Does the tool support other types of content such as the compilation of Less or SASS files to CSS? Can common layouts be used?</text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><strong>Testing support.</strong> What kind of testing support does the tool have? Can a preview be generated? Can it launch a web server to check the results?</text>
     }
@@ -55,11 +55,11 @@
 
 <p>To try and get a complete list, I checked sites that aggregate static site generators including <a href="http://staticsitegenerators.net/">Static Site Generators</a> and <a href="https://www.staticgen.com/">StaticGen</a> (the simple fact that there are two such sites says a lot about static site generator popularity). I also scoured Stack Overflow, GitHub, and the web to see if I could turn up any additional ones.</p>
 
-@using(var table = Bootstrap.Table().Responsive())
+@using (var table = Bootstrap.Table().SetResponsive().Begin())
 {
-    @table.TableHeadingRow("Generator", "Configuration", "Metadata Support", "Templating Engine(s)", "Testing Support", "Documentation")
+    @table.TableHeaderRow("Generator", "Configuration", "Metadata Support", "Templating Engine(s)", "Testing Support", "Documentation")
     
-    using(var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Pretzel</strong>")
         @row.TableData("Command line arguments")
@@ -68,8 +68,8 @@
         @row.TableData("Embedded web server, regeneration on file change")
         @row.TableData("Sparse")
     }
-    
-    using (var row = table.TableRow())
+
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Graze</strong>")
         @row.TableData("XML config file")
@@ -79,7 +79,7 @@
         @row.TableData("Sparse")
     }
 
-    using (var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Champ</strong>")
         @row.TableData("Command line arguments")
@@ -89,7 +89,7 @@
         @row.TableData("Moderate")
     }
 
-    using (var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>StaticSiteGenerator</strong>")
         @row.TableData("Command line arguments")
@@ -99,7 +99,7 @@
         @row.TableData("Moderate")
     }
 
-    using (var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Ocam</strong>")
         @row.TableData("XML config file")
@@ -109,7 +109,7 @@
         @row.TableData("Moderate")
     }
 
-    using (var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Mulder</strong>")
         @row.TableData("Command line arguments")
@@ -119,7 +119,7 @@
         @row.TableData("Sparse")
     }
 
-    using (var row = table.TableRow())
+    using (var row = table.TableRow().Begin())
     {
         @row.TableData("<strong>Sandra.Snow</strong>")
         @row.TableData("Command line arguments, JSON config file")
@@ -174,33 +174,33 @@
 
 <p>For context it's probably worth looking at a couple non-.NET static site generators if you're not already familiar with some. I won't take up space (or time) reviewing them, but the following generators are currently very popular:</p>
 
-@using (var list = Bootstrap.List(FluentBootstrap.Typography.ListType.Unordered).AddCss("p"))
+@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
 {
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://jekyllrb.com/">Jekyll</a> (and <a href="http://octopress.org/">OctoPress</a>)</text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://blog.getpelican.com/">Pelican</a></text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://middlemanapp.com/">Middleman</a></text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://hexo.io/">Hexo</a></text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://www.metalsmith.io/">Metalsmith</a></text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://assemble.io/">Assemble</a></text>
     }
-    using (list.ListItem())
+    using (list.ListItem().Begin())
     {
         <text><a href="http://gohugo.io/">Hugo</a></text>
     }

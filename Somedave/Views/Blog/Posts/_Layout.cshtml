@@ -4,11 +4,11 @@
 
 @model BlogPost
 
-@using (var container = Bootstrap.Container().AddCss("banner", "container-sm-height"))
+@using (var container = Bootstrap.Container().AddCss("banner", "container-sm-height").Begin())
 {
-    using (var row = container.GridRow().AddCss("row-sm-height"))
+    using (var row = container.GridRow().AddCss("row-sm-height").Begin())
     {
-        using (row.GridColumn().Sm(8).AddCss("col-sm-height", "col-bottom"))
+        using (row.GridColumn().SetSm(8).AddCss("col-sm-height", "col-bottom").Begin())
         {
             <div class="title">@Title</div>
             if (!string.IsNullOrWhiteSpace(Lead))
@@ -16,11 +16,11 @@
                 <div class="lead">@Lead</div>
             }
         }
-        using (row.GridColumn().Sm(4).AddCss("col-sm-height", "col-bottom", "stats"))
+        using (row.GridColumn().SetSm(4).AddCss("col-sm-height", "col-bottom", "stats").Begin())
         {
-            using (var statRow = Bootstrap.GridRow())
+            using (var statRow = Bootstrap.GridRow().Begin())
             {
-                using (statRow.GridColumn().Sm(12))
+                using (statRow.GridColumn().SetSm(12).Begin())
                 {
                     <hr class="@Css.VisibleXsBlock" />
                     if (Tags != null)
@@ -51,24 +51,24 @@
     }
 }
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().Begin())
 {
     <hr />
-    using (var row = container.GridRow())
+    using (var row = container.GridRow().Begin())
     {
-        using (row.GridColumn().Sm(12))
+        using (row.GridColumn().SetSm(12).Begin())
         {
             @RenderBody()
         }         
     }
 }
 
-@using (var container = Bootstrap.Container())
+@using (var container = Bootstrap.Container().Begin())
 {
     <hr />
-    using (var row = container.GridRow())
+    using (var row = container.GridRow().Begin())
     {
-        using (row.GridColumn().Sm(12))
+        using (row.GridColumn().SetSm(12).Begin())
         {
             <div id="disqus_thread"></div>
             <script type="text/javascript">

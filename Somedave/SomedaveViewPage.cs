@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FluentBootstrap;
+using FluentBootstrap.Mvc;
 
 namespace Somedave
 {
@@ -15,7 +16,7 @@ namespace Somedave
             set { ViewData[ViewDataKeys.Title] = value; }
         }
 
-        public BootstrapHelper<T> Bootstrap
+        public MvcBootstrapHelper<T> Bootstrap
         {
             get { return Html.Bootstrap(); }
         }
