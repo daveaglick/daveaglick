@@ -24,6 +24,7 @@
 
 <p>I'm been using @Bootstrap.Link("Bootstrap", "http://getbootstrap.com") for a long time, and other CSS frameworks (like the @Bootstrap.Link("now orphaned YUI", "http://yahooeng.tumblr.com/post/96098168666/important-announcement-regarding-yui")) even longer. I like the way a good CSS framework gives you a lot of boilerplate and provides a jumping-off point for more complex design and functionality without having to start from scratch. As I started to integrate my ASP.NET MVC projects with Bootstrap more frequently (and then Microsoft made it part of the default ASP.NET MVC template), I became frustrated with the lack of integration between the HTML and CSS with the model and code. FluentBootstrap was born about a year ago as a way to provide strongly-typed @Bootstrap.Link("HtmlHelpers", "http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs") for Bootstrap components (especially Bootstrap-styled forms). However, as I continued adding support for more and more of the Bootstrap framework, I decided just to take it all the way and support code-based helpers for all Bootstrap components. This took a long time to complete (and it's not totally done - I still need to support the JavaScript components), but today I am pleased to announce the first public release of FluentBootstrap!</p>
 
+
 @using (var grid = Bootstrap.GridRow().Begin())
 {
     using (grid.GridColumn(6).Begin())
