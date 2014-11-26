@@ -217,6 +217,7 @@
     <Content Include="Content\posts\appveyor-nuget-package.png" />
     <Content Include="Content\posts\github-new-repo.png" />
     <Content Include="Content\posts\nuget-apikey.png" />
+    <Content Include="Content\posts\open-source-participants.png" />
     <Content Include="Content\posts\pdf-process.png" />
     <Content Include="Content\posts\persistenceprocess1.png" />
     <Content Include="Content\prism.css" />
@@ -359,6 +360,7 @@
     <Content Include="Views\Blog\Posts\a-t4-template-to-get-all-css-class-names.cshtml" />
     <Content Include="Views\Blog\Posts\how-to-value-creative-work-in-the-new-economy.cshtml" />
     <Content Include="Views\Blog\Posts\introducing-fluentbootstrap.cshtml" />
+    <Content Include="Views\Blog\Posts\open-source-obligations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
