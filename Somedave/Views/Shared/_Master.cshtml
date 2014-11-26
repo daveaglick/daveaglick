@@ -84,7 +84,8 @@
                         {
                             @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", "http://fluentbootstrap.com"))
                             @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
-                        }    
+                        }
+                        <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>    
                     } 
                 }
             }            
@@ -133,6 +134,16 @@
 
             ga('create', 'UA-54470483-1', 'auto');
             ga('send', 'pageview');
+
+            // Twitter
+            window.twttr = (function (d, s, id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
         </script>
 	</body>
 </html>

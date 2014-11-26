@@ -6,10 +6,11 @@
 {
     using (var row = container.GridRow().Begin())
     {
-        using (row.GridColumn().SetSm(2).Begin())
+        using (row.GridColumn(2).SetSm(4).SetXs(6).Begin())
         {
             @Bootstrap.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Circle).AddAttribute("style", "margin-top: 6px;")
         }
+        @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)
         using (row.GridColumn().SetSm(10).Begin())
         {
             <div class="hello">Hello.</div>
