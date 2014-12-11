@@ -12,15 +12,14 @@
   background-color: @thumbnail-bg;
   border: 1px solid @thumbnail-border;
   border-radius: @thumbnail-border-radius;
-  .transition(all .2s ease-in-out);
+  .transition(border .2s ease-in-out);
 
-  // dotless
-  //> img,
-  //a > img {
-  //  &:extend(.img-responsive);
-  //  margin-left: auto;
-  //  margin-right: auto;
-  //}
+  > img,
+  a > img {
+    &:extend(.img-responsive);
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   // Add a hover state for linked versions only
   a&:hover,

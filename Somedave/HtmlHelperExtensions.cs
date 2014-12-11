@@ -43,5 +43,11 @@ namespace Somedave
         {
             return MVC.Blog.Posts(System.IO.Path.GetFileNameWithoutExtension(view(MVC.Blog.Views.Posts)));
         }
+
+        public static IHtmlString Code(this HtmlHelper htmlHelper, string code, string language = "csharp")
+        {
+            return new HtmlString(string.Format(@"<pre><code class=""language-{0}"">{1}</code></pre>", language,
+                htmlHelper.Raw(HttpUtility.HtmlEncode(code.Replace("Bootstrap(this)", "Bootstrap()")))));
+        }
     }
 }

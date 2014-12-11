@@ -144,6 +144,7 @@ namespace Somedave.Controllers
                     public readonly string announcing_razordatabase = "announcing-razordatabase";
                     public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
                     public readonly string brace_style_convention = "brace-style-convention";
+                    public readonly string computed_properties_and_entity_framework = "computed-properties-and-entity-framework";
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "custom-entity-type-configurations-in-entity-framework-code-first-part-1";
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "custom-entity-type-configurations-in-entity-framework-code-first-part-2";
                     public readonly string deploying_a_public_nuget_package_from_scratch = "deploying-a-public-nuget-package-from-scratch";
@@ -177,6 +178,7 @@ namespace Somedave.Controllers
                 public readonly string announcing_razordatabase = "~/Views/Blog/Posts/announcing-razordatabase.cshtml";
                 public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
                 public readonly string brace_style_convention = "~/Views/Blog/Posts/brace-style-convention.cshtml";
+                public readonly string computed_properties_and_entity_framework = "~/Views/Blog/Posts/computed-properties-and-entity-framework.cshtml";
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1.cshtml";
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_2 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2.cshtml";
                 public readonly string deploying_a_public_nuget_package_from_scratch = "~/Views/Blog/Posts/deploying-a-public-nuget-package-from-scratch.cshtml";

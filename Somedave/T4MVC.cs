@@ -75,10 +75,10 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
-        public static readonly string jquery_1_9_0_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.0.intellisense.min.js") ? Url("jquery-1.9.0.intellisense.min.js") : Url("jquery-1.9.0.intellisense.js");
-        public static readonly string jquery_1_9_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.0.min.js") ? Url("jquery-1.9.0.min.js") : Url("jquery-1.9.0.js");
-        public static readonly string jquery_1_9_0_min_js = Url("jquery-1.9.0.min.js");
-        public static readonly string jquery_1_9_0_min_map = Url("jquery-1.9.0.min.map");
+        public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
+        public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
+        public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
+        public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
         public static readonly string prism_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.js") ? Url("prism.min.js") : Url("prism.js");
     }
 

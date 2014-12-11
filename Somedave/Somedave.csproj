@@ -57,21 +57,29 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FluentBootstrap, Version=3.2.0.14, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentBootstrap, Version=3.3.1.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentBootstrap.3.2.0.14\lib\net40\FluentBootstrap.dll</HintPath>
+      <HintPath>..\packages\FluentBootstrap.3.3.1.2\lib\net40\FluentBootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="FluentBootstrap.Mvc">
-      <HintPath>..\packages\FluentBootstrap.Mvc.3.2.0.14\lib\net45\FluentBootstrap.Mvc.dll</HintPath>
+    <Reference Include="FluentBootstrap.Mvc, Version=3.3.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentBootstrap.Mvc.3.3.1.2\lib\net45\FluentBootstrap.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.XmlTransform">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.8.50926.602, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NuGet.Core.2.8.3\lib\net40-Client\NuGet.Core.dll</HintPath>
     </Reference>
     <Reference Include="RazorDatabase, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -223,15 +231,17 @@
     <Content Include="Content\prism.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\master.less" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\wells.less" />
-    <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\utilities.less" />
     <Content Include="Content\bootstrap\type.less" />
     <Content Include="Content\bootstrap\tooltip.less" />
-    <Content Include="Content\bootstrap\thumbnails.less" />
     <Content Include="Content\bootstrap\theme.less" />
     <Content Include="Content\bootstrap\tables.less" />
     <Content Include="Content\bootstrap\scaffolding.less" />
@@ -289,19 +299,18 @@
     <Content Include="Content\bootstrap\component-animations.less" />
     <Content Include="Content\bootstrap\code.less" />
     <Content Include="Content\bootstrap\close.less" />
-    <Content Include="Content\bootstrap\carousel.less" />
     <Content Include="Content\bootstrap\buttons.less" />
     <Content Include="Content\bootstrap\button-groups.less" />
     <Content Include="Content\bootstrap\breadcrumbs.less" />
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Content\master.less" />
-    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.0.js" />
-    <Content Include="Scripts\jquery-1.9.0.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Web.config" />
@@ -312,7 +321,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Blog\Posts\Web.config" />
     <None Include="T4MVC.tt.hooks.t4" />
@@ -361,6 +369,7 @@
     <Content Include="Views\Blog\Posts\how-to-value-creative-work-in-the-new-economy.cshtml" />
     <Content Include="Views\Blog\Posts\introducing-fluentbootstrap.cshtml" />
     <Content Include="Views\Blog\Posts\open-source-obligations.cshtml" />
+    <Content Include="Views\Blog\Posts\computed-properties-and-entity-framework.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
