@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="NuGetDb">
+  <DataContextMoniker Name="/NuGetDbDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c9695971-b308-4115-8ece-6e0313dbe23a" absoluteBounds="3.5, 1.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/NuGetDbDataContext/Author" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef9a8744-5a9d-4553-90d6-217b0e4dae89" absoluteBounds="3.515, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="85669da4-9b38-4148-91c1-f7b98af9a942" absoluteBounds="3.5, 3.25, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/NuGetDbDataContext/Tag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d70f223-8abc-4fae-abe2-49b66c6447b9" absoluteBounds="3.515, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7eddae6a-d11f-45b4-8e73-279222707787" absoluteBounds="3.5, 5.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/NuGetDbDataContext/Dependency" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8ddc4dc7-c6db-424b-8d36-839f0e4819a5" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6ccd04e4-95fb-41e3-b8a1-49ddbc272f2b" absoluteBounds="6.75, 0.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/NuGetDbDataContext/History" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2071b7db-ada2-44a4-83f2-ca81f292b978" absoluteBounds="6.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2176d41a-a68a-4838-a988-3499d94a91b7" absoluteBounds="0.75, 3.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/NuGetDbDataContext/Package" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7ff08bcc-75f5-419d-abe5-36259ed22bd8" absoluteBounds="0.765, 3.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 3.125); (1.75 : 1.81814697265625); (3.5 : 1.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/NuGetDbDataContext/Package/Package_Author" />
+      <nodes>
+        <classShapeMoniker Id="2176d41a-a68a-4838-a988-3499d94a91b7" />
+        <classShapeMoniker Id="c9695971-b308-4115-8ece-6e0313dbe23a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.94314697265625); (3.5 : 3.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/NuGetDbDataContext/Package/Package_Tag" />
+      <nodes>
+        <classShapeMoniker Id="2176d41a-a68a-4838-a988-3499d94a91b7" />
+        <classShapeMoniker Id="85669da4-9b38-4148-91c1-f7b98af9a942" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 4.89589680989583); (1.75 : 6.16429768880208); (3.5 : 6.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/NuGetDbDataContext/Package/Package_Dependency" />
+      <nodes>
+        <classShapeMoniker Id="2176d41a-a68a-4838-a988-3499d94a91b7" />
+        <classShapeMoniker Id="7eddae6a-d11f-45b4-8e73-279222707787" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
