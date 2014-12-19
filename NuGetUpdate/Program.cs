@@ -66,8 +66,9 @@ namespace NuGetUpdate
                             x.Version,
                             x.Published,
                             x.VersionDownloadCount,
+                            x.IsLatestVersion,
+                            x.IsAbsoluteLatestVersion,
                             x.IsPrerelease,
-                            x.GalleryDetailsUrl,
                             x.Created,
                             x.LastUpdated,
                             x.Authors,
@@ -93,6 +94,8 @@ namespace NuGetUpdate
                                 else
                                 {
                                     existing.VersionDownloadCount = package.VersionDownloadCount;
+                                    existing.IsLatestVersion = package.IsLatestVersion;
+                                    existing.IsAbsoluteLatestVersion = package.IsAbsoluteLatestVersion;
                                     existing.IsPrerelease = package.IsPrerelease;
                                 }
 
@@ -112,9 +115,10 @@ namespace NuGetUpdate
                                     {
                                         Id = id,
                                         Version = version,
-                                        GalleryDetailsUrl = package.GalleryDetailsUrl,
                                         Created = package.Created,
                                         VersionDownloadCount = package.VersionDownloadCount,
+                                        IsLatestVersion = package.IsLatestVersion,
+                                        IsAbsoluteLatestVersion = package.IsAbsoluteLatestVersion,
                                         IsPrerelease = package.IsPrerelease
                                     });
                                 }

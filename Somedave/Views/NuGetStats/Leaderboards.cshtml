@@ -2,8 +2,41 @@
     Title = "NuGet Leaderboards";
 }
 
+@model Somedave.Models.NuGetStats.Leaderboards
+
+@helper Leaderboard(IEnumerable<Somedave.Models.NuGetStats.Leaderboards.Entry> entries, string heading1, string heading2, bool isPackage)
+{
+    using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+    {
+        @table.TableHeaderRow(heading1, heading2)
+        foreach (Somedave.Models.NuGetStats.Leaderboards.Entry entry in entries)
+        {
+            @table.TableDataRow(isPackage ? string.Format("<a href='http://www.nuget.org/packages/{0}'>{0}</a>", entry.Name) : entry.Name, entry.Value)
+        }
+    }
+}
+
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
 @using (var container = Bootstrap.Container().Begin())
 {
+    using (var row = Bootstrap.GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading2("Most Downloaded Packages")
+            <p>This list contains the packages with the most total downloads across all versions.</p>
+            @Leaderboard(Model.MostDownloadedPackages, "Package", "Downloads", true)
+    
+            @Bootstrap.Heading2("Most Dependencies").SetSmallText("Direct")
+            <p>This list contains the packages with the most direct dependencies on them irrespective of versions.</p>
+            @Leaderboard(Model.MostDependencies, "Package", "Dependencies", true)
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading2("Most Downloaded Authors")
+            <p>This list contains the authors with the most total downloads across all version.</p>
+            @Leaderboard(Model.MostDownloadedAuthors, "Author", "Downloads", false)
+        }
+    }
 }

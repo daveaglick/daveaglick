@@ -664,11 +664,13 @@ namespace Somedave
 		
 		private string _Version;
 		
-		private string _GalleryDetailsUrl;
-		
 		private System.DateTime _Created;
 		
 		private int _VersionDownloadCount;
+		
+		private bool _IsLatestVersion;
+		
+		private bool _IsAbsoluteLatestVersion;
 		
 		private bool _IsPrerelease;
 		
@@ -680,12 +682,14 @@ namespace Somedave
     partial void OnIdChanged();
     partial void OnVersionChanging(string value);
     partial void OnVersionChanged();
-    partial void OnGalleryDetailsUrlChanging(string value);
-    partial void OnGalleryDetailsUrlChanged();
     partial void OnCreatedChanging(System.DateTime value);
     partial void OnCreatedChanged();
     partial void OnVersionDownloadCountChanging(int value);
     partial void OnVersionDownloadCountChanged();
+    partial void OnIsLatestVersionChanging(bool value);
+    partial void OnIsLatestVersionChanged();
+    partial void OnIsAbsoluteLatestVersionChanging(bool value);
+    partial void OnIsAbsoluteLatestVersionChanged();
     partial void OnIsPrereleaseChanging(bool value);
     partial void OnIsPrereleaseChanged();
     #endregion
@@ -735,26 +739,6 @@ namespace Somedave
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GalleryDetailsUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string GalleryDetailsUrl
-		{
-			get
-			{
-				return this._GalleryDetailsUrl;
-			}
-			set
-			{
-				if ((this._GalleryDetailsUrl != value))
-				{
-					this.OnGalleryDetailsUrlChanging(value);
-					this.SendPropertyChanging();
-					this._GalleryDetailsUrl = value;
-					this.SendPropertyChanged("GalleryDetailsUrl");
-					this.OnGalleryDetailsUrlChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Created", DbType="DateTime NOT NULL")]
 		public System.DateTime Created
 		{
@@ -791,6 +775,46 @@ namespace Somedave
 					this._VersionDownloadCount = value;
 					this.SendPropertyChanged("VersionDownloadCount");
 					this.OnVersionDownloadCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLatestVersion", DbType="Bit NOT NULL")]
+		public bool IsLatestVersion
+		{
+			get
+			{
+				return this._IsLatestVersion;
+			}
+			set
+			{
+				if ((this._IsLatestVersion != value))
+				{
+					this.OnIsLatestVersionChanging(value);
+					this.SendPropertyChanging();
+					this._IsLatestVersion = value;
+					this.SendPropertyChanged("IsLatestVersion");
+					this.OnIsLatestVersionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAbsoluteLatestVersion", DbType="Bit NOT NULL")]
+		public bool IsAbsoluteLatestVersion
+		{
+			get
+			{
+				return this._IsAbsoluteLatestVersion;
+			}
+			set
+			{
+				if ((this._IsAbsoluteLatestVersion != value))
+				{
+					this.OnIsAbsoluteLatestVersionChanging(value);
+					this.SendPropertyChanging();
+					this._IsAbsoluteLatestVersion = value;
+					this.SendPropertyChanged("IsAbsoluteLatestVersion");
+					this.OnIsAbsoluteLatestVersionChanged();
 				}
 			}
 		}

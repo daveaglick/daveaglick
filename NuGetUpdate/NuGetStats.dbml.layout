@@ -26,10 +26,10 @@
         <elementListCompartment Id="d7023ee6-1a54-40c2-bf6f-ed9e2c7874e3" absoluteBounds="3.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d9572323-466f-4c2d-8f45-e2c659e5ed94" absoluteBounds="6.75, 0.75, 2, 1.9631982421875003">
+    <classShape Id="f54696a2-d897-4af2-997b-b5f5e620dca0" absoluteBounds="6.875, 3.125, 2, 2.1554996744791666">
       <DataClassMoniker Name="/NuGetStatsDataContext/Package" />
       <nestedChildShapes>
-        <elementListCompartment Id="0457f502-43ca-4e20-bb0f-1dfe0ffbd4b5" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0542e8cd-a97c-4215-b390-98b445172d7a" absoluteBounds="6.89, 3.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

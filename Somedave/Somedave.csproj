@@ -189,6 +189,7 @@
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Models\Blog\Tags.cs" />
     <Compile Include="Models\Home\Index.cs" />
+    <Compile Include="Models\NuGetStats\Leaderboards.cs" />
     <Compile Include="Models\NuGetStats\Status.cs" />
     <Compile Include="NuGetStats.designer.cs">
       <AutoGen>True</AutoGen>
