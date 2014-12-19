@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="NuGetStats">
+  <DataContextMoniker Name="/NuGetStatsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="cacd6ebc-6973-426c-8d81-ba77c85b45ce" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/NuGetStatsDataContext/Author" />
+      <nestedChildShapes>
+        <elementListCompartment Id="700a66b7-38e1-408b-a539-880f2878a3b0" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1b185718-44bb-4feb-894a-d2f4fd4da095" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/NuGetStatsDataContext/Tag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9b36296b-2281-444f-a215-5e6cf9cb391a" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4dbda335-12e8-4589-b7d8-713e9d1ab21b" absoluteBounds="0.75, 3.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/NuGetStatsDataContext/Dependency" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c7db401b-a1fe-44c1-8285-faada31e48e1" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aea94692-dd92-4ce4-990e-ba77df9ba51f" absoluteBounds="3.75, 3.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/NuGetStatsDataContext/History" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a76921e6-8fe9-455e-a84c-7dbbc726d142" absoluteBounds="3.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81674c47-90f8-44fd-ab0a-3487050a3944" absoluteBounds="6.75, 0.75, 2, 1.9631982421875003">
+      <DataClassMoniker Name="/NuGetStatsDataContext/Package" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6b767526-835c-4f3d-836b-516356fd3c17" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

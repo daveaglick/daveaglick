@@ -32,5 +32,15 @@ namespace NuGetUpdate.Properties {
                 return ((string)(this["NuGetConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\v11.0;Initial Catalog=NuGetStats;Integrated Security=True")]
+        public string NuGetStatsConnectionString {
+            get {
+                return ((string)(this["NuGetStatsConnectionString"]));
+            }
+        }
     }
 }

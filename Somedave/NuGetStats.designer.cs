@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NuGetUpdate
+namespace Somedave
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -22,8 +22,8 @@ namespace NuGetUpdate
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="NuGet")]
-	public partial class NuGetDbDataContext : System.Data.Linq.DataContext
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="NuGetStats")]
+	public partial class NuGetStatsDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -47,31 +47,31 @@ namespace NuGetUpdate
     partial void DeletePackage(Package instance);
     #endregion
 		
-		public NuGetDbDataContext() : 
-				base(global::NuGetUpdate.Properties.Settings.Default.NuGetConnectionString, mappingSource)
+		public NuGetStatsDataContext() : 
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NuGetStatsConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public NuGetDbDataContext(string connection) : 
+		public NuGetStatsDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public NuGetDbDataContext(System.Data.IDbConnection connection) : 
+		public NuGetStatsDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public NuGetDbDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public NuGetStatsDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public NuGetDbDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public NuGetStatsDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -128,9 +128,7 @@ namespace NuGetUpdate
 		
 		private string _Version;
 		
-		private string _Author1;
-		
-		private EntityRef<Package> _Package;
+		private string _Name;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -140,13 +138,12 @@ namespace NuGetUpdate
     partial void OnIdChanged();
     partial void OnVersionChanging(string value);
     partial void OnVersionChanged();
-    partial void OnAuthor1Changing(string value);
-    partial void OnAuthor1Changed();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     #endregion
 		
 		public Author()
 		{
-			this._Package = default(EntityRef<Package>);
 			OnCreated();
 		}
 		
@@ -161,10 +158,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Id != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
@@ -185,10 +178,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Version != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnVersionChanging(value);
 					this.SendPropertyChanging();
 					this._Version = value;
@@ -198,58 +187,22 @@ namespace NuGetUpdate
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Author", Storage="_Author1", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Author1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Name
 		{
 			get
 			{
-				return this._Author1;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._Author1 != value))
+				if ((this._Name != value))
 				{
-					this.OnAuthor1Changing(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._Author1 = value;
-					this.SendPropertyChanged("Author1");
-					this.OnAuthor1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Author", Storage="_Package", ThisKey="Id,Version", OtherKey="Id,Version", IsForeignKey=true)]
-		public Package Package
-		{
-			get
-			{
-				return this._Package.Entity;
-			}
-			set
-			{
-				Package previousValue = this._Package.Entity;
-				if (((previousValue != value) 
-							|| (this._Package.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Package.Entity = null;
-						previousValue.Authors.Remove(this);
-					}
-					this._Package.Entity = value;
-					if ((value != null))
-					{
-						value.Authors.Add(this);
-						this._Id = value.Id;
-						this._Version = value.Version;
-					}
-					else
-					{
-						this._Id = default(string);
-						this._Version = default(string);
-					}
-					this.SendPropertyChanged("Package");
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
@@ -285,9 +238,7 @@ namespace NuGetUpdate
 		
 		private string _Version;
 		
-		private string _Tag1;
-		
-		private EntityRef<Package> _Package;
+		private string _Name;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -297,13 +248,12 @@ namespace NuGetUpdate
     partial void OnIdChanged();
     partial void OnVersionChanging(string value);
     partial void OnVersionChanged();
-    partial void OnTag1Changing(string value);
-    partial void OnTag1Changed();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     #endregion
 		
 		public Tag()
 		{
-			this._Package = default(EntityRef<Package>);
 			OnCreated();
 		}
 		
@@ -318,10 +268,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Id != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
@@ -342,10 +288,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Version != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnVersionChanging(value);
 					this.SendPropertyChanging();
 					this._Version = value;
@@ -355,58 +297,22 @@ namespace NuGetUpdate
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Tag", Storage="_Tag1", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Tag1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Name
 		{
 			get
 			{
-				return this._Tag1;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._Tag1 != value))
+				if ((this._Name != value))
 				{
-					this.OnTag1Changing(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._Tag1 = value;
-					this.SendPropertyChanged("Tag1");
-					this.OnTag1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Tag", Storage="_Package", ThisKey="Id,Version", OtherKey="Id,Version", IsForeignKey=true)]
-		public Package Package
-		{
-			get
-			{
-				return this._Package.Entity;
-			}
-			set
-			{
-				Package previousValue = this._Package.Entity;
-				if (((previousValue != value) 
-							|| (this._Package.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Package.Entity = null;
-						previousValue.Tags.Remove(this);
-					}
-					this._Package.Entity = value;
-					if ((value != null))
-					{
-						value.Tags.Add(this);
-						this._Id = value.Id;
-						this._Version = value.Version;
-					}
-					else
-					{
-						this._Id = default(string);
-						this._Version = default(string);
-					}
-					this.SendPropertyChanged("Package");
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
@@ -446,8 +352,6 @@ namespace NuGetUpdate
 		
 		private string _DependencyVersion;
 		
-		private EntityRef<Package> _Package;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -464,7 +368,6 @@ namespace NuGetUpdate
 		
 		public Dependency()
 		{
-			this._Package = default(EntityRef<Package>);
 			OnCreated();
 		}
 		
@@ -479,10 +382,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Id != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
@@ -503,10 +402,6 @@ namespace NuGetUpdate
 			{
 				if ((this._Version != value))
 				{
-					if (this._Package.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnVersionChanging(value);
 					this.SendPropertyChanging();
 					this._Version = value;
@@ -556,42 +451,6 @@ namespace NuGetUpdate
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Dependency", Storage="_Package", ThisKey="Id,Version", OtherKey="Id,Version", IsForeignKey=true)]
-		public Package Package
-		{
-			get
-			{
-				return this._Package.Entity;
-			}
-			set
-			{
-				Package previousValue = this._Package.Entity;
-				if (((previousValue != value) 
-							|| (this._Package.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Package.Entity = null;
-						previousValue.Dependencies.Remove(this);
-					}
-					this._Package.Entity = value;
-					if ((value != null))
-					{
-						value.Dependencies.Add(this);
-						this._Id = value.Id;
-						this._Version = value.Version;
-					}
-					else
-					{
-						this._Id = default(string);
-						this._Version = default(string);
-					}
-					this.SendPropertyChanged("Package");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -623,7 +482,13 @@ namespace NuGetUpdate
 		
 		private System.Nullable<System.DateTime> _EndTime;
 		
-		private string _Messages;
+		private int _TotalCount;
+		
+		private int _ProcessedCount;
+		
+		private System.DateTime _LastUpdated;
+		
+		private string _Exception;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -633,8 +498,14 @@ namespace NuGetUpdate
     partial void OnStartTimeChanged();
     partial void OnEndTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnEndTimeChanged();
-    partial void OnMessagesChanging(string value);
-    partial void OnMessagesChanged();
+    partial void OnTotalCountChanging(int value);
+    partial void OnTotalCountChanged();
+    partial void OnProcessedCountChanging(int value);
+    partial void OnProcessedCountChanged();
+    partial void OnLastUpdatedChanging(System.DateTime value);
+    partial void OnLastUpdatedChanged();
+    partial void OnExceptionChanging(string value);
+    partial void OnExceptionChanged();
     #endregion
 		
 		public History()
@@ -682,22 +553,82 @@ namespace NuGetUpdate
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Messages", DbType="NVarChar(MAX)")]
-		public string Messages
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalCount", DbType="Int NOT NULL")]
+		public int TotalCount
 		{
 			get
 			{
-				return this._Messages;
+				return this._TotalCount;
 			}
 			set
 			{
-				if ((this._Messages != value))
+				if ((this._TotalCount != value))
 				{
-					this.OnMessagesChanging(value);
+					this.OnTotalCountChanging(value);
 					this.SendPropertyChanging();
-					this._Messages = value;
-					this.SendPropertyChanged("Messages");
-					this.OnMessagesChanged();
+					this._TotalCount = value;
+					this.SendPropertyChanged("TotalCount");
+					this.OnTotalCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProcessedCount", DbType="Int NOT NULL")]
+		public int ProcessedCount
+		{
+			get
+			{
+				return this._ProcessedCount;
+			}
+			set
+			{
+				if ((this._ProcessedCount != value))
+				{
+					this.OnProcessedCountChanging(value);
+					this.SendPropertyChanging();
+					this._ProcessedCount = value;
+					this.SendPropertyChanged("ProcessedCount");
+					this.OnProcessedCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdated", DbType="DateTime NOT NULL")]
+		public System.DateTime LastUpdated
+		{
+			get
+			{
+				return this._LastUpdated;
+			}
+			set
+			{
+				if ((this._LastUpdated != value))
+				{
+					this.OnLastUpdatedChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdated = value;
+					this.SendPropertyChanged("LastUpdated");
+					this.OnLastUpdatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exception", DbType="NVarChar(MAX)")]
+		public string Exception
+		{
+			get
+			{
+				return this._Exception;
+			}
+			set
+			{
+				if ((this._Exception != value))
+				{
+					this.OnExceptionChanging(value);
+					this.SendPropertyChanging();
+					this._Exception = value;
+					this.SendPropertyChanged("Exception");
+					this.OnExceptionChanged();
 				}
 			}
 		}
@@ -733,17 +664,13 @@ namespace NuGetUpdate
 		
 		private string _Version;
 		
-		private string _Description;
+		private string _GalleryDetailsUrl;
 		
-		private System.Nullable<int> _DownloadCount;
+		private System.DateTime _Created;
 		
-		private bool _Listed;
+		private int _VersionDownloadCount;
 		
-		private EntitySet<Author> _Authors;
-		
-		private EntitySet<Tag> _Tags;
-		
-		private EntitySet<Dependency> _Dependencies;
+		private bool _IsPrerelease;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -753,19 +680,18 @@ namespace NuGetUpdate
     partial void OnIdChanged();
     partial void OnVersionChanging(string value);
     partial void OnVersionChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnDownloadCountChanging(System.Nullable<int> value);
-    partial void OnDownloadCountChanged();
-    partial void OnListedChanging(bool value);
-    partial void OnListedChanged();
+    partial void OnGalleryDetailsUrlChanging(string value);
+    partial void OnGalleryDetailsUrlChanged();
+    partial void OnCreatedChanging(System.DateTime value);
+    partial void OnCreatedChanged();
+    partial void OnVersionDownloadCountChanging(int value);
+    partial void OnVersionDownloadCountChanged();
+    partial void OnIsPrereleaseChanging(bool value);
+    partial void OnIsPrereleaseChanged();
     #endregion
 		
 		public Package()
 		{
-			this._Authors = new EntitySet<Author>(new Action<Author>(this.attach_Authors), new Action<Author>(this.detach_Authors));
-			this._Tags = new EntitySet<Tag>(new Action<Tag>(this.attach_Tags), new Action<Tag>(this.detach_Tags));
-			this._Dependencies = new EntitySet<Dependency>(new Action<Dependency>(this.attach_Dependencies), new Action<Dependency>(this.detach_Dependencies));
 			OnCreated();
 		}
 		
@@ -809,102 +735,83 @@ namespace NuGetUpdate
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GalleryDetailsUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string GalleryDetailsUrl
 		{
 			get
 			{
-				return this._Description;
+				return this._GalleryDetailsUrl;
 			}
 			set
 			{
-				if ((this._Description != value))
+				if ((this._GalleryDetailsUrl != value))
 				{
-					this.OnDescriptionChanging(value);
+					this.OnGalleryDetailsUrlChanging(value);
 					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
+					this._GalleryDetailsUrl = value;
+					this.SendPropertyChanged("GalleryDetailsUrl");
+					this.OnGalleryDetailsUrlChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DownloadCount", DbType="Int")]
-		public System.Nullable<int> DownloadCount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Created", DbType="DateTime NOT NULL")]
+		public System.DateTime Created
 		{
 			get
 			{
-				return this._DownloadCount;
+				return this._Created;
 			}
 			set
 			{
-				if ((this._DownloadCount != value))
+				if ((this._Created != value))
 				{
-					this.OnDownloadCountChanging(value);
+					this.OnCreatedChanging(value);
 					this.SendPropertyChanging();
-					this._DownloadCount = value;
-					this.SendPropertyChanged("DownloadCount");
-					this.OnDownloadCountChanged();
+					this._Created = value;
+					this.SendPropertyChanged("Created");
+					this.OnCreatedChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Listed", DbType="Bit NOT NULL")]
-		public bool Listed
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionDownloadCount", DbType="Int NOT NULL")]
+		public int VersionDownloadCount
 		{
 			get
 			{
-				return this._Listed;
+				return this._VersionDownloadCount;
 			}
 			set
 			{
-				if ((this._Listed != value))
+				if ((this._VersionDownloadCount != value))
 				{
-					this.OnListedChanging(value);
+					this.OnVersionDownloadCountChanging(value);
 					this.SendPropertyChanging();
-					this._Listed = value;
-					this.SendPropertyChanged("Listed");
-					this.OnListedChanged();
+					this._VersionDownloadCount = value;
+					this.SendPropertyChanged("VersionDownloadCount");
+					this.OnVersionDownloadCountChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Author", Storage="_Authors", ThisKey="Id,Version", OtherKey="Id,Version")]
-		public EntitySet<Author> Authors
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPrerelease", DbType="Bit NOT NULL")]
+		public bool IsPrerelease
 		{
 			get
 			{
-				return this._Authors;
+				return this._IsPrerelease;
 			}
 			set
 			{
-				this._Authors.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Tag", Storage="_Tags", ThisKey="Id,Version", OtherKey="Id,Version")]
-		public EntitySet<Tag> Tags
-		{
-			get
-			{
-				return this._Tags;
-			}
-			set
-			{
-				this._Tags.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Dependency", Storage="_Dependencies", ThisKey="Id,Version", OtherKey="Id,Version")]
-		public EntitySet<Dependency> Dependencies
-		{
-			get
-			{
-				return this._Dependencies;
-			}
-			set
-			{
-				this._Dependencies.Assign(value);
+				if ((this._IsPrerelease != value))
+				{
+					this.OnIsPrereleaseChanging(value);
+					this.SendPropertyChanging();
+					this._IsPrerelease = value;
+					this.SendPropertyChanged("IsPrerelease");
+					this.OnIsPrereleaseChanged();
+				}
 			}
 		}
 		
@@ -926,42 +833,6 @@ namespace NuGetUpdate
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Authors(Author entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = this;
-		}
-		
-		private void detach_Authors(Author entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = null;
-		}
-		
-		private void attach_Tags(Tag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = this;
-		}
-		
-		private void detach_Tags(Tag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = null;
-		}
-		
-		private void attach_Dependencies(Dependency entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = this;
-		}
-		
-		private void detach_Dependencies(Dependency entity)
-		{
-			this.SendPropertyChanging();
-			entity.Package = null;
 		}
 	}
 }

@@ -1,0 +1,19 @@
+﻿@{
+    Title = "NuGet Stats Status";
+}
+
+@model Somedave.Models.NuGetStats.Status
+
+@Html.Partial(MVC.Shared.Views.Title, string.Empty)
+
+@using (var container = Bootstrap.Container().Begin())
+{
+    using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+    {
+        @table.TableHeaderRow("Start Time", "End Time", "Total Count", "Processed Count", "Last Updated", "Exception")
+        foreach (History history in Model.Histories)
+        {
+            @table.TableDataRow(history.StartTime, history.EndTime, history.TotalCount, history.ProcessedCount, history.LastUpdated, history.Exception)
+        }
+    }
+}
