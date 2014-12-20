@@ -5,9 +5,11 @@ using System.Data.Common;
 using System.Data.Linq;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using NuGet;
 using NuGetUpdate.NuGetFeed;
 
 namespace NuGetUpdate
@@ -16,6 +18,7 @@ namespace NuGetUpdate
     {
         private static readonly Uri NuGetFeedUri = new Uri("http://nuget.org/api/v2", UriKind.Absolute);
         private static readonly DateTime UnlistedPublishedDate = new DateTime(1900, 1, 1);
+        private static readonly List<string> SkipAuthors = new List<string> { "Inc.", "Inc" }; 
         private const int BatchSize = 100;
 
         static void Main(string[] args)
@@ -126,61 +129,74 @@ namespace NuGetUpdate
                                 // Authors
                                 if (!string.IsNullOrWhiteSpace(package.Authors))
                                 {
+                                    HashSet<string> authorHash = new HashSet<string>();
                                     foreach (string author in package.Authors
                                         .Split(new []{','}, StringSplitOptions.RemoveEmptyEntries)
                                         .Select(x => x.Trim())
-                                        .Where(x => x.IndexOf('�') == -1)
+                                        .Where(x => x.IndexOf('�') == -1 && !SkipAuthors.Contains(x, StringComparer.OrdinalIgnoreCase))
                                         .Distinct(StringComparer.OrdinalIgnoreCase))
                                     {
-                                        context.Authors.InsertOnSubmit(new Author
+                                        string normalizedAuthor = Normalize(author, 128);
+                                        if (authorHash.Add(normalizedAuthor))
                                         {
-                                            Id = id,
-                                            Version = version,
-                                            Name = Normalize(author, 128)
-                                        });
+                                            context.Authors.InsertOnSubmit(new Author
+                                            {
+                                                Id = id,
+                                                Version = version,
+                                                Name = normalizedAuthor
+                                            });
+                                        }
                                     }
                                 }
 
-                                // Tags                            
+                                // Tags       
                                 if (!string.IsNullOrWhiteSpace(package.Tags))
                                 {
+                                    HashSet<string> tagHash = new HashSet<string>();
                                     foreach (string tag in package.Tags
                                         .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
                                         .Select(x => x.Trim())
                                         .Where(x => x.IndexOf('�') == -1)
                                         .Distinct(StringComparer.OrdinalIgnoreCase))
                                     {
-                                        context.Tags.InsertOnSubmit(new Tag
+                                        string normalizedTag = Normalize(tag, 128);
+                                        if (tagHash.Add(normalizedTag))
                                         {
-                                            Id = id,
-                                            Version = version,
-                                            Name = Normalize(tag, 128)
-                                        });
+                                            context.Tags.InsertOnSubmit(new Tag
+                                            {
+                                                Id = id,
+                                                Version = version,
+                                                Name = normalizedTag
+                                            });
+                                        }
                                     }
                                 }
 
                                 // Dependencies
-                                HashSet<string> dependencyHash = new HashSet<string>();
                                 if (!string.IsNullOrWhiteSpace(package.Dependencies))
                                 {
-                                    foreach (KeyValuePair<string, string> dependency in package.Dependencies
-                                        .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(x => x.Trim().Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries))
-                                        .Where(x => x.Length == 2 && !string.IsNullOrWhiteSpace(x[0]) && !string.IsNullOrWhiteSpace(x[1]))
-                                        .Select(x => new KeyValuePair<string, string>(x[0].Trim(), x[1].Trim())))
+                                    HashSet<string> dependencyHash = new HashSet<string>();
+                                    List<PackageDependencySet> dependencySets = ParseDependencySet(package.Dependencies);
+                                    if (dependencySets != null)
                                     {
-                                        // Need to check for duplicates since the same dependency might be in more than one set
-                                        string dependencyId = Normalize(dependency.Key, 128);
-                                        string dependencyVersion = Normalize(dependency.Value, 50);
-                                        if (dependencyHash.Add(string.Format("{0}|{1}|{2}|{3}", id, version, dependencyId, dependencyVersion)))
+                                        foreach (PackageDependency dependency in dependencySets
+                                            .Where(x => x.Dependencies != null)
+                                            .SelectMany(x => x.Dependencies)
+                                            .Where(x => x != null && !string.IsNullOrWhiteSpace(x.Id) && x.VersionSpec != null))
                                         {
-                                            context.Dependencies.InsertOnSubmit(new Dependency
+                                            // Need to check for duplicates since the same dependency might be in more than one set
+                                            string dependencyId = Normalize(dependency.Id, 128);
+                                            string dependencyVersion = Normalize(dependency.VersionSpec.ToString(), 50);
+                                            if (dependencyHash.Add(string.Format("{0}|{1}|{2}|{3}", id, version, dependencyId, dependencyVersion)))
                                             {
-                                                Id = id,
-                                                Version = version,
-                                                DependencyId = dependencyId,
-                                                DependencyVersion = dependencyVersion
-                                            });
+                                                context.Dependencies.InsertOnSubmit(new Dependency
+                                                {
+                                                    Id = id,
+                                                    Version = version,
+                                                    DependencyId = dependencyId,
+                                                    DependencyVersion = dependencyVersion
+                                                });
+                                            }
                                         }
                                     }
                                 }
@@ -234,6 +250,58 @@ namespace NuGetUpdate
 	        if (string.IsNullOrEmpty(value)) return value;
 	        value = value.Trim();
             return value.Length <= maxLength ? value : value.Substring(0, maxLength); 
+        }
+
+        // From NuGet.Core src/Core/Packages/DataServicePackage.cs
+        private static List<PackageDependencySet> ParseDependencySet(string value)
+        {
+            var dependencySets = new List<PackageDependencySet>();
+
+            var dependencies = value.Split('|').Select(ParseDependency).ToList();
+
+            // group the dependencies by target framework
+            var groups = dependencies.GroupBy(d => d.Item3);
+
+            dependencySets.AddRange(
+                groups.Select(g => new PackageDependencySet(
+                                           g.Key,   // target framework 
+                                           g.Where(pair => !String.IsNullOrEmpty(pair.Item1))       // the Id is empty when a group is empty.
+                                            .Select(pair => new PackageDependency(pair.Item1, pair.Item2)))));     // dependencies by that target framework
+            return dependencySets;
+        }
+
+        private static Tuple<string, IVersionSpec, FrameworkName> ParseDependency(string value)
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                return null;
+            }
+
+            // IMPORTANT: Do not pass StringSplitOptions.RemoveEmptyEntries to this method, because it will break 
+            // if the version spec is null, for in that case, the Dependencies string sent down is "<id>::<target framework>".
+            // We do want to preserve the second empty element after the split.
+            string[] tokens = value.Trim().Split(new[] { ':' });
+
+            if (tokens.Length == 0)
+            {
+                return null;
+            }
+
+            // Trim the id
+            string id = tokens[0].Trim();
+
+            IVersionSpec versionSpec = null;
+            if (tokens.Length > 1)
+            {
+                // Attempt to parse the version
+                VersionUtility.TryParseVersionSpec(tokens[1], out versionSpec);
+            }
+
+            var targetFramework = (tokens.Length > 2 && !String.IsNullOrEmpty(tokens[2]))
+                                    ? VersionUtility.ParseFrameworkName(tokens[2])
+                                    : null;
+
+            return Tuple.Create(id, versionSpec, targetFramework);
         }
     }
 }
