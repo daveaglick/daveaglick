@@ -1,12 +1,12 @@
 ﻿@{
-    Title = "NuGet Stats Status";
+    Title = "NuGet Stats / Status";
 }
 
 @model Somedave.Models.NuGetStats.Status
 
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (var container = Bootstrap.Container().Begin())
+@using (Bootstrap.Container().Begin())
 {
     using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
     {

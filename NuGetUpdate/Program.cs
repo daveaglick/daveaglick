@@ -9,6 +9,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using LinqToSqlRetry;
 using NuGet;
 using NuGetUpdate.NuGetFeed;
 
@@ -33,7 +34,7 @@ namespace NuGetUpdate
                 using (NuGetStatsDataContext context = new NuGetStatsDataContext())
                 {
                     // Get the last end time
-                    History history = context.Histories.OrderByDescending(x => x.LastUpdated).FirstOrDefault();
+                    History history = context.Histories.OrderByDescending(x => x.LastUpdated).Retry().FirstOrDefault();
                     if (history != null)
                     {
                         lastUpdated = history.LastUpdated;
@@ -47,7 +48,7 @@ namespace NuGetUpdate
                         TotalCount = feed.Packages.Where(x => x.LastUpdated >= lastUpdated && x.LastUpdated < startTime).Count(), 
                         ProcessedCount = 0
                     });
-                    context.SubmitChanges();
+                    context.SubmitChangesRetry();
                 }
 
                 // Iterate the packages
@@ -86,7 +87,7 @@ namespace NuGetUpdate
                         using (NuGetStatsDataContext context = new NuGetStatsDataContext())
                         {
                             // Check for existing
-                            Package existing = context.Packages.FirstOrDefault(x => x.Id == id && x.Version == version);
+                            Package existing = context.Packages.Retry().FirstOrDefault(x => x.Id == id && x.Version == version);
                             if (existing != null)
                             {
                                 // Is it unlisted?
@@ -102,10 +103,13 @@ namespace NuGetUpdate
                                     existing.IsPrerelease = package.IsPrerelease;
                                 }
 
-                                // Delete details in either case (use manual SQL commands to avoid having to get and then delete the records)
-                                context.ExecuteCommand("DELETE FROM dbo.Authors WHERE Id = {0} AND Version = {1}", id, version);
-                                context.ExecuteCommand("DELETE FROM dbo.Tags WHERE Id = {0} AND Version = {1}", id, version);
-                                context.ExecuteCommand("DELETE FROM dbo.Dependencies WHERE Id = {0} AND Version = {1}", id, version);
+                                // Delete details in both cases (use manual SQL commands to avoid having to get and then delete the records)
+                                new LinearUpdateStatsRetry(context).Retry(() =>
+                                {
+                                    context.ExecuteCommand("DELETE FROM [Authors] WHERE [Id] = {0} AND [Version] = {1}", id, version);
+                                    context.ExecuteCommand("DELETE FROM [Tags] WHERE [Id] = {0} AND [Version] = {1}", id, version);
+                                    context.ExecuteCommand("DELETE FROM [Dependencies] WHERE [Id] = {0} AND [Version] = {1}", id, version);
+                                });
                             }
 
                             // Don't add data for unlisted packages
@@ -202,7 +206,7 @@ namespace NuGetUpdate
                                 }
                             }
 
-                            context.SubmitChanges();
+                            context.SubmitChangesRetry();
                         }
 
                         newLastUpdated = package.LastUpdated;
@@ -212,10 +216,10 @@ namespace NuGetUpdate
                     processedCount += count;
                     using (NuGetStatsDataContext context = new NuGetStatsDataContext())
                     {
-                        History history = context.Histories.Single(x => x.StartTime == startTime);
+                        History history = context.Histories.Retry().Single(x => x.StartTime == startTime);
                         history.ProcessedCount = processedCount;
                         history.LastUpdated = newLastUpdated;
-                        context.SubmitChanges();
+                        context.SubmitChangesRetry();
                     }
                     Console.WriteLine(processedCount + " " + newLastUpdated);
 
@@ -226,10 +230,10 @@ namespace NuGetUpdate
                 // Log the exception
                 using (NuGetStatsDataContext context = new NuGetStatsDataContext())
                 {
-                    History history = context.Histories.Single(x => x.StartTime == startTime);
+                    History history = context.Histories.Retry().Single(x => x.StartTime == startTime);
                     history.Exception = ex.ToString();
                     history.EndTime = DateTime.UtcNow;
-                    context.SubmitChanges();
+                    context.SubmitChangesRetry();
                 }
                 Console.WriteLine("Exception:" + ex);
                 throw;
@@ -238,9 +242,9 @@ namespace NuGetUpdate
             // Done!
             using (NuGetStatsDataContext context = new NuGetStatsDataContext())
             {
-                History history = context.Histories.Single(x => x.StartTime == startTime);
+                History history = context.Histories.Retry().Single(x => x.StartTime == startTime);
                 history.EndTime = DateTime.UtcNow;
-                context.SubmitChanges();
+                context.SubmitChangesRetry();
             }
             Console.WriteLine("Done!");
         }

@@ -57,6 +57,12 @@ namespace Somedave.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Leaderboard()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Leaderboard);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NuGetStatsController Actions { get { return MVC.NuGetStats; } }
@@ -74,19 +80,29 @@ namespace Somedave.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string Leaderboards = "Leaderboards";
             public readonly string Status = "Status";
+            public readonly string Footer = "Footer";
+            public readonly string Leaderboard = "Leaderboard";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string Leaderboards = "Leaderboards";
             public const string Status = "Status";
+            public const string Footer = "Footer";
+            public const string Leaderboard = "Leaderboard";
         }
 
 
+        static readonly ActionParamsClass_Leaderboard s_params_Leaderboard = new ActionParamsClass_Leaderboard();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Leaderboard LeaderboardParams { get { return s_params_Leaderboard; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Leaderboard
+        {
+            public readonly string leaderboard = "leaderboard";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -97,12 +113,14 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Footer = "Footer";
                 public readonly string Index = "Index";
-                public readonly string Leaderboards = "Leaderboards";
+                public readonly string Leaderboard = "Leaderboard";
                 public readonly string Status = "Status";
             }
+            public readonly string Footer = "~/Views/NuGetStats/Footer.cshtml";
             public readonly string Index = "~/Views/NuGetStats/Index.cshtml";
-            public readonly string Leaderboards = "~/Views/NuGetStats/Leaderboards.cshtml";
+            public readonly string Leaderboard = "~/Views/NuGetStats/Leaderboard.cshtml";
             public readonly string Status = "~/Views/NuGetStats/Status.cshtml";
         }
     }
@@ -124,17 +142,6 @@ namespace Somedave.Controllers
         }
 
         [NonAction]
-        partial void LeaderboardsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Leaderboards()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Leaderboards);
-            LeaderboardsOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void StatusOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
@@ -142,6 +149,29 @@ namespace Somedave.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Status);
             StatusOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void FooterOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Footer()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Footer);
+            FooterOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LeaderboardOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string leaderboard);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Leaderboard(string leaderboard)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Leaderboard);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "leaderboard", leaderboard);
+            LeaderboardOverride(callInfo, leaderboard);
             return callInfo;
         }
 

@@ -2,8 +2,19 @@
     Title = "NuGet Stats";
 }
 
+@model Somedave.Models.NuGetStats.Index
+
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (var container = Bootstrap.Container().Begin())
+@using (Bootstrap.Container().Begin())
 {
+    @Bootstrap.Heading1("Leaderboards")
+    foreach (KeyValuePair<string, Somedave.Models.NuGetStats.Leaderboard.Meta> kvp in Model.Leaderboards)
+    {
+        <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
+        <p>@kvp.Value.Description</p>
+    }
+    
+    @Html.Action(MVC.NuGetStats.Footer())
 }
+

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinqToSqlRetry">
+      <HintPath>..\packages\LinqToSqlRetry.0.1.0.0\lib\net45\LinqToSqlRetry.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
@@ -66,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinearUpdateStatsRetry.cs" />
     <Compile Include="NuGetStats.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

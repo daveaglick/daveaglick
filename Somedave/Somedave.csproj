@@ -69,6 +69,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="LinqToSqlRetry">
+      <HintPath>..\packages\LinqToSqlRetry.0.1.0.0\lib\net45\LinqToSqlRetry.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -189,7 +192,9 @@
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Models\Blog\Tags.cs" />
     <Compile Include="Models\Home\Index.cs" />
-    <Compile Include="Models\NuGetStats\Leaderboards.cs" />
+    <Compile Include="Models\NuGetStats\Footer.cs" />
+    <Compile Include="Models\NuGetStats\Index.cs" />
+    <Compile Include="Models\NuGetStats\Leaderboard.cs" />
     <Compile Include="Models\NuGetStats\Status.cs" />
     <Compile Include="NuGetStats.designer.cs">
       <AutoGen>True</AutoGen>
@@ -383,9 +388,10 @@
     <Content Include="Views\Blog\Posts\open-source-obligations.cshtml" />
     <Content Include="Views\Blog\Posts\computed-properties-and-entity-framework.cshtml" />
     <Content Include="Views\NuGetStats\Index.cshtml" />
-    <Content Include="Views\NuGetStats\Leaderboards.cshtml" />
     <Content Include="Views\NuGetStats\Status.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\NuGetStats\Leaderboard.cshtml" />
+    <Content Include="Views\NuGetStats\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
