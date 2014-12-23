@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
+using LinqToSqlRetry;
 using Somedave.Models.NuGetStats;
 using Index = Somedave.Models.Home.Index;
 
@@ -29,7 +30,7 @@ namespace Somedave.Controllers
             {
                 return View(new Status
                 {
-                    Histories = context.Histories.OrderByDescending(x => x.StartTime).Take(10).ToList()
+                    Histories = context.Histories.OrderByDescending(x => x.StartTime).Take(10).Retry().ToList()
                 });
             }
         }
@@ -40,9 +41,10 @@ namespace Somedave.Controllers
             Footer footer = new Footer();
             using (NuGetStatsDataContext context = new NuGetStatsDataContext())
             {
-                History history = context.Histories.OrderByDescending(x => x.LastUpdated).FirstOrDefault();
+                SetContextState(context);
+                History history = context.Histories.OrderByDescending(x => x.LastUpdated).Retry().FirstOrDefault();
                 footer.LastUpdated = history == null ? DateTime.MinValue : history.LastUpdated;
-                footer.Packages = context.Packages.Count();
+                footer.Packages = context.Packages.Retry().Count();
             }
             return View(footer);
         }
@@ -68,13 +70,13 @@ namespace Somedave.Controllers
                         })
                         .OrderByDescending(x => x.Value)
                         .Take(10)
+                        .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
                             Value = x.Value.ToString()
                         })
-                        .ToList()
                 }
             },
             {
@@ -99,13 +101,13 @@ namespace Somedave.Controllers
                         })
                         .OrderByDescending(x => x.Value)
                         .Take(10)
+                        .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
                             Value = x.Value.ToString()
                         })
-                        .ToList()
                 }
             },
             {
@@ -127,13 +129,13 @@ namespace Somedave.Controllers
                         })
                         .OrderByDescending(x => x.Value)
                         .Take(10)
+                        .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
                             Value = x.Value.ToString()
                         })
-                        .ToList()
                 }
             }
         };
@@ -149,6 +151,7 @@ namespace Somedave.Controllers
             IEnumerable<Leaderboard.Entry> entries;
             using (NuGetStatsDataContext context = new NuGetStatsDataContext())
             {
+                SetContextState(context);
                 entries = meta.Entries(context);
             }
             return View(MVC.NuGetStats.Views.Leaderboard, new Leaderboard
@@ -156,6 +159,37 @@ namespace Somedave.Controllers
                 Entries = entries,
                 Metadata = meta
             });
+        }
+
+        [GET("dependencies/{package}")]
+        public virtual ActionResult Dependencies(string package)
+        {
+            Dependencies dependencies = new Dependencies {Package = package};
+            using (NuGetStatsDataContext context = new NuGetStatsDataContext())
+            {
+                SetContextState(context);
+                dependencies.Dependency = 
+                    context.Dependencies
+                    .Where(x => x.Id == package)
+                    .Select(x => x.DependencyId)
+                    .Distinct()
+                    .ToList();
+                dependencies.Dependent = 
+                    context.Dependencies
+                    .Where(x => x.DependencyId == package)
+                    .Select(x => x.Id)
+                    .Distinct()
+                    .ToList();
+            }
+            return View(dependencies);
+        }
+
+        // This sets a new timeout and changes the transaction level
+        // Use it any time the main tables are accessed
+        // See http://omaralzabir.com/linq_to_sql_solve_transaction_deadlock_and_query_timeout_problem_using_uncommitted_reads/
+        private void SetContextState(NuGetStatsDataContext context)
+        {
+            context.ExecuteCommand("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
         }
     }
 }

@@ -63,6 +63,12 @@ namespace Somedave.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Leaderboard);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Dependencies()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dependencies);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NuGetStatsController Actions { get { return MVC.NuGetStats; } }
@@ -83,6 +89,7 @@ namespace Somedave.Controllers
             public readonly string Status = "Status";
             public readonly string Footer = "Footer";
             public readonly string Leaderboard = "Leaderboard";
+            public readonly string Dependencies = "Dependencies";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -92,6 +99,7 @@ namespace Somedave.Controllers
             public const string Status = "Status";
             public const string Footer = "Footer";
             public const string Leaderboard = "Leaderboard";
+            public const string Dependencies = "Dependencies";
         }
 
 
@@ -103,6 +111,14 @@ namespace Somedave.Controllers
         {
             public readonly string leaderboard = "leaderboard";
         }
+        static readonly ActionParamsClass_Dependencies s_params_Dependencies = new ActionParamsClass_Dependencies();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Dependencies DependenciesParams { get { return s_params_Dependencies; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Dependencies
+        {
+            public readonly string package = "package";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -113,11 +129,13 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Dependencies = "Dependencies";
                 public readonly string Footer = "Footer";
                 public readonly string Index = "Index";
                 public readonly string Leaderboard = "Leaderboard";
                 public readonly string Status = "Status";
             }
+            public readonly string Dependencies = "~/Views/NuGetStats/Dependencies.cshtml";
             public readonly string Footer = "~/Views/NuGetStats/Footer.cshtml";
             public readonly string Index = "~/Views/NuGetStats/Index.cshtml";
             public readonly string Leaderboard = "~/Views/NuGetStats/Leaderboard.cshtml";
@@ -172,6 +190,18 @@ namespace Somedave.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Leaderboard);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "leaderboard", leaderboard);
             LeaderboardOverride(callInfo, leaderboard);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DependenciesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string package);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Dependencies(string package)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dependencies);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "package", package);
+            DependenciesOverride(callInfo, package);
             return callInfo;
         }
 

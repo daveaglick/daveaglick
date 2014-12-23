@@ -1,10 +1,15 @@
 ﻿@{
-    Title = "NuGet Stats / " + Model.Metadata.Title;
+    Title = "NuGet Stats - " + Model.Metadata.Title;
 }
 
 @model Somedave.Models.NuGetStats.Leaderboard
 
-@Html.Partial(MVC.Shared.Views.Title, string.Empty)
+@using (Bootstrap.Container().AddCss("banner").Begin())
+{
+    @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
+    @Bootstrap.Div().AddCss("title").SetText(Model.Metadata.Title)
+    <hr />
+}
 
 @using (Bootstrap.Container().Begin())
 {
