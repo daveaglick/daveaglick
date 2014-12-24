@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Somedave.Models.NuGetStats
 {
@@ -11,9 +12,9 @@ namespace Somedave.Models.NuGetStats
         {
             public string Title { get; set; }
             public string Description { get; set; }
-            public string Heading1 { get; set; }
-            public string Heading2 { get; set; }
-            public bool IsPackage { get; set; }
+            public string NameHeading { get; set; }
+            public Func<string, UrlHelper, string> NameLink { get; set; }
+            public string ValueHeading { get; set; }
             public Func<NuGetStatsDataContext, IEnumerable<Entry>> Entries { get; set; } 
         }
 

@@ -84,6 +84,7 @@
                         {
                             @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", "http://fluentbootstrap.com"))
                             @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
                         }
                         <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>    
                     } 

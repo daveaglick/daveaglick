@@ -57,9 +57,9 @@ namespace Somedave.Controllers
                 {
                     Title = "Most Downloaded Packages", 
                     Description = "This list contains the packages with the most total downloads across all versions.",
-                    Heading1 = "Package",
-                    Heading2 = "Downloads",
-                    IsPackage = true,
+                    NameHeading = "Package",
+                    NameLink = (x, u) => u.Action(MVC.NuGetStats.Package(x)),
+                    ValueHeading = "Downloads",
                     Entries = c => 
                         c.Packages
                         .GroupBy(x => x.Id)
@@ -69,13 +69,13 @@ namespace Somedave.Controllers
                             Value = x.Sum(y => y.VersionDownloadCount)
                         })
                         .OrderByDescending(x => x.Value)
-                        .Take(10)
+                        .Take(20)
                         .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
-                            Value = x.Value.ToString()
+                            Value = x.Value.ToString("N0")
                         })
                 }
             },
@@ -85,9 +85,8 @@ namespace Somedave.Controllers
                 {
                     Title = "Most Downloaded Authors", 
                     Description = "This list contains the authors with the most total downloads across all versions.",
-                    Heading1 = "Author",
-                    Heading2 = "Downloads",
-                    IsPackage = false,
+                    NameHeading = "Author",
+                    ValueHeading = "Downloads",
                     Entries = c => 
                         c.Authors
                         .GroupBy(x => x.Name)
@@ -100,13 +99,13 @@ namespace Somedave.Controllers
                                 .FirstOrDefault())
                         })
                         .OrderByDescending(x => x.Value)
-                        .Take(10)
+                        .Take(20)
                         .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
-                            Value = x.Value.ToString()
+                            Value = x.Value.ToString("N0")
                         })
                 }
             },
@@ -116,9 +115,9 @@ namespace Somedave.Controllers
                 {
                     Title = "Most Dependencies", 
                     Description = "This list contains the packages with the most direct dependencies on them irrespective of versions.",
-                    Heading1 = "Package",
-                    Heading2 = "Dependencies",
-                    IsPackage = true,
+                    NameHeading = "Package",
+                    NameLink = (x, u) => u.Action(MVC.NuGetStats.Package(x)),
+                    ValueHeading = "Dependencies",
                     Entries = c => 
                         c.Dependencies
                         .GroupBy(x => x.DependencyId)
@@ -128,13 +127,13 @@ namespace Somedave.Controllers
                             Value = x.Select(y => y.Id).Distinct().Count()
                         })
                         .OrderByDescending(x => x.Value)
-                        .Take(10)
+                        .Take(20)
                         .Retry()
                         .ToList()
                         .Select(x => new Leaderboard.Entry
                         {
                             Name = x.Name,
-                            Value = x.Value.ToString()
+                            Value = x.Value.ToString("N0")
                         })
                 }
             }
@@ -161,27 +160,114 @@ namespace Somedave.Controllers
             });
         }
 
-        [GET("dependencies/{package}")]
-        public virtual ActionResult Dependencies(string package)
+        [GET("package/{id}")]
+        public virtual ActionResult Package(string id)
         {
-            Dependencies dependencies = new Dependencies {Package = package};
+            PackageViewModel model = new PackageViewModel { Id = id };
             using (NuGetStatsDataContext context = new NuGetStatsDataContext())
             {
                 SetContextState(context);
-                dependencies.Dependency = 
-                    context.Dependencies
-                    .Where(x => x.Id == package)
-                    .Select(x => x.DependencyId)
-                    .Distinct()
+
+                // Get versions
+                model.Versions = context.Packages
+                    .Where(x => x.Id == id)
+                    .OrderByDescending(x => x.Created)
+                    .Select(x => new PackageViewModel.Version
+                    {
+                        Name = x.Version,
+                        DownloadCount = x.VersionDownloadCount,
+                        Created = x.Created
+                    })
                     .ToList();
-                dependencies.Dependent = 
-                    context.Dependencies
-                    .Where(x => x.DependencyId == package)
-                    .Select(x => x.Id)
+
+                // Get authors
+                model.Authors = context.Authors
+                    .Where(x => x.Id == id)
+                    .Select(x => x.Name)
                     .Distinct()
+                    .OrderBy(x => x)
                     .ToList();
+
+                // Get tags
+                model.Tags = context.Tags
+                    .Where(x => x.Id == id)
+                    .Select(x => x.Name)
+                    .Distinct()
+                    .OrderBy(x => x)
+                    .ToList();
+
+                // Get all dependent packages
+                Dictionary<string, int> dependentDictionary = new Dictionary<string, int> { { id, 0 } };
+                List<string> dependentList = new List<string> { id };
+                int depth = 1;
+                do
+                {
+                    // Server can only handle a maximum of 2000 parameters...
+                    List<string> cloneList = dependentList.ToArray().ToList();
+                    dependentList = new List<string>();
+                    while (cloneList.Count > 0)
+                    {
+                        List<string> containsList = cloneList.Take(2000).ToList();
+                        cloneList = cloneList.Skip(2000).ToList();
+                        dependentList.AddRange(
+                            context.Dependencies
+                            .Where(x => containsList.Contains(x.DependencyId))
+                            .Select(x => x.Id)
+                            .Distinct()
+                            .Retry()
+                            .ToList()
+                            .Where(x => !dependentDictionary.ContainsKey(x)));
+                    }
+
+                    foreach (string dependent in dependentList)
+                    {
+                        dependentDictionary[dependent] = depth;
+                    }
+                    depth++;
+
+                } while (dependentList.Count > 0);
+                dependentDictionary.Remove(id);
+                model.Dependent = dependentDictionary;
+
+                // Get all dependencies
+                Dictionary<string, int> dependencyDictionary = new Dictionary<string, int> { { id, 0 } };
+                List<string> dependencyList = new List<string> { id };
+                depth = 1;
+                do
+                {
+                    // Server can only handle a maximum of 2000 parameters...
+                    List<string> cloneList = dependencyList.ToArray().ToList();
+                    dependencyList = new List<string>();
+                    while (cloneList.Count > 0)
+                    {
+                        List<string> containsList = cloneList.Take(2000).ToList();
+                        cloneList = cloneList.Skip(2000).ToList();
+                        dependencyList.AddRange(
+                            context.Dependencies
+                            .Where(x => containsList.Contains(x.Id))
+                            .Select(x => x.DependencyId)
+                            .Distinct()
+                            .Retry()
+                            .ToList()
+                            .Where(x => !dependencyDictionary.ContainsKey(x)));
+                    }
+
+                    foreach (string dependency in dependencyList)
+                    {
+                        dependencyDictionary[dependency] = depth;
+                    }
+                    depth++;
+                } while (dependencyList.Count > 0);
+                dependencyDictionary.Remove(id);
+                model.Dependency = dependencyDictionary;
             }
-            return View(dependencies);
+            return View(model);
+        }
+
+        [POST("package")]
+        public virtual ActionResult PackagePost(string id)
+        {
+            return RedirectToActionPermanent(MVC.NuGetStats.Package(id));
         }
 
         // This sets a new timeout and changes the transaction level

@@ -65,9 +65,15 @@ namespace Somedave.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Dependencies()
+        public virtual System.Web.Mvc.ActionResult Package()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dependencies);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Package);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult PackagePost()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PackagePost);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -89,7 +95,8 @@ namespace Somedave.Controllers
             public readonly string Status = "Status";
             public readonly string Footer = "Footer";
             public readonly string Leaderboard = "Leaderboard";
-            public readonly string Dependencies = "Dependencies";
+            public readonly string Package = "Package";
+            public readonly string PackagePost = "PackagePost";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -99,7 +106,8 @@ namespace Somedave.Controllers
             public const string Status = "Status";
             public const string Footer = "Footer";
             public const string Leaderboard = "Leaderboard";
-            public const string Dependencies = "Dependencies";
+            public const string Package = "Package";
+            public const string PackagePost = "PackagePost";
         }
 
 
@@ -111,13 +119,21 @@ namespace Somedave.Controllers
         {
             public readonly string leaderboard = "leaderboard";
         }
-        static readonly ActionParamsClass_Dependencies s_params_Dependencies = new ActionParamsClass_Dependencies();
+        static readonly ActionParamsClass_Package s_params_Package = new ActionParamsClass_Package();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Dependencies DependenciesParams { get { return s_params_Dependencies; } }
+        public ActionParamsClass_Package PackageParams { get { return s_params_Package; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Dependencies
+        public class ActionParamsClass_Package
         {
-            public readonly string package = "package";
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_PackagePost s_params_PackagePost = new ActionParamsClass_PackagePost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PackagePost PackagePostParams { get { return s_params_PackagePost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PackagePost
+        {
+            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -129,16 +145,16 @@ namespace Somedave.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Dependencies = "Dependencies";
                 public readonly string Footer = "Footer";
                 public readonly string Index = "Index";
                 public readonly string Leaderboard = "Leaderboard";
+                public readonly string Package = "Package";
                 public readonly string Status = "Status";
             }
-            public readonly string Dependencies = "~/Views/NuGetStats/Dependencies.cshtml";
             public readonly string Footer = "~/Views/NuGetStats/Footer.cshtml";
             public readonly string Index = "~/Views/NuGetStats/Index.cshtml";
             public readonly string Leaderboard = "~/Views/NuGetStats/Leaderboard.cshtml";
+            public readonly string Package = "~/Views/NuGetStats/Package.cshtml";
             public readonly string Status = "~/Views/NuGetStats/Status.cshtml";
         }
     }
@@ -194,14 +210,26 @@ namespace Somedave.Controllers
         }
 
         [NonAction]
-        partial void DependenciesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string package);
+        partial void PackageOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Dependencies(string package)
+        public override System.Web.Mvc.ActionResult Package(string id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dependencies);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "package", package);
-            DependenciesOverride(callInfo, package);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Package);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            PackageOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PackagePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult PackagePost(string id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PackagePost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            PackagePostOverride(callInfo, id);
             return callInfo;
         }
 

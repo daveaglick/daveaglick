@@ -16,10 +16,10 @@
     <p>@Model.Metadata.Description</p>
     using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
     {
-        @table.TableHeaderRow(Model.Metadata.Heading1, Model.Metadata.Heading2)
+        @table.TableHeaderRow(Model.Metadata.NameHeading, Model.Metadata.ValueHeading)
         foreach (Somedave.Models.NuGetStats.Leaderboard.Entry entry in Model.Entries)
         {
-            @table.TableDataRow(Model.Metadata.IsPackage ? string.Format("<a href='http://www.nuget.org/packages/{0}'>{0}</a>", entry.Name) : entry.Name, entry.Value)
+            @table.TableDataRow(Model.Metadata.NameLink == null ? entry.Name : string.Format("<a href='{0}'>{1}</a>", Model.Metadata.NameLink(entry.Name, Url), entry.Name), entry.Value)
         }
     }
     

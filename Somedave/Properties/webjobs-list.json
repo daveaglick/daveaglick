@@ -3,6 +3,9 @@
   "WebJobs": [
     {
       "filePath": "../NuGetUpdate/NuGetUpdate.csproj"
+    },
+    {
+      "filePath": "../NuGetUpdate/NuGetUpdate.csproj"
     }
   ]
 }

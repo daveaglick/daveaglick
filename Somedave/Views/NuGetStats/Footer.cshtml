@@ -5,4 +5,4 @@
 @model Somedave.Models.NuGetStats.Footer
 
 <hr />
-<small>Data is current as of @Model.LastUpdated.ToShortDateString() at @Model.LastUpdated.ToShortTimeString() UTC. There are @Model.Packages total packages.</small>
+<small>Data is current as of @Model.LastUpdated.ToShortDateString() at @Model.LastUpdated.ToShortTimeString() UTC. There are @Model.Packages.ToString("N0") total packages.</small>

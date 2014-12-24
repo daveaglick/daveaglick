@@ -1,0 +1,134 @@
+﻿@{
+    Title = "NuGet Stats - " + Model.Id + " Dependencies";
+}
+
+@using System.Web.Mvc
+@using Somedave.Models.NuGetStats
+@model Somedave.Models.NuGetStats.PackageViewModel
+
+@using(Bootstrap.Container().AddCss("banner").Begin())
+{
+    @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
+    @Bootstrap.Div().AddCss("title").SetText(Model.Id)
+    <hr />
+}
+
+@using (Bootstrap.Container().Begin())
+{
+
+    using (var grid = Bootstrap.GridRow().Begin())
+    {
+        using (grid.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading4(Model.Versions.Sum(x => x.DownloadCount).ToString("N0") + " Total Downloads")
+        }
+        using (grid.GridColumn(6).Begin())
+        {
+            <strong><a href="http://www.nuget.org/packages/@(Model.Id)">View Package on NuGet.org</a></strong>
+        }
+    }
+
+    <hr/>
+    
+    using (var grid = Bootstrap.GridRow().Begin())
+    {
+        using (grid.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading3("Versions")
+            using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+            {
+                @table.TableHeaderRow("Version", "Downloads", "Created")
+                foreach (PackageViewModel.Version version in Model.Versions)
+                {
+                    @table.TableDataRow(string.Format("<a href='http://www.nuget.org/packages/{0}/{1}'>{1}</a>", Model.Id, version.Name), version.DownloadCount.ToString("N0"), version.Created.ToShortDateString())
+                }
+            }
+        }
+        using (grid.GridColumn(3).Begin())
+        {
+            @Bootstrap.Heading3("Authors")
+            if (Model.Authors.Count() == 0)
+            {
+                <p>This package has no authors.</p>
+            }
+            else
+            {
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                {
+                    @table.TableHeaderRow("Name")
+                    foreach (string author in Model.Authors)
+                    {
+                        @table.TableDataRow(author)
+                    }
+                }
+            }
+        }
+        using (grid.GridColumn(3).Begin())
+        {
+            @Bootstrap.Heading3("Tags")
+            if (Model.Tags.Count() == 0)
+            {
+                <p>This package has no tags.</p>
+            }
+            else
+            {
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                {
+                    @table.TableHeaderRow("Tag")
+                    foreach (string tag in Model.Tags)
+                    {
+                        @table.TableDataRow(tag)
+                    }
+                }
+            }
+        }
+    }
+
+    <hr/>
+    
+    using (var grid = Bootstrap.GridRow().Begin())
+    {
+        using (grid.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading3("Dependent").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependent.Count(x => x.Value == 1).ToString("N0"), Model.Dependent.Count().ToString("N0")))
+            if (!Model.Dependent.Any())
+            {
+                <p>No packages are dependent on this package.</p>
+            }
+            else
+            {
+                <p>These packages are dependent on this package.</p>
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                {
+                    @table.TableHeaderRow("Package", "Depth")
+                    foreach (KeyValuePair<string, int> kvp in Model.Dependent.OrderBy(x => x.Key))
+                    {
+                        @table.TableDataRow(Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key)), kvp.Value)
+                    }
+                }
+            }
+        }
+        using (grid.GridColumn(6).Begin())
+        {
+            @Bootstrap.Heading3("Dependencies").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependency.Count(x => x.Value == 1).ToString("N0"), Model.Dependency.Count().ToString("N0")))
+            if (!Model.Dependency.Any())
+            {
+                <p>This package is not dependent on any packages.</p>
+            }
+            else
+            {
+                <p>This package is dependent on the following packages.</p>
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                {
+                    @table.TableHeaderRow("Package", "Depth")
+                    foreach (KeyValuePair<string, int> kvp in Model.Dependency.OrderBy(x => x.Key))
+                    {
+                        @table.TableDataRow(Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key)), kvp.Value)
+                    }
+                }
+            }
+        }
+    }
+
+    @Html.Action(MVC.NuGetStats.Footer())
+}

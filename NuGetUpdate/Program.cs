@@ -33,8 +33,16 @@ namespace NuGetUpdate
                 // Record start data
                 using (NuGetStatsDataContext context = new NuGetStatsDataContext())
                 {
+                    // Get the last run time
+                    History history = context.Histories.OrderByDescending(x => x.StartTime).Retry().FirstOrDefault();
+                    if (history != null && history.EndTime == null)
+                    {
+                        Console.WriteLine("Already running or stopped prematurely, exiting.");
+                        return;
+                    }
+
                     // Get the last end time
-                    History history = context.Histories.OrderByDescending(x => x.LastUpdated).Retry().FirstOrDefault();
+                    history = context.Histories.OrderByDescending(x => x.LastUpdated).Retry().FirstOrDefault();
                     if (history != null)
                     {
                         lastUpdated = history.LastUpdated;
@@ -45,7 +53,7 @@ namespace NuGetUpdate
                     {
                         StartTime = startTime, 
                         LastUpdated = lastUpdated, 
-                        TotalCount = feed.Packages.Where(x => x.LastUpdated >= lastUpdated && x.LastUpdated < startTime).Count(), 
+                        TotalCount = feed.Packages.Where(x => x.LastUpdated >= lastUpdated).Count(), 
                         ProcessedCount = 0
                     });
                     context.SubmitChangesRetry();
@@ -60,7 +68,7 @@ namespace NuGetUpdate
                     count = 0;
                     DateTime newLastUpdated = lastUpdated;
                     foreach (var package in feed.Packages
-                        .Where(x => x.LastUpdated >= lastUpdated && x.LastUpdated < startTime)
+                        .Where(x => x.LastUpdated >= lastUpdated)
                         .OrderBy(x => x.LastUpdated)
                         .Skip(processedCount)
                         .Take(BatchSize)

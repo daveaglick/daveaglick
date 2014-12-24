@@ -192,7 +192,7 @@
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Models\Blog\Tags.cs" />
     <Compile Include="Models\Home\Index.cs" />
-    <Compile Include="Models\NuGetStats\Dependencies.cs" />
+    <Compile Include="Models\NuGetStats\PackageViewModel.cs" />
     <Compile Include="Models\NuGetStats\Footer.cs" />
     <Compile Include="Models\NuGetStats\Index.cs" />
     <Compile Include="Models\NuGetStats\Leaderboard.cs" />
@@ -394,7 +394,7 @@
     <Content Include="Views\NuGetStats\Leaderboard.cshtml" />
     <Content Include="Views\NuGetStats\Footer.cshtml" />
     <Content Include="Views\Blog\Posts\automatic-retry-for-linq-to-sql.cshtml" />
-    <Content Include="Views\NuGetStats\Dependencies.cshtml" />
+    <Content Include="Views\NuGetStats\Package.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
