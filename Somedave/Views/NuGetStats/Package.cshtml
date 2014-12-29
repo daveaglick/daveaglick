@@ -90,40 +90,68 @@
     {
         using (grid.GridColumn(6).Begin())
         {
-            @Bootstrap.Heading3("Dependent").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependent.Count(x => x.Value == 1).ToString("N0"), Model.Dependent.Count().ToString("N0")))
+            @Bootstrap.Heading3("Dependent").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependent.Count(x => x.Value.Any(y => y.Value == 1)).ToString("N0"), Model.Dependent.Count().ToString("N0")))
             if (!Model.Dependent.Any())
             {
                 <p>No packages are dependent on this package.</p>
             }
             else
             {
-                <p>These packages are dependent on this package.</p>
+                <p>These packages are <em>possibly</em> dependent on this package (depending on selected versions).</p>
                 using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
                 {
-                    @table.TableHeaderRow("Package", "Depth")
-                    foreach (KeyValuePair<string, int> kvp in Model.Dependent.OrderBy(x => x.Key))
+                    @table.TableHeaderRow("Package", "Minimum Depth")
+                    foreach (KeyValuePair<string, Dictionary<string, int>> kvp in Model.Dependent.OrderBy(x => x.Key))
                     {
-                        @table.TableDataRow(Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key)), kvp.Value)
+                        using (table.TableDataRow().Begin())
+                        {
+                            using (table.TableData().Begin())
+                            {
+                                @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br/>
+                                if (kvp.Value.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                     <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                }
+                            }
+                            using (table.TableData().Begin())
+                            {
+                                <text>@kvp.Value.Min(x => x.Value)</text>
+                            }
+                        }
                     }
                 }
             }
         }
         using (grid.GridColumn(6).Begin())
         {
-            @Bootstrap.Heading3("Dependencies").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependency.Count(x => x.Value == 1).ToString("N0"), Model.Dependency.Count().ToString("N0")))
+            @Bootstrap.Heading3("Dependencies").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependency.Count(x => x.Value.Any(y => y.Value == 1)).ToString("N0"), Model.Dependency.Count().ToString("N0")))
             if (!Model.Dependency.Any())
             {
                 <p>This package is not dependent on any packages.</p>
             }
             else
             {
-                <p>This package is dependent on the following packages.</p>
+                <p>This package is <em>possibly</em> dependent on the following packages (depending on selected versions).</p>
                 using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
                 {
-                    @table.TableHeaderRow("Package", "Depth")
-                    foreach (KeyValuePair<string, int> kvp in Model.Dependency.OrderBy(x => x.Key))
+                    @table.TableHeaderRow("Package", "Minimum Depth")
+                    foreach (KeyValuePair<string, Dictionary<string, int>> kvp in Model.Dependency.OrderBy(x => x.Key))
                     {
-                        @table.TableDataRow(Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key)), kvp.Value)
+                        using (table.TableDataRow().Begin())
+                        {
+                            using (table.TableData().Begin())
+                            {
+                                @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br/>
+                                if (kvp.Value.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                }
+                            }
+                            using (table.TableData().Begin())
+                            {
+                                <text>@kvp.Value.Min(x => x.Value)</text>
+                            }
+                        }
                     }
                 }
             }

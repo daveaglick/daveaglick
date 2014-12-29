@@ -197,67 +197,75 @@ namespace Somedave.Controllers
                     .ToList();
 
                 // Get all dependent packages
-                Dictionary<string, int> dependentDictionary = new Dictionary<string, int> { { id, 0 } };
-                List<string> dependentList = new List<string> { id };
+                Dictionary<string, Dictionary<string, int>> dependentDictionary = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase) { { id, new Dictionary<string, int>() } };
+                List<string> queryList = new List<string> { id };
                 int depth = 1;
                 do
                 {
                     // Server can only handle a maximum of 2000 parameters...
-                    List<string> cloneList = dependentList.ToArray().ToList();
-                    dependentList = new List<string>();
+                    List<string> cloneList = queryList.ToArray().ToList();
+                    queryList = new List<string>();
                     while (cloneList.Count > 0)
                     {
                         List<string> containsList = cloneList.Take(2000).ToList();
                         cloneList = cloneList.Skip(2000).ToList();
-                        dependentList.AddRange(
-                            context.Dependencies
+                        foreach (var result in context.Dependencies
                             .Where(x => containsList.Contains(x.DependencyId))
-                            .Select(x => x.Id)
-                            .Distinct()
-                            .Retry()
-                            .ToList()
-                            .Where(x => !dependentDictionary.ContainsKey(x)));
-                    }
-
-                    foreach (string dependent in dependentList)
-                    {
-                        dependentDictionary[dependent] = depth;
+                            .Select(x => new { x.Id, x.DependencyId })
+                            .Retry())
+                        {
+                            Dictionary<string, int> valueDictionary;
+                            if (!dependentDictionary.TryGetValue(result.Id, out valueDictionary))
+                            {
+                                valueDictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                                dependentDictionary[result.Id] = valueDictionary;
+                                queryList.Add(result.Id);
+                            }
+                            if (!valueDictionary.ContainsKey(result.DependencyId))
+                            {
+                                valueDictionary[result.DependencyId] = depth;
+                            }
+                        }
                     }
                     depth++;
 
-                } while (dependentList.Count > 0);
+                } while (queryList.Count > 0);
                 dependentDictionary.Remove(id);
                 model.Dependent = dependentDictionary;
 
                 // Get all dependencies
-                Dictionary<string, int> dependencyDictionary = new Dictionary<string, int> { { id, 0 } };
-                List<string> dependencyList = new List<string> { id };
+                Dictionary<string, Dictionary<string, int>> dependencyDictionary = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase) { { id, new Dictionary<string, int>() } };
+                queryList = new List<string> { id };
                 depth = 1;
                 do
                 {
                     // Server can only handle a maximum of 2000 parameters...
-                    List<string> cloneList = dependencyList.ToArray().ToList();
-                    dependencyList = new List<string>();
+                    List<string> cloneList = queryList.ToArray().ToList();
+                    queryList = new List<string>();
                     while (cloneList.Count > 0)
                     {
                         List<string> containsList = cloneList.Take(2000).ToList();
                         cloneList = cloneList.Skip(2000).ToList();
-                        dependencyList.AddRange(
-                            context.Dependencies
+                        foreach (var result in context.Dependencies
                             .Where(x => containsList.Contains(x.Id))
-                            .Select(x => x.DependencyId)
-                            .Distinct()
-                            .Retry()
-                            .ToList()
-                            .Where(x => !dependencyDictionary.ContainsKey(x)));
-                    }
-
-                    foreach (string dependency in dependencyList)
-                    {
-                        dependencyDictionary[dependency] = depth;
+                            .Select(x => new {x.Id, x.DependencyId})
+                            .Retry())
+                        {
+                            Dictionary<string, int> valueDictionary;
+                            if (!dependencyDictionary.TryGetValue(result.DependencyId, out valueDictionary))
+                            {
+                                valueDictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                                dependencyDictionary[result.DependencyId] = valueDictionary;
+                                queryList.Add(result.DependencyId);
+                            }
+                            if (!valueDictionary.ContainsKey(result.Id))
+                            {
+                                valueDictionary[result.Id] = depth;
+                            }
+                        }
                     }
                     depth++;
-                } while (dependencyList.Count > 0);
+                } while (queryList.Count > 0);
                 dependencyDictionary.Remove(id);
                 model.Dependency = dependencyDictionary;
             }
