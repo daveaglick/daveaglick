@@ -316,6 +316,7 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Scripts\arbor.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NuGetStats.dbml">
@@ -326,11 +327,15 @@
     <None Include="Properties\PublishProfiles\somedave.pubxml" />
     <Content Include="Properties\webjobs-list.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\cola.v3.min.js" />
+    <Content Include="Scripts\cytoscape.min.js" />
+    <Content Include="Scripts\dagre.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Scripts\prism.js" />
+    <Content Include="Scripts\springy.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

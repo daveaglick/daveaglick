@@ -74,13 +74,18 @@ namespace Links
         private const string URLPATH = "~/Scripts";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        public static readonly string arbor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/arbor.min.js") ? Url("arbor.min.js") : Url("arbor.js");
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+        public static readonly string cola_v3_min_js = Url("cola.v3.min.js");
+        public static readonly string cytoscape_min_js = Url("cytoscape.min.js");
+        public static readonly string dagre_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dagre.min.js") ? Url("dagre.min.js") : Url("dagre.js");
         public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
         public static readonly string prism_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.js") ? Url("prism.min.js") : Url("prism.js");
+        public static readonly string springy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/springy.min.js") ? Url("springy.min.js") : Url("springy.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

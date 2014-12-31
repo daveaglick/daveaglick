@@ -6,6 +6,9 @@
 @using Somedave.Models.NuGetStats
 @model Somedave.Models.NuGetStats.PackageViewModel
 
+<script src="@Links.Scripts.cytoscape_min_js"></script>
+<script src="@Links.Scripts.arbor_js"></script>
+
 @using(Bootstrap.Container().AddCss("banner").Begin())
 {
     @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
@@ -35,12 +38,19 @@
         using (grid.GridColumn(6).Begin())
         {
             @Bootstrap.Heading3("Versions")
-            using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+            if (Model.Authors.Count() == 0)
             {
-                @table.TableHeaderRow("Version", "Downloads", "Created")
-                foreach (PackageViewModel.Version version in Model.Versions)
+                <p>This package has no versions (possibly all are unlisted).</p>
+            }
+            else
+            {
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
                 {
-                    @table.TableDataRow(string.Format("<a href='http://www.nuget.org/packages/{0}/{1}'>{1}</a>", Model.Id, version.Name), version.DownloadCount.ToString("N0"), version.Created.ToShortDateString())
+                    @table.TableHeaderRow("Version", "Downloads", "Created")
+                    foreach (PackageViewModel.Version version in Model.Versions)
+                    {
+                        @table.TableDataRow(string.Format("<a href='http://www.nuget.org/packages/{0}/{1}'>{1}</a>", Model.Id, version.Name), version.DownloadCount.ToString("N0"), version.Created.ToShortDateString())
+                    }
                 }
             }
         }
@@ -85,6 +95,12 @@
     }
 
     <hr/>
+    
+    @Bootstrap.Heading3("Dependency Graph")
+    <p>Click/tap on a node to highlight it's immediate neighbor nodes. Right-click/two-finger-tap on a node to go to it's package page.</p>
+    <div id="dependency-graph" class="graph" style="height: 400px;"></div>
+    
+    <hr />
     
     using (var grid = Bootstrap.GridRow().Begin())
     {
@@ -160,3 +176,95 @@
 
     @Html.Action(MVC.NuGetStats.Footer())
 }
+
+<script>
+    $('#dependency-graph').cytoscape({
+        style: cytoscape.stylesheet()
+          .selector('node')
+            .css({
+                'content': 'data(name)',
+                'font-size': '8px',
+                'min-zoomed-font-size': '7px',
+                'width': '10',
+                'height': '10'
+            })
+          .selector('edge')
+            .css({
+                'target-arrow-shape': 'triangle'
+            })
+          .selector(':selected')
+            .css({
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black'
+            })
+          .selector('.faded')
+            .css({
+                'opacity': 0.25,
+                'text-opacity': 0,
+            })
+          .selector('.ontop')
+            .css({
+                'z-index': 10000
+            }),
+
+        motionBlur: false,
+        wheelSensitivity: .1,
+        textureOnViewport: true,
+
+        elements: {
+            nodes: [
+                @(Html.Raw(string.Join(",",
+                    Model.Dependent.Select(x => x.Key)
+                    .Concat(Model.Dependency.Select(x => x.Key))
+                    .Concat(new[] { Model.Id })
+                    .Select(x => string.Format("{{ data: {{ id: '{0}', name: '{1}' }} }}", x.ToLowerInvariant(), x)))))
+            ],
+            edges: [
+                @(Html.Raw(string.Join(",",
+                    Model.Dependent.SelectMany(x => x.Value.Select(y => new KeyValuePair<string, string>(x.Key, y.Key)))
+                    .Concat(Model.Dependency.SelectMany(x => x.Value.Select(y => new KeyValuePair<string, string>(y.Key, x.Key))))
+                    .Distinct()
+                    .Select(x => string.Format("{{ data: {{ source: '{0}', target: '{1}' }} }}", x.Key.ToLowerInvariant(), x.Value.ToLowerInvariant())))))
+            ]
+        },
+
+        ready: function () {
+            window.cy = this;
+            
+            cy.elements().unselectify();
+
+            cy.on('tap', 'node', function (e) {
+                var node = e.cyTarget;
+                var neighborhood = node.neighborhood().add(node);
+
+                cy.elements().addClass('faded');
+                neighborhood.removeClass('faded');
+                neighborhood.addClass('ontop');
+            });
+
+            cy.on('tap', function (e) {
+                if (e.cyTarget === cy) {
+                    cy.elements().removeClass('faded');
+                    cy.elements().removeClass('ontop');
+                }
+            });
+
+            cy.on('cxttap', 'node', function (e) {
+                var node = e.cyTarget;
+                window.location.href = "@(Html.Raw(Url.Action(MVC.NuGetStats.Package("***")).Replace("***", "\" + node.data().name + \"")))";
+            });
+
+            var layoutOptions = {
+                name: 'cose',
+                animate: false
+            };
+
+            cy.layout(layoutOptions);
+
+            var packageNode = cy.elements('node[id="@(Model.Id.ToLowerInvariant())"]');
+            packageNode.css('background-color', 'black');
+        }
+    });
+</script>

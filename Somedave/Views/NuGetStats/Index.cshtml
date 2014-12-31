@@ -18,6 +18,7 @@
                 <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
                 <p>@kvp.Value.Description</p>
             }
+            <p>More leaderboards coming soon - please let me know if there are any you would like to see.</p>
         }
         using (grid.GridColumn(6).Begin())
         {
@@ -28,6 +29,8 @@
                 @form.Input(MVC.NuGetStats.PackagePostParams.id, "Package")
                 @form.Submit()
             }
+            <hr />
+            <p>Detailed author and tag statistics coming soon.</p>
         }
     }
 
