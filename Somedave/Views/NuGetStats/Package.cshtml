@@ -7,7 +7,6 @@
 @model Somedave.Models.NuGetStats.PackageViewModel
 
 <script src="@Links.Scripts.cytoscape_min_js"></script>
-<script src="@Links.Scripts.arbor_js"></script>
 
 @using(Bootstrap.Container().AddCss("banner").Begin())
 {
@@ -182,15 +181,13 @@
         style: cytoscape.stylesheet()
           .selector('node')
             .css({
-                'content': 'data(name)',
-                'font-size': '8px',
-                'min-zoomed-font-size': '7px',
                 'width': '10',
                 'height': '10'
             })
           .selector('edge')
             .css({
-                'target-arrow-shape': 'triangle'
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'haystack'
             })
           .selector(':selected')
             .css({
@@ -206,12 +203,23 @@
             })
           .selector('.ontop')
             .css({
-                'z-index': 10000
+                'z-index': 10000,
+                'content': 'data(name)',
+                'font-size': '8px'
             }),
 
         motionBlur: false,
         wheelSensitivity: .1,
         textureOnViewport: true,
+        hideEdgesOnViewport: true,
+        hideLabelsOnViewport: true,
+
+        layout: {
+            name: 'cose',
+            animate: false,
+            refresh: 0,
+            randomize: true
+        },
 
         elements: {
             nodes: [
@@ -255,13 +263,6 @@
                 var node = e.cyTarget;
                 window.location.href = "@(Html.Raw(Url.Action(MVC.NuGetStats.Package("***")).Replace("***", "\" + node.data().name + \"")))";
             });
-
-            var layoutOptions = {
-                name: 'cose',
-                animate: false
-            };
-
-            cy.layout(layoutOptions);
 
             var packageNode = cy.elements('node[id="@(Model.Id.ToLowerInvariant())"]');
             packageNode.css('background-color', 'black');
