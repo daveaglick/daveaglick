@@ -16,16 +16,33 @@ namespace Somedave.Models.NuGetStats
 
         public class DependencyData
         {
-            
+            // Key = package, value = minimum depth
+            public Dictionary<string, int> Dependents { get; set; }
+            public Dictionary<string, int> Dependencies { get; set; }
+            public double XCoord { get; set; }
+            public double YCoord { get; set; }
+
+            public DependencyData()
+            {
+                Dependents = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                Dependencies = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            public bool HasDependents
+            {
+                get { return Dependents.Count > 0; }
+            }
+
+            public bool HasDependencies
+            {
+                get { return Dependencies.Count > 0; }
+            }
         }
 
         public string Id { get; set; }
         public IEnumerable<Version> Versions { get; set; }
         public IEnumerable<string> Authors { get; set; }
         public IEnumerable<string> Tags { get; set; }
-
-        // Key = dependents/dependencies; Value = list of "via" dependents/dependencies with depth from target package as KVP value
-        public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> Dependent { get; set; }
-        public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> Dependency { get; set; } 
+        public IDictionary<string, DependencyData> Dependencies { get; set; } 
     }
 }

@@ -5,9 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using AttributeRouting;
 using AttributeRouting.Web.Mvc;
+using GraphSharp.Algorithms.Layout.Simple.Hierarchical;
 using LinqToSqlRetry;
+using QuickGraph;
 using Somedave.Models.NuGetStats;
 using Index = Somedave.Models.Home.Index;
+using GraphSharp.Algorithms.Layout.Simple.FDP;
 
 namespace Somedave.Controllers
 {
@@ -196,8 +199,11 @@ namespace Somedave.Controllers
                     .OrderBy(x => x)
                     .ToList();
 
+                // Create the dependency dictionary and add a node for the current package
+                model.Dependencies = new Dictionary<string, PackageViewModel.DependencyData>(StringComparer.OrdinalIgnoreCase) { { id, new PackageViewModel.DependencyData() } };
+                model.Dependencies[id] = new PackageViewModel.DependencyData();
+
                 // Get all dependent packages
-                Dictionary<string, Dictionary<string, int>> dependentDictionary = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase) { { id, new Dictionary<string, int>() } };
                 List<string> queryList = new List<string> { id };
                 int depth = 1;
                 do
@@ -214,27 +220,24 @@ namespace Somedave.Controllers
                             .Select(x => new { x.Id, x.DependencyId })
                             .Retry())
                         {
-                            Dictionary<string, int> valueDictionary;
-                            if (!dependentDictionary.TryGetValue(result.Id, out valueDictionary))
+                            PackageViewModel.DependencyData dependencyData;
+                            if (!model.Dependencies.TryGetValue(result.Id, out dependencyData))
                             {
-                                valueDictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-                                dependentDictionary[result.Id] = valueDictionary;
+                                dependencyData = new PackageViewModel.DependencyData();
+                                model.Dependencies[result.Id] = dependencyData;
                                 queryList.Add(result.Id);
                             }
-                            if (!valueDictionary.ContainsKey(result.DependencyId))
+                            if (!dependencyData.Dependents.ContainsKey(result.DependencyId))
                             {
-                                valueDictionary[result.DependencyId] = depth;
+                                dependencyData.Dependents[result.DependencyId] = depth;
                             }
                         }
                     }
                     depth++;
 
                 } while (queryList.Count > 0);
-                dependentDictionary.Remove(id);
-                model.Dependent = dependentDictionary;
 
                 // Get all dependencies
-                Dictionary<string, Dictionary<string, int>> dependencyDictionary = new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase) { { id, new Dictionary<string, int>() } };
                 queryList = new List<string> { id };
                 depth = 1;
                 do
@@ -251,24 +254,73 @@ namespace Somedave.Controllers
                             .Select(x => new {x.Id, x.DependencyId})
                             .Retry())
                         {
-                            Dictionary<string, int> valueDictionary;
-                            if (!dependencyDictionary.TryGetValue(result.DependencyId, out valueDictionary))
+                            PackageViewModel.DependencyData dependencyData;
+                            if (!model.Dependencies.TryGetValue(result.DependencyId, out dependencyData))
                             {
-                                valueDictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-                                dependencyDictionary[result.DependencyId] = valueDictionary;
+                                dependencyData = new PackageViewModel.DependencyData();
+                                model.Dependencies[result.DependencyId] = dependencyData;
                                 queryList.Add(result.DependencyId);
                             }
-                            if (!valueDictionary.ContainsKey(result.Id))
+                            if (!dependencyData.Dependencies.ContainsKey(result.Id))
                             {
-                                valueDictionary[result.Id] = depth;
+                                dependencyData.Dependencies[result.Id] = depth;
                             }
                         }
                     }
                     depth++;
                 } while (queryList.Count > 0);
-                dependencyDictionary.Remove(id);
-                model.Dependency = dependencyDictionary;
             }
+
+            // Layout the dependency graph
+            BidirectionalGraph<PackageViewModel.DependencyData, Edge<PackageViewModel.DependencyData>> graph =
+                new BidirectionalGraph<PackageViewModel.DependencyData, Edge<PackageViewModel.DependencyData>>();
+            graph.AddVertexRange(model.Dependencies.Values);
+            graph.AddEdgeRange(model.Dependencies.SelectMany(x => x.Value.Dependents.Select(y => new Edge<PackageViewModel.DependencyData>(x.Value, model.Dependencies[y.Key]))));
+            graph.AddEdgeRange(model.Dependencies.SelectMany(x => x.Value.Dependencies.Select(y => new Edge<PackageViewModel.DependencyData>(model.Dependencies[y.Key], x.Value))));
+            int graphSize = Math.Min(model.Dependencies.Count * 10, 1000);
+            ISOMLayoutParameters parameters = new ISOMLayoutParameters()
+            {
+                Width = graphSize,
+                Height = graphSize
+            };
+            var layout = new ISOMLayoutAlgorithm<PackageViewModel.DependencyData, Edge<PackageViewModel.DependencyData>, BidirectionalGraph<PackageViewModel.DependencyData, Edge<PackageViewModel.DependencyData>>>(graph, parameters);
+            layout.Compute();
+            foreach (var vertex in layout.VertexPositions)
+            {
+                vertex.Key.XCoord = vertex.Value.X;
+                vertex.Key.YCoord = vertex.Value.Y;
+            }            
+
+            // Alternate code for GLEE - too slow...
+            //Microsoft.Glee.GleeGraph graph = new Microsoft.Glee.GleeGraph();
+            //Microsoft.Glee.Splines.ICurve curve = Microsoft.Glee.Splines.CurveFactory.CreateEllipse(1, 1, new Microsoft.Glee.Splines.Point(0, 0));
+            //foreach(KeyValuePair<string, PackageViewModel.DependencyData> kvp in model.Dependencies)
+            //{
+            //    Microsoft.Glee.Node node = new Microsoft.Glee.Node(kvp.Key.ToLowerInvariant(), curve);
+            //    graph.AddNode(node);
+            //}
+            //foreach(KeyValuePair<string, PackageViewModel.DependencyData> kvp in model.Dependencies)
+            //{
+            //    Microsoft.Glee.Node node = graph.FindNode(kvp.Key.ToLowerInvariant());
+            //    foreach(string dependent in kvp.Value.Dependents.Keys)
+            //    {
+            //        Microsoft.Glee.Edge edge = new Microsoft.Glee.Edge(node, graph.FindNode(dependent.ToLowerInvariant()));
+            //        graph.AddEdge(edge);
+            //    }
+            //    foreach (string dependent in kvp.Value.Dependencies.Keys)
+            //    {
+            //        Microsoft.Glee.Edge edge = new Microsoft.Glee.Edge(graph.FindNode(dependent.ToLowerInvariant()), node);
+            //        graph.AddEdge(edge);
+            //    }
+            //}
+            //graph.CalculateLayout();
+            //foreach (KeyValuePair<string, PackageViewModel.DependencyData> kvp in model.Dependencies)
+            //{
+            //    Microsoft.Glee.Node node = graph.FindNode(kvp.Key.ToLowerInvariant());
+            //    kvp.Value.XCoord = node.Center.X;
+            //    kvp.Value.YCoord = node.Center.Y;
+            //}
+
             return View(model);
         }
 

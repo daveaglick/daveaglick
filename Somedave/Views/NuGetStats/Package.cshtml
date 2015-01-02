@@ -17,44 +17,15 @@
 
 @using (Bootstrap.Container().Begin())
 {
-
     using (var grid = Bootstrap.GridRow().Begin())
     {
-        using (grid.GridColumn(6).Begin())
+        using (grid.GridColumn().SetLg(4).SetMd(6).Begin())
         {
             @Bootstrap.Heading4(Model.Versions.Sum(x => x.DownloadCount).ToString("N0") + " Total Downloads")
-        }
-        using (grid.GridColumn(6).Begin())
-        {
-            <strong><a href="http://www.nuget.org/packages/@(Model.Id)">View Package on NuGet.org</a></strong>
-        }
-    }
-
-    <hr/>
+            <div><strong><a href="http://www.nuget.org/packages/@(Model.Id)">View Package on NuGet.org</a></strong></div>
     
-    using (var grid = Bootstrap.GridRow().Begin())
-    {
-        using (grid.GridColumn(6).Begin())
-        {
-            @Bootstrap.Heading3("Versions")
-            if (Model.Authors.Count() == 0)
-            {
-                <p>This package has no versions (possibly all are unlisted).</p>
-            }
-            else
-            {
-                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
-                {
-                    @table.TableHeaderRow("Version", "Downloads", "Created")
-                    foreach (PackageViewModel.Version version in Model.Versions)
-                    {
-                        @table.TableDataRow(string.Format("<a href='http://www.nuget.org/packages/{0}/{1}'>{1}</a>", Model.Id, version.Name), version.DownloadCount.ToString("N0"), version.Created.ToShortDateString())
-                    }
-                }
-            }
-        }
-        using (grid.GridColumn(3).Begin())
-        {
+            <hr />
+
             @Bootstrap.Heading3("Authors")
             if (Model.Authors.Count() == 0)
             {
@@ -71,9 +42,24 @@
                     }
                 }
             }
-        }
-        using (grid.GridColumn(3).Begin())
-        {
+
+            @Bootstrap.Heading3("Versions")
+            if (Model.Authors.Count() == 0)
+            {
+                <p>This package has no versions (possibly all are unlisted).</p>
+            }
+            else
+            {
+                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                {
+                    @table.TableHeaderRow("Version", "Downloads", "Created")
+                    foreach (PackageViewModel.Version version in Model.Versions)
+                    {
+                        @table.TableDataRow(string.Format("<a href='http://www.nuget.org/packages/{0}/{1}'>{1}</a>", Model.Id, version.Name), version.DownloadCount.ToString("N0"), version.Created.ToShortDateString())
+                    }
+                }
+            }
+
             @Bootstrap.Heading3("Tags")
             if (Model.Tags.Count() == 0)
             {
@@ -91,80 +77,78 @@
                 }
             }
         }
-    }
-
-    <hr/>
-    
-    @Bootstrap.Heading3("Dependency Graph")
-    <p>Click/tap on a node to highlight it's immediate neighbor nodes. Right-click/two-finger-tap on a node to go to it's package page.</p>
-    <div id="dependency-graph" class="graph" style="height: 400px;"></div>
-    
-    <hr />
-    
-    using (var grid = Bootstrap.GridRow().Begin())
-    {
-        using (grid.GridColumn(6).Begin())
+        using (grid.GridColumn().SetLg(8).SetMd(6).Begin())
         {
-            @Bootstrap.Heading3("Dependent").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependent.Count(x => x.Value.Any(y => y.Value == 1)).ToString("N0"), Model.Dependent.Count().ToString("N0")))
-            if (!Model.Dependent.Any())
+            @Bootstrap.Heading3("Dependency Graph")
+            <p>Hover on a node to show it's package ID. Click/tap on a node to highlight it's immediate neighbor nodes. Right-click/two-finger-tap on a node to go to it's package page.</p>
+            <div id="dependency-graph" class="graph" style="height: 400px;"></div>
+    
+            using (var dependencyGrid = Bootstrap.GridRow().Begin())
             {
-                <p>No packages are dependent on this package.</p>
-            }
-            else
-            {
-                <p>These packages are <em>possibly</em> dependent on this package (depending on selected versions).</p>
-                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                using (dependencyGrid.GridColumn().SetLg(6).SetMd(12).Begin())
                 {
-                    @table.TableHeaderRow("Package", "Minimum Depth")
-                    foreach (KeyValuePair<string, Dictionary<string, int>> kvp in Model.Dependent.OrderBy(x => x.Key))
+                    @Bootstrap.Heading3("Dependent").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependencies.Count(x => x.Value.Dependents.Any(y => y.Value == 1)).ToString("N0"), Model.Dependencies.Count(x => x.Value.HasDependents).ToString("N0")))
+                    if (!Model.Dependencies.Any(x => x.Value.HasDependents))
                     {
-                        using (table.TableDataRow().Begin())
+                        <p>No packages are dependent on this package.</p>
+                    }
+                    else
+                    {
+                        <p>These packages are <em>possibly</em> dependent on this package (depending on selected versions).</p>
+                        using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
                         {
-                            using (table.TableData().Begin())
+                            @table.TableHeaderRow("Package", "Minimum Depth")
+                            foreach (KeyValuePair<string, PackageViewModel.DependencyData> kvp in Model.Dependencies.Where(x => x.Value.HasDependents).OrderBy(x => x.Key))
                             {
-                                @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br/>
-                                if (kvp.Value.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                using (table.TableDataRow().Begin())
                                 {
-                                     <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                    using (table.TableData().Begin())
+                                    {
+                                        @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br />
+                                        if (kvp.Value.Dependents.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                        {
+                                            <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Dependents.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                        }
+                                    }
+                                    using (table.TableData().Begin())
+                                    {
+                                        <text>@kvp.Value.Dependents.Min(x => x.Value)</text>
+                                    }
                                 }
-                            }
-                            using (table.TableData().Begin())
-                            {
-                                <text>@kvp.Value.Min(x => x.Value)</text>
                             }
                         }
                     }
                 }
-            }
-        }
-        using (grid.GridColumn(6).Begin())
-        {
-            @Bootstrap.Heading3("Dependencies").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependency.Count(x => x.Value.Any(y => y.Value == 1)).ToString("N0"), Model.Dependency.Count().ToString("N0")))
-            if (!Model.Dependency.Any())
-            {
-                <p>This package is not dependent on any packages.</p>
-            }
-            else
-            {
-                <p>This package is <em>possibly</em> dependent on the following packages (depending on selected versions).</p>
-                using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+                using (dependencyGrid.GridColumn().SetLg(6).SetMd(12).Begin())
                 {
-                    @table.TableHeaderRow("Package", "Minimum Depth")
-                    foreach (KeyValuePair<string, Dictionary<string, int>> kvp in Model.Dependency.OrderBy(x => x.Key))
+                    @Bootstrap.Heading3("Dependencies").SetSmallText(string.Format("{0} direct, {1} total", Model.Dependencies.Count(x => x.Value.Dependencies.Any(y => y.Value == 1)).ToString("N0"), Model.Dependencies.Count(x => x.Value.HasDependencies).ToString("N0")))
+                    if (!Model.Dependencies.Any(x => x.Value.HasDependencies))
                     {
-                        using (table.TableDataRow().Begin())
+                        <p>This package is not dependent on any packages.</p>
+                    }
+                    else
+                    {
+                        <p>This package is <em>possibly</em> dependent on the following packages (depending on selected versions).</p>
+                        using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
                         {
-                            using (table.TableData().Begin())
+                            @table.TableHeaderRow("Package", "Minimum Depth")
+                            foreach (KeyValuePair<string, PackageViewModel.DependencyData> kvp in Model.Dependencies.Where(x => x.Value.HasDependencies).OrderBy(x => x.Key))
                             {
-                                @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br/>
-                                if (kvp.Value.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                using (table.TableDataRow().Begin())
                                 {
-                                    <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                    using (table.TableData().Begin())
+                                    {
+                                        @Html.ActionLink(kvp.Key, MVC.NuGetStats.Package(kvp.Key))<br />
+                                        if (kvp.Value.Dependencies.Any(x => !string.Equals(x.Key, Model.Id, StringComparison.OrdinalIgnoreCase)))
+                                        {
+                                            <small>@Html.Raw("via " + string.Join(", ", kvp.Value.Dependencies.Select(x => Html.ActionLink(x.Key, MVC.NuGetStats.Package(x.Key)))))</small>
+                                        }
+                                    }
+                                    using (table.TableData().Begin())
+                                    {
+                                        <text>@kvp.Value.Dependencies.Min(x => x.Value)</text>
+                                    }
                                 }
-                            }
-                            using (table.TableData().Begin())
-                            {
-                                <text>@kvp.Value.Min(x => x.Value)</text>
                             }
                         }
                     }
@@ -181,13 +165,14 @@
         style: cytoscape.stylesheet()
           .selector('node')
             .css({
-                'width': '10',
-                'height': '10'
+                'width': '5',
+                'height': '5'
             })
           .selector('edge')
             .css({
-                'target-arrow-shape': 'triangle',
-                'curve-style': 'haystack'
+                'curve-style': 'haystack',
+                'haystack-radius': '0',
+                'width': '1'
             })
           .selector(':selected')
             .css({
@@ -204,6 +189,14 @@
           .selector('.ontop')
             .css({
                 'z-index': 10000,
+            })
+          .selector('.mouseover')
+            .css({
+                'content': 'data(name)',
+                'font-size': '8px'
+            })
+          .selector('.selectednode')
+            .css({
                 'content': 'data(name)',
                 'font-size': '8px'
             }),
@@ -213,28 +206,22 @@
         textureOnViewport: true,
         hideEdgesOnViewport: true,
         hideLabelsOnViewport: true,
-
-        layout: {
-            name: 'cose',
-            animate: false,
-            refresh: 0,
-            randomize: true
-        },
+        selectionType: 'single',
+        boxSelectionEnabled: false,
+        layout: { name: 'preset' },
 
         elements: {
             nodes: [
                 @(Html.Raw(string.Join(",",
-                    Model.Dependent.Select(x => x.Key)
-                    .Concat(Model.Dependency.Select(x => x.Key))
-                    .Concat(new[] { Model.Id })
-                    .Select(x => string.Format("{{ data: {{ id: '{0}', name: '{1}' }} }}", x.ToLowerInvariant(), x)))))
+                    Model.Dependencies
+                    .Select(x => string.Format("{{ data: {{ id: '{0}', name: '{1}' }}, position: {{ x: {2}, y: {3} }} }}", x.Key.ToLowerInvariant(), x.Key, x.Value.XCoord, x.Value.YCoord)))))
             ],
             edges: [
                 @(Html.Raw(string.Join(",",
-                    Model.Dependent.SelectMany(x => x.Value.Select(y => new KeyValuePair<string, string>(x.Key, y.Key)))
-                    .Concat(Model.Dependency.SelectMany(x => x.Value.Select(y => new KeyValuePair<string, string>(y.Key, x.Key))))
+                    Model.Dependencies.SelectMany(x => x.Value.Dependents.Select(y => new KeyValuePair<string, string>(x.Key, y.Key)))
+                            .Concat(Model.Dependencies.SelectMany(x => x.Value.Dependencies.Select(y => new KeyValuePair<string, string>(y.Key, x.Key))))
                     .Distinct()
-                    .Select(x => string.Format("{{ data: {{ source: '{0}', target: '{1}' }} }}", x.Key.ToLowerInvariant(), x.Value.ToLowerInvariant())))))
+                    .Select(x => string.Format("{{ data: {{ source: '{0}', target: '{1}' }}, selectable: false }}", x.Key.ToLowerInvariant(), x.Value.ToLowerInvariant())))))
             ]
         },
 
@@ -250,13 +237,21 @@
                 cy.elements().addClass('faded');
                 neighborhood.removeClass('faded');
                 neighborhood.addClass('ontop');
+                node.addClass('selectednode');
             });
 
             cy.on('tap', function (e) {
                 if (e.cyTarget === cy) {
                     cy.elements().removeClass('faded');
                     cy.elements().removeClass('ontop');
+                    cy.elements().removeClass('selectednode');
                 }
+            });
+
+            cy.on('mouseover', 'node', function (e) {
+                var node = e.cyTarget;
+                cy.elements().removeClass('mouseover');
+                node.addClass('mouseover');
             });
 
             cy.on('cxttap', 'node', function (e) {
