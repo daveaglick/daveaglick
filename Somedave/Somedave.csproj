@@ -410,6 +410,7 @@
     <Content Include="Views\NuGetStats\Footer.cshtml" />
     <Content Include="Views\Blog\Posts\automatic-retry-for-linq-to-sql.cshtml" />
     <Content Include="Views\NuGetStats\Package.cshtml" />
+    <Content Include="Views\Blog\Posts\eliminating-magic-strings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
