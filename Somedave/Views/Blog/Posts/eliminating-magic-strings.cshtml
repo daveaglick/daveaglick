@@ -2,7 +2,7 @@
     Title = "Eliminating Magic Strings in ASP.NET MVC";
     Lead = "One man's quest to get rid of quotes.";
     Published = new DateTime(2015, 1, 5);
-    Tags = new[] { "programming", "magic strings", "ASPNET", "ASPNET MVC" };
+    Tags = new[] { "programming", "magic strings", "ASP.NET", "ASP.NET MVC" };
 }
 
 <p>Except for direct screen output, I really dislike coded string literals. Using strings to refer to properties, methods, classes, etc. makes it much easier to introduce code quality problems. This includes things like mistyped identifiers, missed refactoring renames, and poor code analysis capabilities. I am constantly on the hunt for ways to remove these "magic strings" and replace them with strongly-typed counterparts. This post describes several of the tools and techniques I've found that work well. While this post addresses the elimination of magic strings from ASP.NET MVC web applications, many of the strategies are applicable to other code as well.</p>
