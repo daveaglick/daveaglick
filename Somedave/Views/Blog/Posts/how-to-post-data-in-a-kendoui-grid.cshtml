@@ -1,7 +1,7 @@
 ﻿@{
     Title = "How to Post Data (Including Checkboxes) in a KendoUI Grid back to an ASP.NET MVC Action";
     Published = new DateTime(2014, 1, 3);
-    Tags = new[] { "ASPNET", "ASPNET MVC", "KendoUI", "KendoUI MVC", "grid", "checkbox", "postback" };
+    Tags = new[] { "ASP.NET", "ASP.NET MVC", "KendoUI", "KendoUI MVC", "grid", "checkbox", "postback" };
 }
 
 <p>The KendoUI grid is great for displaying data and manipulating it one row at a time. There are several options available including posting the edited data back via AJAX, performing in-line editing, etc. However, there is no built-in support for posting the grid data on form submission because the grid isn't an actual form control. This came up recently when designing a feature for an enterprise contact list. I had a view that should allow the user to select two contacts and merge them into one. The user needed to be able to select which addresses, phone numbers, etc. from both contact should be kept in the merged contact. A grid seemed like a perfect interface match since it supports multiple columns and I could (presumably) add a checkbox to the first (or last) one for the user to select. This turned out to be much more complicated than I had anticipated and there isn't a lot of help out there, so I'll walk you through the process.</p>

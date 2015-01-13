@@ -1,7 +1,7 @@
 ﻿@{
     Title = "Automatically Generating Column Titles For A KendoUI MVC Grid";
     Published = new DateTime(2013, 4, 11);
-    Tags = new[] { "ASPNET", "ASPNET MVC", "KendoUI", "KendoUI MVC", "grid", "data annotations" };
+    Tags = new[] { "ASP.NET", "ASP.NET MVC", "KendoUI", "KendoUI MVC", "grid", "data annotations" };
 }
 
 <p>I love KendoUI, especially because of the available MVC wrappers. It is a very well engineered product with lots of opportunity for extension, and in this post I'll briefly discuss one that should relieve a small pain point: generating grid column titles from a <code><a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.displayattribute.aspx">DisplayAttribute</a></code> <a href="http://msdn.microsoft.com/en-us/library/dd901590(v=vs.95).aspx">data annotation</a>. As you probably already know, you can change the way your UI layer presents properties of your model by applying the <code>DisplayAttribute</code> data annotation. This causes most of the UI code to use the <code>Name</code> property of the attribute when displaying that property. It looks like this:</p>
