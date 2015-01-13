@@ -8,7 +8,7 @@
     {
         using (row.GridColumn(2).SetSm(4).SetXs(6).Begin())
         {
-            @Bootstrap.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Circle).AddAttribute("style", "margin-top: 6px;")
+            @Bootstrap.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Rounded).AddStyle("margin-top", "6px").AddStyle("border", "4px solid #333")
         }
         @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)
         using (row.GridColumn().SetSm(10).Begin())

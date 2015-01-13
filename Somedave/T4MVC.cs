@@ -200,6 +200,9 @@ namespace Links
             public static readonly string appveyor_build_png = Url("appveyor-build.png");
             public static readonly string appveyor_deployment_png = Url("appveyor-deployment.png");
             public static readonly string appveyor_nuget_package_png = Url("appveyor-nuget-package.png");
+            public static readonly string debug_diagnostic_1_png = Url("debug-diagnostic-1.png");
+            public static readonly string debug_diagnostic_2_png = Url("debug-diagnostic-2.png");
+            public static readonly string debug_diagnostic_3_png = Url("debug-diagnostic-3.png");
             public static readonly string github_new_repo_png = Url("github-new-repo.png");
             public static readonly string nuget_apikey_png = Url("nuget-apikey.png");
             public static readonly string open_source_participants_png = Url("open-source-participants.png");

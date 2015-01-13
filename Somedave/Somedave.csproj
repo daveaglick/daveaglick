@@ -244,6 +244,9 @@
     <Content Include="Content\posts\appveyor-build.png" />
     <Content Include="Content\posts\appveyor-deployment.png" />
     <Content Include="Content\posts\appveyor-nuget-package.png" />
+    <Content Include="Content\posts\debug-diagnostic-1.png" />
+    <Content Include="Content\posts\debug-diagnostic-2.png" />
+    <Content Include="Content\posts\debug-diagnostic-3.png" />
     <Content Include="Content\posts\github-new-repo.png" />
     <Content Include="Content\posts\nuget-apikey.png" />
     <Content Include="Content\posts\open-source-participants.png" />
@@ -411,6 +414,7 @@
     <Content Include="Views\Blog\Posts\automatic-retry-for-linq-to-sql.cshtml" />
     <Content Include="Views\NuGetStats\Package.cshtml" />
     <Content Include="Views\Blog\Posts\eliminating-magic-strings.cshtml" />
+    <Content Include="Views\Blog\Posts\debugging-stack-overflows-on-iis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
