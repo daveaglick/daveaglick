@@ -5,14 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using FluentBootstrap;
 using FluentBootstrap.Buttons;
+using FluentBootstrap.Internals;
 using Somedave.Controllers;
 using FluentBootstrap.Mvc;
+using FluentBootstrap.Mvc.Internals;
 
 namespace Somedave
 {
     public static class HtmlHelperExtensions
     {
-        public static LinkButton<MvcBootstrapHelper<TModel>> TagButton<TModel>(this HtmlHelper<TModel> helper, string tag, int? count = null, ButtonState buttonState = ButtonState.Default)
+        public static ComponentBuilder<MvcBootstrapConfig<TModel>, LinkButton> TagButton<TModel>(this HtmlHelper<TModel> helper, string tag, int? count = null, ButtonState buttonState = ButtonState.Default)
         {
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
             return helper.Bootstrap().LinkButton(

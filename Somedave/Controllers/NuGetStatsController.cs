@@ -14,7 +14,7 @@ using GraphSharp.Algorithms.Layout.Simple.FDP;
 
 namespace Somedave.Controllers
 {
-    [RoutePrefix("nuget-stats")]
+    [AttributeRouting.RoutePrefix("nuget-stats")]
     public partial class NuGetStatsController : Controller
     {
         [GET("")]

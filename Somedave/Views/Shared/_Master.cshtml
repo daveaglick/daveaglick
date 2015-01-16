@@ -70,10 +70,10 @@
                     { 
                         using (var nav = Bootstrap.List().Begin())
                         {
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" About", Url.Action(MVC.Home.About())).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null))).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Tags", Url.Action(MVC.Blog.Tags(null))).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Likes", Url.Action(MVC.Home.Likes())).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" About", MVC.Home.About()).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
+                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
                         }     
                     } 
                     @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)  

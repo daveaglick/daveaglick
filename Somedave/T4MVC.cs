@@ -3,8 +3,8 @@
 // Don't change it directly as your change would get overwritten.  Instead, make changes
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
-// Make sure the compiler doesn't complain about missing Xml comments
-#pragma warning disable 1591
+// Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
+#pragma warning disable 1591, 3008, 3009
 #region T4MVC
 
 using System;
@@ -80,7 +80,6 @@ namespace Links
         public static readonly string cola_v3_min_js = Url("cola.v3.min.js");
         public static readonly string cytoscape_min_js = Url("cytoscape.min.js");
         public static readonly string dagre_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dagre.min.js") ? Url("dagre.min.js") : Url("dagre.js");
-        public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
@@ -254,6 +253,6 @@ internal static class T4MVCHelpers {
 
 
 #endregion T4MVC
-#pragma warning restore 1591
+#pragma warning restore 1591, 3008, 3009
 
 
