@@ -52,11 +52,11 @@
 
 <p>While T4MVC works wonders for all the MVC code in your application, what about the other stuff? <a href="http://danielvaughan.org/post/MetaGen-A-project-metadata-generator-for-Visual-Studio-using-T4.aspx">MetaGen</a> is a small T4 template similar to T4MVC that reads all the classes and interfaces in the project and outputs <code>static</code> metadata classes with <code>const</code> strings for their members. It's especially helpful when creating bindings in view code to properties of your view models. For example, instead of having to put a magic string into the <code>name</code> and/or <code>id</code> attributes of HTML form fields like this:</p>
 
-@Html.Code(@"<input id=""Username"" name=""Username"" type=""text"">", "markup")
+@Html.Code(@"<input id=""Username"" name=""Username"" type=""text"">")
 
 <p>You can refer instead to the generated <code>const</code> string from MetaGen like this:</p>
 
-@Html.Code(@"<input id=""@LoginMetadata.Username"" name=""@LoginMetadata.Username"" type=""text"">", "markup")
+@Html.Code(@"<input id=""@LoginMetadata.Username"" name=""@LoginMetadata.Username"" type=""text"">")
 
 <p>As with T4MVC, the MetaGen T4 template won't normally be run on code changes. <a href="https://github.com/bennor/AutoT4">AutoT4</a> is another Visual Studio extension that will force processing of any T4 template on project rebuild.</p>
 

@@ -83,7 +83,7 @@ namespace Links
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
-        public static readonly string prism_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.js") ? Url("prism.min.js") : Url("prism.js");
+        public static readonly string prettify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prettify.min.js") ? Url("prettify.min.js") : Url("prettify.js");
         public static readonly string springy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/springy.min.js") ? Url("springy.min.js") : Url("springy.js");
     }
 
@@ -187,6 +187,8 @@ namespace Links
             public static readonly string glyphicons_halflings_regular_woff = Url("glyphicons-halflings-regular.woff");
         }
     
+        public static readonly string github_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/github.min.css") ? Url("github.min.css") : Url("github.css");
+             
         public static readonly string master_less = Url("master.less");
         public static readonly string me_jpg = Url("me.jpg");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -209,7 +211,7 @@ namespace Links
             public static readonly string persistenceprocess1_png = Url("persistenceprocess1.png");
         }
     
-        public static readonly string prism_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prism.min.css") ? Url("prism.min.css") : Url("prism.css");
+        public static readonly string prettify_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prettify.min.css") ? Url("prettify.min.css") : Url("prettify.css");
              
     }
 

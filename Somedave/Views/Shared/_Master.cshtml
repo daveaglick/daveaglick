@@ -14,7 +14,8 @@
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <link href="@Links.Content.bootstrap.bootstrap_less" rel="stylesheet">
-        <link href="@Links.Content.prism_css" rel="stylesheet">
+        <link href="@Links.Content.prettify_css" rel="stylesheet">
+        <link href="@Links.Content.github_css" rel="stylesheet">
         <link href="@Links.Content.master_less" rel="stylesheet">
 
         <meta name="application-name" content="Somedave" />
@@ -29,7 +30,7 @@
 
         <script src="@Links.Scripts.jquery_2_1_1_min_js"></script>
         <script src="@Links.Scripts.bootstrap_min_js"></script>
-        <script src="@Links.Scripts.prism_js"></script>
+        <script src="@Links.Scripts.prettify_js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
         <script>
             WebFont.load({
@@ -43,7 +44,7 @@
             });
         </script>
 	</head>
-	<body>
+	<body onload="prettyPrint()">
         @using (Bootstrap.Div().SetId("page-wrapper").Begin())
         {
             using (var container = Bootstrap.Container().AddCss("topnav", "container-sm-height").Begin())
@@ -146,6 +147,6 @@
                 return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
             }(document, "script", "twitter-wjs"));
         </script>
-	</body>
+	</bodyonload="prettyPrint()">
 </html>
 

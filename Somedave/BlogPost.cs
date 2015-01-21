@@ -33,7 +33,10 @@ namespace Somedave
 
         public string GetViewName()
         {
-            return ViewTypeName.Replace('_', '-');
+            return ViewTypeName
+                .Replace("_Views_Blog_Posts_", "")
+                .Replace("_cshtml", "")
+                .Replace('_', '-');
         }
 
         public ActionResult GetAction()

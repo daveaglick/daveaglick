@@ -11,7 +11,7 @@
 
 <p>Before you start the process of getting crash dumps, etc. it might be helpful to check out the Windows Event Log. This should give you some small indication of what's going on, or at least give you something to Google. In my case I didn't have anything in the Application log, but in the System log I found an Information message with a source of Application Popup every time my process got killed:</p>
 
-@Html.Code("Application popup: w3wp.exe - System Error : A new guard page for the stack cannot be created.", "markup")
+@Html.Code("Application popup: w3wp.exe - System Error : A new guard page for the stack cannot be created.")
 
 <p>I also had a Warning from the source WAS:</p>
 
@@ -39,7 +39,7 @@
 <p>Once you install WinDbg, open it up and select Open Crash Dump from the File menu. Then you'll need to type the following two commands into the crash dump window:</p>
 
 @Html.Code(@".loadby sos clr
-!clrstack", "markup")
+!clrstack")
 
 <p>If everything goes well, this should print out the full stack when the process crashed (it might take a while). That should get you on your way to debugging what went wrong.</p>
 

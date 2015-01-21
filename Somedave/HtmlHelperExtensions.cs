@@ -46,10 +46,23 @@ namespace Somedave
             return MVC.Blog.Posts(System.IO.Path.GetFileNameWithoutExtension(view(MVC.Blog.Views.Posts)));
         }
 
-        public static IHtmlString Code(this HtmlHelper htmlHelper, string code, string language = "csharp")
+        public static IHtmlString Code(this HtmlHelper htmlHelper, string code)
         {
-            return new HtmlString(string.Format(@"<pre><code class=""language-{0}"">{1}</code></pre>", language,
-                htmlHelper.Raw(HttpUtility.HtmlEncode(code.Replace("Bootstrap(this)", "Bootstrap()")))));
+            int num = 0;
+            string[] lines = code.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            if (lines.Length > 1)
+            {
+                num = lines
+                    .Skip(1)
+                    .Min(x =>
+                    {
+                        int index = x.ToList().FindIndex(c => c != ' ');
+                        return index == -1 ? Int32.MaxValue : index;
+                    });
+            }
+            string spaces = new String(' ', num);
+            code = code.Replace(Environment.NewLine + spaces, Environment.NewLine);
+            return new HtmlString(string.Format(@"<pre class='prettyprint'>{0}</pre>", htmlHelper.Raw(HttpUtility.HtmlEncode(code))));
         }
     }
 }

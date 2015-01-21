@@ -244,6 +244,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\github.css" />
     <Content Include="Content\me.jpg" />
     <Content Include="Content\posts\appveyor-artifacts.png" />
     <Content Include="Content\posts\appveyor-assemblyinfo-patching.png" />
@@ -258,7 +259,7 @@
     <Content Include="Content\posts\open-source-participants.png" />
     <Content Include="Content\posts\pdf-process.png" />
     <Content Include="Content\posts\persistenceprocess1.png" />
-    <Content Include="Content\prism.css" />
+    <Content Include="Content\prettify.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap\variables.less" />
@@ -357,7 +358,7 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.settings.xml" />
-    <Content Include="Scripts\prism.js" />
+    <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\springy.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
