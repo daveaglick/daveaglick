@@ -421,6 +421,7 @@
     <Content Include="Views\NuGetStats\Package.cshtml" />
     <Content Include="Views\Blog\Posts\eliminating-magic-strings.cshtml" />
     <Content Include="Views\Blog\Posts\debugging-stack-overflows-on-iis.cshtml" />
+    <Content Include="Views\Blog\Posts\a-tale-of-two-apis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
