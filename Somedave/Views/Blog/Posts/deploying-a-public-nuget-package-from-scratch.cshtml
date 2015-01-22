@@ -34,7 +34,7 @@
 <p>Now we need to go back to our local system and prepare the NuGet package. NuGet works in two phases. The first step is to create a <code>.nuspec</code> file that contains all of the metadata for your package. Then, each time that you change the library, the <code>.nuspec</code> file gets reused to create the actual NuGet package that can be deployed to users. To create the <code>.nuspec</code> file, open a command prompt with <code>nuget.exe</code> in the path and run <code>nuget spec</code> from the same folder as your project. This will create the <code>.nuspec</code> file and give it the same name as your project file.</p>
 
 <p>Open the <code>.nuspec</code> file in a text editor. It should look like this:</p>
-<pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot;?&gt;
+<pre class="prettyprint">&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;package &gt;
   &lt;metadata&gt;
     &lt;id&gt;$id$&lt;/id&gt;
@@ -51,7 +51,7 @@
     &lt;copyright&gt;Copyright 2014&lt;/copyright&gt;
     &lt;tags&gt;Tag1 Tag2&lt;/tags&gt;
   &lt;/metadata&gt;
-&lt;/package&gt;</code></pre>
+&lt;/package&gt;</pre>
 
 <p>Go ahead and add content for all of the elements except <code>version</code>, which should be left as <code>$version$</code>. This takes care of your package specification. Now we need to figure out how to build the actual NuGet package.</p>
 

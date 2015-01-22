@@ -14,7 +14,7 @@
 
 <p>The other kind of approach is to get the data on the client. I like this approach better because it has the potential to exactly match what the user sees on their screen. I found the following <a href="https://github.com/uber-rob/kendo-grid-csv-download">source on GitHub</a>, which itself is based on the work in this <a href="http://www.telerik.com/forums/export-to-csv">forum thread</a>. The goal of this code is to trigger downloading and formatting of the data by the grid itself after the user has manipulated it and then package that data into a file for download. In other words, use the grid as a proxy so that the data you use for the file matches exactly what the user sees. While I think the approach is sound, I found many problems with the code itself. For example, it didn’t wait for the grid data source to complete fetching data, thus often returning stale data to the user. It also lacked support for things like stripping out HTML (which I use in grids a lot for embedded links). My modified version looks like this:</p>
 
-<pre><code class="language-javascript">// Modified from https://github.com/uber-rob/kendo-grid-csv-download
+<pre class="prettyprint">// Modified from https://github.com/uber-rob/kendo-grid-csv-download
 function kendoGridToCSV(grid) {
 
     // Get access to basic grid data
@@ -98,7 +98,7 @@ function kendoGridToCSV(grid) {
     // Increase page size to cover all the data and then trigger fetching and processing of all the data
     datasource.pageSize(datasource.total());
     datasource.view();
-}</code></pre>
+}</pre>
 
 <p>The one problem with this code is that it creates the data on the client. “But that’s great!” you say, “The client won’t have to download anything extra!” you say. Unfortunately there’s actually no good cross-browser way to get a blob of data into a “file” that the client presents for download to the user. As suggested by the original authors, there is a library called <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> that can solve this using JavaScript and Flash. If that works for you, great! However, I’m not a fan of Flash and can’t rely on it being available in my user’s environment so I needed a workaround.</p>
 
@@ -106,7 +106,7 @@ function kendoGridToCSV(grid) {
 
 <p>The first challenge is getting the data to the user. I found this JavaScript method that can be used to post arbitrary content to a server (we can’t use the jQuery AJAX post method because we need this to be an actual post request so the prompt to save the resulting file is presented):</p>
 
-<pre><code class="language-javascript">// This posts specific data to a given URL
+<pre class="prettyprint">// This posts specific data to a given URL
 // From http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
 function postToURL(url, values) {
     var form = $('&lt;form id="postToURL"&gt;&lt;/form&gt;');
@@ -129,24 +129,24 @@ function postToURL(url, values) {
     $(document.body).append(form);
     form.submit();
     $("#postToURL").remove();
-}</code></pre>
+}</pre>
 
 <p>You’ll notice it’s called from inside the function that converts the grid to CSV data. That solves the client-side part of the equation. Yes, I know what you’re thinking. Isn’t it inefficient to have the client get the data from the server, format it, and then send it right back to the server, only to have it sent BACK to the client as a file? Well, yes, yes it is. In my situation though, the performance hit was acceptable in order to achieve the best user interaction. That’s aided by the fact that the user clicked a button to make this happen. If a user takes an action that they know might be long-running, their a lot more likely to forgive a little wait time.</p>
 
 <p>On the server I have an action called <code>CsvToExcel</code>. However, before I show you that, here’s an alternate action that would have just packaged up the CSV and returned it as a file:</p>
 
-<pre><code class="language-csharp">[POST("MakeFile")]
+<pre class="prettyprint">[POST("MakeFile")]
 [ValidateInput(false)]
 public virtual ActionResult MakeFile(string fileName, string contentType, string data)
 {
     if (string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(contentType) || string.IsNullOrWhiteSpace(data))
         return HttpNotFound();
     return File(Encoding.UTF8.GetBytes(data), contentType, fileName);
-}</code></pre>
+}</pre>
 
 <p>Now my actual action uses <a href="http://www.aspose.com/.net/excel-component.aspx">Aspose Cells</a> to create an Excel file with headings, frozen panes, etc. but you could make do with other free alternatives mentioned in the linked articles at the beginning of this post. Here is my real action:</p>
 
-<pre><code class="language-csharp">[POST("CsvToExcel")]
+<pre class="prettyprint">[POST("CsvToExcel")]
 [ValidateInput(false)]
 public virtual ActionResult CsvToExcel(string data)
 {
@@ -182,33 +182,33 @@ public virtual ActionResult CsvToExcel(string data)
         output = outputStream.ToArray();
     }
     return File(output, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "grid.xlsx");
-}</code></pre>
+}</pre>
 
 <h2>Rigging It Up</h2>
 
 <p>The last part is rigging this all up to an actual grid. I wanted it to be as easy as possible to add this capability to any arbitrary grid. To that end, I create an extension method for the Kendo MVC wrappers that lets me add an “Export” button the exact same way you add a “Create” button to the grid toolbar. Here’s the extension:</p>
 
-<pre><code class="language-csharp">public static GridToolBarCustomCommandBuilder&lt;TModel&gt; Export&lt;TModel&gt;(this GridToolBarCommandFactory&lt;TModel&gt; factory)
+<pre class="prettyprint">public static GridToolBarCustomCommandBuilder&lt;TModel&gt; Export&lt;TModel&gt;(this GridToolBarCommandFactory&lt;TModel&gt; factory)
     where TModel : class, new()
 {
     return factory.Custom().Text("Export").HtmlAttributes(new { @@class = "export-grid" });
-}</code></pre>
+}</pre>
 
 <p>And here’s the small bit a JavaScript that supports it (essentially rigging up a jQuery click handler for the new button to the <code>kendoGridToCSV</code> function mentioned earlier:</p>
 
-<pre><code class="language-javascript">// This rigs up the export button on the grid
+<pre class="prettyprint">// This rigs up the export button on the grid
 $(".export-grid").click(function (e) {
     e.preventDefault();
     var grid = $(e.target).parents('.k-grid').data("kendoGrid");
     kendoGridToCSV(grid);
-});</code></pre>
+});</pre>
 
 <p>Finally, here’s how to use it on your grid:</p>
 
-<pre><code class="language-csharp">@@(Html.Kendo().Grid(...).Name("...")
+<pre class="prettyprint">@@(Html.Kendo().Grid(...).Name("...")
     ...
     .ToolBar(x =&gt; x.Export())
     ...
-)</code></pre>
+)</pre>
 
 <p>Easy, right? I hope this was helpful – it took me a while to work through all the bits and hopefully it will save you some time.</p>

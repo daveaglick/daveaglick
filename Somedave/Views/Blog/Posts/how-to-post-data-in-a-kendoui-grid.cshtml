@@ -10,14 +10,14 @@
 
 <p>My model is simple:</p>
 
-<pre><code class="language-csharp">public class ContactInfoGridItem
+<pre class="prettyprint">public class ContactInfoGridItem
 {
     public string ContactInfoId { get; set; }
     public bool Keep { get; set; }
     public string Contact { get; set; }
     public string Type { get; set; }
     public string Content { get; set; }
-}</code></pre>
+}</pre>
 
 <p>The important fields are <code>ContactInfoId</code> and <code>Keep</code> – <code>Contact</code>, <code>Type</code>, and <code>Content</code> are just bits of domain data for display to the user but won't be posted back on submit (they'll get default values after model binding).</p>
 
@@ -25,10 +25,10 @@
 
 <p>This is the action we eventually want to receive the data:</p>
 
-<pre><code class="language-csharp">public virtual ActionResult Index(IEnumerable&lt;ContactInfoGridItem&gt; contactInfo)
+<pre class="prettyprint">public virtual ActionResult Index(IEnumerable&lt;ContactInfoGridItem&gt; contactInfo)
 {
     //...
-}</code></pre>
+}</pre>
 
 <p>We want the grid to send us a collection of <code>ContactInfoGridItems</code>. In my collection I only need the <code>ContactInfoId</code> and <code>Keep</code> fields to be set.</p>
 
@@ -36,7 +36,7 @@
 
 <p>The grid is declared like this (using KendoUI for ASP.NET MVC):</p>
 
-<pre><code class="language-csharp">@@(Html.Kendo().Grid(new List&lt;ContactInfoGridItem&gt;())
+<pre class="prettyprint">@@(Html.Kendo().Grid(new List&lt;ContactInfoGridItem&gt;())
     .Name("grid")
     .DataSource(d =&gt; d.Ajax()
         .Read(r =&gt; r.Action(MVC.ContactList.Merge.ContactInfoGridRead()))
@@ -57,7 +57,7 @@
         c.Bound(m =&gt; m.Contact);
         c.Bound(m =&gt; m.Type);
         c.Bound(m =&gt; m.Content);
-    }))</code></pre>
+    }))</pre>
 
 <p>So what's going on here? Don't worry about the Action – if you've never seen this syntax before, I'm just using <a href="http://t4mvc.codeplex.com/">T4MVC</a> (which I love) to eliminate magic strings. The first important note is that I'm declaring <code>ServerOperation(false)</code> on the <code>DataSource</code>. This ensures that KendoUI properly sends the data back to the server. I found <a href="http://www.kendoui.com/code-library/mvc/grid/submit-form-containing-grid-along-with-other-input-elements.aspx">this example</a> very helpful in understanding how to rig up posting of grid data. Next, notice the client templates for the <code>ContactInfoId</code> and <code>Keep</code> columns. The general principle here is that if we stick form controls (even hidden ones) directly inside the grid then they will get posted to the server like any other form control. The trick to getting a grid to work though is knowing how to identify and name form controls in such a way that ASP.NET MVC understands how to turn them into a collection. This can be accomplished by adding brackets after the form control name with an index – see <a href="http://haacked.com/archive/2008/10/23/model-binding-to-a-list.aspx/">this blog post</a> for more details.</p>
 

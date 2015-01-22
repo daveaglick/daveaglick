@@ -14,7 +14,7 @@
 
 <p>The <code>PdfResult</code> class is the heart of this approach. It contains all of the logic necessary to locate the view, set up the view context, render the view, and generate the PDF file. Though it does all the heavy lifting, there actually isn’t that much code involved:</p>
 
-<pre><code class="language-csharp">public class PdfResult : PartialViewResult
+<pre class="prettyprint">public class PdfResult : PartialViewResult
 {
     // Setting a FileDownloadName downloads the PDF instead of viewing it
     public string FileDownloadName { get; set; }
@@ -76,7 +76,7 @@
             result.ExecuteResult(context);
         }
     }
-}</code></pre>
+}</pre>
 
 <p>Let’s go through this from top to bottom.</p>
 
@@ -88,7 +88,7 @@
 
 <p>Once we have the content to pass to the PDF generator library, we create the PDF file. The code above is written for <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a>, but could be adapted to work with <a href="http://sourceforge.net/projects/itextsharp/">iTextSharp</a> like this (from <a href="https://github.com/andyhutch77/MvcRazorToPdf">MvcRazorToPdf</a>):</p>
 
-<pre><code class="language-csharp">// Create a PDF from the rendered view content
+<pre class="prettyprint">// Create a PDF from the rendered view content
 var workStream = new MemoryStream();
 var document = new Document();
 PdfWriter writer = PdfWriter.GetInstance(document, workStream);
@@ -103,7 +103,7 @@ FileContentResult result = new FileContentResult(workStream.ToArray(), "applicat
 {
     FileDownloadName = FileDownloadName
 };
-</code></pre>
+</pre>
 
 <p>One final note about the <code>FileDownloadName</code> property and it’s use in the <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.filecontentresult(v=vs.118).aspx">FileContentResult</a></code>. If <code>null</code> is supplied for <code>FileDownloadName</code>, the PDF file will be delivered to the browser and rendered inline. However, if a value is supplied for <code>FileDownloadName</code>, the browser will initiate a file download of a PDF file with that name. This lets you control the way in which the client views and downloads the PDF file.</p>
 
@@ -111,7 +111,7 @@ FileContentResult result = new FileContentResult(workStream.ToArray(), "applicat
 
 <p>Now that we have the <code>PdfResult</code> class complete, how do we use it to actually generate a PDF file? This step is optional, but I prefer to add a method to my <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.controller(v=vs.118).aspx">Controller</a></code> base class to support alternate view results from an action. <a href="http://msdn.microsoft.com/en-us/library/dd460331(v=vs.118).aspx">The base <code>Controller</code> in MVC already does this</a> – you typically write <code>return View();</code> not <code>return new ViewResult() { ... };</code> If you don’t already have a custom base <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.controller(v=vs.118).aspx">Controller</a></code> in your MVC application, I suggest adding one. Even if it’s just to hold the next bit of code, it’s worthwhile. And I’ve found over time that it’s nice having a base <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.controller(v=vs.118).aspx">Controller</a></code> class into which I can add all sorts of other helper methods and additional logic. To that end, the following are overloads for a <code>Pdf()</code> method that can be used as the return value for an action:</p>
 
-<pre><code class="language-csharp">protected ActionResult Pdf()
+<pre class="prettyprint">protected ActionResult Pdf()
 {
     return Pdf(null, null, null);
 }
@@ -152,19 +152,19 @@ protected ActionResult Pdf(string fileDownloadName, string viewName, object mode
         ViewEngineCollection = ViewEngineCollection
     };
     return pdf;
-}</code></pre>
+}</pre>
 
 <h1>The Action</h1>
 
 <p>The result of all this is that you can write you PDF generating actions in a very similar way to how you write your normal web actions:</p>
 
-<pre><code class="language-csharp">public virtual ActionResult PdfTest()
+<pre class="prettyprint">public virtual ActionResult PdfTest()
 {
 
     return Pdf(new int[] { 1, 2, 3 });
 
 }
-</code></pre>
+</pre>
 
 <p>The code about will cause a <code>PdfResult</code> class to be instantiated which will attempt to find a view named “PdfTest.cshtml” in the conventional location. It will be given an <code>int[]</code> array as it’s model and then rendered by the Razor view engine.</p>
 
@@ -172,7 +172,7 @@ protected ActionResult Pdf(string fileDownloadName, string viewName, object mode
 
 <p>The final step is the view, where the actual PDF content is specified. Recall that I said I’m using <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a>, so the XML in my view corresponds to the XML that <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> expects. If you’re using <a href="http://sourceforge.net/projects/itextsharp/">iTextSharp</a> or any other PDF generation library then the XML (or other type of) content contained in your view may look drastically different. But for the sake of example, here’s what a sample view might look like using the <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> XML format:</p>
 
-<pre><code class="language-csharp">@@model IEnumerable&lt;int&gt;
+<pre class="prettyprint">@@model IEnumerable&lt;int&gt;
 
 &lt;Pdf xmlns=&quot;Aspose.Pdf&quot; DestinationType=&quot;FitPage&quot;&gt;
     &lt;Section&gt;
@@ -181,7 +181,7 @@ protected ActionResult Pdf(string fileDownloadName, string viewName, object mode
             @@:&lt;Text Alignment=&quot;Center&quot;&gt;&lt;Segment&gt;@@c&lt;/Segment&gt;&lt;/Text&gt;       
         }
     &lt;/Section&gt;
-&lt;/Pdf&gt;</code></pre>
+&lt;/Pdf&gt;</pre>
 
 <p>The Razor syntax checker in Visual Studio will probably complain that all these XML elements are not valid HTML5 (or whatever other validation type you have configured), but that’s fine – the actual view engine will deal with them without issue. One small complication you’ll see above is that the <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> XML specification uses an element called <code>Text</code>. <a href="http://weblogs.asp.net/scottgu/archive/2010/12/15/asp-net-mvc-3-razor-s-and-lt-text-gt-syntax.aspx">Unfortunately, this element also has a very special meaning in Razor syntax</a>. We need to escape it when used directly inside a code block by using <code>@@:</code>.</p>
 

@@ -30,7 +30,7 @@
     using (grid.GridColumn(6).Begin())
     {
         <p>Put simply, FluentBootstrap lets you output this HTML:</p>
-        <pre><code class="language-markup">@Html.Raw(HttpUtility.HtmlEncode(@"<nav class=""navbar-static-top navbar-default navbar"" 
+        <pre class="prettyprint">@Html.Raw(HttpUtility.HtmlEncode(@"<nav class=""navbar-static-top navbar-default navbar"" 
  id=""navbar"" role=""navigation"">
  <div class=""container-fluid"">
   <div class=""navbar-header"">
@@ -52,19 +52,19 @@
    </div>
   </div>
  </div>
-</nav>"))</code></pre>
+</nav>"))</pre>
     }
     using (grid.GridColumn(6).Begin())
     {
         <p>By writing this code instead:</p>
-        <pre><code class="language-csharp">@Html.Raw(@"@using (var navbar = Html.Bootstrap(this).Navbar(""FluentBootstrap"")
+        <pre class="prettyprint">@Html.Raw(@"@using (var navbar = Html.Bootstrap(this).Navbar(""FluentBootstrap"")
     .SetPosition(NavbarPosition.StaticTop).Begin())
 {
     @navbar.NavbarLink(""Introduction"", ""/"")
     @navbar.NavbarLink(""Installation"", ""/Installation"")
     @navbar.NavbarLink(""Usage"", ""/Usage"")
     @navbar.NavbarLink(""Development"", ""/Development"")
-}")</code></pre>
+}")</pre>
     }
 }
 

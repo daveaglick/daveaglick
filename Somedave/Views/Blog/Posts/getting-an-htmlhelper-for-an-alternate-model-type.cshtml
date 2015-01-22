@@ -13,7 +13,7 @@
 
 <p>Thankfully there are ways to make this work. I would like to give a lot of credit to Tahir Hassan for his answer to a <a href="http://stackoverflow.com/questions/1321254/asp-net-mvc-typesafe-html-textboxfor-with-different-outputmodel">related question on Stack Overflow</a>. In his answer he describes an HTML helper extension method that can get a new <code>HtmlHelper</code> of a requested type. The code in this article is based very heavily on his code with very few changes. Below is the code for a series of extension methods and direct methods (more on these in a later post) for getting an alternate <code>HtmlHelper</code>.</p>
 
-<pre><code class="language-csharp">public static class HtmlHelpers
+<pre class="prettyprint">public static class HtmlHelpers
 {
     public static HtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(this HtmlHelper helper) where TModel : class, new()
     {
@@ -53,12 +53,12 @@
             ViewData = viewData;
         }
     }
-}</code></pre>
+}</pre>
 
 <p>Once these extension methods are available you can write things like the following in your views:</p>
 
-<pre><code class="language-csharp">&lt;th&gt;@@(Html.For&lt;TableItemModel&gt;().DisplayNameFor(m => m.ThisColumnProperty))&lt;/th&gt;</code></pre>
+<pre class="prettyprint">&lt;th&gt;@@(Html.For&lt;TableItemModel&gt;().DisplayNameFor(m => m.ThisColumnProperty))&lt;/th&gt;</pre>
 
-<pre><code class="language-csharp">&lt;td&gt;@@(Html.For(rowItem).TextBoxFor(m => m.ThisColumnProperty))&lt;/td&gt;</code></pre>
+<pre class="prettyprint">&lt;td&gt;@@(Html.For(rowItem).TextBoxFor(m => m.ThisColumnProperty))&lt;/td&gt;</pre>
 
 <p>By itself this is already a powerful capability and opens up your views to additional model types easily. In my next post I'll detail how to use the non-extension versions with the MVC wrappers for KendoUI to automatically set the title of a bound grid column.</p>

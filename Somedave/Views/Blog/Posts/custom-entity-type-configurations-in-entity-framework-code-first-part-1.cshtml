@@ -8,37 +8,37 @@
 
 <p>The first thing you'll need to understand is the way that the fluent API actually configures entities. Inside of the <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext(v=vs.103).aspx">DbContext</a></code> class (which you've presumably subclassed) there is an overridable method called <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext.onmodelcreating(v=vs.103).aspx">OnModelCreating()</a></code>. This method has a single parameter of type <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbmodelbuilder(v=vs.103).aspx">DbModelBuilder</a></code>. During normal fluent API usage you write code that looks like this inside the <code>OnModelCreating()</code> method:</p>
 
-<pre><code class="language-csharp">modelBuilder.Entity&lt;Department&gt;().Property(t =&gt; t.Name).IsRequired();</code></pre>
+<pre class="prettyprint">modelBuilder.Entity&lt;Department&gt;().Property(t =&gt; t.Name).IsRequired();</pre>
 
 <p>When you call <code><a href="http://msdn.microsoft.com/en-us/library/gg696542(v=vs.103).aspx">DbModelBuilder.Entity&lt;TEntityType&gt;()</a></code>, you get back an <code><a href="http://msdn.microsoft.com/en-us/library/gg696117(v=vs.103).aspx">EntityTypeConfiguration&lt;TEntityType&gt;</a></code> class that is used for configuring the entity. However, this isn't the only way to get an <code>EntityTypeConfiguration</code> class. You can actually create them yourself:</p>
 
-<pre><code class="language-csharp">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
+<pre class="prettyprint">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
 {
   public DepartmentTypeConfiguration() { }
-}</code></pre>
+}</pre>
 
 <p>Once you've instantiated one, you can use it just like you would have used the one you obtained from the <code><a href="http://msdn.microsoft.com/en-us/library/gg696542(v=vs.103).aspx">DbModelBuilder.Entity&lt;TEntityType&gt;()</a></code> call:</p>
 
-<pre><code class="language-csharp">DepartmentTypeConfiguration departmentConfig = new DepartmentTypeConfiguration();
-departmentConfig.Property(t =&gt; t.Name).IsRequired();</code></pre>
+<pre class="prettyprint">DepartmentTypeConfiguration departmentConfig = new DepartmentTypeConfiguration();
+departmentConfig.Property(t =&gt; t.Name).IsRequired();</pre>
 
 <p>The previous example was just to show that the custom <code>EntityTypeConfiguration</code> class works the same way as the ones you obtain by calling <code>DbModelBuilder.Entity&lt;TEntityType&gt;()</code>. Alternatively you can specify configuration code in the constructor, which is more useful because it means the configuration code will get called whenever a new instance of your <code>EntityTypeConfiguration</code> class is created (I.e., through reflection).</p>
 
-<pre><code class="language-csharp">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
+<pre class="prettyprint">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
 {
   public DepartmentTypeConfiguration()
   {
     Property(t =&gt; t.Name).IsRequired();
   }
-}</code></pre>
+}</pre>
 
 <p>The fluent API calls (such as <code>Property()</code>) change the internal state of the <code>EntityTypeConfiguration</code> class. When all of the configuration is complete, Entity Framework reads the state of all <code>EntityTypeConfiguration</code> classes that have been registered and uses them to build the model. But back up a step, notice I said "all <code>EntityTypeConfiguration</code> classes <em>that have been registered</em>". There is one more step before a custom <code>EntityTypeConfiguration</code> class can be used for configuration - it has to be registered with the <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.modelconfiguration.configuration.configurationregistrar(v=vs.103).aspx">ConfigurationRegistrar</a></code>. To do so, you just use the <code>DbModelBuilder.Configurations</code> property:</p>
 
-<pre><code class="language-csharp">modelBuilder.Configurations.Add(departmentConfig);</code></pre>
+<pre class="prettyprint">modelBuilder.Configurations.Add(departmentConfig);</pre>
 
 <p>This adds the custom <code>EntityTypeConfiguration</code> instance to the list of configurations that will be used to build the final model. At this point, we could just reflect over the assembly looking for <code>EntityTypeConfiguration</code> classes, instantiating them, and adding them to the <code>ConfigurationRegistrar</code> (<a href="http://areaofinterest.wordpress.com/2010/12/08/dynamically-load-entity-configurations-in-ef-codefirst-ctp5/">as described by Jonas Cannehag</a>):</p>
 
-<pre><code class="language-csharp">var typesToRegister = Assembly.GetAssembly(typeof(YourDbContext)).GetTypes()
+<pre class="prettyprint">var typesToRegister = Assembly.GetAssembly(typeof(YourDbContext)).GetTypes()
   .Where(type =&gt; type.Namespace != null
     &amp;&amp; type.Namespace.Equals(typeof(YourDbContext).Namespace))
   .Where(type =&gt; type.BaseType.IsGenericType
@@ -48,7 +48,7 @@ foreach (var type in typesToRegister)
 {
   dynamic configurationInstance = Activator.CreateInstance(type);
   modelBuilder.Configurations.Add(configurationInstance);
-}</code></pre>
+}</pre>
 
 <p>This will allow you to create as many custom EntityTypeConfiguration classes as you need for each entity in your model. However, there are some limitations:</p>
 

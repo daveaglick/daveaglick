@@ -6,7 +6,7 @@
 
 <p>Today's post is an XQuery function designed to get a count of the number of week (or work) days between two dates. It's designed to mimic the Excel <code>NETWORKDAYS</code> function. I got the algorithm from Bernal Schooley in this <a href="http://www.eggheadcafe.com/community/aspnet/2/44982/how-to-calculate-num-of-w.aspx">thread</a> and then adapted it to XQuery. It also makes use of the <a href="http://www.xqueryfunctions.com/">FunctX</a> <code><a href="http://www.xqueryfunctions.com/xq/functx_day-of-week.html">day-of-week</a></code> function, so if you have FunctX functions already referenced you can take that part out.</p>
 
-<pre class="prettify">declare namespace functx = "http://www.functx.com";
+<pre class="prettyprint">declare namespace functx = "http://www.functx.com";
 
 declare function functx:day-of-week
  ($date as xs:anyAtomicType?) as xs:integer? {

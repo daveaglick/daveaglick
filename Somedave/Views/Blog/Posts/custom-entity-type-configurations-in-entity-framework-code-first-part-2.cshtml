@@ -8,17 +8,17 @@
 
 <p>The first step is to revisit the <code><a href="http://msdn.microsoft.com/en-us/library/gg696117(v=vs.103).aspx">EntityTypeConfiguration&lt;TEntityType&gt;</a></code> that is part of Entity Framework. Recall that by overriding it you can provide your own configurations:</p>
 
-<pre><code class="language-csharp">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
+<pre class="prettyprint">public class DepartmentTypeConfiguration : EntityTypeConfiguration&lt;Department&gt;
 {
   public DepartmentTypeConfiguration()
   {
     Property(t =&gt; t.Name).IsRequired();
   }
-}</code></pre>
+}</pre>
 
 <p>Once you're done, the <code>EntityTypeConfiguration</code> class is registered with the <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.modelconfiguration.configuration.configurationregistrar(v=vs.103).aspx">ConfigurationRegistrar</a></code>. One problem with this is that the <code>ConfigurationRegistrar</code> only accepts one <cdoe>EntityTypeConfiguration</cdoe> per type. To get around this, instead of creating derived <cdoe>EntityTypeConfiguration</cdoe> classes we're going to create a custom interface that can be implemented to apply configuration to a common pre-generated <code>EntityTypeConfiguration</code> class per type. This way, even if there are multiple configurations for a given entity type, they'll all get applied to the same <code>EntityTypeConfiguration</code> instance. The first step is defining the interface that our own configuration classes will implement:</p>
 
-<pre><code class="language-csharp">// This interface is needed to refer to the closed generic without the generic
+<pre class="prettyprint">// This interface is needed to refer to the closed generic without the generic
 // type parameter being available
 public interface IEntityTypeConfiguration
 {
@@ -29,11 +29,11 @@ public interface IEntityTypeConfiguration&lt;TEntity&gt;
   : IEntityTypeConfiguration where TEntity : class
 {
   void Configure(EntityTypeConfiguration&lt;TEntity&gt; configuration);
-}</code></pre>
+}</pre>
 
 <p>The first non-generic version of the interface is only needed so that we can refer to the implementation without requiring the generic type parameter to be specified. The generic interface is the one that should be implemented to provide entity configuration data. Notice how instead of accessing an <code>EntityTypeConfiguration</code> by inheriting from it, we are now passing it in through the <code>Configure()</code> method. This results in configuration code that looks like:</p>
 
-<pre><code class="language-csharp">public class Department 
+<pre class="prettyprint">public class Department 
 {
 
   // ... Department entity data goes here
@@ -47,11 +47,11 @@ public interface IEntityTypeConfiguration&lt;TEntity&gt;
       configuration.Property(t =&gt; t.Name).IsRequired();
     }
   }
-}</code></pre>
+}</pre>
 
 <p>The rest of the code that we need is all just rigging code to get this technique to work. The first helper class we'll need allows us to add an <code>EntityTypeConfiguration</code> to the <code>ConfigurationRegistrar</code> without knowing it's generic parameter types. This is needed because <code>ConfigurationRegistrar.Add&lt;TEntity&gt;()</code> is a generic method and otherwise wouldn't let us add an open generic instance. If this isn't making much sense yet, hang in there. Hopefully it will by the time I'm done.</p>
 
-<pre><code class="language-csharp">// Similar to above, this lets us call AddConfiguration() without knowing the
+<pre class="prettyprint">// Similar to above, this lets us call AddConfiguration() without knowing the
 // generic type parameter
 public interface IAutomaticEntityTypeConfiguration
 {
@@ -71,11 +71,11 @@ public class AutomaticEntityTypeConfiguration&lt;TEntity&gt;
   {
     registrar.Add(this);
   }
-}</code></pre>
+}</pre>
 
 <p>Finally, the last class we'll need ties the user code (<code>IEntityTypeConfiguration&lt;TEntity&gt;</code>) and the <code>EntityTypeConfiguration</code> implementation (<code>AutomaticEntityTypeConfiguration&lt;TEntity&gt;</code>) together.</p>
 
-<pre><code class="language-csharp">public interface IEntityTypeConfigurationAdapter
+<pre class="prettyprint">public interface IEntityTypeConfigurationAdapter
 {
   void Configure(IEntityTypeConfiguration configurationInterface,
     IAutomaticEntityTypeConfiguration configuration);
@@ -91,11 +91,11 @@ public class EntityTypeConfigurationAdapter&lt;TEntity&gt;
       = (IEntityTypeConfiguration&lt;TEntity&gt;)configurationInterface;
     typedConfigurationInterface.Configure((EntityTypeConfiguration&lt;TEntity&gt;)configuration);
   }
-}</code></pre>
+}</pre>
 
 <p>Now that we have all of the needed classes defined, I can show you the code I have in my <code>DbContext</code> to find, configure, and register entity type configurations.</p>
 
-<pre><code class="language-csharp">protected override void OnModelCreating(DbModelBuilder modelBuilder)
+<pre class="prettyprint">protected override void OnModelCreating(DbModelBuilder modelBuilder)
 {
 
   // Get all entity type configurations
@@ -117,11 +117,11 @@ public class EntityTypeConfigurationAdapter&lt;TEntity&gt;
     configuration.AddConfiguration(modelBuilder.Configurations);
   }
 
-}</code></pre>
+}</pre>
 
 <p>The <code>GetTypeConfigurations</code> method uses reflection to scan the same assembly as your <code>DbContext</code>, find all <code>IEntityTypeConfiguration</code> implementers, instantiate them, and record them in a list-per-entity-type. Note that this code uses the @Html.PostLink("AddMulti extension method", x => x.quick_and_dirty_multiple_value_dictionary_using_extension_methods) for working with multi-value dictionaries. You could just as easily expand that part of the code to check if there is already a <code>List&lt;&gt;</code> available and create one if not.</p>
 
-<pre><code class="language-csharp">private Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt; GetTypeConfigurations()
+<pre class="prettyprint">private Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt; GetTypeConfigurations()
 {  
   Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt; typeConfigurations
     = new Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt;();
@@ -141,22 +141,22 @@ public class EntityTypeConfigurationAdapter&lt;TEntity&gt;
         typeConfigurations.AddMulti(entityType, configurationInstance);
       }
    {
-}</code></pre>
+}</pre>
 
 <p>You'll also need the following extension method somewhere:</p>
 
-<pre><code class="language-csharp">// This returns all generic interfaces implemented by a given type that themselves implement a given base interface
+<pre class="prettyprint">// This returns all generic interfaces implemented by a given type that themselves implement a given base interface
 public static IEnumerable&lt;Type&gt; GetGenericInterfaces(this Type type, Type baseInterfaceType)
 {
     Validate.That(
         type.IsNot().Null(() =&gt; type),
         baseInterfaceType.IsNot().Null(() =&gt; baseInterfaceType));
     return type.GetInterfaces().Where(i =&gt; i.IsGenericType &amp;&amp; baseInterfaceType.IsAssignableFrom(i));
-}</code></pre>
+}</pre>
 
 <p>And finally, the <code>ApplyConfigurations</code> method just uses the <code>EntityTypeConfigurationAdapter</code> to tie the <code>IEntityTypeConfiguration</code> and <code>IAutomaticEntityTypeConfiguration</code> classes together.</p>
 
-<pre><code class="language-csharp">private void ApplyConfigurations(
+<pre class="prettyprint">private void ApplyConfigurations(
   Type entityType,
   IList&lt;IEntityTypeConfiguration&gt; typeConfigurationInterfaces,
   IAutomaticEntityTypeConfiguration configuration)
@@ -172,6 +172,6 @@ public static IEnumerable&lt;Type&gt; GetGenericInterfaces(this Type type,�
   {
     adapter.Configure(typeConfigurationInterface, configuration);
   }
-}</code></pre>
+}</pre>
 
 <p>Phew. That was a lot of code. Hopefully it made some sense. I realize it was pretty deep and might not have gelled just by reading it in blog format. The best advice I can give is that if this seems like a capability you want or need that you copy to code into some source files, get it to compile, and step through it. That should give you a better understanding of how it all fits together.</p>

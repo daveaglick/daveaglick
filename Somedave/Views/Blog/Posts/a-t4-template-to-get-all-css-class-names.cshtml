@@ -13,7 +13,7 @@
 
 <p>Here is the code for the T4 template. If it looks a little funny, don't worry. The T4 syntax is outside the scope of this blog post, but there are <a href="http://www.hanselman.com/blog/T4TextTemplateTransformationToolkitCodeGenerationBestKeptVisualStudioSecret.aspx">plenty of resources if you'd like to learn more</a>.</p>
 
-<pre><code class="language-csharp">&lt;#@@ template language=&quot;C#&quot; hostSpecific=&quot;true&quot; #&gt;
+<pre class="prettyprint">&lt;#@@ template language=&quot;C#&quot; hostSpecific=&quot;true&quot; #&gt;
 &lt;#@@ assembly name=&quot;System.Core&quot; #&gt; 
 &lt;#@@ import namespace=&quot;System.Linq&quot; #&gt;
 &lt;#@@ import namespace=&quot;System.IO&quot; #&gt;
@@ -73,4 +73,4 @@
 		}
 		WriteLine(&quot;}&quot;);
 	}
-#&gt;</code></pre>
+#&gt;</pre>

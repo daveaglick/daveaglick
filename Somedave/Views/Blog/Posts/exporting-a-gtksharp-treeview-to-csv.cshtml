@@ -8,7 +8,7 @@
 <p>I recently had to create some functionality to export a TreeView widget to a CSV file for further analysis. Since I tend to think about generic behavior, I decided to code up a method that would take any arbitrary TreeView and perform the export operation. Luckily, the TreeView widget and the attached TreeModel both contain a lot of functionality for accessing the data and it's presentation. I decided that I wanted the exported CSV file to represent the perspective of the model as currently represented in the TreeView including column visibility and sort order. This led to the trickiest part of the process. Because a CellRenderer can be customized using cell data functions (such as those added by a call to TreeViewColumn.SetCellDataFunc), I had to pull the content to export from the CellRenderer as opposed to pulling directly from the TreeModel. Turns out there's a method to take the TreeIter from a TreeModel and apply it to all the CellRenderers in a given TreeViewColumn. Since I really only care about textual content, I decided to only export those columns that contain CellRendererText renderers.</p>
 <p>After working out the algorithm to fetch what needed to be exported I thought I was ready to roll. Turns out that the CSV pseudo-standard is pretty complex though (the RFC is <a href="http://www.rfc-editor.org/rfc/rfc4180.txt">here</a>), and I quickly got bogged down in writing all kinds of special cases for escaping, quoting, etc. Thankfully, someone else had already been down this road and I was able to find the excellent <a href="http://kbcsv.codeplex.com/">KBCsv</a> library which will write and read formatted CSV files. My only complaint was that it used another utility library purely for convenience in exception generation and null checking (I already use a ton of libraries in our application and I'd prefer not to add any unnecessarily). I replaced the calls to the utility library with the language equivalents, but that's totally a personal preference.</p>
 <p>Without further adieu, I present the <code>TreeViewHelper.ExportToCsv</code> and <code>TreeViewHelper.ExportToCsvFile</code> methods...</p>
-<pre><code class="language-csharp">using System;
+<pre class="prettyprint">using System;
 using System.Collections.Generic;
 using System.IO;
 using Gtk;
@@ -112,5 +112,5 @@ namespace Somedave
   }
  }
 }
-</code></pre>
+</pre>
 

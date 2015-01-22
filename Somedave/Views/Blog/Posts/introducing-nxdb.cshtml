@@ -17,22 +17,22 @@
 
 <p>The Database class serves as the starting point for working with an Nxdb database. It encapsulates all of the operations on a database instance and provides methods for getting node objects and evaluating queries. Before use, Nxdb must be initialized as follows using the static Database.Initialize() method (path is where all of the database files will be stored):</p>
 
-<pre><code class="language-csharp">Database.Initialize(path);</code></pre>
+<pre class="prettyprint">Database.Initialize(path);</pre>
 
 <p>Once that's done, a new or existing database can be obtained via the static Database.Get() method:</p>
 
-<pre><code class="language-csharp">Database.Get(databaseName);</code></pre>
+<pre class="prettyprint">Database.Get(databaseName);</pre>
 
 <p>Once a Database instance has been obtained, XML content can be added, documents fetched, and queries executed. A very simple example usage might look like this:</p>
 
-<pre><code class="language-csharp">using Nxdb;
+<pre class="prettyprint">using Nxdb;
 Database.Initialize("C:\Temp\NxdbData");
 using(Database db = Database.Get("Example"))
 {
   db.Add("DocA", "<A><B>b</B><C>c</C></A>");
   Document doc = db.GetDocument("DocA");
   Console.Write(doc.OuterXml);
-}</code></pre>
+}</pre>
 
 <h1>Obtaining</h1>
 

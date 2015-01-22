@@ -8,7 +8,7 @@
 
 <p>While it may not be a bug, this is certainly odd behavior. The solution (at least for me) was to write two small utility methods. <code>SafeAdd</code> first removes the <code>Widget.HasGrab</code> flag to ensure that the Widget always gets added to the grab stack, regardless of if it's previously in it. <code>SafeAdd</code> should be paired with <code>SafeRemove</code> which checks the newly grabbed Widget after removing one to make sure it still has the <code>Widget.HasGrab</code> flag set. Note that it doesn't clear the <code>Widget.HasGrab</code> flag for grabbed Widget getting replaced by a new grabbed Widget on the grab stack as you might expect. This maintains compatibility with all the other Gtk code that might be expecting Widgets anywhere in the stack to have the flag set.</p>
 
-<pre><code class="language-csharp">public static void SafeAdd(Widget widget)
+<pre class="prettyprint">public static void SafeAdd(Widget widget)
 {
  if (widget == null)
  {
@@ -33,4 +33,4 @@ public static void SafeRemove(Widget widget)
  {
   current.SetFlag(WidgetFlags.HasGrab);
  }
-}</code></pre>
+}</pre>

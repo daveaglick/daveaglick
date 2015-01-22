@@ -8,7 +8,7 @@
 
 <p>This approach will rely on a <code>DataBound</code> JavaScript handler to iterate the rows of the grid post-binding, find the ones that meet your conditions, and set a CSS class on them. The first step is to add the event handler to your grid. If you're using the ASP.NET MVC wrapper it looks like <code>.Events(e => e.DataBound("dataBound"))</code>. Then once you've registered the <code>DataBound</code> event, add a JavaScript handler that looks like this:
 
-<pre><code class="language-javascript">&lt;script&gt;
+<pre class="prettyprint">&lt;script&gt;
 function dataBound(e) {
     var grid = $("#grid").data("kendoGrid");
     var gridData = grid.dataSource.view();
@@ -19,13 +19,13 @@ function dataBound(e) {
         }
     }
 }
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;</pre>
 
 <p>You'll also want to make sure you've got the CSS class declared somewhere (either at the top of the page or in a common CSS file). It might look something like this, which includes darkening the highlighted rows when using banding:</p>
 
-<pre><code class="language-css">.highlighted-row {
+<pre class="prettyprint">.highlighted-row {
 	background-color: #eeffee;
 }
 .highlighted-row.k-alt {
 	background-color: #ccffcc;
-}</code></pre>
+}</pre>

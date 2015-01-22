@@ -37,16 +37,16 @@
     
     <h2>Create a Base View Class</h2>
     <p>In order to distinguish the views that should be available via RazorGenerator from all the other views in your site, you should create a custom view class for all of the different categories of views you want RazorGenerator to work with. Add properties to your custom view class that you want to be available at run-time.</p>
-    <pre><code class="language-csharp">public abstract class BlogPostViewPage&lt;T&gt; : WebViewPage&lt;T&gt;
+    <pre class="prettyprint">public abstract class BlogPostViewPage&lt;T&gt; : WebViewPage&lt;T&gt;
 {
     public string Title { get; set; }
     public DateTime Published { get; set; }
     public string[] Tags { get; set; }
-}</code></pre>
+}</pre>
     
     <h2>Derive Your Views From The Base View Class</h2>
     <p>There are a couple ways to do this, but the easiest is probably to put the following in a <code>Web.config</code> file in the same folder as the views you want RazorDatabase to see.</p>
-    <pre><code class="language-markup">@Html.Raw(Html.Encode(@"<?xml version=""1.0""?>
+    <pre class="prettyprint">@Html.Raw(Html.Encode(@"<?xml version=""1.0""?>
 <configuration>
   <system.web.webPages.razor>
     <host factoryType=""System.Web.Mvc.MvcWebRazorHostFactory, System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"" />
@@ -59,54 +59,52 @@
       </namespaces>
     </pages>
   </system.web.webPages.razor>
-</configuration>"))</code></pre>
+</configuration>"))</pre>
     
     <h2>Create Your Views</h2>
     <p>Create your views just like you normally would. You have access to the full range of Razor syntax including HtmlHelpers. If you've created properties in the base view class, one way to set those is in a language block at the top of the view. A sample blog post is below.</p>
-    <pre><code class="language-csharp">@@{
+    <pre class="prettyprint">@@{
     Title = "My Blog Post";
     Published = new DateTime(2014, 5, 15);
     Tags = new[] { "cool", "awesome" };
 }
-
-&lt;p&gt;Something witty and insightful.&lt;/p&gt;</code></pre>
+&lt;p&gt;Something witty and insightful.&lt;/p&gt;</pre>
     <p>Since the views that RazorDatabase uses are just normal everyday views, you can set up actions to present them for specific routes as you normally would. RazorDatabase doesn't really help with the eventual display of your content. It's more about allowing access to your content and associated metadata programmatically from anywhere else in your site.</p>
     
     <h2>Create a Mapping Class for RazorDatabase</h2>
     <p>Instead of storing an instance of the actual view class, RazorDatabase stores a representation of the view using a special mapping class. This is kind of like the relationship between a domain model and a view model. The mapping class helps tell RazorDatabase which view classes it should find, how to find them, and how to treat them during initialization. Instances of the mapping class are what RazorDatabase provides at run-time (one per view). All mapping classes are derived from <code>ViewType&lt;TViewClass&gt;</code>. The generic parameter tells RazorDatabase which specific views it should look for (those that derive from the specified view class). Since view classes also take a generic parameter, you should just use <code>dynamic</code> for this.</p>
     <p>Properties of the view class will get automatically mapped to properties in the mapping class during initialization. First properties names will be checked, and then the <code>ViewData</code> and <code>ViewBag</code> collections will be checked for matching names (after rendering).</p>
     <p>You can have as many different mapping classes, and thus different categories of views, as needed. You can also add whatever additional helper code you want to the mapping classes.</p>
-    <pre><code class="language-csharp">public class BlogPost : ViewType&lt;BlogPostViewPage&lt;dynamic&gt;&gt;
+    <pre class="prettyprint">public class BlogPost : ViewType&lt;BlogPostViewPage&lt;dynamic&gt;&gt;
 {
     public string Title { get; set; }
     public DateTime Published { get; set; }
     public string[] Tags { get; set; }
-}</code></pre>
+}</pre>
     
     <h2>Precompile Your Razor Views with RazorGenerator</h2>
     <p>RazorDatabase requires you to precompile your views using <a href="https://razorgenerator.codeplex.com/">RazorGenerator</a>. You can either precompile specific views by changing the "custom tool" property for the views you want to precompile or precompile all views by running <code>Enable-RazorGenerator</code> in the Package Manager Console. After enabling RazorGenerator, there are two ways to get it to actually compile the views. The first is to install the <a href="http://visualstudiogallery.msdn.microsoft.com/1f6ec6ff-e89b-4c47-8e79-d2d68df894ec">RazorGenerator Visual Studio Extension</a>. This will cause Visual Studio to precompile Razor views at build time. The other approach is to <a href="https://razorgenerator.codeplex.com/wikipage?title=Using%20RazorGenerator.MsBuild">add the RazorGenerator.MsBuild package</a>. This does not require a Visual Studio extension and will cause the views to compile at build time via a target in the project file (read the linked document for details). If you don't manually add either the Visual Studio extension or the RazorGenerator.MsBuild package you views will not get compiled and RazorDatabase will not work.</p>
-
     <h2>Initialize RazorDatabase</h2>
     <p>You will need to initialize RazorGenerator on application start. This is just a single line of code in your <code>Global.asax</code> file.</p>
-    <pre><code class="language-csharp">protected void Application_Start()
+    <pre class="prettyprint">protected void Application_Start()
 {
     RazorDb.Initialize();
-}</code></pre>
+}</pre>
     
     <h2>Query RazorDatabase</h2>
     <p>Querying is probably a misnomer - RazorDatabase puts instances of your mapping class into a collection that can be iterated and queried using LINQ (or any other means). Getting access to the collection is easy, just call <code>RazorDb.Get&lt;TMappingClass&gt;()</code>. You can call this from an action and pass the results to a view model or it can be used directly in the view. The code below gets the list of blog posts and displays the most recent 3. First the action:</p>
-    <pre><code class="language-csharp">public virtual ActionResult Index()
+    <pre class="prettyprint">public virtual ActionResult Index()
 {
     return View(RazorDb.Get&lt;BlogPost&gt;()
         .OrderByDescending(x => x.Published)
         .Take(3));
-}</code></pre>
+}</pre>
     <p>And now the view:</p>
-    <pre><code class="language-csharp">@@model IEnumerable&lt;BlogPost&gt;
+    <pre class="prettyprint">@@model IEnumerable&lt;BlogPost&gt;
 @@foreach(var blogPost in Model)
 {
     &lt;p&gt;&lt;strong&gt;@@blogPost.Title&lt;/strong&gt; - @@blogPost.Published.ToShortDateString()&lt;/p&gt;
-}</code></pre>
+}</pre>
     
     <h1>Customizing Behavior</h1>
     <p>There are a number of ways to customize how RazorDatabase behaves...</p>
