@@ -6,14 +6,11 @@
 
 @Html.Partial(MVC.Shared.Views.Title, "icon-archive")
 
-@using (var container = Bootstrap.Container().Begin())
+@foreach (IGrouping<int, BlogPost> year in Model)
 {
-    foreach (IGrouping<int, BlogPost> year in Model)
+    if (year.Key != Int32.MaxValue)
     {
-        if (year.Key != Int32.MaxValue)
-        {
-            <h3>@year.Key</h3>
-        }
-        @Html.Partial(MVC.Shared.Views.PostList, year)
+        <h3>@year.Key</h3>
     }
+    @Html.Partial(MVC.Shared.Views.PostList, year)
 }

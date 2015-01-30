@@ -4,24 +4,21 @@
 
 @model Somedave.Models.NuGetStats.Leaderboard
 
-@using (Bootstrap.Container().AddCss("banner").Begin())
+@using (Bootstrap.Div().AddCss("banner").Begin())
 {
     @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
     @Bootstrap.Div().AddCss("title").SetText(Model.Metadata.Title)
     <hr />
 }
 
-@using (Bootstrap.Container().Begin())
+<p>@Model.Metadata.Description</p>
+@using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
 {
-    <p>@Model.Metadata.Description</p>
-    using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+    @table.TableHeaderRow(Model.Metadata.NameHeading, Model.Metadata.ValueHeading)
+    foreach (Somedave.Models.NuGetStats.Leaderboard.Entry entry in Model.Entries)
     {
-        @table.TableHeaderRow(Model.Metadata.NameHeading, Model.Metadata.ValueHeading)
-        foreach (Somedave.Models.NuGetStats.Leaderboard.Entry entry in Model.Entries)
-        {
-            @table.TableDataRow(Model.Metadata.NameLink == null ? entry.Name : string.Format("<a href='{0}'>{1}</a>", Model.Metadata.NameLink(entry.Name, Url), entry.Name), entry.Value)
-        }
+        @table.TableDataRow(Model.Metadata.NameLink == null ? entry.Name : string.Format("<a href='{0}'>{1}</a>", Model.Metadata.NameLink(entry.Name, Url), entry.Name), entry.Value)
     }
-    
-    @Html.Action(MVC.NuGetStats.Footer())
 }
+    
+@Html.Action(MVC.NuGetStats.Footer())

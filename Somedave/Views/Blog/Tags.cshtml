@@ -6,9 +6,9 @@
 
 @Html.Partial(MVC.Shared.Views.Title, Model.Tag == null ? "icon-tags" : "icon-tag-2")
 
-@using (var container = Bootstrap.Container().AddCss("container-sm-height").Begin())
+@using (Bootstrap.Div().AddCss("container-sm-height").Begin())
 {
-    using (var row = container.GridRow().AddCss("row-sm-height").Begin())
+    using (var row = Bootstrap.GridRow().AddCss("row-sm-height").Begin())
     {
         if (Model.Tag != null)
         {

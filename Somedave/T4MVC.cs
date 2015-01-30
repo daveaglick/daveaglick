@@ -83,8 +83,10 @@ namespace Links
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
+        public static readonly string Please_compressed_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Please-compressed.min.js") ? Url("Please-compressed.min.js") : Url("Please-compressed.js");
         public static readonly string prettify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prettify.min.js") ? Url("prettify.min.js") : Url("prettify.js");
         public static readonly string springy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/springy.min.js") ? Url("springy.min.js") : Url("springy.js");
+        public static readonly string trianglify_min_js = Url("trianglify.min.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

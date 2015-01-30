@@ -4,11 +4,8 @@
 
 @Html.Partial(MVC.Shared.Views.Title, "icon-megaphone")
 
-@using (var container = Bootstrap.Container().Begin())
-{
-    @Bootstrap.Lead("Hello, my name is Dave Glick.")
-    <p>I am currently the Principal Software Engineer at the @Bootstrap.Link("Securities Investor Protection Corporation (SIPC)", "http://www.sipc.org") where I lead the design and development of line-of-business web applications using .NET technologies like ASP.NET MVC, Entity Framework, and client libraries like jQuery, KendoUI, and Bootstrap.</p>
-    <p>Of course, we're all hopefully much more than where we plant our butt during the week (or stand, if you're one of those standing desk folks). At home I am a husband and father to three very active kids and enjoy every moment. That doesn't leave a lot of left-over time, but when I do get the chance I enjoy @Bootstrap.Link("taking pictures", "http://flickr.com/photos/somedave/") and @Bootstrap.Link("a good book", "http://www.goodreads.com/somedave"). Somehow, I also occasionally find time to @Bootstrap.Link("write code", "https://github.com/somedave").</p>
-    <p>I have profiles scattered around the web at the following sites:</p>
-    @Html.Partial(MVC.Shared.Views.SocialLinks)
-}
+@Bootstrap.Lead("Hello, my name is Dave Glick.")
+<p>I am currently the Principal Software Engineer at the @Bootstrap.Link("Securities Investor Protection Corporation (SIPC)", "http://www.sipc.org") where I lead the design and development of line-of-business web applications using .NET technologies like ASP.NET MVC, Entity Framework, and client libraries like jQuery, KendoUI, and Bootstrap.</p>
+<p>Of course, we're all hopefully much more than where we plant our butt during the week (or stand, if you're one of those standing desk folks). At home I am a husband and father to three very active kids and enjoy every moment. That doesn't leave a lot of left-over time, but when I do get the chance I enjoy @Bootstrap.Link("taking pictures", "http://flickr.com/photos/somedave/") and @Bootstrap.Link("a good book", "http://www.goodreads.com/somedave"). Somehow, I also occasionally find time to @Bootstrap.Link("write code", "https://github.com/somedave").</p>
+<p>I have profiles scattered around the web at the following sites:</p>
+@Html.Partial(MVC.Shared.Views.SocialLinks)

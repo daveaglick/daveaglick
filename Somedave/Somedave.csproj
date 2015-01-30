@@ -358,8 +358,10 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="Scripts\Please-compressed.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\springy.js" />
+    <Content Include="Scripts\trianglify.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

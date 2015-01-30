@@ -31,6 +31,9 @@
         <script src="@Links.Scripts.jquery_2_1_1_min_js"></script>
         <script src="@Links.Scripts.bootstrap_min_js"></script>
         <script src="@Links.Scripts.prettify_js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="@Links.Scripts.trianglify_min_js"></script>
+        <script src="@Links.Scripts.Please_compressed_js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
         <script>
             WebFont.load({
@@ -71,27 +74,36 @@
                     { 
                         using (var nav = Bootstrap.List().Begin())
                         {
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" About", MVC.Home.About()).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bootstrap.Link(" About", MVC.Home.About()).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bootstrap.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bootstrap.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bootstrap.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
                         }     
                     } 
                     @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)  
                     using (row.GridColumn().SetXs(12).SetSm(2).AddCss("proj-col", "collapse", "col-sm-height").AddStyle("visibility", "visible").Begin())
                     { 
-                        @Bootstrap.Div().AddChild(x => Bootstrap.Strong("Projects"))
+                        @Bootstrap.Div().AddContent("Projects")
                         using (var nav = Bootstrap.List().Begin())
                         {
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("FluentBootstrap", "http://fluentbootstrap.com"))
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
-                            @nav.ListItem("<strong>/</strong> " + Bootstrap.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
+                            @nav.ListItem("/ " + Bootstrap.Link("FluentBootstrap", "http://fluentbootstrap.com"))
+                            @nav.ListItem("/ " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bootstrap.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
                         }
-                        <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>    
-                    } 
+                        <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>
+                    }
                 }
-            }            
-		    @RenderBody()
+            }
+            using(Html.Bootstrap().Container().SetId("body-content").Begin())
+            {
+                using(var contentRow = Html.Bootstrap().GridRow().Begin())
+                {
+                    using(contentRow.GridColumn(12).Begin())
+                    {
+                        @RenderBody()
+                    }
+                }
+            }
         }
         @using (Bootstrap.Div().SetId("sticky-footer-wrapper").Begin())
         {
@@ -146,6 +158,19 @@
                 fjs.parentNode.insertBefore(js, fjs);
                 return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
             }(document, "script", "twitter-wjs"));
+
+            // Background
+            var colors = Please.make_color({
+                golden: false, //disable default
+                colors_returned: 3,
+                saturation: .4 //set your saturation manually
+            });
+            var t = new Trianglify({
+                x_gradient: colors,
+                y_gradient: ["#FFFFFF"],
+            });
+            var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
+            document.body.setAttribute('style', 'background-image: ' + pattern.dataUrl);
         </script>
 	</bodyonload="prettyPrint()">
 </html>

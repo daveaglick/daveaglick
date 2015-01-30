@@ -36,8 +36,17 @@ html, body {
 // ***
 
 body {
-	background-color: #fcfcfc;
     border-top: 12px solid @gray-dark;
+    background-color: @gray;
+}
+
+#body-content {
+    margin-top: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .border-top-radius(6px);
+    .border-bottom-radius(6px);
+    background-color: #fff;
 }
 
 .logo-col {
@@ -60,13 +69,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-default .badge {
-    background-color: @gray-lighter;
-    color: @gray-light;
+    background-color: #ccc;
+    color: @gray;
 }
 
 .nav-col, .proj-col {
     padding-top: 6px;
     display: block;
+    color: @gray-dark;
+
+    & a, & a:hover, & a:focus, & a:active {
+        color: @gray-lighter;
+    }
 
     & strong {
         font-weight: 900;
@@ -83,11 +97,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .topnav {
     color: @gray;
+    font-weight: bold;
 }
 
 .banner {
-    margin-top: 12px;
-
     & .hello {
         font-family: 'Indie Flower', cursive;
         font-size: floor((@font-size-h1 * 2));
@@ -183,14 +196,22 @@ td {
     #page-wrapper {
       margin-bottom: -240px;
     }
+    
+    #body-content {
+        margin-top: 60px;
+        .border-top-radius(0);
+        .border-bottom-radius(0);
+    }
 
     #sticky-footer-wrapper, #page-wrapper:after {  
       height: 240px; /* must be the same height as footer */
     }
 
     #sticky-footer-wrapper {
+        padding-top: 0;
+
         & #sticky-footer {
-            height: 228px; /* equal to footer height minus padding */
+            height: 240px; /* equal to footer height minus padding */
         }
     }
 

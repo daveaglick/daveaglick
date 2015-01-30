@@ -6,34 +6,31 @@
 
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (Bootstrap.Container().Begin())
+@using (var grid = Bootstrap.GridRow().Begin())
 {
-    using (var grid = Bootstrap.GridRow().Begin())
+    using (grid.GridColumn(6).Begin())
     {
-        using (grid.GridColumn(6).Begin())
+        @Bootstrap.Heading1("Leaderboards")
+        foreach (KeyValuePair<string, Somedave.Models.NuGetStats.Leaderboard.Meta> kvp in Model.Leaderboards)
         {
-            @Bootstrap.Heading1("Leaderboards")
-            foreach (KeyValuePair<string, Somedave.Models.NuGetStats.Leaderboard.Meta> kvp in Model.Leaderboards)
-            {
-                <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
-                <p>@kvp.Value.Description</p>
-            }
-            <p>More leaderboards coming soon - please let me know if there are any you would like to see.</p>
+            <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
+            <p>@kvp.Value.Description</p>
         }
-        using (grid.GridColumn(6).Begin())
-        {
-            @Bootstrap.Heading1("Packages")
-            <p>Input the ID of a package to see metadata such as authors, tags, a list of the packages it depends, and those that depend on it.</p>
-            using (var form = Bootstrap.Form(MVC.NuGetStats.ActionNames.PackagePost, MVC.NuGetStats.Name, FormMethod.Post).Begin())
-            {
-                @form.Input(MVC.NuGetStats.PackagePostParams.id, "Package")
-                @form.Submit()
-            }
-            <hr />
-            <p>Detailed author and tag statistics coming soon.</p>
-        }
+        <p>More leaderboards coming soon - please let me know if there are any you would like to see.</p>
     }
-
-    @Html.Action(MVC.NuGetStats.Footer())
+    using (grid.GridColumn(6).Begin())
+    {
+        @Bootstrap.Heading1("Packages")
+        <p>Input the ID of a package to see metadata such as authors, tags, a list of the packages it depends, and those that depend on it.</p>
+        using (var form = Bootstrap.Form(MVC.NuGetStats.ActionNames.PackagePost, MVC.NuGetStats.Name, FormMethod.Post).Begin())
+        {
+            @form.Input(MVC.NuGetStats.PackagePostParams.id, "Package")
+            @form.Submit()
+        }
+        <hr />
+        <p>Detailed author and tag statistics coming soon.</p>
+    }
 }
+
+@Html.Action(MVC.NuGetStats.Footer())
 
