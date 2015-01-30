@@ -167,6 +167,7 @@ namespace Somedave.Controllers
                     public readonly string object_persistence_in_nxdb = "object-persistence-in-nxdb";
                     public readonly string open_source_obligations = "open-source-obligations";
                     public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "quick-and-dirty-multiple-value-dictionary-using-extension-methods";
+                    public readonly string random_polygon_page_backgrounds = "random-polygon-page-backgrounds";
                     public readonly string right_click_context_menus_in_gtksharp = "right-click-context-menus-in-gtksharp";
                     public readonly string round_robin_row_selection_from_sql_server = "round-robin-row-selection-from-sql-server";
                     public readonly string simple_row_coloring_in_kendo_grid = "simple-row-coloring-in-kendo-grid";
@@ -205,6 +206,7 @@ namespace Somedave.Controllers
                 public readonly string object_persistence_in_nxdb = "~/Views/Blog/Posts/object-persistence-in-nxdb.cshtml";
                 public readonly string open_source_obligations = "~/Views/Blog/Posts/open-source-obligations.cshtml";
                 public readonly string quick_and_dirty_multiple_value_dictionary_using_extension_methods = "~/Views/Blog/Posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods.cshtml";
+                public readonly string random_polygon_page_backgrounds = "~/Views/Blog/Posts/random-polygon-page-backgrounds.cshtml";
                 public readonly string right_click_context_menus_in_gtksharp = "~/Views/Blog/Posts/right-click-context-menus-in-gtksharp.cshtml";
                 public readonly string round_robin_row_selection_from_sql_server = "~/Views/Blog/Posts/round-robin-row-selection-from-sql-server.cshtml";
                 public readonly string simple_row_coloring_in_kendo_grid = "~/Views/Blog/Posts/simple-row-coloring-in-kendo-grid.cshtml";

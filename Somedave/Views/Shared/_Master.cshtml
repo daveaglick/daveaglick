@@ -161,13 +161,13 @@
 
             // Background
             var colors = Please.make_color({
-                golden: false, //disable default
+                golden: false,
                 colors_returned: 3,
-                saturation: .4 //set your saturation manually
+                saturation: .4
             });
             var t = new Trianglify({
                 x_gradient: colors,
-                y_gradient: ["#FFFFFF"],
+                y_gradient: ["#FFFFFF"]
             });
             var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
             document.body.setAttribute('style', 'background-image: ' + pattern.dataUrl);
