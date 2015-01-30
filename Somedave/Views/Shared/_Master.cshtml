@@ -48,9 +48,9 @@
         </script>
 	</head>
 	<body onload="prettyPrint()">
-        @using (Bootstrap.Div().SetId("page-wrapper").Begin())
+        @using (Bs.Div().SetId("page-wrapper").Begin())
         {
-            using (var container = Bootstrap.Container().AddCss("topnav", "container-sm-height").Begin())
+            using (var container = Bs.Container().AddCss("topnav", "container-sm-height").Begin())
             {
                 using (var row = container.GridRow().AddCss("nav-row", "row-sm-height").Begin())
                 {
@@ -60,7 +60,7 @@
                     }
                     using (row.GridColumn().SetXs(9).SetVisibility(Visibility.VisibleXsBlock).Begin())
                     {
-                        using (Bootstrap.Div().SetVisibility(Visibility.VisibleXsBlock).Begin())
+                        using (Bs.Div().SetVisibility(Visibility.VisibleXsBlock).Begin())
                         {         
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
                                 <span class="icon-bar"></span>
@@ -69,34 +69,34 @@
                             </button>
                         }
                     }
-                    @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)                    
+                    @Bs.Clearfix().SetVisibility(Visibility.VisibleXsBlock)                    
                     using (row.GridColumn().SetXs(12).SetSm(2).AddCss("nav-col", "collapse", "col-sm-height").AddStyle("visibility", "visible").Begin())
                     { 
-                        using (var nav = Bootstrap.List().Begin())
+                        using (var nav = Bs.List().Begin())
                         {
-                            @nav.ListItem("/ " + Bootstrap.Link(" About", MVC.Home.About()).ToHtmlString()) 
-                            @nav.ListItem("/ " + Bootstrap.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
-                            @nav.ListItem("/ " + Bootstrap.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
-                            @nav.ListItem("/ " + Bootstrap.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link(" About", MVC.Home.About()).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
                         }     
                     } 
-                    @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)  
+                    @Bs.Clearfix().SetVisibility(Visibility.VisibleXsBlock)  
                     using (row.GridColumn().SetXs(12).SetSm(2).AddCss("proj-col", "collapse", "col-sm-height").AddStyle("visibility", "visible").Begin())
                     { 
-                        @Bootstrap.Div().AddContent("Projects")
-                        using (var nav = Bootstrap.List().Begin())
+                        @Bs.Div().AddContent("Projects")
+                        using (var nav = Bs.List().Begin())
                         {
-                            @nav.ListItem("/ " + Bootstrap.Link("FluentBootstrap", "http://fluentbootstrap.com"))
-                            @nav.ListItem("/ " + Bootstrap.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
-                            @nav.ListItem("/ " + Bootstrap.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
+                            @nav.ListItem("/ " + Bs.Link("FluentBootstrap", "http://fluentbootstrap.com"))
+                            @nav.ListItem("/ " + Bs.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
                         }
                         <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>
                     }
                 }
             }
-            using(Html.Bootstrap().Container().SetId("body-content").Begin())
+            using(Bs.Container().SetId("body-content").Begin())
             {
-                using(var contentRow = Html.Bootstrap().GridRow().Begin())
+                using(var contentRow = Bs.GridRow().Begin())
                 {
                     using(contentRow.GridColumn(12).Begin())
                     {
@@ -105,21 +105,21 @@
                 }
             }
         }
-        @using (Bootstrap.Div().SetId("sticky-footer-wrapper").Begin())
+        @using (Bs.Div().SetId("sticky-footer-wrapper").Begin())
         {
-            using (Bootstrap.Div().SetId("sticky-footer").Begin())
+            using (Bs.Div().SetId("sticky-footer").Begin())
             {
-                using (Bootstrap.Container().Begin())
+                using (Bs.Container().Begin())
                 {
-                    using(Bootstrap.Small().Begin())
+                    using(Bs.Small().Begin())
                     {
                         <text>
                             Copyright © @DateTime.Now.Year by Dave Glick. All jams and jellies preserved. The opinions expressed herein are my own and do not represent my employer's, sponsors', or any other third-party views in any way. This work is licensed under a
-                            @Bootstrap.Link(Bootstrap.Span().SetId("icon-creative-commons").ToHtmlString() + " Creative Commons Attribution 4.0 International License", "http://creativecommons.org/licenses/by/4.0/").AddAttribute("rel", "license").
+                            @Bs.Link(Bs.Span().SetId("icon-creative-commons").ToHtmlString() + " Creative Commons Attribution 4.0 International License", "http://creativecommons.org/licenses/by/4.0/").AddAttribute("rel", "license").
                             <br />
-                            @Bootstrap.Link(Bootstrap.Span().SetId("icon-rss").ToHtmlString() + " RSS Feed", "/feed/rss") | @Bootstrap.Link(Bootstrap.Span().SetId("icon-rss").ToHtmlString() + " Atom Feed", "/feed/atom")
+                            @Bs.Link(Bs.Span().SetId("icon-rss").ToHtmlString() + " RSS Feed", "/feed/rss") | @Bs.Link(Bs.Span().SetId("icon-rss").ToHtmlString() + " Atom Feed", "/feed/atom")
                             <br />
-                            @Bootstrap.Link(Bootstrap.Span().SetId("icon-github-square").ToHtmlString() + " This Site on GitHub", "https://github.com/somedave/Somedave")
+                            @Bs.Link(Bs.Span().SetId("icon-github-square").ToHtmlString() + " This Site on GitHub", "https://github.com/somedave/Somedave")
                         </text>
                     }
                 }

@@ -4,14 +4,14 @@
 
 @model Somedave.Models.NuGetStats.Status
 
-@using (Bootstrap.Div().AddCss("banner").Begin())
+@using (Bs.Div().AddCss("banner").Begin())
 {
-    @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
-    @Bootstrap.Div().AddCss("title").SetText("Status")
+    @Bs.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
+    @Bs.Div().AddCss("title").SetText("Status")
     <hr />
 }
 
-@using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+@using (var table = Bs.Table().SetStyle(TableStyle.Striped).Begin())
 {
     @table.TableHeaderRow("Start Time", "End Time", "Total Count", "Processed Count", "Last Updated", "Exception")
     foreach (History history in Model.Histories)

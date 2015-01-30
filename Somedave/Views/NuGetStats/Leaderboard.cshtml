@@ -4,15 +4,15 @@
 
 @model Somedave.Models.NuGetStats.Leaderboard
 
-@using (Bootstrap.Div().AddCss("banner").Begin())
+@using (Bs.Div().AddCss("banner").Begin())
 {
-    @Bootstrap.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
-    @Bootstrap.Div().AddCss("title").SetText(Model.Metadata.Title)
+    @Bs.Heading3(Html.ActionLink("NuGet Stats", MVC.NuGetStats.Index()).ToString())
+    @Bs.Div().AddCss("title").SetText(Model.Metadata.Title)
     <hr />
 }
 
 <p>@Model.Metadata.Description</p>
-@using (var table = Bootstrap.Table().SetStyle(TableStyle.Striped).Begin())
+@using (var table = Bs.Table().SetStyle(TableStyle.Striped).Begin())
 {
     @table.TableHeaderRow(Model.Metadata.NameHeading, Model.Metadata.ValueHeading)
     foreach (Somedave.Models.NuGetStats.Leaderboard.Entry entry in Model.Entries)

@@ -2,13 +2,13 @@
 
 @model Somedave.Models.Home.Index
 
-@using (var row = Html.Bootstrap().GridRow().AddCss("banner").Begin())
+@using (var row = Bs.GridRow().AddCss("banner").Begin())
 {
     using (row.GridColumn().SetXs(6).SetSm(4).SetSmPush(8).SetSmPull(0).Begin())
     {
-        @Bootstrap.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Rounded)
+        @Bs.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Rounded)
     }
-    @Bootstrap.Clearfix().SetVisibility(Visibility.VisibleXsBlock)
+    @Bs.Clearfix().SetVisibility(Visibility.VisibleXsBlock)
     using (row.GridColumn().SetXs(12).SetSm(8).SetSmPull(4).Begin())
     {
         <div class="hello">Hello.</div>
@@ -17,7 +17,7 @@
 }
 <hr />
 
-@using (var row = Html.Bootstrap().GridRow().Begin())
+@using (var row = Bs.GridRow().Begin())
 {
     using (row.GridColumn().SetSm(8).AddCss("right-border").Begin())
     {
@@ -31,12 +31,12 @@
             first = false;
             <div>
                 <h3>
-                    @Bootstrap.Link(post.Title, Url.Action(post.GetAction()))
+                    @Bs.Link(post.Title, Url.Action(post.GetAction()))
                     @if (post.Published != default(DateTime))
                     {
-                        <small>@Bootstrap.Label(post.Published.ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
+                        <small>@Bs.Label(post.Published.ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
                         <small>
-                            @using (Bootstrap.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
+                            @using (Bs.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
                             {
                                 <a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a>
                             }
@@ -46,13 +46,13 @@
             </div>
             if(!string.IsNullOrWhiteSpace(post.Lead))
             {
-                @Bootstrap.Lead(post.Lead)
+                @Bs.Lead(post.Lead)
             }
             @Html.Raw(post.GetExcerpt())
-            @Bootstrap.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
+            @Bs.LinkButton("Read More &rarr;", Url.Action(post.GetAction()))
         }
         <hr />
-        <div><strong>@Bootstrap.Link(" Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
+        <div><strong>@Bs.Link(" Archive", Url.Action(MVC.Blog.Posts(null)))</strong></div>
     }
     using (row.GridColumn().SetSm(4).Begin())
     {
@@ -64,7 +64,7 @@
                 @Html.TagButton(tag.Key, tag.Value)
             }
         </div>
-        <div><strong>@Bootstrap.Link("View All Tags", Url.Action(MVC.Blog.Tags(null)))</strong></div>
+        <div><strong>@Bs.Link("View All Tags", Url.Action(MVC.Blog.Tags(null)))</strong></div>
         <hr />
         <h5>On The Interwebs</h5>
         @Html.Partial(MVC.Shared.Views.SocialLinks)

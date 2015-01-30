@@ -52,7 +52,7 @@ foreach (var type in typesToRegister)
 
 <p>This will allow you to create as many custom EntityTypeConfiguration classes as you need for each entity in your model. However, there are some limitations:</p>
 
-@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
+@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
 {
     using (list.ListItem().Begin())
     {

@@ -8,14 +8,14 @@
     <p>Don't dress things up, or try to explain them; just write them down, in a list, in the plainest language possible.</p>
     <footer>Nick Hornby, <cite title="High Fidelity">High Fidelity</cite></footer>
 </blockquote>
-<p>If you've read the book @Bootstrap.Link("High Fidelity", "https://www.goodreads.com/book/show/285092.High_Fidelity") then you know that the protagonist, Rob, is obsessed with making lists of things. I can relate. There are a ton of great tools and resources available to software developers and putting stuff in lists helps make sense of it all. To that end, I've curated a few lists of things that I like and will periodically update them as my likes change.</p>
-@using (var row = Bootstrap.GridRow().Begin())
+<p>If you've read the book @Bs.Link("High Fidelity", "https://www.goodreads.com/book/show/285092.High_Fidelity") then you know that the protagonist, Rob, is obsessed with making lists of things. I can relate. There are a ton of great tools and resources available to software developers and putting stuff in lists helps make sense of it all. To that end, I've curated a few lists of things that I like and will periodically update them as my likes change.</p>
+@using (var row = Bs.GridRow().Begin())
 {
     using (row.GridColumn().SetSm(6).Begin())
     {
         <h3>Tools</h3>
         <h4>Libraries / NuGet Packages</h4>     
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {        
             <li>
                 <strong><a href="http://attributerouting.net/">AttributeRouting</a></strong>
@@ -67,7 +67,7 @@
             </li>    
         }
         <h4>Visual Studio Extensions</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         { 
             <li>
                 <strong><a href="http://www.telerik.com/products/justcode.aspx">JustCode</a></strong>
@@ -83,7 +83,7 @@
             </li> 
         }
         <h4>Front End (JavaScript & CSS)</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://getbootstrap.com/">Bootstrap</a></strong>
@@ -107,7 +107,7 @@
             </li>
         }
         <h4>Development Tools</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://www.telerik.com/fiddler">Fiddler</a></strong>
@@ -139,7 +139,7 @@
             </li>                   
         }
         <h4>Utilities</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://getgreenshot.org/">Greenshot</a></strong>
@@ -163,7 +163,7 @@
     {
         <h3>Development Resources</h3>
         <h4>Blogs</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://www.hanselman.com/">Scott Hanselman</a></strong>
@@ -194,7 +194,7 @@
             </li>  
         }    
         <h4>Websites</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://stackoverflow.com">Stack Overflow</a></strong>
@@ -217,7 +217,7 @@
         }  
         <h3>Design Resources</h3>
         <h4>Blogs</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://bradfrostweb.com/">Brad Frost</a></strong>
@@ -233,7 +233,7 @@
             </li>       
         }  
         <h4>Websites</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://alistapart.com/">A List Apart</a></strong>
@@ -250,7 +250,7 @@
         }  
         <h3>Nothing To Do With Software, But Included Because I Am Vain Enough To Think You Care What I Like</h3>
         <h4>Books/Authors</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {      
             <li>
                 <strong><a href="https://www.goodreads.com/book/show/6288.The_Road">The Road</a></strong> by <strong>Cormac McCarthy</strong>
@@ -284,7 +284,7 @@
             </li>    
         }  
         <h4>Music Groups</h4>
-        using (var list = Bootstrap.List(ListType.Unordered).Begin())
+        using (var list = Bs.List(ListType.Unordered).Begin())
         {
             <li>
                 <strong><a href="http://www.thealbumleaf.com/">The Album Leaf</a></strong> (Post-Rock)

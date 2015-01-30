@@ -1,10 +1,10 @@
 ﻿@model string
 
-@using (var row = Html.Bootstrap().GridRow().AddCss("banner").Begin())
+@using (var row = Bs.GridRow().AddCss("banner").Begin())
 {
     using (row.GridColumn().SetSm(12).Begin())
     { 
-        @Bootstrap.Div().AddCss("title", Model).SetText(" " + ViewData[ViewDataKeys.Title])
+        @Bs.Div().AddCss("title", Model).SetText(" " + ViewData[ViewDataKeys.Title])
     }
 }
 <hr />

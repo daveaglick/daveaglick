@@ -5,27 +5,27 @@
     Tags = new[] { "FluentBootstrap", "Bootstrap", "ASP.NET", "ASP.NET MVC" };
 }
 
-@using(var row = Bootstrap.GridRow().Begin())
+@using(var row = Bs.GridRow().Begin())
 {
     using(row.GridColumn(4).Begin())
     {
-        <strong>@Bootstrap.Link("FluentBootstrap Web Site", "http://www.fluentbootstrap.com")</strong>
+        <strong>@Bs.Link("FluentBootstrap Web Site", "http://www.fluentbootstrap.com")</strong>
     }
     using (row.GridColumn(4).Begin())
     {
-        <strong>@Bootstrap.Link("GitHub", "https://github.com/somedave/FluentBootstrap")</strong>
+        <strong>@Bs.Link("GitHub", "https://github.com/somedave/FluentBootstrap")</strong>
     }
     using (row.GridColumn(4).Begin())
     {
-        <strong>@Bootstrap.Link("NuGet", "http://www.nuget.org/packages?q=fluentbootstrap")</strong>
+        <strong>@Bs.Link("NuGet", "http://www.nuget.org/packages?q=fluentbootstrap")</strong>
     }
 }
 <hr />
 
-<p>I'm been using @Bootstrap.Link("Bootstrap", "http://getbootstrap.com") for a long time, and other CSS frameworks (like the @Bootstrap.Link("now orphaned YUI", "http://yahooeng.tumblr.com/post/96098168666/important-announcement-regarding-yui")) even longer. I like the way a good CSS framework gives you a lot of boilerplate and provides a jumping-off point for more complex design and functionality without having to start from scratch. As I started to integrate my ASP.NET MVC projects with Bootstrap more frequently (and then Microsoft made it part of the default ASP.NET MVC template), I became frustrated with the lack of integration between the HTML and CSS with the model and code. FluentBootstrap was born about a year ago as a way to provide strongly-typed @Bootstrap.Link("HtmlHelpers", "http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs") for Bootstrap components (especially Bootstrap-styled forms). However, as I continued adding support for more and more of the Bootstrap framework, I decided just to take it all the way and support code-based helpers for all Bootstrap components. This took a long time to complete (and it's not totally done - I still need to support the JavaScript components), but today I am pleased to announce the first public release of FluentBootstrap!</p>
+<p>I'm been using @Bs.Link("Bootstrap", "http://getbootstrap.com") for a long time, and other CSS frameworks (like the @Bs.Link("now orphaned YUI", "http://yahooeng.tumblr.com/post/96098168666/important-announcement-regarding-yui")) even longer. I like the way a good CSS framework gives you a lot of boilerplate and provides a jumping-off point for more complex design and functionality without having to start from scratch. As I started to integrate my ASP.NET MVC projects with Bootstrap more frequently (and then Microsoft made it part of the default ASP.NET MVC template), I became frustrated with the lack of integration between the HTML and CSS with the model and code. FluentBootstrap was born about a year ago as a way to provide strongly-typed @Bs.Link("HtmlHelpers", "http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs") for Bootstrap components (especially Bootstrap-styled forms). However, as I continued adding support for more and more of the Bootstrap framework, I decided just to take it all the way and support code-based helpers for all Bootstrap components. This took a long time to complete (and it's not totally done - I still need to support the JavaScript components), but today I am pleased to announce the first public release of FluentBootstrap!</p>
 
 
-@using (var grid = Bootstrap.GridRow().Begin())
+@using (var grid = Bs.GridRow().Begin())
 {
     using (grid.GridColumn(6).Begin())
     {
@@ -68,4 +68,4 @@
     }
 }
 
-<p>There's a lot more information over on the @Bootstrap.Link("FluentBootstrap web site", "http://www.fluentbootstrap.com"), so check it out. Right now I'm particularly interested in any feedback you have or bugs that you find. I'm also interested in where you'd like to see the project go. For example, would you rather see more model binding functionality, T4MVC support, etc.?</p>
+<p>There's a lot more information over on the @Bs.Link("FluentBootstrap web site", "http://www.fluentbootstrap.com"), so check it out. Right now I'm particularly interested in any feedback you have or bugs that you find. I'm also interested in where you'd like to see the project go. For example, would you rather see more model binding functionality, T4MVC support, etc.?</p>

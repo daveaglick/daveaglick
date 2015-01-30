@@ -16,7 +16,7 @@ namespace Somedave
             set { ViewData[ViewDataKeys.Title] = value; }
         }
 
-        public MvcBootstrapHelper<T> Bootstrap
+        public MvcBootstrapHelper<T> Bs
         {
             get { return Html.Bootstrap(); }
         }

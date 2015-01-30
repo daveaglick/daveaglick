@@ -2,17 +2,17 @@
 
 @model IEnumerable<BlogPost>
 
-@using (var list = Bootstrap.List(ListType.Unordered).Begin())
+@using (var list = Bs.List(ListType.Unordered).Begin())
 {          
     foreach (BlogPost post in Model)
     {
         using (list.ListItem().Begin())
         {
-            @Bootstrap.Strong(Bootstrap.Link(post.Title, Url.Action(post.GetAction())).ToHtmlString())
+            @Bs.Strong(Bs.Link(post.Title, Url.Action(post.GetAction())).ToHtmlString())
             if (post.Published != default(DateTime))
             {
-                @Bootstrap.Label(post.Published.ToShortDateString()).AddCss("label-date", "icon-calendar")
-                using (Bootstrap.Label(null).AddCss("label-comments", "icon-talk-chat-2").Begin())
+                @Bs.Label(post.Published.ToShortDateString()).AddCss("label-date", "icon-calendar")
+                using (Bs.Label(null).AddCss("label-comments", "icon-talk-chat-2").Begin())
                 {
                     <a href="@Url.Action(post.GetAction())#disqus_thread" data-disqus-identifier="@post.GetViewName()"></a>
                 }

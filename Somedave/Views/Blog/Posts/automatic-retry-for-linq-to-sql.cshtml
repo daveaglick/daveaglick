@@ -5,15 +5,15 @@
     Tags = new[] { "LINQ", "LINQ to SQL" };
 }
 
-@using (var row = Bootstrap.GridRow().Begin())
+@using (var row = Bs.GridRow().Begin())
 {
     using (row.GridColumn(6).Begin())
     {
-        <strong>@Bootstrap.Link("GitHub", "https://github.com/somedave/LinqToSqlRetry")</strong>
+        <strong>@Bs.Link("GitHub", "https://github.com/somedave/LinqToSqlRetry")</strong>
     }
     using (row.GridColumn(6).Begin())
     {
-        <strong>@Bootstrap.Link("NuGet", "http://www.nuget.org/packages/LinqToSqlRetry/")</strong>
+        <strong>@Bs.Link("NuGet", "http://www.nuget.org/packages/LinqToSqlRetry/")</strong>
     }
 }
 <hr/>
@@ -24,7 +24,7 @@
 
 @Html.Code(@"using LinqtoSqlRetry;")
  
-@Bootstrap.Heading2("Retry On Submit Changes")
+@Bs.Heading2("Retry On Submit Changes")
 
 <p>Instead of using <code>DataContext.SubmitChanges()</code> just use <code>DataContext.SubmitChangesRetry()</code>:</p>
 
@@ -34,7 +34,7 @@
   context.SubmitChangesRetry();
 }")
 
-@Bootstrap.Heading2("Retry on Queries")
+@Bs.Heading2("Retry on Queries")
 
 <p>Add the <code>Retry()</code> extension method to the end of your queries. It should generally be the last extension you use before materializing the query (which happens when you use extensions like <code>ToList()</code> or <code>Count()</code>):</p>
 
@@ -44,11 +44,11 @@
 }")
 
 
-@Bootstrap.Heading2("Retry Policy")
+@Bs.Heading2("Retry Policy")
 
 <p>The retry logic is controlled by a policy that indicates when a retry should take place and how long to wait before retrying the operation. Two policies are supplied:</p>
 
-@using (var list = Bootstrap.List(ListType.Unordered).Begin())
+@using (var list = Bs.List(ListType.Unordered).Begin())
 {
     using (list.ListItem().Begin())
     {
@@ -73,14 +73,14 @@
 
 <p>You can specify your own custom policies to do things like log retry attempts, use more complex logic, retry on different types of errors, etc. by implementing <code>IRetryPolicy</code>.</p>
 
-@Bootstrap.Heading2("Retry for Arbitrary Operations")
+@Bs.Heading2("Retry for Arbitrary Operations")
 
 <p>You can also retry any arbitrary operation with the Retry() extension methods on any IRetryPolicy object. There are two of them, one takes an <code>Action</code> and the other takes a <code>Func&lt;t&gt;</code> and returns the result. For example:</p>
 
 @Html.Code(@"var retryPolicy = new ExponentialRetry(TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(2), 5);
 retryPolicy.Retry(() => AMethodThatMightFail());")
 
-@Bootstrap.Heading2("Under the Hood")
+@Bs.Heading2("Under the Hood")
 
 <p>The retry logic under the hood is fairly simple:</p>
 

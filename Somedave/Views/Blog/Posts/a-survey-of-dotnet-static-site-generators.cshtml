@@ -10,7 +10,7 @@
 <h1>Why Are Static Site Generators Becoming So Popular?</h1>
 
 <p>Before we get to the survey, let's back up a step and consider static site generators in general. Specifically, why are they becoming <em>so</em> popular right now? I think it's a combination of a few factors:</p>
-@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
+@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
 {
     using (list.ListItem().Begin())
     {
@@ -31,7 +31,7 @@
 
 <p>Many static site generators tend to share similar traits, after all there are only so many ways to accomplish a particular task. For this survey I tried to focus on the following capabilities. Note that I relied heavily on browsing documentation, examples, and source code. This was a survey and not a test, so I didn't have time to install and run each tool.</p>
 
-@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
+@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
 {
     using (list.ListItem().Begin())
     {
@@ -55,7 +55,7 @@
 
 <p>To try and get a complete list, I checked sites that aggregate static site generators including <a href="http://staticsitegenerators.net/">Static Site Generators</a> and <a href="https://www.staticgen.com/">StaticGen</a> (the simple fact that there are two such sites says a lot about static site generator popularity). I also scoured Stack Overflow, GitHub, and the web to see if I could turn up any additional ones.</p>
 
-@using (var table = Bootstrap.Table().SetResponsive().Begin())
+@using (var table = Bs.Table().SetResponsive().Begin())
 {
     @table.TableHeaderRow("Generator", "Configuration", "Metadata Support", "Templating Engine(s)", "Testing Support", "Documentation")
     
@@ -174,7 +174,7 @@
 
 <p>For context it's probably worth looking at a couple non-.NET static site generators if you're not already familiar with some. I won't take up space (or time) reviewing them, but the following generators are currently very popular:</p>
 
-@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
+@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
 {
     using (list.ListItem().Begin())
     {

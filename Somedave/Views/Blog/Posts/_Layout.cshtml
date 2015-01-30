@@ -4,9 +4,9 @@
 
 @model BlogPost
 
-@using (Bootstrap.Div().AddCss("banner", "container-sm-height").Begin())
+@using (Bs.Div().AddCss("banner", "container-sm-height").Begin())
 {
-    using (var row = Bootstrap.GridRow().AddCss("row-sm-height").Begin())
+    using (var row = Bs.GridRow().AddCss("row-sm-height").Begin())
     {
         using (row.GridColumn().SetSm(8).AddCss("col-sm-height", "col-bottom").Begin())
         {
@@ -18,7 +18,7 @@
         }
         using (row.GridColumn().SetSm(4).AddCss("col-sm-height", "col-bottom", "stats").Begin())
         {
-            using (var statRow = Bootstrap.GridRow().Begin())
+            using (var statRow = Bs.GridRow().Begin())
             {
                 using (statRow.GridColumn().SetSm(12).Begin())
                 {
@@ -53,7 +53,7 @@
 }
 
 <hr />
-@using (var row = Bootstrap.GridRow().Begin())
+@using (var row = Bs.GridRow().Begin())
 {
     using (row.GridColumn().SetSm(12).Begin())
     {
@@ -62,7 +62,7 @@
 }
 
 <hr />
-@using (var row = Bootstrap.GridRow().Begin())
+@using (var row = Bs.GridRow().Begin())
 {
     using (row.GridColumn().SetSm(12).Begin())
     {

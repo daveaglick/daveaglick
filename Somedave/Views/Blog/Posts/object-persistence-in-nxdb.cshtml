@@ -20,7 +20,7 @@
 
 <p>When we started thinking about an XML persistence layer for Nxdb we considered what the most important requirements should be and narrowed them down to a few key ones:</p>
 
-@using (var list = Bootstrap.List(ListType.Unordered).AddCss("p").Begin())
+@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
 {
 	@list.ListItem("The framework should be able to serialize objects in a variety of ways to support many different environments and uses.")
 	@list.ListItem("The framework should automate the process of storing and fetching objects as much as possible.")
@@ -32,4 +32,4 @@
 
 <p>The main entry point for the persistence framework is the Manager class. All objects are initially persisted or retrieved through one of it's methods. Objects can be <em>attached</em> to the manager, which means that they are stored in a cache and the manager will return a reference to the same instance of the object if the same XML content is used. Additionally, attached objects can be automatically updated when the database changes, making the objects more of a programmatic representation of the database rather than the database simply serving as a backing store. Each object is persisted to and from the database using a Persister. The persister is primarily responsible for determining what parts of an object should be stored in the database, how those parts should be represented (for example as XML elements or attributes), and performing the actual serialization and deserialization of an object. There are several persisters including one that supports the native .NET XmlSerializer, one that provides a great deal of control through the use of attributes on class members, and one that allows completely custom behavior through the implementation of an interface. Should additional techniques be required, a new persister is easy to create and implement. Overall, the architecture and process by which objects are stored to the database and fetched from the database is presented below.</p>
 
-@Bootstrap.Image(Links.Content.posts.persistenceprocess1_png).SetResponsive()
+@Bs.Image(Links.Content.posts.persistenceprocess1_png).SetResponsive()

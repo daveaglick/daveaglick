@@ -6,11 +6,11 @@
 
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
-@using (var grid = Bootstrap.GridRow().Begin())
+@using (var grid = Bs.GridRow().Begin())
 {
     using (grid.GridColumn(6).Begin())
     {
-        @Bootstrap.Heading1("Leaderboards")
+        @Bs.Heading1("Leaderboards")
         foreach (KeyValuePair<string, Somedave.Models.NuGetStats.Leaderboard.Meta> kvp in Model.Leaderboards)
         {
             <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
@@ -20,9 +20,9 @@
     }
     using (grid.GridColumn(6).Begin())
     {
-        @Bootstrap.Heading1("Packages")
+        @Bs.Heading1("Packages")
         <p>Input the ID of a package to see metadata such as authors, tags, a list of the packages it depends, and those that depend on it.</p>
-        using (var form = Bootstrap.Form(MVC.NuGetStats.ActionNames.PackagePost, MVC.NuGetStats.Name, FormMethod.Post).Begin())
+        using (var form = Bs.Form(MVC.NuGetStats.ActionNames.PackagePost, MVC.NuGetStats.Name, FormMethod.Post).Begin())
         {
             @form.Input(MVC.NuGetStats.PackagePostParams.id, "Package")
             @form.Submit()
