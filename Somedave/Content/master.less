@@ -104,6 +104,7 @@ h1, h2, h3, h4, h5, h6 {
     & .hello {
         font-family: 'Indie Flower', cursive;
         font-size: floor((@font-size-h1 * 2));
+        line-height: @headings-line-height;
     }
 
     & .intro {
@@ -260,6 +261,14 @@ td {
     .banner {
         & .title {
             font-size: @font-size-h2;
+        }
+
+        & .hello {
+            font-size: @font-size-h2;
+        }
+
+        & .intro {
+            font-size: @font-size-h4;
         }
         
         & .lead {

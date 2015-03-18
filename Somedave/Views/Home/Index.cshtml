@@ -4,15 +4,10 @@
 
 @using (var row = Bs.GridRow().AddCss("banner").Begin())
 {
-    using (row.GridColumn().SetXs(6).SetSm(4).SetSmPush(8).SetSmPull(0).Begin())
+    using (row.GridColumn(12).Begin())
     {
-        @Bs.Image(Links.Content.me_jpg, "Me").SetResponsive().SetStyle(ImageStyle.Rounded)
-    }
-    @Bs.Clearfix().SetVisibility(Visibility.VisibleXsBlock)
-    using (row.GridColumn().SetXs(12).SetSm(8).SetSmPull(4).Begin())
-    {
-        <div class="hello">Hello.</div>
-        <div class="intro">My name is Dave Glick.</div>
+        <div class="hello">Hello. My name is Dave Glick.</div>
+        <div class="intro">By day, a .NET and open source enthusiast. By night, a husband and father of 3.</div>
     }
 }
 <hr />
