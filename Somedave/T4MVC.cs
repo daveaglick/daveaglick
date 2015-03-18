@@ -211,6 +211,7 @@ namespace Links
             public static readonly string open_source_participants_png = Url("open-source-participants.png");
             public static readonly string pdf_process_png = Url("pdf-process.png");
             public static readonly string persistenceprocess1_png = Url("persistenceprocess1.png");
+            public static readonly string syntax_tree_png = Url("syntax-tree.png");
         }
     
         public static readonly string prettify_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prettify.min.css") ? Url("prettify.min.css") : Url("prettify.css");

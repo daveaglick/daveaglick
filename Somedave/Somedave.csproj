@@ -259,6 +259,7 @@
     <Content Include="Content\posts\open-source-participants.png" />
     <Content Include="Content\posts\pdf-process.png" />
     <Content Include="Content\posts\persistenceprocess1.png" />
+    <Content Include="Content\posts\syntax-tree.png" />
     <Content Include="Content\prettify.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -426,6 +427,7 @@
     <Content Include="Views\Blog\Posts\a-tale-of-two-apis.cshtml" />
     <Content Include="Views\Blog\Posts\random-polygon-page-backgrounds.cshtml" />
     <Content Include="Views\Blog\Posts\compiler-platform-scripting.cshtml" />
+    <Content Include="Views\Blog\Posts\announcing-linqpad-codeanalysis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

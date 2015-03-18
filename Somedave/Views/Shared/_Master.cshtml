@@ -54,7 +54,7 @@
             {
                 using (var row = container.GridRow().AddCss("nav-row", "row-sm-height").Begin())
                 {
-                    using (row.GridColumn().SetXs(3).SetSm(8).AddCss("logo-col", "col-sm-height", "col-bottom").Begin())
+                    using (row.GridColumn().SetXs(3).SetSm(6).AddCss("logo-col", "col-sm-height", "col-bottom").Begin())
                     { 
                         @Html.ActionLink("<somedave/>", MVC.Home.Index())
                     }
@@ -77,20 +77,21 @@
                             @nav.ListItem("/ " + Bs.Link(" About", MVC.Home.About()).ToHtmlString()) 
                             @nav.ListItem("/ " + Bs.Link(" Archive", MVC.Blog.Posts(null)).ToHtmlString()) 
                             @nav.ListItem("/ " + Bs.Link(" Tags", MVC.Blog.Tags(null)).ToHtmlString()) 
-                            @nav.ListItem("/ " + Bs.Link(" Likes", MVC.Home.Likes()).ToHtmlString()) 
-                        }     
-                    } 
+                            @nav.ListItem("/ " + Bs.Link(" Likes", MVC.Home.Likes()).ToHtmlString())
+                        }
+                        <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>
+                    }
                     @Bs.Clearfix().SetVisibility(Visibility.VisibleXsBlock)  
-                    using (row.GridColumn().SetXs(12).SetSm(2).AddCss("proj-col", "collapse", "col-sm-height").AddStyle("visibility", "visible").Begin())
+                    using (row.GridColumn().SetXs(12).SetSm(4).AddCss("proj-col", "collapse", "col-sm-height").AddStyle("visibility", "visible").Begin())
                     { 
                         @Bs.Div().AddContent("Projects")
                         using (var nav = Bs.List().Begin())
                         {
                             @nav.ListItem("/ " + Bs.Link("FluentBootstrap", "http://fluentbootstrap.com"))
-                            @nav.ListItem("/ " + Bs.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString()) 
+                            @nav.ListItem("/ " + Bs.Link("LINQPad.CodeAnalysis", "https://github.com/somedave/LINQPad.CodeAnalysis"))
+                            @nav.ListItem("/ " + Bs.Link("RazorDatabase", Url.Action(MVC.Projects.RazorDatabase())).ToHtmlString())
                             @nav.ListItem("/ " + Bs.Link("NuGet Stats", Url.Action(MVC.NuGetStats.Index())).ToHtmlString())
                         }
-                        <a class="twitter-follow-button" href="https://twitter.com/somedaveg" data-show-count="false" data-lang="en">Follow @@somedaveg</a>
                     }
                 }
             }

@@ -142,6 +142,7 @@ namespace Somedave.Controllers
                     public readonly string a_survey_of_dotnet_static_site_generators = "a-survey-of-dotnet-static-site-generators";
                     public readonly string a_t4_template_to_get_all_css_class_names = "a-t4-template-to-get-all-css-class-names";
                     public readonly string a_tale_of_two_apis = "a-tale-of-two-apis";
+                    public readonly string announcing_linqpad_codeanalysis = "announcing-linqpad-codeanalysis";
                     public readonly string announcing_razordatabase = "announcing-razordatabase";
                     public readonly string automatic_retry_for_linq_to_sql = "automatic-retry-for-linq-to-sql";
                     public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
@@ -182,6 +183,7 @@ namespace Somedave.Controllers
                 public readonly string a_survey_of_dotnet_static_site_generators = "~/Views/Blog/Posts/a-survey-of-dotnet-static-site-generators.cshtml";
                 public readonly string a_t4_template_to_get_all_css_class_names = "~/Views/Blog/Posts/a-t4-template-to-get-all-css-class-names.cshtml";
                 public readonly string a_tale_of_two_apis = "~/Views/Blog/Posts/a-tale-of-two-apis.cshtml";
+                public readonly string announcing_linqpad_codeanalysis = "~/Views/Blog/Posts/announcing-linqpad-codeanalysis.cshtml";
                 public readonly string announcing_razordatabase = "~/Views/Blog/Posts/announcing-razordatabase.cshtml";
                 public readonly string automatic_retry_for_linq_to_sql = "~/Views/Blog/Posts/automatic-retry-for-linq-to-sql.cshtml";
                 public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
