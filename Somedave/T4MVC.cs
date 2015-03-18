@@ -74,18 +74,13 @@ namespace Links
         private const string URLPATH = "~/Scripts";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-        public static readonly string arbor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/arbor.min.js") ? Url("arbor.min.js") : Url("arbor.js");
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
-        public static readonly string cola_v3_min_js = Url("cola.v3.min.js");
-        public static readonly string cytoscape_min_js = Url("cytoscape.min.js");
-        public static readonly string dagre_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dagre.min.js") ? Url("dagre.min.js") : Url("dagre.js");
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
         public static readonly string Please_compressed_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Please-compressed.min.js") ? Url("Please-compressed.min.js") : Url("Please-compressed.js");
         public static readonly string prettify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/prettify.min.js") ? Url("prettify.min.js") : Url("prettify.js");
-        public static readonly string springy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/springy.min.js") ? Url("springy.min.js") : Url("springy.js");
         public static readonly string trianglify_min_js = Url("trianglify.min.js");
     }
 

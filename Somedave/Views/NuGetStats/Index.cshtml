@@ -2,35 +2,13 @@
     Title = "NuGet Stats";
 }
 
-@model Somedave.Models.NuGetStats.Index
-
 @Html.Partial(MVC.Shared.Views.Title, string.Empty)
 
 @using (var grid = Bs.GridRow().Begin())
 {
-    using (grid.GridColumn(6).Begin())
+    using (grid.GridColumn(12).Begin())
     {
-        @Bs.Heading1("Leaderboards")
-        foreach (KeyValuePair<string, Somedave.Models.NuGetStats.Leaderboard.Meta> kvp in Model.Leaderboards)
-        {
-            <div><strong>@Html.ActionLink(kvp.Value.Title, MVC.NuGetStats.Leaderboard(kvp.Key))</strong></div>
-            <p>@kvp.Value.Description</p>
-        }
-        <p>More leaderboards coming soon - please let me know if there are any you would like to see.</p>
-    }
-    using (grid.GridColumn(6).Begin())
-    {
-        @Bs.Heading1("Packages")
-        <p>Input the ID of a package to see metadata such as authors, tags, a list of the packages it depends, and those that depend on it.</p>
-        using (var form = Bs.Form(MVC.NuGetStats.ActionNames.PackagePost, MVC.NuGetStats.Name, FormMethod.Post).Begin())
-        {
-            @form.Input(MVC.NuGetStats.PackagePostParams.id, "Package")
-            @form.Submit()
-        }
-        <hr />
-        <p>Detailed author and tag statistics coming soon.</p>
+        <p>NuGet Stats was a fun little experiment I started to see what would happen if I downloaded <em>the entire</em> NuGet directory and then ran some data mining and visualizations on it. The results were neat. Unfortunately, it turns out that downloading and analyzing the main NuGet feed takes a lot of database space, a lot of processor cycles, and a lot of time to maintain. There are just too many edge cases. I learned a lot in the process of building NuGet Stats, but it's time to let it go (for now). I may bring it back as a dedicated web application at some point in the future, but for now I'm going to dedicate my time to other projects.</p>
     }
 }
-
-@Html.Action(MVC.NuGetStats.Footer())
 

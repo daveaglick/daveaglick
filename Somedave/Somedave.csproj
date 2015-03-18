@@ -208,16 +208,6 @@
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Models\Blog\Tags.cs" />
     <Compile Include="Models\Home\Index.cs" />
-    <Compile Include="Models\NuGetStats\PackageViewModel.cs" />
-    <Compile Include="Models\NuGetStats\Footer.cs" />
-    <Compile Include="Models\NuGetStats\Index.cs" />
-    <Compile Include="Models\NuGetStats\Leaderboard.cs" />
-    <Compile Include="Models\NuGetStats\Status.cs" />
-    <Compile Include="NuGetStats.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NuGetStats.dbml</DependentUpon>
-    </Compile>
     <Compile Include="NuGetStatsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -337,19 +327,10 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Scripts\arbor.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="NuGetStats.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>NuGetStats.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Properties\PublishProfiles\somedave.pubxml" />
     <Content Include="Properties\webjobs-list.json" />
-    <Content Include="Scripts\cola.v3.min.js" />
-    <Content Include="Scripts\cytoscape.min.js" />
-    <Content Include="Scripts\dagre.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -361,7 +342,6 @@
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Scripts\Please-compressed.js" />
     <Content Include="Scripts\prettify.js" />
-    <Content Include="Scripts\springy.js" />
     <Content Include="Scripts\trianglify.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -416,12 +396,8 @@
     <Content Include="Views\Blog\Posts\open-source-obligations.cshtml" />
     <Content Include="Views\Blog\Posts\computed-properties-and-entity-framework.cshtml" />
     <Content Include="Views\NuGetStats\Index.cshtml" />
-    <Content Include="Views\NuGetStats\Status.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\NuGetStats\Leaderboard.cshtml" />
-    <Content Include="Views\NuGetStats\Footer.cshtml" />
     <Content Include="Views\Blog\Posts\automatic-retry-for-linq-to-sql.cshtml" />
-    <Content Include="Views\NuGetStats\Package.cshtml" />
     <Content Include="Views\Blog\Posts\eliminating-magic-strings.cshtml" />
     <Content Include="Views\Blog\Posts\debugging-stack-overflows-on-iis.cshtml" />
     <Content Include="Views\Blog\Posts\a-tale-of-two-apis.cshtml" />
@@ -444,11 +420,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NuGetStats.dbml.layout">
-      <DependentUpon>NuGetStats.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
