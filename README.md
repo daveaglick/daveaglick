@@ -1,4 +1,4 @@
-Somedave
+daveaglick
 ========
 
-The code for the [somedave.com](http://www.somedave.com) website.
+The code for the [daveaglick.com](http://www.daveaglick.com) website.

@@ -1,0 +1,39 @@
+﻿@{
+    Title = "Introducing Nxdb";
+    Lead = "A high-performance embedded XML database for .NET.";
+    Published = new DateTime(2012, 2, 24);
+    Tags = new[] { "Nxdb", "XML", "XQuery", "database" };
+}
+
+<p>For the second time in as many weeks, I have the pleasure of announcing a new open source project. This time I've released Nxdb, a high-performance embedded XML database for .NET with full XQuery support. It is essentially a .NET binding for the excellent <a href="http://basex.org/">BaseX</a> Java XML database. However, Nxdb goes well beyond a simple wrapper by providing a native .NET API suitable for embedding (the primary focus of BaseX is on client/server uses), providing additional functionality to interface directly with .NET classes and objects, and rethinking several aspects of the BaseX design for the embedded use case. The underlying BaseX code is cross-compiled to IL using <a href="http://www.ikvm.net/">IKVM</a> making Nxdb 100% native .NET, usable on all .NET platforms including <a href="http://www.mono-project.com">Mono</a>.</p>
+
+<p>This project has a long history. Around the fall of 2008, my company, DRAC was tasked with developing an entirely new cross-platform graphical user interface for one of the US Air Force's most complex models. The model itself used over a hundred different input files, each with slightly different grammar and syntax. What we needed was a way to store, query, and manipulate all of this data in a consistent way. XML seemed like an ideal choice given it's ability to represent data hierarchically and powerful XQuery query language. Having already made the decision to use Mono as our platform, we scoured both the open source community and commercial vendors to find a database backend that was a good fit. We were surprised to discover that there weren't very many suitable embedded XML databases for .NET and the ones we did find were either too slow for processing and querying the volume of data we needed to work with or had cumbersome and limited APIs that didn't allow the control we needed.</p>
+
+<p>Thankfully, we stumbled on BaseX when it was a fairly early project. We were immediately impressed with the completeness of it's query engine and the fast performance. Unfortunately it was written in Java and we were using .NET and had already sunk considerable resources into the GUI shell. Having used IKVM to cross-compile Java code before, we decided to give it a shot for BaseX and were pleased to discover it converted and ran quite well. Over the intervening years we've separated our BaseX binding from the original project, applied it to many other projects, and watched as BaseX has flourished. Nxdb is now used in production code every day and we're excited to share it with the rest of the open source community.</p>
+
+<h1>Usage</h1>
+
+<p>Nxdb is designed to be easy to use. It provides two primary means of working with the database. The first is by directly working with the database through classes that represent XML nodes. The other main interface is through the evaluation of XQuery expressions.</p>
+
+<p>The Database class serves as the starting point for working with an Nxdb database. It encapsulates all of the operations on a database instance and provides methods for getting node objects and evaluating queries. Before use, Nxdb must be initialized as follows using the static Database.Initialize() method (path is where all of the database files will be stored):</p>
+
+<pre class="prettyprint">Database.Initialize(path);</pre>
+
+<p>Once that's done, a new or existing database can be obtained via the static Database.Get() method:</p>
+
+<pre class="prettyprint">Database.Get(databaseName);</pre>
+
+<p>Once a Database instance has been obtained, XML content can be added, documents fetched, and queries executed. A very simple example usage might look like this:</p>
+
+<pre class="prettyprint">using Nxdb;
+Database.Initialize("C:\Temp\NxdbData");
+using(Database db = Database.Get("Example"))
+{
+  db.Add("DocA", "<A><B>b</B><C>c</C></A>");
+  Document doc = db.GetDocument("DocA");
+  Console.Write(doc.OuterXml);
+}</pre>
+
+<h1>Obtaining</h1>
+
+<p>Nxdb is open source and released under the Apache 2.0 license. It can be obtained here: <a href="https://github.com/daveaglick/Nxdb">https://github.com/daveaglick/Nxdb</a></p>

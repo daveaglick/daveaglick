@@ -25,7 +25,7 @@ packages*/
 !lib/*
 *App_Data*
 obj
-Somedave/website.publishproj
-Somedave/App_Data/PublishProfiles/*
-Somedave/Properties/PublishProfiles/*
+DaveAGlick/website.publishproj
+DaveAGlick/App_Data/PublishProfiles/*
+DaveAGlick/Properties/PublishProfiles/*
 NuGetUpdate/Properties/PublishProfiles/*

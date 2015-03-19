@@ -1,0 +1,46 @@
+﻿@{
+    Title = "Introducing NiceThreads";
+    Lead = "A threading utility library designed to make different threading primitives easier to use.";
+    Published = new DateTime(2012, 2, 17);
+    Tags = new[] { "NiceThreads", "Threading", "Monitor", "ReaderWriterLockSlim", "locking", "ILocker" };
+}
+
+<p>NiceThreads is threading utility library designed to make different threading primitives easier to use with a more consistent API. It started out of frustration with the different options (and more specifically, the different APIs) for enabling thread safety and locks in the .NET framework and how much code was required to use some of them. NiceThreads provides a consistent interface for standard <code><a href="http://msdn.microsoft.com/en-us/library/system.threading.monitor.aspx">Monitor</a></code> locks and the <code><a href="http://msdn.microsoft.com/en-us/library/system.threading.readerwriterlockslim.aspx">ReaderWriterLockSlim</a></code> class (and possibly others in the future). It also provides support for activating and deactivating these locking primitives through the <a href="http://msdn.microsoft.com/en-us/library/system.idisposable.aspx">disposable pattern</a>. Finally, it provides wrappers that can easily provide thread-safety to unsafe objects.</p>
+<h1>Common API</h1>
+<p>Both <code>Monitor</code> (and the "lock" statement which is syntactic sugar for <code>Monitor</code>) and <code>ReaderWriterLockSlim</code> attempt to solve the same problem: preventing conflicting concurrent access to objects that might need to be read or written to by multiple threads. They both do this by limiting access to the object to one thread at a time (or in the case of read locks provided by <code>ReaderWriterLockSlim</code>, only to threads that signal they want read-only access) while making other threads wait their turn. However, even though both classes provide similar functionality they are intended for different uses and have <a href="http://blogs.msdn.com/b/pedram/archive/2007/10/07/a-performance-comparison-of-readerwriterlockslim-with-readerwriterlock.aspx">different tradeoffs</a>. Further, they use similar but different APIs making switching between them difficult.</p>
+<p>To solve this problem, NiceThreads provides a consistent ILocker interface that has implementations wrapping both classes and provides a consistent API. The rest of NiceThreads is designed to interact with <code>ILocker</code> allowing interchangeable use of the different types of locking primitives. In addition, the <code>ILocker</code> interface can be used directly to provide a consistent wrapper around either locking class for your own code.</p>
+<p>For example:</p>
+<pre class="prettyprint">ILocker locker = new ReaderWriterLockSlimLocker();
+locker.EnterReadLock();
+// Do work...
+locker.ExitReadLock();
+locker = new MonitorLocker();
+locker.EnterReadLock();
+// Do work...
+locker.ExitReadLock();</pre>
+<h1>Disposable Pattern</h1>
+<p>Both locking primitives require explicitly activating the lock and subsequently manually removing the lock when finished. This can lead to problems if the developer forgets to release the lock or ends up exiting the normal program flow (for example, because an exception was thrown). The <code>lock</code> keyword in C# attempts to make this design easier to use for the <code>Monitor</code> class by abstracting <code>Monitor</code> instantiation and surrounding it's use in a control block, however, no such keyword exists for other locking classes such as <code>ReaderWriterLockSlim</code>. In addition, using the <code>lock</code> keyword means some control is lost over the lifecycle and usage of the underlying <code>Monitor</code> class.</p>
+<p>NiceThreads attempts to solve this problem by providing a set of classes that implement <code>IDisposable</code> and wraps an underlying <code>ILocker</code> (which in turn provides consistent access to alternate framework locking classes). They activate the requested lock type on instantiation and free it on disposal. This allows the developer to use the built-in support for the disposable pattern in .NET to automatically free a lock when finished with it by using the <code>using</code> statement.</p>
+<p>For example:</p>
+<pre class="prettyprint">ILocker locker = new ReaderWriterLockSlimLocker();
+using(new ReadLock(locker))
+{
+  // Do work...
+}</pre>
+<h1>Thread-Safe Wrappers</h1>
+<p>Even with the added convenience of a consistent API and disposable pattern support, implementing thread-safety for non-thread-safe objects can still require a fair amount of code. For every object that needs to be protected, a new locking object potentially needs to be created and maintained. NiceThreads helps implement thread safety for objects by providing wrapper classes that encapsulate generic locking logic and provide thread-safe access to their underlying object. <code>SyncObject&lt;T&gt;</code> wraps an arbitrary type and <code>ReadOnlySyncObject&lt;T&gt;</code> wraps an arbitrary type while providing "readonly" semantics (I.e., once the <code>ReadOnlySyncObject&lt;T&gt;</code> has been constructed, it's underlying object cannot be changed). These classes provide a variety of methods to expose their wrapped object in thread-safe ways including thread-safe getting and setting, disposable pattern access, and action/function providers (I.e., lambdas or anonymous methods).</p>
+<p>For example:</p>
+<pre class="prettyprint">SyncObject&lt;int&gt; num = new SyncObject&lt;int&gt;(10);
+num.Sync = 20; // Access as a property with a thread-safe setter
+int value = num.Sync; // Access as a property with a thread-safe getter
+using(num.WriteLock())
+{
+ // We can now access using unsafe code
+ num.UnsyncField++; // Provides direct field access
+ value = num.Unsync; // Access as a property with an unsafe getter
+}
+num.DoWrite(n => n + 10); // Thread-safe write with an Action
+value = num.DoRead(n => n + 100); // Thread-safe read with a Func
+</pre>
+<h1>Obtaining</h1>
+<p>NiceThreads is open source and released under the Apache 2.0 license. It can be obtained here: <a href="https://github.com/daveaglick/NiceThreads">https://github.com/daveaglick/NiceThreads</a></p>
