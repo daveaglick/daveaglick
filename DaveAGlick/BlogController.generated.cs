@@ -147,6 +147,7 @@ namespace DaveAGlick.Controllers
                     public readonly string automatic_retry_for_linq_to_sql = "automatic-retry-for-linq-to-sql";
                     public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "automatically-generating-column-titles-for-a-kendoui-mvc-grid";
                     public readonly string brace_style_convention = "brace-style-convention";
+                    public readonly string compiler_platform_in_t4 = "compiler-platform-in-t4";
                     public readonly string compiler_platform_scripting = "compiler-platform-scripting";
                     public readonly string computed_properties_and_entity_framework = "computed-properties-and-entity-framework";
                     public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "custom-entity-type-configurations-in-entity-framework-code-first-part-1";
@@ -189,6 +190,7 @@ namespace DaveAGlick.Controllers
                 public readonly string automatic_retry_for_linq_to_sql = "~/Views/Blog/Posts/automatic-retry-for-linq-to-sql.cshtml";
                 public readonly string automatically_generating_column_titles_for_a_kendoui_mvc_grid = "~/Views/Blog/Posts/automatically-generating-column-titles-for-a-kendoui-mvc-grid.cshtml";
                 public readonly string brace_style_convention = "~/Views/Blog/Posts/brace-style-convention.cshtml";
+                public readonly string compiler_platform_in_t4 = "~/Views/Blog/Posts/compiler-platform-in-t4.cshtml";
                 public readonly string compiler_platform_scripting = "~/Views/Blog/Posts/compiler-platform-scripting.cshtml";
                 public readonly string computed_properties_and_entity_framework = "~/Views/Blog/Posts/computed-properties-and-entity-framework.cshtml";
                 public readonly string custom_entity_type_configurations_in_entity_framework_code_first_part_1 = "~/Views/Blog/Posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1.cshtml";

@@ -404,6 +404,7 @@
     <Content Include="Views\Blog\Posts\compiler-platform-scripting.cshtml" />
     <Content Include="Views\Blog\Posts\announcing-linqpad-codeanalysis.cshtml" />
     <Content Include="Views\Blog\Posts\identity-crisis.cshtml" />
+    <Content Include="Views\Blog\Posts\compiler-platform-in-t4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
