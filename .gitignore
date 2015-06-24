@@ -25,7 +25,4 @@ packages*/
 !lib/*
 *App_Data*
 obj
-DaveAGlick/website.publishproj
-DaveAGlick/App_Data/PublishProfiles/*
-DaveAGlick/Properties/PublishProfiles/*
-NuGetUpdate/Properties/PublishProfiles/*
+Output*/

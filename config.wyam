@@ -1,0 +1,131 @@
+Packages
+	.Install("HtmlAgilityPack")  // TODO: This can be removed once a real excerpt module is developed
+	.Install("Twitter.Bootstrap.Less", "[3.3.4]")
+	.Install("FluentBootstrap.Wyam", true)
+	.Install("jQuery", "[2.1.1]");
+	
+===
+
+using FluentBootstrap;
+using FluentBootstrap.Wyam;
+using FluentBootstrap.Buttons;
+using HtmlAgilityPack;
+using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
+
+public abstract class RazorPage : BaseRazorPage
+{
+    public WyamBootstrapHelper Bs
+	{
+		get { return Html.Bootstrap(); }
+	}
+}
+
+public static class HtmlHelperExtensions
+{
+    public static ComponentBuilder<WyamBootstrapConfig, LinkButton> TagButton(this HtmlHelper helper, string tag, int? count = null, ButtonState buttonState = ButtonState.Default)
+    {
+        return helper.Bootstrap().LinkButton(
+            string.Format(" {0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
+            "/tags/" + tag.ToLowerInvariant().Replace(' ', '-'))
+            .SetState(buttonState)
+            .SetSize(ButtonSize.Sm)
+            .AddCss("tag-button", "icon-tag-2");
+    }
+	
+	// TODO: This can be removed once a real excerpt module is developed
+	public static string GetExcerpt(this HtmlHelper helper, IDocument document)
+    { 
+        try
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(document.Content);
+            HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
+            if (p != null)
+            {
+                return p.OuterHtml;
+            }
+        }
+        catch(Exception)
+        {     
+        }
+        return string.Empty;
+    }
+	
+	public static HtmlString Code(this HtmlHelper helper, string code)
+    {
+        int num = 0;
+        string[] lines = code.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+        if (lines.Length > 1)
+        {
+            num = lines
+                .Skip(1)
+                .Min(x =>
+                {
+                    int index = x.ToList().FindIndex(c => c != ' ');
+                    return index == -1 ? Int32.MaxValue : index;
+                });
+        }
+        string spaces = new String(' ', num);
+        code = code.Replace(Environment.NewLine + spaces, Environment.NewLine);
+        return new HtmlString(string.Format(@"<pre class='prettyprint'>{0}</pre>", helper.Raw(System.Net.WebUtility.HtmlEncode(code))));
+    }
+}
+
+---
+
+Pipelines.Add("Posts",
+	ReadFiles(@"posts\*.md"),
+	FrontMatter(Yaml()),
+	Markdown(),
+	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
+	Concat(
+		ReadFiles(@"posts\*.cshtml").Where(x => Path.GetFileName(x)[0] != '_' && Path.GetFileName(x) != "index.cshtml"),
+		FrontMatter(Yaml())		
+	),
+	Razor(typeof(RazorPage)),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Content",
+	ReadFiles("*.md").Where(x => !Path.GetDirectoryName(x).EndsWith("posts")),
+	FrontMatter(Yaml()),
+	Markdown(),
+	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
+	Concat(
+		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_' 
+			&& (!Path.GetDirectoryName(x).EndsWith("posts") || Path.GetFileName(x) == "index.cshtml")),
+		FrontMatter(Yaml())		
+	),
+	Razor(typeof(RazorPage)),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Tags",
+	ReadFiles(@"tags\index.cshtml"),
+	FrontMatter(),
+	Execute((doc, ctx) => ctx.Documents.SelectMany(x => x.Value)
+		.Where(x => x.Metadata.ContainsKey("Published") && x.Metadata.ContainsKey("Tags"))
+    	.SelectMany(x => x.Metadata.Get<string[]>("Tags"))
+		.Distinct()
+		.Select(x => doc.Clone(new Dictionary<string, object>()
+		{ 
+		    { "Title", x },
+			{ "Tag", x }
+		}))),
+	Razor(typeof(RazorPage)),
+	WriteFiles(x => @"tags\" + x.Get<string>("Tag").ToLowerInvariant().Replace(' ', '-') + ".html")
+);
+
+Pipelines.Add("Less",
+    ReadFiles("master.less"),
+    Concat(ReadFiles("bootstrap.less")),
+    Less(),
+    WriteFiles(".css")
+);
+
+Pipelines.Add("Resources",
+	CopyFiles("*").Where(x => 
+		Path.GetExtension(x) != ".cshtml" 
+		&& Path.GetExtension(x) != ".md"
+		&& Path.GetExtension(x) != ".less")
+);

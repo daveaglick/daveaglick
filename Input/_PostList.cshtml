@@ -1,0 +1,28 @@
+@using FluentBootstrap;
+
+@{
+    var docs = (IEnumerable<IDocument>)ViewData["PostListDocuments"];
+    using (var list = Bs.List(ListType.Unordered).Begin())
+    {          
+        foreach (IDocument doc in docs)
+        {
+            using (list.ListItem().Begin())
+            {
+                string file = doc.Get<string>(MetadataKeys.RelativeFilePath);
+                string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
+                @Bs.Strong(Bs.Link(doc.Get<string>("Title"), link).ToHtmlString())
+                    
+                @Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")
+                using (Bs.Label(null).AddCss("label-comments", "icon-talk-chat-2").Begin())
+                {
+                    <a href="@link#disqus_thread" data-disqus-identifier="@System.IO.Path.GetFileNameWithoutExtension(file)"></a>
+                }
+                            
+                if (doc.Metadata.ContainsKey("Lead"))
+                {
+                    <text><br />@(doc.Get<string>("Lead"))</text>
+                }
+            }
+        }
+    }
+}

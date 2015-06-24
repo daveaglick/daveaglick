@@ -1,0 +1,79 @@
+@using FluentBootstrap;
+
+@using (var row = Bs.GridRow().AddCss("banner").Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        <div class="hello">Hello.</div>
+        <div class="intro">My name is Dave Glick. By day, I'm a .NET and open source enthusiast. By night, I'm a husband and father. Somewhere in between the two I write stuff here.</div>
+    }
+}
+<hr />
+
+@using (var row = Bs.GridRow().Begin())
+{
+    using (row.GridColumn().SetSm(8).AddCss("right-border").Begin())
+    {
+        bool first = true;
+        foreach(IDocument doc in AllDocuments
+            .Where(x => x.Metadata.ContainsKey("Published"))
+            .OrderByDescending(x => x.Get<DateTime>("Published"))
+            .Take(3))
+        {
+            string file = doc.Get<string>(MetadataKeys.RelativeFilePath);
+            string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
+                
+            if (!first)
+            {
+                <hr /> 
+            }
+            first = false;
+            <div>
+                <h3>
+                    @Bs.Link(doc.Get<string>("Title"), link)
+                    <small>@Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
+                    <small>
+                        @using (Bs.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
+                        {
+                            <a href="@link#disqus_thread" data-disqus-identifier="@System.IO.Path.GetFileNameWithoutExtension(file)"></a>
+                        }
+                    </small>
+                </h3>
+            </div>
+            string lead = doc.Get<string>("Lead");
+            if(!string.IsNullOrWhiteSpace(lead))
+            {
+                @Bs.Lead(lead)
+            }
+            @Html.Raw(Html.GetExcerpt(doc))                
+            @Bs.LinkButton("Read More &rarr;", link)            
+        }
+        <hr />
+        <div><strong>@Bs.Link(" Archive", "/posts")</strong></div>
+    }
+    using (row.GridColumn().SetSm(4).Begin())
+    {
+        <hr class="@Css.VisibleXsBlock" />
+        <h5>Tags</h5>
+        <div>
+            @{                
+            	List<KeyValuePair<string, int>> Tags = AllDocuments
+                    .Where(x => x.Metadata.ContainsKey("Published") && x.Metadata.ContainsKey("Tags"))
+                    .SelectMany(x => x.Metadata.Get<string[]>("Tags"))
+                    .GroupBy(x => x)
+                    .Select(x => new KeyValuePair<string, int>(x.Key, x.Count()))
+                    .OrderByDescending(x => x.Value)
+                    .Take(10)
+                    .ToList(); 
+            }            
+            @foreach (KeyValuePair<string, int> tag in Tags)
+            { 
+                @Html.TagButton(tag.Key, tag.Value)
+            }
+        </div>
+        <div><strong>@Bs.Link("View All Tags", "/tags")</strong></div>
+        <hr />
+        <h5>On The Interwebs</h5>
+        @Html.Partial("_SocialLinks")
+    } 
+}

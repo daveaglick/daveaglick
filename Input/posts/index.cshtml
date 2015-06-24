@@ -1,0 +1,24 @@
+Title: Archive
+---
+@using FluentBootstrap;
+@{
+    Layout = "_Layout.cshtml";
+}
+
+@{
+    ViewData["TitleClass"] = "icon-archive";
+}
+@Html.Partial("_Title")
+
+@{
+    foreach(IGrouping<int, IDocument> year in AllDocuments
+        .Where(x => x.Metadata.ContainsKey("Published"))
+        .OrderByDescending(x => x.Get<DateTime>("Published"))
+        .GroupBy(x => x.Get<DateTime>("Published").Year)
+        .OrderByDescending(x => x.Key))
+    {
+        <h3>@year.Key</h3>
+        ViewData["PostListDocuments"] = year;
+        @Html.Partial("_PostList");
+    }
+}
