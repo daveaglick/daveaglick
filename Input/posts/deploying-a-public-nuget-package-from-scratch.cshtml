@@ -1,0 +1,89 @@
+﻿Title: Deploying a Public NuGet.org Package From Scratch
+Lead: With Continuous Integration Using GitHub and AppVeyor
+Published: 9/18/2014
+Tags:
+  - NuGet
+  - GitHub
+  - AppVeyor
+---
+@using FluentBootstrap;
+
+<p>As I prepare to release my first NuGet package, I figured I would provide a walkthrough of how I set all this up. While I’ve used NuGet before (and even set up a private feed for internal libraries at my day job using <a href="http://inedo.com/proget">ProGet</a>, which is awesome), I’ve never published a public package to <a href="http://nuget.org">NuGet.org</a>. While there is <a href="http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package">ample help available</a>, it can be a little confusing how to rig everything up. I also wanted to enable continuous integration so that every time I committed a change to my library, it would automatically push a new NuGet package.</p>
+
+<p>The only assumption before we start this walkthrough is that you’ve got a class library that would be suitable for a standard NuGet package. That is, you don’t use any kind of exotic external libraries or require special packaging. I’m not going to discuss more advanced NuGet packages, but there should be ample resources available on the NuGet site to help you adapt this walkthrough if needed.</p>
+
+<h1>Create a GitHub Account and Repository</h1>
+
+<p>Most of you will already have an account on GitHub, and you may already have a repository for your library. If you don’t have a GitHub account, <a href="https://github.com/">go ahead and create one</a>. You’ll also need to make a repository for your library by clicking on the “Repositories” tab and then clicking “New”.</p>
+
+@Bs.Image("/Content/posts/github-new-repo.png").SetResponsive()
+
+<p>Pushing your code to the repository and general Git usage is mostly outside the scope of this walkthrough. However, <a href="https://help.github.com/">see the GitHub help pages if you need some guidance</a>. You don’t necessarily need to do your first push yet, but you will need to push everything a little later.</p>
+
+<h1>Create a NuGet Account</h1>
+
+<p>If you don’t already have one, go ahead and create a new <a href="http://www.nuget.org">NuGet.org</a> account as well. Once you've created an account, you need to get your API key which can be found on your account page.</p>
+
+@Bs.Image("/Content/posts/nuget-apikey.png").SetResponsive()
+
+<h1>Create an AppVeyor Account and Project</h1>
+
+<p>While we’re creating accounts, let’s also create an <a href="http://www.appveyor.com/">AppVeyor</a> account. It’s free for unlimited public repositories, so there’s really nothing to loose. I created an account directly on AppVeyor, but you can also choose to login using your GitHub credentials.</p>
+
+<p>Once you’re logged in, click on the “Projects” tab and then click “New Project”. This will allow you to link up your GitHub account (or BitBucket, Kiln, etc.) and select the repository that you want to use. Go ahead and select the repository that we created in the first step.</p>
+
+<h1>Set Up the NuGet Package</h1>
+
+<p>Now we need to go back to our local system and prepare the NuGet package. NuGet works in two phases. The first step is to create a <code>.nuspec</code> file that contains all of the metadata for your package. Then, each time that you change the library, the <code>.nuspec</code> file gets reused to create the actual NuGet package that can be deployed to users. To create the <code>.nuspec</code> file, open a command prompt with <code>nuget.exe</code> in the path and run <code>nuget spec</code> from the same folder as your project. This will create the <code>.nuspec</code> file and give it the same name as your project file.</p>
+
+<p>Open the <code>.nuspec</code> file in a text editor. It should look like this:</p>
+<pre class="prettyprint">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;package &gt;
+  &lt;metadata&gt;
+    &lt;id&gt;$id$&lt;/id&gt;
+    &lt;version&gt;$version$&lt;/version&gt;
+    &lt;title&gt;$title$&lt;/title&gt;
+    &lt;authors&gt;$author$&lt;/authors&gt;
+    &lt;owners&gt;$author$&lt;/owners&gt;
+    &lt;licenseUrl&gt;http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE&lt;/licenseUrl&gt;
+    &lt;projectUrl&gt;http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE&lt;/projectUrl&gt;
+    &lt;iconUrl&gt;http://ICON_URL_HERE_OR_DELETE_THIS_LINE&lt;/iconUrl&gt;
+    &lt;requireLicenseAcceptance&gt;false&lt;/requireLicenseAcceptance&gt;
+    &lt;description&gt;$description$&lt;/description&gt;
+    &lt;releaseNotes&gt;Summary of changes made in this release of the package.&lt;/releaseNotes&gt;
+    &lt;copyright&gt;Copyright 2014&lt;/copyright&gt;
+    &lt;tags&gt;Tag1 Tag2&lt;/tags&gt;
+  &lt;/metadata&gt;
+&lt;/package&gt;</pre>
+
+<p>Go ahead and add content for all of the elements except <code>version</code>, which should be left as <code>$version$</code>. This takes care of your package specification. Now we need to figure out how to build the actual NuGet package.</p>
+
+<p>In the past I’ve always created NuGet packages from a project by running <code>nuget pack MyProject.csproj</code> after any changes. However, this process isn’t ideal for a continuous integration environment where the NuGet package file needs to be built by the continuous integration server. Jim Counts has written <a href="http://ihadthisideaonce.com/2014/02/24/nuget-like-a-pro-the-msbuild-way/">some very good instructions on how to add package building to your msbuild process</a>. I initially thought I’d need to do this too, but it turns out that AppVeyor has built-in support for NuGet so you don’t have to worry about messing with your build files (though there may be other reasons why you’d want to do this, such as if you want to also create NuGet packages locally during build).</p>
+
+<p>To turn this feature on, open up your AppVeyor project and click “Settings”. Then select “Build” and check “Package NuGet projects”. When it is enabled AppVeyor calls <code>nuget pack</code> for every project in the solution that has a <code>.nuspec</code> file in its root and then publishes NuGet package artifacts in both project and account feeds.</p>
+
+@Bs.Image("/Content/posts/appveyor-nuget-package.png").SetResponsive()
+
+<p>You'll probably also want to turn on <code>AssemblyInfo</code> patching. This will enable AppVeyor to modify your <code>AssemblyInfo.cs</code> file with an updated version number on each build. Since we told NuGet to use the version number from the assembly as well, this will also automatically update your NuGet package version. To turn on <code>AssemblyInfo</code> patching, go to "Settings" then "General" and the option is near the bottom of the page.</p>
+
+@Bs.Image("/Content/posts/appveyor-assemblyinfo-patching.png").SetResponsive()
+
+<h1>Push Your Code to GitHub and Trigger a Build</h1>
+
+<p>If you haven't yet pushed your code to your GitHub repository, go ahead and do that now. When you commit code to the repository, AppVeyor will automatically kick-off a build. If you already had code in your repository, you can manually trigger a build from the AppVeyor "Latest Build" project page. In both cases, the build will be queued by AppVeyor and may take a minute or two to kick off. Once it does, you'll get an automatically updated console window with the build results on the "Latest Build" page in AppVeyor.</p>
+
+@Bs.Image("/Content/posts/appveyor-build.png").SetResponsive()
+
+<p>Once the build is done, you should be able to see your NuGet package in the "Artifacts" tab.</p>
+
+@Bs.Image("/Content/posts/appveyor-artifacts.png").SetResponsive()
+
+<h1>Deploying Your NuGet Package</h1>
+
+<p>The last step is to deploy your NuGet package. This can be set up automatically using AppVeyor, just click "Settings", "Deployment", and then "Add deployment". Select ""NuGet" from the list and add your API key we fetched when setting up your NuGet.org account (you can leave the "NuGet server" and "Artifact(s)" fields empty). This will automatically push your NuGet package to NuGet.org on your next build.</p>
+
+@Bs.Image("/Content/posts/appveyor-deployment.png").SetResponsive()
+
+<h1>A Final Word, And More Control</h1>
+
+<p>That's all it takes for a simple setup. Alternatively, AppVeyor also allows you to place a special file in your repository that it will use to configure everything. This gives you a little more control and also helps correlate your build with a specific revision in the repository. <a href="http://www.codeproject.com/Tips/806257/Automating-NuGet-Package-Creation-using-AppVeyor">Stuart Wheelwright has written a great tutorial on this approach</a>.</p>
