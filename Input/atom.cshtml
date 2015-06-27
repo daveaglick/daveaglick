@@ -1,0 +1,41 @@
+WriteFileName: feed.atom
+---
+@using System.ServiceModel.Syndication; 
+@using System.IO;
+@using System.Xml;
+@using AngleSharp;
+@using AngleSharp.Parser.Html;
+
+@{
+	Layout = string.Empty;
+	
+	Uri baseUri = new Uri(@"http://daveaglick.com");
+    SyndicationFeed feed = new SyndicationFeed()
+    {
+        Title = new TextSyndicationContent("Dave Glick"),
+        Description = new TextSyndicationContent("Latest blog posts by Dave Glick"),
+        BaseUri = baseUri,
+        Items = Documents
+            .Where(x => x.ContainsKey("Published"))
+            .OrderByDescending(x => x.Get<DateTime>("Published"))
+            .Take(10)
+            .Select(x => {             
+                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")));
+                SyndicationItem item = new SyndicationItem(
+                    x.String("Title") + (x.ContainsKey("Lead") ? " - " + x.String("Lead") : string.Empty),
+                    new HtmlParser(x.Content).Parse().QuerySelector("div#post-content").InnerHtml,
+                    uri, uri.ToString(), x.ContainsKey("Edited") ? x.Get<DateTime>("Edited") : x.Get<DateTime>("Published"))
+                {
+                    PublishDate = x.Get<DateTime>("Published")
+                };
+
+                item.Authors.Add(new SyndicationPerson("", "Dave Glick", ""));
+                return item;
+            })
+    };
+    feed.Links.Add(new SyndicationLink(feed.BaseUri));
+    using (XmlTextWriter writer = new XmlTextWriter(Output))
+    {
+        new Atom10FeedFormatter(feed).WriteTo(writer);
+    }        
+}

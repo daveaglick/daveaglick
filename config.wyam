@@ -1,15 +1,19 @@
 Packages
-	.Install("HtmlAgilityPack")  // TODO: This can be removed once a real excerpt module is developed
+	.Install("AngleSharp")  // TODO: This can be removed once a real excerpt module is developed
 	.Install("Twitter.Bootstrap.Less", "[3.3.4]")
 	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
+Assemblies
+    .Load("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")
+    .Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
 	
 ===
 
 using FluentBootstrap;
 using FluentBootstrap.Wyam;
 using FluentBootstrap.Buttons;
-using HtmlAgilityPack;
+using AngleSharp;
+using AngleSharp.Parser.Html;
 using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
 
 public abstract class RazorPage : BaseRazorPage
@@ -35,20 +39,9 @@ public static class HtmlHelperExtensions
 	// TODO: This can be removed once a real excerpt module is developed
 	public static string GetExcerpt(this HtmlHelper helper, IDocument document)
     { 
-        try
-        {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(document.Content);
-            HtmlNode p = doc.DocumentNode.SelectSingleNode("//p");
-            if (p != null)
-            {
-                return p.OuterHtml;
-            }
-        }
-        catch(Exception)
-        {     
-        }
-        return string.Empty;
+        var doc = new HtmlParser(document.Content).Parse();
+        var p = doc.QuerySelector("p");
+        return p == null ? string.Empty : p.OuterHtml;
     }
 	
 	public static HtmlString Code(this HtmlHelper helper, string code)
@@ -103,9 +96,9 @@ Pipelines.Add("Content",
 Pipelines.Add("Tags",
 	ReadFiles(@"tags\index.cshtml"),
 	FrontMatter(),
-	Execute((doc, ctx) => ctx.Documents.SelectMany(x => x.Value)
-		.Where(x => x.Metadata.ContainsKey("Published") && x.Metadata.ContainsKey("Tags"))
-    	.SelectMany(x => x.Metadata.Get<string[]>("Tags"))
+	Execute((doc, ctx) => ctx.Documents
+		.Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))
+    	.SelectMany(x => x.Get<string[]>("Tags"))
 		.Distinct()
 		.Select(x => doc.Clone(new Dictionary<string, object>()
 		{ 
@@ -113,7 +106,7 @@ Pipelines.Add("Tags",
 			{ "Tag", x }
 		}))),
 	Razor(typeof(RazorPage)),
-	WriteFiles(x => @"tags\" + x.Get<string>("Tag").ToLowerInvariant().Replace(' ', '-') + ".html")
+	WriteFiles(x => @"tags\" + x.String("Tag").ToLowerInvariant().Replace(' ', '-') + ".html")
 );
 
 Pipelines.Add("Less",

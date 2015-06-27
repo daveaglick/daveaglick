@@ -8,9 +8,9 @@
         {
             using (list.ListItem().Begin())
             {
-                string file = doc.Get<string>(MetadataKeys.RelativeFilePath);
+                string file = doc.String("RelativeFilePath");
                 string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
-                @Bs.Strong(Bs.Link(doc.Get<string>("Title"), link).ToHtmlString())
+                @Bs.Strong(Bs.Link(doc.String("Title"), link).ToHtmlString())
                     
                 @Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")
                 using (Bs.Label(null).AddCss("label-comments", "icon-talk-chat-2").Begin())
@@ -18,9 +18,9 @@
                     <a href="@link#disqus_thread" data-disqus-identifier="@System.IO.Path.GetFileNameWithoutExtension(file)"></a>
                 }
                             
-                if (doc.Metadata.ContainsKey("Lead"))
+                if (doc.ContainsKey("Lead"))
                 {
-                    <text><br />@(doc.Get<string>("Lead"))</text>
+                    <text><br />@(doc.String("Lead"))</text>
                 }
             }
         }

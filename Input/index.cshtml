@@ -15,12 +15,12 @@
     using (row.GridColumn().SetSm(8).AddCss("right-border").Begin())
     {
         bool first = true;
-        foreach(IDocument doc in AllDocuments
-            .Where(x => x.Metadata.ContainsKey("Published"))
+        foreach(IDocument doc in Documents
+            .Where(x => x.ContainsKey("Published"))
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(3))
         {
-            string file = doc.Get<string>(MetadataKeys.RelativeFilePath);
+            string file = doc.String("RelativeFilePath");
             string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
                 
             if (!first)
@@ -30,7 +30,7 @@
             first = false;
             <div>
                 <h3>
-                    @Bs.Link(doc.Get<string>("Title"), link)
+                    @Bs.Link(doc.String("Title"), link)
                     <small>@Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
                     <small>
                         @using (Bs.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
@@ -40,7 +40,7 @@
                     </small>
                 </h3>
             </div>
-            string lead = doc.Get<string>("Lead");
+            string lead = doc.String("Lead");
             if(!string.IsNullOrWhiteSpace(lead))
             {
                 @Bs.Lead(lead)
@@ -57,9 +57,9 @@
         <h5>Tags</h5>
         <div>
             @{                
-            	List<KeyValuePair<string, int>> Tags = AllDocuments
-                    .Where(x => x.Metadata.ContainsKey("Published") && x.Metadata.ContainsKey("Tags"))
-                    .SelectMany(x => x.Metadata.Get<string[]>("Tags"))
+            	List<KeyValuePair<string, int>> Tags = Documents
+                    .Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))
+                    .SelectMany(x => x.Get<string[]>("Tags"))
                     .GroupBy(x => x)
                     .Select(x => new KeyValuePair<string, int>(x.Key, x.Count()))
                     .OrderByDescending(x => x.Value)

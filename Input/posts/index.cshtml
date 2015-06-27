@@ -11,8 +11,8 @@ Title: Archive
 @Html.Partial("_Title")
 
 @{
-    foreach(IGrouping<int, IDocument> year in AllDocuments
-        .Where(x => x.Metadata.ContainsKey("Published"))
+    foreach(IGrouping<int, IDocument> year in Documents
+        .Where(x => x.ContainsKey("Published"))
         .OrderByDescending(x => x.Get<DateTime>("Published"))
         .GroupBy(x => x.Get<DateTime>("Published").Year)
         .OrderByDescending(x => x.Key))

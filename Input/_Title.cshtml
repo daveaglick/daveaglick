@@ -4,7 +4,7 @@
 {
     using (row.GridColumn().SetSm(12).Begin())
     { 
-        @Bs.Div().AddCss("title", (string)ViewData["TitleClass"]).SetText(" " + Model.Get<string>("Title"))
+        @Bs.Div().AddCss("title", (string)ViewData["TitleClass"]).SetText(" " + Model.String("Title"))
     }
 }
 <hr />

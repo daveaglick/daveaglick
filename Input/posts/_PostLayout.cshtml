@@ -2,11 +2,11 @@
 
 @{
     Layout = "_Layout.cshtml";
-    var Title = Model.Get<string>("Title", null);
-    var Lead = Model.Get<string>("Lead", null);
-    var Published = Model.Get<DateTime>("Published", default(DateTime));
-    var Edited = Model.Get<DateTime>("Edited", default(DateTime));        
-    var Page = System.IO.Path.GetFileNameWithoutExtension(Model.Get<string>(MetadataKeys.RelativeFilePath));
+    var Title = Model.String("Title");
+    var Lead = Model.String("Lead");
+    var Published = Model.Get<DateTime>("Published");
+    var Edited = Model.Get<DateTime>("Edited");        
+    var Page = System.IO.Path.GetFileNameWithoutExtension(Model.String("RelativeFilePath"));
     var Tags = Model.Get<string[]>("Tags");
 }
 
@@ -64,7 +64,7 @@
 <hr />
 @using (var row = Bs.GridRow().Begin())
 {
-    using (row.GridColumn().SetSm(12).Begin())
+    using (row.GridColumn().SetSm(12).SetId("post-content").Begin())
     {
         @RenderBody()
     }         
