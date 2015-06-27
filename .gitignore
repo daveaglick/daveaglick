@@ -21,8 +21,9 @@ ipch
 *.pdb
 /*.~vsd
 *UpgradeWizard*
-packages*/
+packages/*
 !lib/*
 *App_Data*
 obj
 Output*/
+!packages/Twitter.Bootstrap.Less.*
