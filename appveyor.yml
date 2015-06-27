@@ -1,0 +1,40 @@
+branches:
+  only:
+    - master
+    
+environment:
+  access_token:
+    secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
+
+install:
+  - mkdir ..\Wyam
+  - mkdir ..\Output
+  # Fetch the latest version of Wyam 
+  # Have to use the Cygwin version of grep because the gitbash one is old and doesn't support -o option
+  # Also have to use this little hack to get the curl/grep output into an environment variable (via a file) 
+  # Note that we have to escape special chars inside this YAML scalar string
+  - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | C:\\cygwin\\bin\\grep -oP ': \"\\K[^\"]*' > ..\\Wyam\\wyamversion.txt"
+  - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
+  - echo %WYAMVERSION%
+  # Get and unzip the latest version of Wyam
+  - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam.zip" -FileName "..\Wyam\Wyam.zip"
+  - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
+
+build_script:
+  - ..\Wyam\Wyam.exe --output ..\Output
+
+on_success:
+  # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
+  # See http://www.appveyor.com/docs/how-to/git-push for more info
+  - git config --global credential.helper store
+  - git config --global user.email "dave@daveaglick.com"
+  - git config --global user.name "Dave Glick"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git checkout gh-pages
+  - git rm -rf .
+  - xcopy ..\Output . /E
+  - echo daveaglick.com > CNAME
+  - git remote set-url origin https://github.com/daveaglick/daveaglick.git
+  - git add -A
+  - git commit -a -m "Commit from AppVeyor"
+  - git push
