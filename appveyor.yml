@@ -24,7 +24,7 @@ build_script:
   - ..\Wyam\Wyam.exe --output ..\Output
 
 on_success:
-  - del Input/Scripts/jquery-2.1.1-vsdoc.js
+  - del Input\Scripts\jquery-2.1.1-vsdoc.js
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
