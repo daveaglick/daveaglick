@@ -30,11 +30,20 @@ public static class HtmlHelperExtensions
     {
         return helper.Bootstrap().LinkButton(
             string.Format(" {0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
-            "/tags/" + tag.ToLowerInvariant().Replace(' ', '-'))
+            	@"/" + GetTagLink(tag))
             .SetState(buttonState)
             .SetSize(ButtonSize.Sm)
             .AddCss("tag-button", "icon-tag-2");
     }
+	
+	public static string GetTagLink(string tag)
+	{
+		if(tag.StartsWith("."))
+		{
+		    tag = tag.Substring(1);
+		}
+		return @"tags/" + tag.ToLowerInvariant().Replace(' ', '-');
+	}
 	
 	// TODO: This can be removed once a real excerpt module is developed
 	public static string GetExcerpt(this HtmlHelper helper, IDocument document)
@@ -106,7 +115,7 @@ Pipelines.Add("Tags",
 			{ "Tag", x }
 		}))),
 	Razor(typeof(RazorPage)),
-	WriteFiles(x => @"tags\" + x.String("Tag").ToLowerInvariant().Replace(' ', '-') + ".html")
+	WriteFiles(x => HtmlHelperExtensions.GetTagLink(x.String("Tag")) + ".html")
 );
 
 Pipelines.Add("Less",
