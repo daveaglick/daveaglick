@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .banner {
     & .hello {
-        font-family: 'Indie Flower', cursive;
+        font-family: @font-family-sans-serif;
         font-size: floor((@font-size-h1 * 2));
         line-height: @headings-line-height;
     }
@@ -133,12 +133,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .lead {
-    font-family: 'Indie Flower', cursive;
+    font-family: @font-family-sans-serif;
 }
 
-p, .p {
+p, .p, #body-content ul {
     font-family: @font-family-serif;
     line-height: 24px;
+    a:link, a:visited, a:active {
+        color: darken(@brand-info, 15%);
+    }
+    a:hover {
+        color: darken(@brand-info, 30%);
+    }
 }
 
 strong {
