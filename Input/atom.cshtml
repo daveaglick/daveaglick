@@ -20,7 +20,7 @@ WriteFileName: feed.atom
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(10)
             .Select(x => {             
-                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")));
+                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")).Replace("\\", "/"));
                 SyndicationItem item = new SyndicationItem(
                     x.String("Title") + (x.ContainsKey("Lead") ? " - " + x.String("Lead") : string.Empty),
                     new HtmlParser(x.Content).Parse().QuerySelector("div#post-content").InnerHtml,

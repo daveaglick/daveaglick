@@ -20,7 +20,7 @@
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(3))
         {
-            string file = doc.String("RelativeFilePath");
+            string file = doc.String("RelativeFilePath").Replace("\\", "/");
             string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
                 
             if (!first)

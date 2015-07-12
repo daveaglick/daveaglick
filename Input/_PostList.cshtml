@@ -8,7 +8,7 @@
         {
             using (list.ListItem().Begin())
             {
-                string file = doc.String("RelativeFilePath");
+                string file = doc.String("RelativeFilePath").Replace("\\", "/");
                 string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
                 @Bs.Strong(Bs.Link(doc.String("Title"), link).ToHtmlString())
                     
