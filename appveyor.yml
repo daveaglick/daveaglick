@@ -29,7 +29,7 @@ on_success:
   - git config --global user.email "dave@daveaglick.com"
   - git config --global user.name "Dave Glick"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git checkout gh-pages
+  - git checkout -b gh-pages origin/gh-pages
   - git rm -rf .
   - xcopy ..\Output . /E
   - echo daveaglick.com > CNAME
