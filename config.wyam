@@ -1,5 +1,5 @@
 Packages
-	.Install("AngleSharp")  // TODO: This can be removed once a real excerpt module is developed
+	.Install("AngleSharp", "[0.8.5]")  // TODO: This can be removed once a real excerpt module is developed
 	.Install("Twitter.Bootstrap.Less", "[3.3.4]")
 	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
