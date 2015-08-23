@@ -75,7 +75,7 @@ string source = @@"Lorem ipsum dolor sit amet, consectetur adipiscing
 	fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
 	sunt in culpa qui officia deserunt mollit anim id est laborum.";
 string search = @@"dolor";
-string replace = @@"foorbar";
+string replace = @@"foobar";
 string replaced = new string(source.Replace(search, replace).ToArray());
 ```
 
