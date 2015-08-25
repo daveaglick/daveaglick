@@ -1,5 +1,4 @@
 Packages
-	.Install("AngleSharp", "[0.8.5]")  // TODO: This can be removed once a real excerpt module is developed
 	.Install("Twitter.Bootstrap.Less", "[3.3.4]")
 	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
@@ -45,14 +44,6 @@ public static class HtmlHelperExtensions
 		return @"tags/" + tag.ToLowerInvariant().Replace(' ', '-');
 	}
 	
-	// TODO: This can be removed once a real excerpt module is developed
-	public static string GetExcerpt(this HtmlHelper helper, IDocument document)
-    { 
-        var doc = new HtmlParser(document.Content).Parse();
-        var p = doc.QuerySelector("p");
-        return p == null ? string.Empty : p.OuterHtml;
-    }
-	
 	public static HtmlString Code(this HtmlHelper helper, string code)
     {
         int num = 0;
@@ -85,6 +76,10 @@ Pipelines.Add("Posts",
 		FrontMatter(Yaml())		
 	),
 	Razor(typeof(RazorPage)),
+	Excerpt(),
+	Excerpt("div#post-content")
+		.SetMetadataKey("PostContent")
+		.SetOuterHtml(false),
 	WriteFiles(".html")
 );
 

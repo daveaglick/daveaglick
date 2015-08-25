@@ -45,7 +45,7 @@
             {
                 @Bs.Lead(lead)
             }
-            @Html.Raw(Html.GetExcerpt(doc))                
+            @Html.Raw(doc.String("Excerpt"))                
             @Bs.LinkButton("Read More &rarr;", link)            
         }
         <hr />
