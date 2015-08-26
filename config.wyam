@@ -1,5 +1,5 @@
 Packages
-	.Install("Twitter.Bootstrap.Less", "[3.3.4]")
+	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
 	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
 Assemblies
@@ -11,8 +11,6 @@ Assemblies
 using FluentBootstrap;
 using FluentBootstrap.Wyam;
 using FluentBootstrap.Buttons;
-using AngleSharp;
-using AngleSharp.Parser.Html;
 using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
 
 public abstract class RazorPage : BaseRazorPage
@@ -31,8 +29,7 @@ public static class HtmlHelperExtensions
             string.Format(" {0}{1}", tag, count == null ? string.Empty : string.Format(" <span class='badge'>{0}</span>", count)), 
             	@"/" + GetTagLink(tag))
             .SetState(buttonState)
-            .SetSize(ButtonSize.Sm)
-            .AddCss("tag-button", "icon-tag-2");
+            .SetSize(ButtonSize.Sm);
     }
 	
 	public static string GetTagLink(string tag)
@@ -115,6 +112,7 @@ Pipelines.Add("Tags",
 
 Pipelines.Add("Less",
     ReadFiles("master.less"),
+    Concat(ReadFiles("clean-blog.less")),
     Concat(ReadFiles("bootstrap.less")),
     Less(),
     WriteFiles(".css")

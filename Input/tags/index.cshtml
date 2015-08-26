@@ -7,9 +7,7 @@ Title: All Tags
         .ContainsKey("Published")
         .ToLookup<string>("Tags");
 	string Tag = Model.Get<string>("Tag", null);
-    ViewData["TitleClass"] = Tag == null ? "icon-tags" : "icon-tag-2";
 }
-@Html.Partial("_Title")
 
 @using (Bs.Div().AddCss("container-sm-height").Begin())
 {

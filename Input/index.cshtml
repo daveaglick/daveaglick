@@ -1,14 +1,12 @@
 @using FluentBootstrap;
 
-@using (var row = Bs.GridRow().AddCss("banner").Begin())
-{
-    using (row.GridColumn(12).Begin())
-    {
-        <div class="hello">Hello.</div>
-        <div class="intro">My name is Dave Glick. By day, I'm a .NET and open source enthusiast. By night, I'm a husband and father. Somewhere in between the two I write stuff here.</div>
-    }
+@section Header {
+    <div class="site-heading">
+        <h1>Welcome!</h1>
+        <hr class="small">
+        <span class="subheading">My name is Dave Glick. By day, I'm a .NET and open source enthusiast. By night, I'm a husband and father. Somewhere in between the two I write stuff here.</span>
+    </div>
 }
-<hr />
 
 @using (var row = Bs.GridRow().Begin())
 {
@@ -28,30 +26,21 @@
                 <hr /> 
             }
             first = false;
-            <div>
-                <h3>
-                    @Bs.Link(doc.String("Title"), link)
-                    <small>@Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")</small>
-                    <small>
-                        @using (Bs.Label(null).AddCss("label-comments icon-talk-chat-2").Begin())
-                        {
-                            <a href="@link#disqus_thread" data-disqus-identifier="@System.IO.Path.GetFileNameWithoutExtension(file)"></a>
-                        }
-                    </small>
-                </h3>
-            </div>
             string lead = doc.String("Lead");
-            if(!string.IsNullOrWhiteSpace(lead))
-            {
-                @Bs.Lead(lead)
-            }
-            @Html.Raw(doc.String("Excerpt"))                
-            @Bs.LinkButton("Read More &rarr;", link)            
+            <div class="post-preview">
+                <a href="@link">
+                    <h2 class="post-title">@doc.String("Title")</h2>
+                    @if(!string.IsNullOrWhiteSpace(lead))
+                    {
+                        <h3 class="post-subtitle">@lead</h3>
+                    }
+                </a>
+                <p class="post-meta">Posted on @(doc.Get<DateTime>("Published").ToLongDateString())</p>
+                @Html.Raw(doc.String("Excerpt"))             
+            </div>       
         }
-        <hr />
-        <div><strong>@Bs.Link(" Archive", "/posts")</strong></div>
     }
-    using (row.GridColumn().SetSm(4).Begin())
+    using (row.GridColumn().SetSm(4).AddCss("sidebar").Begin())
     {
         <hr class="@Css.VisibleXsBlock" />
         <h5>Tags</h5>
@@ -68,12 +57,36 @@
             }            
             @foreach (KeyValuePair<string, int> tag in Tags)
             { 
-                @Html.TagButton(tag.Key, tag.Value)
+                @Html.TagButton(tag.Key, tag.Value)<br>
             }
         </div>
-        <div><strong>@Bs.Link("View All Tags", "/tags")</strong></div>
+        <ul class="pager">
+            <li class="next">
+                <a href="/tags">View All Tags &rarr;</a>
+            </li>
+        </ul>
         <hr />
         <h5>On The Interwebs</h5>
         @Html.Partial("_SocialLinks")
+        <hr />
+        <h5>Older Posts</h5>
+        @using (var list = Bs.List().Begin())
+        {
+            foreach(IDocument doc in Documents
+                .Where(x => x.ContainsKey("Published"))
+                .OrderByDescending(x => x.Get<DateTime>("Published"))
+                .Skip(3)
+                .Take(4))
+            {
+                string file = doc.String("RelativeFilePath").Replace("\\", "/");
+                string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");           
+                @list.ListItem(Bs.Link(@doc.String("Title"), link))
+            }
+        }
+        <ul class="pager">
+            <li class="next">
+                <a href="/posts">Archive &rarr;</a>
+            </li>
+        </ul>
     } 
 }

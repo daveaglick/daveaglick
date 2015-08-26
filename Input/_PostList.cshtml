@@ -2,27 +2,21 @@
 
 @{
     var docs = (IEnumerable<IDocument>)ViewData["PostListDocuments"];
-    using (var list = Bs.List(ListType.Unordered).Begin())
-    {          
-        foreach (IDocument doc in docs)
-        {
-            using (list.ListItem().Begin())
-            {
-                string file = doc.String("RelativeFilePath").Replace("\\", "/");
-                string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
-                @Bs.Strong(Bs.Link(doc.String("Title"), link).ToHtmlString())
-                    
-                @Bs.Label(doc.Get<DateTime>("Published").ToShortDateString()).AddCss("label-date", "icon-calendar")
-                using (Bs.Label(null).AddCss("label-comments", "icon-talk-chat-2").Begin())
+    foreach (IDocument doc in docs)
+    {
+        string file = doc.String("RelativeFilePath").Replace("\\", "/");
+        string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
+        string lead = doc.String("Lead");
+        
+        <div class="post-list">
+            <a href="@link">
+                <h3 class="post-title">@doc.String("Title")</h3>
+                @if(!string.IsNullOrWhiteSpace(lead))
                 {
-                    <a href="@link#disqus_thread" data-disqus-identifier="@System.IO.Path.GetFileNameWithoutExtension(file)"></a>
+                    <h4 class="post-subtitle">@lead</h4>
                 }
-                            
-                if (doc.ContainsKey("Lead"))
-                {
-                    <text><br />@(doc.String("Lead"))</text>
-                }
-            }
-        }
+            </a>
+            <p class="post-meta">Posted on @(doc.Get<DateTime>("Published").ToLongDateString())</p>            
+        </div>   
     }
 }

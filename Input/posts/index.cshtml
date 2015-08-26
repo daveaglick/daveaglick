@@ -6,18 +6,14 @@ Title: Archive
 }
 
 @{
-    ViewData["TitleClass"] = "icon-archive";
-}
-@Html.Partial("_Title")
-
-@{
     foreach(IGrouping<int, IDocument> year in Documents
         .Where(x => x.ContainsKey("Published"))
         .OrderByDescending(x => x.Get<DateTime>("Published"))
         .GroupBy(x => x.Get<DateTime>("Published").Year)
         .OrderByDescending(x => x.Key))
     {
-        <h3>@year.Key</h3>
+        <h1>@year.Key</h1>
+        <hr />
         ViewData["PostListDocuments"] = year;
         @Html.Partial("_PostList");
     }

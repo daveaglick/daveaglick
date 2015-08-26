@@ -1,301 +1,83 @@
 ﻿@import "bootstrap\\variables.less";
 @import "bootstrap\\mixins.less";
 
-/* Pure CSS sticky footer concept from http://css-tricks.com/snippets/css/sticky-footer/ */
-
-html, body {
-  height: 100%;
-}
-
-#page-wrapper {
-  min-height: 100%;  
-  margin-bottom: -130px; /* equal to footer height */
-}
-
-#page-wrapper:after {
-  content: "";
-  display: block;
-}
-
-#sticky-footer-wrapper, #page-wrapper:after {  
-  height: 130px; /* must be the same height as footer */
-}
-
-#sticky-footer-wrapper {
-    width: 100%;
-    padding-top: 12px;
-
-    & #sticky-footer {
-        background-color: @gray-dark;
-        color: @gray-light;
-        padding-top: 12px;
-        height: 118px; /* equal to footer height minus padding */
-    }
-}
-
-// ***
-
-body {
-    border-top: 12px solid @gray-dark;
+#intro-header {	
     background-color: @gray;
 }
 
-#body-content {
-    margin-top: 18px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    .border-top-radius(6px);
-    .border-bottom-radius(6px);
-    background-color: #fff;
+.intro-header .site-heading .subheading {
+    line-height: 1.6;
 }
 
-.logo-col {
-    padding-bottom: 6px;
-    background-color: @gray-dark;
-    font-weight: 900;
-    color: @gray-lighter;
-    font-size: @font-size-h3;
-    .border-bottom-radius(6px);
-
-    & a, & a:hover, & a:focus, & a:active {
-        color: @gray-lighter;
-    }
+.btn {
+    margin-bottom: 6px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    & a, & a:hover, & a:focus, & a:active {
-        color: @headings-color;
-    }
+.btn-sm {
+    font-size: @font-size-small;
+    padding: @padding-small-vertical @padding-small-horizontal;
 }
 
-.btn-default .badge {
-    background-color: #ccc;
-    color: @gray;
-}
-
-.nav-col, .proj-col {
-    padding-top: 6px;
-    display: block;
-    color: @gray-dark;
-
-    & a, & a:hover, & a:focus, & a:active {
-        color: @gray-lighter;
-    }
-
-    & strong {
-        font-weight: 900;
-    }
-
-    & .navbar-toggle {
-        margin-right: 0;
-    }
-}
-
-.icon-bar {
-    background-color: @gray-lighter;
-}
-
-.topnav {
-    color: @gray;
-    font-weight: bold;
-}
-
-.banner {
-    & .hello {
-        font-family: @font-family-sans-serif;
-        font-size: floor((@font-size-h1 * 2));
-        line-height: @headings-line-height;
-    }
-
-    & .intro {
-        font-family: @font-family-serif;
-        font-size: @font-size-h3;
-    }
-
-    & .title {
-        font-weight: 900;
-        font-size: floor((@font-size-h1 * 1.3));
-        word-wrap: break-word;
-    }
-
-    & .lead {
-        font-size: @font-size-h1;
-        margin-bottom: 0;
-    }
-
-    & .stats {
-        padding-bottom: 10px;
-
-        & .stat-heading {
-            text-align: right;
-        }
-    }
-}
-
-.lead {
-    font-family: @font-family-sans-serif;
-}
-
-p, .p, #body-content ul {
-    font-family: @font-family-serif;
-    line-height: 24px;
-    a:link, a:visited, a:active {
-        color: darken(@brand-info, 15%);
-    }
-    a:hover {
-        color: darken(@brand-info, 30%);
-    }
-}
-
-strong {
-    font-weight: 900;
+.btn-xs {
+    font-size: @font-size-small;
+    padding: 1px 5px;
 }
 
 .right-border {
     border-right: 1px solid @gray-lighter;
 }
 
-.tag-button {
-    margin-bottom: 6px;
-
-    &::before {
-        color: @gray-light;
-    }
+.sidebar li {
+    margin-bottom: 8px;
 }
 
-.label-date::before {
-    margin-right: 6px;
-    color: @label-color;
+.post-list {
+	> a {
+		color: @gray-dark;
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			color: @brand-primary;
+		}
+		> .post-title {
+			margin-top: 10px;
+			margin-bottom: 6px;
+		}
+		> .post-subtitle {
+			margin: 0;
+			font-weight: 300;
+			margin-bottom: 6px;
+		}
+	}
+	> .post-meta {
+		color: @gray-light;
+        font-size: 16px;
+		font-style: italic;
+		margin-top: 0;
+		> a {
+			text-decoration: none;
+			color: @gray-dark;
+			&:hover,
+			&:focus {
+				color: @brand-primary;
+				text-decoration: underline;
+			}
+		}
+	}
 }
 
-.label-comments {
-    color: @label-color;
-
-    & a {
-        color: @label-color !important;
-
-        &:hover,
-        &:focus {
-            color: @label-color !important;
+.post-heading {
+    .subheading {
+        margin-bottom: 0;
+    }
+    .meta {
+        margin-top: 30px;
+    }
+    .tags {
+        margin-top: 30px;
+        .btn {
+            border-color: @gray-darker;
         }
-    }
-
-    &::before {
-        margin-right: 6px;
-        color: @label-color;
-    }
-}
-
-td {
-    word-wrap: break-word;
-    word-break: break-all;
-}
-
-.graph {  
-    color: @pre-color;
-    background-color: @pre-bg;
-    border: 1px solid @pre-border-color;
-    border-radius: @border-radius-base;
-}
-
-@media (max-width: @screen-xs-max) {
-
-    #page-wrapper {
-      margin-bottom: -240px;
-    }
-    
-    #body-content {
-        margin-top: 60px;
-        .border-top-radius(0);
-        .border-bottom-radius(0);
-    }
-
-    #sticky-footer-wrapper, #page-wrapper:after {  
-      height: 240px; /* must be the same height as footer */
-    }
-
-    #sticky-footer-wrapper {
-        padding-top: 0;
-
-        & #sticky-footer {
-            height: 240px; /* equal to footer height minus padding */
-        }
-    }
-
-    body {
-        border-top: none;
-    }
-    .nav-row {
-        background-color: @gray-dark;
-    }
-
-    .logo-col {
-        padding-top: 6px;
-        padding-bottom: 0;
-        .border-bottom-radius(none);
-    }
-
-    .nav-col, .proj-col {
-        padding-top: 0;
-        color: @gray-light;
-
-        & a, & a:hover, & a:focus, & a:active {
-            color: @gray-lighter;
-        }
-
-        &.collapse {
-            display: none;
-
-            &.in {
-                display: block;
-            }
-        }
-    }
-
-    .hero-row {
-        padding-top: 6px;
-        
-        & .stats .stat-heading {
-            text-align: left;
-        }
-    }
-
-    .right-border {
-        border-right: none;
-    }
-
-    .banner {
-        & .title {
-            font-size: @font-size-h2;
-        }
-
-        & .hello {
-            font-size: @font-size-h2;
-        }
-
-        & .intro {
-            font-size: @font-size-h4;
-        }
-        
-        & .lead {
-            font-size: @font-size-h2;
-        }
-    }
-
-    h1 {
-        font-size: @font-size-h2;
-    }
-    h2 {
-        font-size: @font-size-h3;
-    }
-    h3 {
-        font-size: @font-size-h4;
-    }
-    h4 {
-        font-size: @font-size-h5;
-    }
-    h5 {
-        font-size: @font-size-h6;
     }
 }
 
