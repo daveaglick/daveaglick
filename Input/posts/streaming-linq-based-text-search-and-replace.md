@@ -76,7 +76,7 @@ string source = @@"Lorem ipsum dolor sit amet, consectetur adipiscing
 	sunt in culpa qui officia deserunt mollit anim id est laborum.";
 string search = @@"dolor";
 string replace = @@"foobar";
-string replaced = new string(source.Replace(search, replace).ToArray());
+string replaced = new string(source.ToCharArray().Replace(search, replace).ToArray());
 ```
 
 Performance isn't terrible, but it's not too great either. In very rough benchmarking it's about an order of magnitude (and a little more) slower than a standard `string.Replace(...)`. Of course, there are much faster string search algorithms that take advantage of being able to seek. You could also speed this up by buffering and then doing a `string.Replace(...)` on each chunk (though you'd have to account for matches at the break points of the chunks). You could also easly genericize the algorithm to search and replace any sort of object in an `IEnumerable<T>`, not just `char`.

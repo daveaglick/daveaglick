@@ -2,10 +2,11 @@ Packages
 	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
 	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
+
 Assemblies
     .Load("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")
     .Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
-	
+
 ===
 
 using FluentBootstrap;
@@ -76,7 +77,7 @@ Pipelines.Add("Posts",
 	Excerpt(),
 	Excerpt("div#post-content")
 		.SetMetadataKey("PostContent")
-		.SetOuterHtml(false),
+		.GetOuterHtml(false),
 	WriteFiles(".html")
 );
 
@@ -97,17 +98,17 @@ Pipelines.Add("Content",
 Pipelines.Add("Tags",
 	ReadFiles(@"tags\index.cshtml"),
 	FrontMatter(),
-	Execute((doc, ctx) => ctx.Documents
+	Execute(@ctx.Documents
 		.Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))
     	.SelectMany(x => x.Get<string[]>("Tags"))
 		.Distinct()
-		.Select(x => doc.Clone(new Dictionary<string, object>()
+		.Select(x => @doc.Clone(new Dictionary<string, object>()
 		{ 
 		    { "Title", x },
 			{ "Tag", x }
 		}))),
 	Razor(typeof(RazorPage)),
-	WriteFiles(x => HtmlHelperExtensions.GetTagLink(x.String("Tag")) + ".html")
+	WriteFiles(HtmlHelperExtensions.GetTagLink(@doc.String("Tag")) + ".html")
 );
 
 Pipelines.Add("Less",
@@ -119,7 +120,7 @@ Pipelines.Add("Less",
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x => 
+	CopyFiles("*").Where(x =>
 		Path.GetExtension(x) != ".cshtml" 
 		&& Path.GetExtension(x) != ".md"
 		&& Path.GetExtension(x) != ".less")
