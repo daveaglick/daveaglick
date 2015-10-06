@@ -5,11 +5,11 @@ Tags:
   - strings
   - algorithms
 ---
-I've been working on a Roslyn-powered documentation generator built on top of [Wyam](http://wyam.io) for a little while, but recently ran into an area that's taken a lot longer than I thought it would. I've been trying to generate syntax strings that look like the ones on the MSDN site:
+I've been working on a Roslyn-powered documentation generator built on top of [Wyam](http://wyam.io) for a little while, but recently ran into an area that's taken a lot longer than I thought it would. I've been trying to generate syntax strings that look like the ones on the MSDN site.
 
 <img src="/Content/posts/syntax.png" alt="Syntax" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
 
-It turns out this is really hard. Roslyn doesn't quite do this in the box (thought it gets close) and getting the formatting correct with wrapping and indents is a challenge.
+It turns out this is really hard. Roslyn doesn't quite do this in the box (though it gets close). This means you have to rely on parsing out the different segments of the definition yourself (this part of the process is for a future blog post). Getting the formatting to look good with wrapping and indents once you bring it all together is a challenge.
 
 To addess that last problem, I created a little helper class that can append string segments with an optional indication of whether they should be allowed to wrap to the next line. You can also specify (and change) a string prefix to use for new lines (for indenting text, for example). I haven't seen anything else like this out there, and it took me a while to work through all the edge cases (it's covered by unit tests in my actual project), so I figured I'd share in case it helps anyone.
 
