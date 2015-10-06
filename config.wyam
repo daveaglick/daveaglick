@@ -1,6 +1,6 @@
 Packages
 	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
-	.Install("FluentBootstrap.Wyam", true)
+	.Install("FluentBootstrap.Wyam", "[3.3.5.1-beta]")
 	.Install("jQuery", "[2.1.1]");
 
 Assemblies
