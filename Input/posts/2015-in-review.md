@@ -1,5 +1,5 @@
 Title: 2015 In Review
-Lead: A personal look back.
+Lead: A personal look back (and an important announcement).
 Published: 1/1/2016
 Tags:
   - personal
@@ -77,3 +77,11 @@ I look forward to another ultra-productive 2016. My family will remain my top pr
 My big open source project for 2016 is to improve Wyam to the point that it's stable and easy to use. There is so much unrealized potential and I want to see more people benefit from what it can do for them and how it can make their blogging, documentation, and other site generation activities easier. My goal is no less than making Wyam as powerful and popular as the top static generators like Jekyll, Hugo, Middleman, etc.
 
 Other than all that, I plan to savor the ride. Coding is fun. Community is fun. I'm thankful to have another year to enjoy them.
+
+# One More Thing (A Last-Minute Update)
+---
+As I was waiting for AppVeyor to build my site, I got this in my email:
+
+<img src="/Content/posts/mvp.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+
+I am still in a bit of shock. I've worked very hard this last year on open source and community efforts, and am extremely humbled and grateful for this recognition. One of my biggest goals for 2016 will be to live up to the trust placed in me by Microsoft and the community and to help continue to share my code and my knowledge with .NET developers everywhere. Thank you!
