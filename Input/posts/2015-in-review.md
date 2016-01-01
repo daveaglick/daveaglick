@@ -23,6 +23,10 @@ I was so enthusiastic about Roslyn that I wanted to play around with it well bef
 
 <img src="/Content/posts/linqpad-about.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
 
+## @dotnetissues
+
+I love that there are so many new Microsoft open source projects on GitHub. I also love keeping tabs on their new issues and pull requests - it's a great way to keep up with what's going on and learning how they work. Unfortunately, GitHub's notification system is all or nothing. You can get notices for every activity, including comments, but not just new stuff. I'd prefer to see all the new issues and then choose which to follow more closely. To address this I created the @dotnetissues Twitter account. It tweets all new issues and pull requests for many of the most important Microsoft GitHub projects. By hooking it up to IFTTT, you can get email notices for issues in the repositories and then only subscribe to issues you care about.
+
 ## RazorGenerator, DelegateDecompiler, Up For Grabs, Roslyn, Etc.
 
 In addition to my own open source projects, I set a goal for 2015 to actively contribute to other projects as well. I think I did pretty well in that regard. Here were some of my bigger OSS contributions for the year:
