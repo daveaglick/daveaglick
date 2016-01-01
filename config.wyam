@@ -1,6 +1,6 @@
 Packages
 	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
-	.Install("FluentBootstrap.Wyam", "[3.3.5.1-beta]", true)
+	.Install("FluentBootstrap.Wyam", true)
 	.Install("jQuery", "[2.1.1]");
 
 Assemblies
@@ -120,8 +120,5 @@ Pipelines.Add("Less",
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x =>
-		Path.GetExtension(x) != ".cshtml" 
-		&& Path.GetExtension(x) != ".md"
-		&& Path.GetExtension(x) != ".less")
+	CopyFiles("*").WithoutExtensions(".cshtml", ".md", ".less")
 );

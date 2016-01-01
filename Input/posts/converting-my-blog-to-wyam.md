@@ -38,7 +38,7 @@ Pipelines.Add(
 Once I had the non-blog pages working, I moved on the blog posts. In the previous site each post specified it's metadata (like title, published date, etc.) by setting additional Razor page properties from the custom base class. In this case, I had a better mechanism for specifying metadata and used [YAML](http://wyam.io/modules/yaml) [front matter](http://wyam.io/modules/frontmatter) for the metadata. This required me to manually change the declarations at the top of each blog post from something like this:
 
 ```
-@@{
+@{
     Title = "Announcing LINQPad.CodeAnalysis";
     Lead = ".NET Compiler Platform helpers and utilities for LINQPad.";
     Published = new DateTime(2015, 3, 18);
@@ -65,14 +65,14 @@ It's a nice side benefit that the YAML is easier to read as well. This process t
 The last step was to convert over the more dynamic pages in the site, specifically the [post archives](/posts) and [list of tags](/tags) and cooresponding tag archives. For the post archive, I wrote a LINQ statement that used the Wyam metadata to fetch all the posts in the site:
 
 ```
-@@{
+@{
   foreach(IGrouping<int, IDocument> year in Documents
     .Where(x => x.ContainsKey("Published"))
     .OrderByDescending(x => x.Get<DateTime>("Published"))
     .GroupBy(x => x.Get<DateTime>("Published").Year)
     .OrderByDescending(x => x.Key))
   {
-    <h3>@@year.Key</h3>
+    <h3>@year.Key</h3>
     // ...
   }
 }
@@ -81,13 +81,13 @@ The last step was to convert over the more dynamic pages in the site, specifical
 Then for the tags, I did something similar (this uses the special `ToLookup` extension for handling metadata lookup in Wyam):
 
 ```
-@@{    
+@{    
   var DocumentsByTag = Documents
     .ContainsKey("Published")
     .ToLookup<string>("Tags");
 }
 // ...
-@@{
+@{
   foreach (var tagDocuments in DocumentsByTag.OrderBy(x => x.Key))
   {
     // ...
@@ -99,7 +99,7 @@ Finally, to generate the individual archive page for each tag, I added a special
 
 ```
 Pipelines.Add("Tags",
-  ReadFiles(@@"tags\index.cshtml"),
+  ReadFiles(@"tags\index.cshtml"),
   FrontMatter(),
   Execute((doc, ctx) => ctx.Documents
     .Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))

@@ -10,7 +10,7 @@ As more and more of the .NET framework, runtime, etc. get put in the open on Git
 
 To achieve this, I created [a Twitter bot](https://twitter.com/dotnetissues) that scans core .NET respositories and tweets all new issues:
 
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">aspnet\Configuration#292 <a href="https://t.co/KfVNvpgrUr">https://t.co/KfVNvpgrUr</a>&#10;Add `Exists` to IConfigurationSection</p>&mdash; DotNet Issues (@@dotnetissues) <a href="https://twitter.com/dotnetissues/status/645925456026406912">September 21, 2015</a></blockquote>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">aspnet\Configuration#292 <a href="https://t.co/KfVNvpgrUr">https://t.co/KfVNvpgrUr</a>&#10;Add `Exists` to IConfigurationSection</p>&mdash; DotNet Issues (@dotnetissues) <a href="https://twitter.com/dotnetissues/status/645925456026406912">September 21, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 It currently looks at the following repositores (let me know in the comments if I should add any additional ones):
