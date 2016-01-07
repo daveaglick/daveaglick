@@ -49,10 +49,13 @@ It turns out Cake *also* uses the API for a very specific purpose. Because licen
 
 [Squirrel](https://github.com/Squirrel/Squirrel.Windows) is a very interesting case. It's an application installation and updating framework that uses NuGet under the hood. However, it doesn't use standard NuGet packages. Instead, it creates "delta packages" that contain only the deltas from some previous NuGet package to the current one. This allows it to efficiently distribute application updates without sending the whole package over again. I love this idea because it represents using the NuGet API to make use of some aspects of the technology while tailoring the exact use to the need at hand.
 
+## ReSharper Unified Installer
+
+Another product that uses NuGet packages for installation and deployment scenarios is the ReSharper Unified Installer. There's a [great blog post here](https://blog.jetbrains.com/dotnet/2015/07/01/resharper-unified-nuget-based-installer-how/) on how and why JetBrains selected NuGet for distributing their updates. It mostly comes down to flexibility, and they've done some neat things with package metadata and gallery hosting (Azure-based vs. local depending on the kind of install). 
+
 ## Chocolatey
 
 [Chocolatey](https://chocolatey.org/) essentially *is* NuGet (or at least the "gallery" idea) for whole applications instead of application dependencies. It makes extensive use of the NuGet version 2 libraries and [this discussion](https://github.com/NuGet/Home/issues/1870) with the NuGet team is a good indication of how challenging it is right now to move to version 3 APIs given the lack of documentation.
-
 
 # Summary
 
