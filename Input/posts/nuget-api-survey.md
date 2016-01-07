@@ -37,7 +37,7 @@ The sqlci tool (from Red Gate) uses the NuGet.Core API to package and publish da
 
 ## Paket
 
-[Paket](https://fsprojects.github.io/Paket/) is a dependency manager that supports NuGet packages as well as other sources such as Git repositories or HTTP resources. It has it's own packaging format, but is compatible with NuGet's. This means it needs to use the NuGet APIs to read NuGet packages as one of it's supported package formats. It can also pull packages from a NuGet server (such as the public NuGet gallery), though it's unclear to me if this functionality uses the NuGet API or a custom protocol implementation (I seem to remember reading something about the latter, but can't find it now). There are a lot of other NuGet integration points as well, and it appears that Paket has already implemented NuGet version 3 compatibility in a lot of places.
+[Paket](https://fsprojects.github.io/Paket/) is a dependency manager that supports NuGet packages as well as other sources such as Git repositories or HTTP resources. It uses the .nupkg package format under the hood, which means it needs to use the NuGet APIs to read and write NuGet packages. It can also pull packages from a NuGet server (such as the public NuGet gallery), though it's unclear to me if this functionality uses the NuGet API or a custom protocol implementation (I seem to remember reading something about the latter, but can't find it now). There are a lot of other NuGet integration points as well, and it appears that Paket has already implemented NuGet version 3 compatibility in a lot of places.
 
 ## Cake
 
