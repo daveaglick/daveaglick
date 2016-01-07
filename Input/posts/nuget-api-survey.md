@@ -8,7 +8,7 @@ By now, most .NET developers are at least a bit familiar with NuGet, the NuGet c
 
 I started by performing exhaustive research and conducting complex GitHub searches. Just kidding. I posted on Twitter:
 
-<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Curious about something: I know a few apps/libs use NuGet directly: Packet, LINQPad, Chocolatey, Cake (via CLI)... Any others?</p>&mdash; Dave Glick (@daveaglick) <a href="https://twitter.com/daveaglick/status/683654871380312064">January 3, 2016</a></blockquote>
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Curious about something: I know a few apps/libs use NuGet directly: Paket, LINQPad, Chocolatey, Cake (via CLI)... Any others?</p>&mdash; Dave Glick (@daveaglick) <a href="https://twitter.com/daveaglick/status/683654871380312064">January 3, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Between what I already knew about field usage of the NuGet API and the responses to my Tweet, I looked at several projects that use the NuGet API in one way or another (and one that does API-like stuff without actually using the API). Note that this isn't an in-depth code review, or even all that technical. Mainly, I was just curious where to start looking for examples if I wanted to explore further and though others might be interested too.
@@ -35,9 +35,9 @@ I received feedback that at least one company was using the NuGet API along with
 
 The sqlci tool (from Red Gate) uses the NuGet.Core API to package and publish database scripts. 
 
-## Packet
+## Paket
 
-[Packet](https://fsprojects.github.io/Paket/) is a dependency manager that supports NuGet packages as well as other sources such as Git repositories or HTTP resources. It has it's own packaging format, but is compatible with NuGet's. This means it needs to use the NuGet APIs to read NuGet packages as one of it's supported package formats. It can also pull packages from a NuGet server (such as the public NuGet gallery), though it's unclear to me if this functionality uses the NuGet API or a custom protocol implementation (I seem to remember reading something about the latter, but can't find it now). There are a lot of other NuGet integration points as well, and it appears that Packet has already implemented NuGet version 3 compatibility in a lot of places.
+[Paket](https://fsprojects.github.io/Paket/) is a dependency manager that supports NuGet packages as well as other sources such as Git repositories or HTTP resources. It has it's own packaging format, but is compatible with NuGet's. This means it needs to use the NuGet APIs to read NuGet packages as one of it's supported package formats. It can also pull packages from a NuGet server (such as the public NuGet gallery), though it's unclear to me if this functionality uses the NuGet API or a custom protocol implementation (I seem to remember reading something about the latter, but can't find it now). There are a lot of other NuGet integration points as well, and it appears that Paket has already implemented NuGet version 3 compatibility in a lot of places.
 
 ## Cake
 
@@ -54,4 +54,4 @@ The sqlci tool (from Red Gate) uses the NuGet.Core API to package and publish da
 
 # Summary
 
-I would love to see more custom uses of the NuGet API. This type of thing should be easy and supported. NuGet is more than just a repository of libraries for you to use as references. It's a format, protocol, and API for packaging, versioning, and associating assets (be they libraries, executables, content, etc.) There are probably a lot of "outside the box" use cases (see Packet) that could be addressed, but many developers aren't aware it's even an option. Unfortunately, this message isn't getting across very clearly right now, and it's even more confusing given the transition from version 2 to version 3. I'm hopeful that in the future as the NuGet team is able to relax from meeting the requirements of the rapidly evolving ASP.NET and .NET Core product teams, some more attention is given to features, documentation, and messaging around using NuGet in your own applications.
+I would love to see more custom uses of the NuGet API. This type of thing should be easy and supported. NuGet is more than just a repository of libraries for you to use as references. It's a format, protocol, and API for packaging, versioning, and associating assets (be they libraries, executables, content, etc.) There are probably a lot of "outside the box" use cases (see Paket) that could be addressed, but many developers aren't aware it's even an option. Unfortunately, this message isn't getting across very clearly right now, and it's even more confusing given the transition from version 2 to version 3. I'm hopeful that in the future as the NuGet team is able to relax from meeting the requirements of the rapidly evolving ASP.NET and .NET Core product teams, some more attention is given to features, documentation, and messaging around using NuGet in your own applications.
