@@ -102,7 +102,7 @@ Pipelines.Add("Tags",
 		.Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))
     	.SelectMany(x => x.Get<string[]>("Tags"))
 		.Distinct()
-		.Select(x => @doc.Clone(new Dictionary<string, object>()
+		.Select(x => @ctx.GetDocument(@doc, new Dictionary<string, object>()
 		{ 
 		    { "Title", x },
 			{ "Tag", x }
