@@ -20,7 +20,7 @@ WriteFileName: feed.rss
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(10)
             .Select(x => {             
-                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")).Replace("\\", "/"));
+                Uri uri = new Uri(Context.GetLink(x, true));
                 SyndicationItem item = new SyndicationItem(
                     x.String("Title") + (x.ContainsKey("Lead") ? " - " + x.String("Lead") : string.Empty),
                     x.String("PostContent"),

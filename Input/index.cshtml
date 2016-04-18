@@ -17,10 +17,7 @@
             .Where(x => x.ContainsKey("Published"))
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(3))
-        {
-            string file = doc.String("RelativeFilePath").Replace("\\", "/");
-            string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
-                
+        {                
             if (!first)
             {
                 <hr /> 
@@ -28,7 +25,7 @@
             first = false;
             string lead = doc.String("Lead");
             <div class="post-preview">
-                <a href="@link">
+                <a href="@Context.GetLink(doc)">
                     <h2 class="post-title">@doc.String("Title")</h2>
                     @if(!string.IsNullOrWhiteSpace(lead))
                     {
@@ -77,10 +74,8 @@
                 .OrderByDescending(x => x.Get<DateTime>("Published"))
                 .Skip(3)
                 .Take(4))
-            {
-                string file = doc.String("RelativeFilePath").Replace("\\", "/");
-                string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");           
-                @list.ListItem(Bs.Link(@doc.String("Title"), link))
+            {        
+                @list.ListItem(Bs.Link(@doc.String("Title"), Context.GetLink(doc)))
             }
         }
         <ul class="pager">

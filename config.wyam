@@ -8,7 +8,6 @@ Assemblies
     .Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
 
 ===
-
 using FluentBootstrap;
 using FluentBootstrap.Wyam;
 using FluentBootstrap.Buttons;
@@ -63,14 +62,15 @@ public static class HtmlHelperExtensions
 }
 
 ---
+Settings.Host = "daveaglick.com";
 
 Pipelines.Add("Posts",
-	ReadFiles(@"posts\*.md"),
+	ReadFiles(@"posts/*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
 	Concat(
-		ReadFiles(@"posts\*.cshtml").Where(x => Path.GetFileName(x)[0] != '_' && Path.GetFileName(x) != "index.cshtml"),
+		ReadFiles(@"posts/{!_,!index,}*.cshtml"),
 		FrontMatter(Yaml())		
 	),
 	Razor(typeof(RazorPage)),
@@ -82,13 +82,16 @@ Pipelines.Add("Posts",
 );
 
 Pipelines.Add("Content",
-	ReadFiles("*.md").Where(x => !Path.GetDirectoryName(x).EndsWith("posts")),
+	ReadFiles("{!posts,**}/*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
 	Concat(
-		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_' 
-			&& (!Path.GetDirectoryName(x).EndsWith("posts") || Path.GetFileName(x) == "index.cshtml")),
+		ReadFiles("{!posts,**}/*.cshtml"),
+		FrontMatter(Yaml())		
+	),
+	Concat(
+		ReadFiles("posts/index.cshtml"),
 		FrontMatter(Yaml())		
 	),
 	Razor(typeof(RazorPage)),
@@ -96,7 +99,7 @@ Pipelines.Add("Content",
 );
 
 Pipelines.Add("Tags",
-	ReadFiles(@"tags\index.cshtml"),
+	ReadFiles(@"tags/index.cshtml"),
 	FrontMatter(),
 	Execute(@ctx.Documents
 		.Where(x => x.ContainsKey("Published") && x.ContainsKey("Tags"))
@@ -112,13 +115,13 @@ Pipelines.Add("Tags",
 );
 
 Pipelines.Add("Less",
-    ReadFiles("master.less"),
-    Concat(ReadFiles("clean-blog.less")),
-    Concat(ReadFiles("bootstrap.less")),
+    ReadFiles("**/master.less"),
+    Concat(ReadFiles("**/clean-blog.less")),
+    Concat(ReadFiles("**/bootstrap.less")),
     Less(),
     WriteFiles(".css")
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").WithoutExtensions(".cshtml", ".md", ".less")
+	CopyFiles("**/*{!.cshtml,!.md,!.less,}")
 );

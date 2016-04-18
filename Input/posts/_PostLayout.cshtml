@@ -6,7 +6,7 @@
     var Lead = Model.String("Lead");
     var Published = Model.Get<DateTime>("Published");
     var Edited = Model.Get<DateTime>("Edited");        
-    var Page = System.IO.Path.GetFileNameWithoutExtension(Model.String("RelativeFilePath"));
+    var Page = Model.FilePath("RelativeFilePath").FileNameWithoutExtension.FullPath;
     var Tags = Model.Get<string[]>("Tags");
 }
 
@@ -47,7 +47,7 @@
     var disqus_shortname = 'somedave'; // required: replace example with your forum shortname
     var disqus_identifier = '@Page';
     var disqus_title = '@Title';
-    var disqus_url = 'http://www.daveaglick.com/posts/@Page';
+    var disqus_url = '@Context.GetLink(Model)';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

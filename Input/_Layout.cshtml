@@ -38,7 +38,7 @@
         <meta property="og:title" content="Dave Glick@(string.IsNullOrWhiteSpace(Title) ? string.Empty : " - " + Title)" />
         @* <meta property="og:image" content="@Blog.Image" /> *@
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://daveaglick.com/@(PathHelper.RemoveExtension(Model.String("RelativeFilePath")).Replace("\\", "/"))" />
+        <meta property="og:url" content="@Context.GetLink(Model, true)" />
         <!-- TODO: More social graph meta tags -->
 
         <script src="/Scripts/jquery-2.1.1.min.js"></script>

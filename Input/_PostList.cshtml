@@ -4,12 +4,10 @@
     var docs = (IEnumerable<IDocument>)ViewData["PostListDocuments"];
     foreach (IDocument doc in docs)
     {
-        string file = doc.String("RelativeFilePath").Replace("\\", "/");
-        string link = "/" + System.IO.Path.ChangeExtension(file, "EXT").Replace(".EXT", "");
         string lead = doc.String("Lead");
         
         <div class="post-list">
-            <a href="@link">
+            <a href="@Context.GetLink(doc)">
                 <h3 class="post-title">@doc.String("Title")</h3>
                 @if(!string.IsNullOrWhiteSpace(lead))
                 {
