@@ -1,13 +1,14 @@
-Packages
-	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
-	.Install("FluentBootstrap.Wyam", true)
-	.Install("jQuery", "[2.1.1]");
+#n Wyam.Modules.Yaml -p
+#n Wyam.Modules.Markdown -p
+#n Wyam.Modules.Razor -p
+#n Wyam.Modules.Less -p
+#n Wyam.Modules.Html -p
+#n Twitter.Bootstrap.Less -v 3.3.5
+#n FluentBootstrap.Wyam -p
 
-Assemblies
-    .Load("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")
-    .Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+#an "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+#an "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
 
-===
 using FluentBootstrap;
 using FluentBootstrap.Wyam;
 using FluentBootstrap.Buttons;

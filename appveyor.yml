@@ -9,20 +9,12 @@ environment:
 install:
   - mkdir ..\Wyam
   - mkdir ..\Output
-  # Fetch the latest version of Wyam 
-  - "curl -s https://raw.githubusercontent.com/Wyamio/Wyam/master/RELEASE -o ..\\Wyam\\wyamversion.txt"
-  - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
-  - echo %WYAMVERSION%
-  # Get and unzip the latest version of Wyam
-  - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam-$env:WYAMVERSION.zip" -FileName "..\Wyam\Wyam.zip"
-  - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
 build_script:
-  - ..\Wyam\Wyam.exe --output ..\Output
+  - ps: .\build.ps1 -Target "AppVeyor"
 
 on_success:
-  - del Input\Scripts\jquery-2.1.1-vsdoc.js
-  - del Input\_._  # Not sure where this one is coming from, but it needs to be deleted before checkout
+  - rm -rf tools
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
