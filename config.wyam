@@ -5,6 +5,7 @@
 #n Wyam.Modules.Html -p
 #n Twitter.Bootstrap.Less -v 3.3.5
 #n FluentBootstrap.Wyam -p
+#n jQuery -v 2.1.1
 
 #an "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
 #an "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
