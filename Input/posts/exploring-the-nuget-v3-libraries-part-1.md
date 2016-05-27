@@ -1,5 +1,5 @@
 Title: Exploring the NuGet v3 Libraries, Part 1
-Lead: "My God, it's full of...something"
+Lead: Introduction and concepts
 Published: 5/18/2016
 Tags:
   - NuGet
@@ -12,7 +12,7 @@ One more caveat: this is from my own attempts to integrate. It required a lot of
 
 This series will be split into a few different posts:
 * In this first post I'll go over the new libraries in general and introduce some core concepts.
-* In the next post I'll talk about how to find packages, specify package sources, etc.
+* In the next post ([available here](/posts/exploring-the-nuget-v3-libraries-part-2)) I'll talk about how to find packages, specify package sources, etc.
 * In the final post I'll look at the process of actually installing packages.
 
 # What You'll Need
@@ -51,4 +51,6 @@ There are certainly other types of classes that we'll need to do anything useful
 There's almost no documentation about the new libraries. In addition to the source code and a decompiler, I found [this issue](https://github.com/NuGet/Home/issues/1870) to be somewhat helpful in getting started. As far as the source code goes, I also found that digging through [the implementations of various NuGet command line commands](https://github.com/NuGet/NuGet.Client/tree/dev/src/NuGet.Clients/NuGet.CommandLine/Commands) was a good place to start.
 
 But really, it's just *a lot* of trial and error. Hopefully this series can also help once all the parts are done. Next time: searching for packages.
+
+Update: [Part 2 is available here](/posts/exploring-the-nuget-v3-libraries-part-2).
  
