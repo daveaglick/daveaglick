@@ -1,11 +1,11 @@
-#n Wyam.Modules.Yaml -p
-#n Wyam.Modules.Markdown -p
-#n Wyam.Modules.Razor -p
-#n Wyam.Modules.Less -p
-#n Wyam.Modules.Html -p
-#n Twitter.Bootstrap.Less -v 3.3.5
-#n FluentBootstrap.Wyam -p
-#n jQuery -v 2.1.1
+#n Wyam.Yaml -p
+#n Wyam.Markdown -p
+#n Wyam.Razor -p
+#n Wyam.Less -p
+#n Wyam.Html -p
+#n Twitter.Bootstrap.Less -v [3.3.5]
+#n FluentBootstrap.Wyam -p -v 3.3.5.4-beta
+#n jQuery -v [2.1.1]
 
 #an "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
 #an "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
@@ -13,7 +13,7 @@
 using FluentBootstrap;
 using FluentBootstrap.Wyam;
 using FluentBootstrap.Buttons;
-using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
+using Wyam.Razor.Microsoft.AspNet.Mvc.Rendering;
 
 public abstract class RazorPage : BaseRazorPage
 {
