@@ -32,7 +32,7 @@ This will output a comment for each of the files in your project. Syntax look fa
 
 # How To Get It
 
-The easiest way to get up and running is to install the `Scripty.MsBuild` NuGet package into an existing project. Then just create a script file with a `.csx` extension, add it to your project, and watch the magic happen on your next build. Alternatively, you can install the Scripty Visual Studio extension to add custom tool support for code generation outside the build process.
+The easiest way to get up and running is to install the [Scripty.MsBuild NuGet package](https://www.nuget.org/packages/Scripty.MsBuild/) into an existing project. Then just create a script file with a `.csx` extension, add it to your project, and watch the magic happen on your next build. Alternatively, you can install the [Scripty Visual Studio extension](https://visualstudiogallery.msdn.microsoft.com/52c02bb2-1d79-476e-82fb-5abfbfe6b3e4) to add custom tool support for code generation outside the build process. It's also possible to run Scripty on the command line with the [Scripty package](https://www.nuget.org/packages/Scripty/) or to embed the scripty engine with the [Scripty.Core package](https://www.nuget.org/packages/Scripty.Core/), though these are more advanced scenarios.
 
 More information, documentation, and source code is available at the GitHub repository: [https://github.com/daveaglick/Scripty](https://github.com/daveaglick/Scripty).
 
