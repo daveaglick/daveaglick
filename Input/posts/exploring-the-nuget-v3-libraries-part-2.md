@@ -112,3 +112,5 @@ There are many other resources you can use to do different things. In fact, a go
 * `PackageUpdateResource` - Contains methods to push or delete a package to/from a local repository.
 
 Note that the whole resource model is fairly low-level and directly supports the on-the-wire NuGet protocols. While they provide you with adequate control for most simple use cases, they may not be the best way to support more complex scenarios. In part 3 we'll look at some higher-level abstractions designed to interoperate with project files and the host.
+
+Update: [Part 3 is available here](/posts/exploring-the-nuget-v3-libraries-part-3).
