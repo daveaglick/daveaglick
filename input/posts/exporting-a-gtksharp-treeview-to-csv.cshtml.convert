@@ -1,0 +1,121 @@
+﻿Title: Exporting a GtkSharp TreeView to CSV
+Lead: All packaged up in nice little utility methods.
+Published: 4/9/2010
+Tags:
+  - Mono
+  - GtkSharp
+  - CellRenderer
+  - CSV
+  - TreeModel
+  - TreeView
+  - TreeViewColumn
+---
+<p>I recently had to create some functionality to export a TreeView widget to a CSV file for further analysis. Since I tend to think about generic behavior, I decided to code up a method that would take any arbitrary TreeView and perform the export operation. Luckily, the TreeView widget and the attached TreeModel both contain a lot of functionality for accessing the data and it's presentation. I decided that I wanted the exported CSV file to represent the perspective of the model as currently represented in the TreeView including column visibility and sort order. This led to the trickiest part of the process. Because a CellRenderer can be customized using cell data functions (such as those added by a call to TreeViewColumn.SetCellDataFunc), I had to pull the content to export from the CellRenderer as opposed to pulling directly from the TreeModel. Turns out there's a method to take the TreeIter from a TreeModel and apply it to all the CellRenderers in a given TreeViewColumn. Since I really only care about textual content, I decided to only export those columns that contain CellRendererText renderers.</p>
+<p>After working out the algorithm to fetch what needed to be exported I thought I was ready to roll. Turns out that the CSV pseudo-standard is pretty complex though (the RFC is <a href="http://www.rfc-editor.org/rfc/rfc4180.txt">here</a>), and I quickly got bogged down in writing all kinds of special cases for escaping, quoting, etc. Thankfully, someone else had already been down this road and I was able to find the excellent <a href="http://kbcsv.codeplex.com/">KBCsv</a> library which will write and read formatted CSV files. My only complaint was that it used another utility library purely for convenience in exception generation and null checking (I already use a ton of libraries in our application and I'd prefer not to add any unnecessarily). I replaced the calls to the utility library with the language equivalents, but that's totally a personal preference.</p>
+<p>Without further adieu, I present the <code>TreeViewHelper.ExportToCsv</code> and <code>TreeViewHelper.ExportToCsvFile</code> methods...</p>
+<pre class="prettyprint">using System;
+using System.Collections.Generic;
+using System.IO;
+using Gtk;
+using Kent.Boogaart.KBCsv;
+
+namespace DaveAGlick
+{
+ public static class TreeViewHelper
+ {
+  public static bool ExportToCsv(TreeView treeView, Window parent)
+  {
+   FileChooserDialog fcd = new FileChooserDialog("Export File", parent, FileChooserAction.Save,
+   "Cancel", ResponseType.Cancel, "Export", ResponseType.Accept);
+   fcd.DoOverwriteConfirmation = true;
+   FileFilter filter = new FileFilter { Name = "CSV File" };
+   filter.AddPattern("*.csv");
+   fcd.AddFilter(filter);
+   if (fcd.Run() == (int)ResponseType.Accept)
+   {
+    string path = fcd.Filename;
+    fcd.Destroy();
+    return ExportToCsvFile(treeView, path);
+   }
+   fcd.Destroy();
+   return false;
+  }
+
+  public static bool ExportToCsvFile(TreeView treeView, string path)
+  {
+   //Get the iterator
+   TreeIter iter;
+   if (treeView.Model.GetIterFirst(out iter))
+   {
+    //Create the stream
+    using (StreamWriter streamWriter = new StreamWriter(path, false))
+    {
+     //Create the CSV writer
+     using (CsvWriter csvWriter = new CsvWriter(streamWriter))
+     {
+      List&lt;string&gt; headers = new List&lt;string&gt;();
+      List&lt;string&gt; values = new List&lt;string&gt;();
+
+      //Traverse the tree
+      do
+      {
+       values.Clear();
+       foreach (TreeViewColumn column in treeView.Columns)
+       {
+        //Only output visible columns
+        if (column.Visible)
+        {
+         //Loop through CellRenderers to make sure we have a CellRendererText
+         string value = null;
+         column.CellSetCellData(treeView.Model, iter, false, false);
+         foreach (CellRenderer renderer in column.CellRenderers)
+         {
+          CellRendererText text = renderer as CellRendererText;
+          if (text != null)
+          {
+           //Setting value indicates this column had a CellRendererText and should be included
+           if (value == null)
+           {
+            value = String.Empty;
+           }
+
+           //Add the header if the first time through
+           if (headers != null)
+           {
+            headers.Add(column.Title);
+           }
+
+           //Append to the value
+           if (text.Text != null)
+           {
+            value += text.Text;
+           }
+          }
+         }
+         if (value != null)
+         {
+          values.Add(value);
+         }
+        }
+       }
+
+       //Output the header
+       if (headers != null)
+       {
+        csvWriter.WriteHeaderRecord(headers.ToArray());
+        headers = null;
+       }
+
+       //Output the values
+       csvWriter.WriteDataRecord(values.ToArray());
+      } while (treeView.Model.IterNext(ref iter));
+     }
+    }
+    return true;
+   }
+   return false;
+  }
+ }
+}
+</pre>
+

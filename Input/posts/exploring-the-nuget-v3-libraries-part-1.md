@@ -13,7 +13,7 @@ One more caveat: this is from my own attempts to integrate. It required a lot of
 This series will be split into a few different posts:
 * In this first post I'll go over the new libraries in general and introduce some core concepts.
 * In the next post ([available here](/posts/exploring-the-nuget-v3-libraries-part-2)) I'll talk about how to find packages, specify package sources, etc.
-* In the final post ([available here](/posts/exploring-the-nuget-v3-libraries-part-3)) I'll look at the process of actually installing packages.
+* In the final post I'll look at the process of actually installing packages.
 
 # What You'll Need
 
@@ -52,5 +52,5 @@ There's almost no documentation about the new libraries. In addition to the sour
 
 But really, it's just *a lot* of trial and error. Hopefully this series can also help once all the parts are done. Next time: searching for packages.
 
-Update: [Part 2 is available here](/posts/exploring-the-nuget-v3-libraries-part-2) and [part 3 is here](/posts/exploring-the-nuget-v3-libraries-part-3).
+Update: [Part 2 is available here](/posts/exploring-the-nuget-v3-libraries-part-2).
  

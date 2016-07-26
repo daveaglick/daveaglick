@@ -1,5 +1,6 @@
 Title: Announcing Scripty
 Lead: An alternative to T4 for compile-time code generation using the power of Roslyn scripting
+Image: images/hero.jpg
 Published: 6/7/2016
 Tags:
   - open source
@@ -28,7 +29,7 @@ foreach(Document document in Project.Documents)
 
 This will output a comment for each of the files in your project. Syntax look familar? That's because it's just plain old C#. The `Document` and `Project` classes are from the Roslyn project model, the same one you use if you're building Roslyn-based code analysis tools. Scripty scripts are just [standard Roslyn C# scripts](https://github.com/dotnet/roslyn/wiki/Scripting-API-Samples) with some special global properties to make them suitable for powering code generation. All the standard C# scripting conventions still apply such as using the `#r` preprocessor directive to load assemblies and the  `#load` directive to load external script files. They are also generally given `.csx` extensions just like normal C# scripts.
 
-<img src="/Content/posts/scripty.gif" alt="Scripty" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/scripty.gif" alt="Scripty" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
 
 # How To Get It
 

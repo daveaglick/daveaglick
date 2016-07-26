@@ -1,5 +1,5 @@
-#tool nuget:https://www.myget.org/F/wyam/api/v2?package=Wyam&prerelease
-#addin nuget:https://www.myget.org/F/wyam/api/v2?package=Cake.Wyam&prerelease
+#tool nuget:?package=Wyam&prerelease
+#addin nuget:?package=Cake.Wyam&prerelease
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -26,6 +26,8 @@ Task("Build")
     {
         Wyam(new WyamSettings
         {
+            Recipe = "Blog",
+            Theme = "CleanBlog",
             OutputPath = isRunningOnAppVeyor ? "../Output" : null
         });        
     });
@@ -35,6 +37,8 @@ Task("Preview")
     {
         Wyam(new WyamSettings
         {
+            Recipe = "Blog",
+            Theme = "CleanBlog",
             Preview = true,
             Watch = true
         });        
