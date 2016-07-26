@@ -13,17 +13,17 @@ Tags:
 
 <p>Consider the following class:</p>
 
-<pre class='prettyprint'><code>namespace MyLibrary
+<pre class='prettyprint'>namespace MyLibrary
 {
     public class Car
     {
         public int NumberOfTires { get; internal set; }
     }
-}</code></pre>
+}</pre>
 
 <p>Assume that the number of tires is set by some sort of car factory class internal to the library and we don't want normal library users to change it. However, let's say we did want extension developers to have access to the tire count so that they could create alternate factory classes. Using this approach, the answer would be to create an extension method that would allow changing the number of tires in a special namespace:</p>
 
-<pre class='prettyprint'><code>namespace MyLibrary.Internal
+<pre class='prettyprint'>namespace MyLibrary.Internal
 {
     public static class CarExtensions
     {
@@ -32,7 +32,7 @@ Tags:
             car.NumberOfTires = numberOfTires;
         }
     }
-}</code></pre>
+}</pre>
 
 <p>Because the <code>SetNumberOfTires()</code> extension method is still in the <code>MyLibrary</code> project, it has access to the <code>internal</code> <code>NumberOfTires</code> setter. In essence, the extension method is proxying the <code>internal</code> property and making it <code>public</code>. All an extension library has to do in order to use it is to add <code>using MyLibrary.Internal;</code> to any code that needs access.</p>
 

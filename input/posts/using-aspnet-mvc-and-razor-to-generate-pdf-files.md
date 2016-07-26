@@ -7,13 +7,11 @@ Tags:
   - PDF
   - Acrobat
 ---
-@using FluentBootstrap;
-
 <p>From reports to scan sheets, the need to generate PDF files has been present in every line-of-business application I’ve ever worked on. In the past, I’ve used a variety of tools to achieve this such as <a href="http://en.wikipedia.org/wiki/SQL_Server_Reporting_Services">SQL Server Reporting Services</a> or <a href="http://www.telerik.com/products/reporting.aspx">Telerik Reporting</a>. While these kinds of tools work well enough for generating reports straight from the database, it’s been surprising how few resources exist to aid in generating PDF files from arbitrary data.</p>
 
 <p>It turns out there is a pretty simple way to enable the generation of PDF files in an ASP.NET MVC application using the same Razor view engine that you’re probably already using. This allows you to make use of view models, HTML helpers, etc. in your PDF logic. The code here is based primarily on the code in MVC itself, specifically the <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.actionresult(v=vs.118).aspx">ActionResult</a></code> and <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.viewresult(v=vs.118).aspx">ViewResult</a></code> classes. It’s also based on general concepts used in two open source projects, <a href="https://github.com/andyhutch77/MvcRazorToPdf">MvcRazorToPdf</a> and <a href="https://github.com/RazorAnt/RazorPDF">RazorPDF</a>. In a nutshell, the commands necessary to create a given PDF file (typically as XML) are placed in a standard .cshtml view, rendered and interpreted as any Razor view would be, passed to a PDF generation library (I use the excellent <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a>, but this approach can also work with <a href="http://sourceforge.net/projects/itextsharp/">iTextSharp</a> or any other PDF generation library that takes markup such as XML), and then returned to the client as PDF content. This is what the process looks like in a nutshell:</p>
 
-@Bs.Image("/Content/posts/pdf-process.png").SetResponsive()
+<img src="/posts/images/pdf-process.png" class="img-responsive"></img>
 
 <h1>The PdfResult Class</h1>
 
@@ -177,18 +175,18 @@ protected ActionResult Pdf(string fileDownloadName, string viewName, object mode
 
 <p>The final step is the view, where the actual PDF content is specified. Recall that I said I’m using <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a>, so the XML in my view corresponds to the XML that <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> expects. If you’re using <a href="http://sourceforge.net/projects/itextsharp/">iTextSharp</a> or any other PDF generation library then the XML (or other type of) content contained in your view may look drastically different. But for the sake of example, here’s what a sample view might look like using the <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> XML format:</p>
 
-<pre class="prettyprint">@@model IEnumerable&lt;int&gt;
+<pre class="prettyprint">@model IEnumerable&lt;int&gt;
 
 &lt;Pdf xmlns=&quot;Aspose.Pdf&quot; DestinationType=&quot;FitPage&quot;&gt;
     &lt;Section&gt;
-        @@foreach (int c in Model)
+        @foreach (int c in Model)
         {
-            @@:&lt;Text Alignment=&quot;Center&quot;&gt;&lt;Segment&gt;@@c&lt;/Segment&gt;&lt;/Text&gt;       
+            @:&lt;Text Alignment=&quot;Center&quot;&gt;&lt;Segment&gt;@c&lt;/Segment&gt;&lt;/Text&gt;       
         }
     &lt;/Section&gt;
 &lt;/Pdf&gt;</pre>
 
-<p>The Razor syntax checker in Visual Studio will probably complain that all these XML elements are not valid HTML5 (or whatever other validation type you have configured), but that’s fine – the actual view engine will deal with them without issue. One small complication you’ll see above is that the <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> XML specification uses an element called <code>Text</code>. <a href="http://weblogs.asp.net/scottgu/archive/2010/12/15/asp-net-mvc-3-razor-s-and-lt-text-gt-syntax.aspx">Unfortunately, this element also has a very special meaning in Razor syntax</a>. We need to escape it when used directly inside a code block by using <code>@@:</code>.</p>
+<p>The Razor syntax checker in Visual Studio will probably complain that all these XML elements are not valid HTML5 (or whatever other validation type you have configured), but that’s fine – the actual view engine will deal with them without issue. One small complication you’ll see above is that the <a href="http://www.aspose.com/.net/pdf-component.aspx">Aspose.Pdf</a> XML specification uses an element called <code>Text</code>. <a href="http://weblogs.asp.net/scottgu/archive/2010/12/15/asp-net-mvc-3-razor-s-and-lt-text-gt-syntax.aspx">Unfortunately, this element also has a very special meaning in Razor syntax</a>. We need to escape it when used directly inside a code block by using <code>@:</code>.</p>
 
 <h1>Conclusion</h1>
 

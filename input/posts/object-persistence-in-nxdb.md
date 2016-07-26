@@ -7,8 +7,6 @@ Tags:
   - persistence
   - object persistence
 ---
-@using FluentBootstrap;
-
 <p>The most recent version of Nxdb includes a complete object persistence framework and this post explains some of the motivation behind it and provides some insight into how it was implemented.</p>
 
 <h1>What Is A Persistence Framework?</h1>
@@ -25,16 +23,13 @@ Tags:
 
 <p>When we started thinking about an XML persistence layer for Nxdb we considered what the most important requirements should be and narrowed them down to a few key ones:</p>
 
-@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
-{
-	@list.ListItem("The framework should be able to serialize objects in a variety of ways to support many different environments and uses.")
-	@list.ListItem("The framework should automate the process of storing and fetching objects as much as possible.")
-	@list.ListItem("The framework should require as small a change as possible to existing objects to make them compatible.")
-	@list.ListItem("The framework should be extensible, allowing developers to modify or enhance any aspect of the design.")
-}
+* The framework should be able to serialize objects in a variety of ways to support many different environments and uses.
+* The framework should automate the process of storing and fetching objects as much as possible.
+* The framework should require as small a change as possible to existing objects to make them compatible.
+* The framework should be extensible, allowing developers to modify or enhance any aspect of the design.
 
 <h1>Overall Design</h1>
 
 <p>The main entry point for the persistence framework is the Manager class. All objects are initially persisted or retrieved through one of it's methods. Objects can be <em>attached</em> to the manager, which means that they are stored in a cache and the manager will return a reference to the same instance of the object if the same XML content is used. Additionally, attached objects can be automatically updated when the database changes, making the objects more of a programmatic representation of the database rather than the database simply serving as a backing store. Each object is persisted to and from the database using a Persister. The persister is primarily responsible for determining what parts of an object should be stored in the database, how those parts should be represented (for example as XML elements or attributes), and performing the actual serialization and deserialization of an object. There are several persisters including one that supports the native .NET XmlSerializer, one that provides a great deal of control through the use of attributes on class members, and one that allows completely custom behavior through the implementation of an interface. Should additional techniques be required, a new persister is easy to create and implement. Overall, the architecture and process by which objects are stored to the database and fetched from the database is presented below.</p>
 
-@Bs.Image("/Content/posts/persistenceprocess1.png").SetResponsive()
+<img src="/posts/images/persistenceprocess1.png" class="img-responsive"></img>

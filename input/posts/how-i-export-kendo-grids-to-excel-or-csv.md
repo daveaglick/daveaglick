@@ -198,7 +198,7 @@ public virtual ActionResult CsvToExcel(string data)
 <pre class="prettyprint">public static GridToolBarCustomCommandBuilder&lt;TModel&gt; Export&lt;TModel&gt;(this GridToolBarCommandFactory&lt;TModel&gt; factory)
     where TModel : class, new()
 {
-    return factory.Custom().Text("Export").HtmlAttributes(new { @@class = "export-grid" });
+    return factory.Custom().Text("Export").HtmlAttributes(new { @class = "export-grid" });
 }</pre>
 
 <p>And here’s the small bit a JavaScript that supports it (essentially rigging up a jQuery click handler for the new button to the <code>kendoGridToCSV</code> function mentioned earlier:</p>
@@ -212,7 +212,7 @@ $(".export-grid").click(function (e) {
 
 <p>Finally, here’s how to use it on your grid:</p>
 
-<pre class="prettyprint">@@(Html.Kendo().Grid(...).Name("...")
+<pre class="prettyprint">@(Html.Kendo().Grid(...).Name("...")
     ...
     .ToolBar(x =&gt; x.Export())
     ...

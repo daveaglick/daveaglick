@@ -5,8 +5,6 @@ Tags:
   - blog
   - meta
 ---
-@using FluentBootstrap;
-
 <p>It's been a little while coming, but I'm finally launching my new blog. It's built from scratch in ASP.NET MVC. Why go to all the trouble to build a blog engine from scratch when there are a gazillion great engines already out there? That's a very good question, let me break it down for you.</p>
 
 <h1>Own Your Content</h1>
@@ -25,13 +23,13 @@ Tags:
 
 <h1>Database, Or Lack Thereof</h1>
 <p>The most obvious backend capability of any blog is the storage and retrieval of blog articles. Most blogs have an archive page, a summary or recent articles, tags, etc. and while you could conceivably rig all that up manually it would get unwieldy very quickly, which is where a database comes into play. I've been intrigued by the file-based database concept used by some recent blogging/content/static site engines such as <a href="http://jekyllrb.com/">Jekyll</a>. The only thing I don't like about many of those tools is the way that the content is separate from the code. I am obsessed with eliminating magic strings and strong-typing everything. The notion that a blog article would like to another blog article using a plain-text <code>a</code> tag keeps me up at night. What if you wanted to change the link? What if you deleted the post? What I wanted was a way to create my blog database from the file system but still maintain all the power and flexibility that my code gives me.</p>
-<p>To satisfy this, I wrote a little library I'm calling @Bs.Link("RazorDatabase", "/razordatabase") (by the way, if you look in the code for this blog post, that last link looks like <code>@@Html.ActionLink("RazorDatabase", MVC.Projects.RazorDatabase())</code> - see what I mean about strong links?). RazorDatabase takes all of the Razor views that are derived from a specified <code>WebViewPage</code> class, renders them at compile time, and stores the rendered content and any view properties in an in-memory collection (with caching to disk for quick loading on site startup). I'll write more about RazorDatabase in a future blog post once I've gotten it closer to general availability.</p>
+<p>To satisfy this, I wrote a little library I'm calling RazorDatabase. RazorDatabase takes all of the Razor views that are derived from a specified <code>WebViewPage</code> class, renders them at compile time, and stores the rendered content and any view properties in an in-memory collection (with caching to disk for quick loading on site startup). I'll write more about RazorDatabase in a future blog post once I've gotten it closer to general availability.</p>
 
 <h1>Writing Posts</h1>
 <p>Because the blog posts are just Razor views similar to any other, the easiest way to write them is from within Visual Studio. I could write them externally, but they'd still have to be included in the project and compiled with the site to get the compile-time rendering to work correctly. This suits me just fine - while I've enjoyed Windows Live Writer in the past, I'm also quite comfortable with HTML and don't mind writing up my posts from my IDE.</p>
 
 <h1>Other Content</h1>
-<p>Other non-blog pages on the site like @Bs.Link("About", "/about") and @Bs.Link("Likes", "/likes") are just regular ASP.NET MVC actions and views. Because the blog posts are also just actions and views (albeit ones that get loaded into an in-memory collection), the two can reference each other without problems. I really like the way I don't have to worry about whether I'm on a content page or a blog post - all the Razor syntax and code I'm used to using is available in either place.</p>
+<p>Other non-blog pages on the site like <a href="/about">About</a> and <a href="/likes">Likes</a> are just regular ASP.NET MVC actions and views. Because the blog posts are also just actions and views (albeit ones that get loaded into an in-memory collection), the two can reference each other without problems. I really like the way I don't have to worry about whether I'm on a content page or a blog post - all the Razor syntax and code I'm used to using is available in either place.</p>
 
 <h1>T4MVC</h1>
 <p>Did I mention I hate magic strings? <a href="http://t4mvc.codeplex.com/">T4MVC</a> is one of my all-time favorite libraries. It provides strongly typed HTML helpers and exposes other bits of code to help eliminate the magic string problem. I highly recommend you check it out if you're not already familiar with it.</p>

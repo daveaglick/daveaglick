@@ -5,7 +5,7 @@ Tags:
   - T4
   - CSS
 ---
-<p>This post combines two of my favorite things: meta-programming and the elimination of magic strings. The goal is to automatically generate a class with <code>static const</code> strings containing the name of all the CSS classes in your CSS files. Why would you want to do this? There are a number of reasons. First, it helps eliminate magic strings from your view code. Instead of writing <code>&lt;p class="my-class"&gt;</code> you can write <code>&lt;p class="@@Css.MyClass"&gt;</code>. It also helps when writing view code because you'll have access to IntelliSense data for all of your CSS classes, making it easier to remember their names and avoid mistakes. Finally, it improves analysis and refactoring because you can now rely on code engines  to locate and operate on uses of a particular <code>const string</code> instead of just plain-text searching.</p>
+<p>This post combines two of my favorite things: meta-programming and the elimination of magic strings. The goal is to automatically generate a class with <code>static const</code> strings containing the name of all the CSS classes in your CSS files. Why would you want to do this? There are a number of reasons. First, it helps eliminate magic strings from your view code. Instead of writing <code>&lt;p class="my-class"&gt;</code> you can write <code>&lt;p class="@Css.MyClass"&gt;</code>. It also helps when writing view code because you'll have access to IntelliSense data for all of your CSS classes, making it easier to remember their names and avoid mistakes. Finally, it improves analysis and refactoring because you can now rely on code engines  to locate and operate on uses of a particular <code>const string</code> instead of just plain-text searching.</p>
 
 <p>To accomplish this, we're going to use a <a href="http://msdn.microsoft.com/en-us/library/bb126445.aspx">T4 template</a>. If you're not familiar with T4 templates, they're a technology that was added to Visual Studio and are "a mixture of text blocks and control logic that can generate a text file". In short, they let you create code or other content for your application <em>before</em> compile time. They're very powerful, but are also a little like salting your food: a little bit goes a long way and you don't want to use too much.</p>
 
@@ -13,28 +13,28 @@ Tags:
 
 <p>Here is the code for the T4 template. If it looks a little funny, don't worry. The T4 syntax is outside the scope of this blog post, but there are <a href="http://www.hanselman.com/blog/T4TextTemplateTransformationToolkitCodeGenerationBestKeptVisualStudioSecret.aspx">plenty of resources if you'd like to learn more</a>.</p>
 
-<pre class="prettyprint">&lt;#@@ template language=&quot;C#&quot; hostSpecific=&quot;true&quot; #&gt;
-&lt;#@@ assembly name=&quot;System.Core&quot; #&gt; 
-&lt;#@@ import namespace=&quot;System.Linq&quot; #&gt;
-&lt;#@@ import namespace=&quot;System.IO&quot; #&gt;
-&lt;#@@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
-&lt;#@@ import namespace=&quot;System.Text.RegularExpressions&quot; #&gt;
+<pre class="prettyprint">&lt;#@ template language=&quot;C#&quot; hostSpecific=&quot;true&quot; #&gt;
+&lt;#@ assembly name=&quot;System.Core&quot; #&gt; 
+&lt;#@ import namespace=&quot;System.Linq&quot; #&gt;
+&lt;#@ import namespace=&quot;System.IO&quot; #&gt;
+&lt;#@ import namespace=&quot;System.Collections.Generic&quot; #&gt;
+&lt;#@ import namespace=&quot;System.Text.RegularExpressions&quot; #&gt;
 &lt;# Process(); #&gt;
 &lt;#+
 	// Regex for CSS classes from http://paul.kinlan.me/regex-to-get-class-names-from-css-2-0/
-	string cssClassRegex = @@&quot;\.[-]?[_a-zA-Z][_a-zA-Z0-9-]*|[^\0-\177]*\\[0-9a-f]{1,6}(\r\n[ \n\r\t\f])?|\\[^\n\r\f0-9a-f]*&quot;;
+	string cssClassRegex = @&quot;\.[-]?[_a-zA-Z][_a-zA-Z0-9-]*|[^\0-\177]*\\[0-9a-f]{1,6}(\r\n[ \n\r\t\f])?|\\[^\n\r\f0-9a-f]*&quot;;
 	// Regexes for removing comments from http://stackoverflow.com/questions/3524317/regex-to-strip-line-comments-from-c-sharp/3524689#3524689
-	string blockComments = @@&quot;/\*(.*?)\*/&quot;;
-	string lineComments = @@&quot;//(.*?)\r?\n&quot;;
-	string strings = @@&quot;&quot;&quot;((\\[^\n]|[^&quot;&quot;\n])*)&quot;&quot;&quot;;
-	string verbatimStrings = @@&quot;@@(&quot;&quot;[^&quot;&quot;]*&quot;&quot;)+&quot;;
+	string blockComments = @&quot;/\*(.*?)\*/&quot;;
+	string lineComments = @&quot;//(.*?)\r?\n&quot;;
+	string strings = @&quot;&quot;&quot;((\\[^\n]|[^&quot;&quot;\n])*)&quot;&quot;&quot;;
+	string verbatimStrings = @&quot;@(&quot;&quot;[^&quot;&quot;]*&quot;&quot;)+&quot;;
 	public void Process()
 	{
 		WriteLine(&quot;public static class Css&quot;);
 		WriteLine(&quot;{&quot;);
 		// Iterate all CSS files in the solution
 		HashSet&lt;string&gt; cssClasses = new HashSet&lt;string&gt;();
-		foreach(string fileName in Directory.GetFiles(Host.ResolvePath(@@&quot;.&quot;), &quot;*.css&quot;, SearchOption.AllDirectories))
+		foreach(string fileName in Directory.GetFiles(Host.ResolvePath(@&quot;.&quot;), &quot;*.css&quot;, SearchOption.AllDirectories))
 		{
 			// Read the CSS file and strip comments
 			string css = System.IO.File.ReadAllText(fileName);
@@ -51,7 +51,7 @@ Tags:
 			// Get all CSS classes in the file
 			foreach (Match match in Regex.Matches(css, cssClassRegex))
 			{
-				if(match.Success &amp;&amp; !string.IsNullOrWhiteSpace(match.Groups[0].Value) &amp;&amp; !match.Groups[0].Value.StartsWith(@@&quot;\&quot;))
+				if(match.Success &amp;&amp; !string.IsNullOrWhiteSpace(match.Groups[0].Value) &amp;&amp; !match.Groups[0].Value.StartsWith(@&quot;\&quot;))
 				{
 					cssClasses.Add(match.Groups[0].Value.Substring(1));	
 				}

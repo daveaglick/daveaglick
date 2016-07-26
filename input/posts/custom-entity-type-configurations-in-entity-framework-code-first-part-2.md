@@ -4,9 +4,7 @@ Tags:
   - Entity Framework
   - Entity Framework Code First
 ---
-@using FluentBootstrap;
-
-<p>In @Bs.Link("my last post", "/posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1") I discussed how to inherit from the <code>EntityTypeConfiguration</code> class and use reflection to dynamically configure Entity Framework. In this post I'll expand on that technique by using a custom interface, reflection, and several helper classes to automatically apply Entity Framework configurations from arbitrary classes.</p>
+<p>In <a href="/posts/custom-entity-type-configurations-in-entity-framework-code-first-part-1">my last post</a> I discussed how to inherit from the <code>EntityTypeConfiguration</code> class and use reflection to dynamically configure Entity Framework. In this post I'll expand on that technique by using a custom interface, reflection, and several helper classes to automatically apply Entity Framework configurations from arbitrary classes.</p>
 
 <p>The first step is to revisit the <code><a href="http://msdn.microsoft.com/en-us/library/gg696117(v=vs.103).aspx">EntityTypeConfiguration&lt;TEntityType&gt;</a></code> that is part of Entity Framework. Recall that by overriding it you can provide your own configurations:</p>
 
@@ -121,7 +119,7 @@ public class EntityTypeConfigurationAdapter&lt;TEntity&gt;
 
 }</pre>
 
-<p>The <code>GetTypeConfigurations</code> method uses reflection to scan the same assembly as your <code>DbContext</code>, find all <code>IEntityTypeConfiguration</code> implementers, instantiate them, and record them in a list-per-entity-type. Note that this code uses the @Bs.Link("AddMulti extension method", "/posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods") for working with multi-value dictionaries. You could just as easily expand that part of the code to check if there is already a <code>List&lt;&gt;</code> available and create one if not.</p>
+<p>The <code>GetTypeConfigurations</code> method uses reflection to scan the same assembly as your <code>DbContext</code>, find all <code>IEntityTypeConfiguration</code> implementers, instantiate them, and record them in a list-per-entity-type. Note that this code uses the <a href="/posts/quick-and-dirty-multiple-value-dictionary-using-extension-methods">AddMulti extension method</a> for working with multi-value dictionaries. You could just as easily expand that part of the code to check if there is already a <code>List&lt;&gt;</code> available and create one if not.</p>
 
 <pre class="prettyprint">private Dictionary&lt;Type, List&lt;IEntityTypeConfiguration&gt;&gt; GetTypeConfigurations()
 {  

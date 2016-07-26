@@ -4,8 +4,6 @@ Tags:
   - Entity Framework
   - Entity Framework Code First
 ---
-@using FluentBootstrap;
-
 <p>One of the things I really like about Entity Framework Code First is the way you can mix declarative configuration (I.e., by using <a href="http://msdn.microsoft.com/en-us/library/dd901590(v=vs.95).aspx">Data Annotation</a> attributes) with programmatic configuration for more complicated cases (I.e., by using the <a href="http://msdn.microsoft.com/en-US/data/jj591617">fluent API</a>). The one aspect of this that really bothers me though is that in normal usage the fluent API commands end up being placed inside your <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext(v=vs.103).aspx">DbContext</a></code> class removed from your actual entity. If you change some aspect of an entity that uses the fluent API for configuration, you have to remember to go check the <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext.onmodelcreating(v=vs.103).aspx">OnModelCreating()</a></code> method to ensure you don't need to modify the code-based configuration. It would be much better (in my opinion) if all configuration, declarative and programmatic, were located close to the entity and/or encapsulated within it. This article explains one way of accomplishing this.</p>
 
 <p>The first thing you'll need to understand is the way that the fluent API actually configures entities. Inside of the <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext(v=vs.103).aspx">DbContext</a></code> class (which you've presumably subclassed) there is an overridable method called <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext.onmodelcreating(v=vs.103).aspx">OnModelCreating()</a></code>. This method has a single parameter of type <code><a href="http://msdn.microsoft.com/en-us/library/system.data.entity.dbmodelbuilder(v=vs.103).aspx">DbModelBuilder</a></code>. During normal fluent API usage you write code that looks like this inside the <code>OnModelCreating()</code> method:</p>
@@ -54,16 +52,7 @@ foreach (var type in typesToRegister)
 
 <p>This will allow you to create as many custom EntityTypeConfiguration classes as you need for each entity in your model. However, there are some limitations:</p>
 
-@using (var list = Bs.List(ListType.Unordered).AddCss("p").Begin())
-{
-    using (list.ListItem().Begin())
-    {
-        <text>The <code><a href="http://msdn.microsoft.com/en-us/library/gg696203(v=vs.103).aspx">ConfigurationRegistrar.Add()</a></code> method only allows one <code>EntityTypeConfiguration</code> class per entity type. This may be a problem in complex models if you have some configurations for a given entity spread out in multiple places (for example, you want to place the responsibility of configuring relationships for a given entity near the entities on the other side of the relationships).</text>
-    }
-    using (list.ListItem().Begin())
-    { 
-	    <text>I personally find the idea of placing configuration code inside the constructor of a dedicated class a little awkward. I would prefer to have my custom configurations specified through an interface that I could implement right on the entity, or perhaps use more than once to specify configuration for multiple entities in a single configuration class. That would give more flexibility.</text>
-    }
-}
+* The <code><a href="http://msdn.microsoft.com/en-us/library/gg696203(v=vs.103).aspx">ConfigurationRegistrar.Add()</a></code> method only allows one <code>EntityTypeConfiguration</code> class per entity type. This may be a problem in complex models if you have some configurations for a given entity spread out in multiple places (for example, you want to place the responsibility of configuring relationships for a given entity near the entities on the other side of the relationships).
+* I personally find the idea of placing configuration code inside the constructor of a dedicated class a little awkward. I would prefer to have my custom configurations specified through an interface that I could implement right on the entity, or perhaps use more than once to specify configuration for multiple entities in a single configuration class. That would give more flexibility.
 
-<p>In @Bs.Link("my next post", "/posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2") I'll discuss an alternate method of specifying custom entity type configurations that builds on this technique and addresses these two points.</p>
+<p>In <a href="/posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2">my next post</a> I'll discuss an alternate method of specifying custom entity type configurations that builds on this technique and addresses these two points.</p>

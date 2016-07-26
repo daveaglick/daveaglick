@@ -8,8 +8,6 @@ Tags:
   - grid
   - data annotations
 ---
-@using FluentBootstrap;
-
 <p>I love KendoUI, especially because of the available MVC wrappers. It is a very well engineered product with lots of opportunity for extension, and in this post I'll briefly discuss one that should relieve a small pain point: generating grid column titles from a <code><a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.displayattribute.aspx">DisplayAttribute</a></code> <a href="http://msdn.microsoft.com/en-us/library/dd901590(v=vs.95).aspx">data annotation</a>. As you probably already know, you can change the way your UI layer presents properties of your model by applying the <code>DisplayAttribute</code> data annotation. This causes most of the UI code to use the <code>Name</code> property of the attribute when displaying that property. It looks like this:</p>
 
 <pre class="prettyprint">[Display(Name = "The Product!")]
@@ -19,9 +17,9 @@ public string ProductName { get; set; }</pre>
 
 <p>Now, let's say we have a KendoUI grid declared in Razor using the MVC wrappers (this is from their demo page):</p>
 
-<pre class="prettyprint">@@model IEnumerable&lt;Kendo.Mvc.Examples.Models.ProductViewModel&gt;
+<pre class="prettyprint">@model IEnumerable&lt;Kendo.Mvc.Examples.Models.ProductViewModel&gt;
 
-@@(Html.Kendo().Grid(Model)    
+@(Html.Kendo().Grid(Model)    
     .Name("Grid")
     .Columns(columns =&gt;
     {
@@ -87,6 +85,6 @@ private class GridBoundColumnAdapter&lt;TModel, TValue&gt;
 
 <p>So let's look at this code a little more closely. The first <code>DisplayNameTitle&lt;TModel&gt;()</code> method is the actual extension. It takes a <code>GridBoundColumnBuilder&lt;TModel&gt;</code> because that's what the <code>Bound()</code> method returns as part of the KendoUI MVC fluent interface for column specifications. The <code>DisplayNameTitle</code> extension method creates an instance of an adapter class that can be used to manipulate the grid column. Because the KendoUI MVC classes are strongly typed, we need to use reflection to create an adapter with the proper generic type parameters. The key to this working is that the adapter class implements the non-generic <code>IGridBoundColumnAdapter</code> interface, which means that by casting the reflection-generated generic adapter class to the interface we can call non-generic methods that have access to the generic type parameters we used during the reflected construction in the actual implementation of the method.</p>
 
-<p>The real work gets done inside the <code>GetDisplayName()</code> implementation. This method @Bs.Link("creates an appropriately typed HtmlHelper", "/posts/getting-an-htmlhelper-for-an-alternate-model-type") and then uses it to call the <code>HtmlHelper.DisplayNameFor()</code> extension method. This ensures that our own <code>DisplayNameTitle()</code> extension will always return the exact same title that would be returned if we used the normal MVC <code>HtmlHelper</code> methods to display the property.</p>
+<p>The real work gets done inside the <code>GetDisplayName()</code> implementation. This method <a href="/posts/getting-an-htmlhelper-for-an-alternate-model-type">creates an appropriately typed HtmlHelper</a> and then uses it to call the <code>HtmlHelper.DisplayNameFor()</code> extension method. This ensures that our own <code>DisplayNameTitle()</code> extension will always return the exact same title that would be returned if we used the normal MVC <code>HtmlHelper</code> methods to display the property.</p>
 
 <p>This technique could be used to add other extensions to the KendoUI column building fluent interface as well. For example, you could automatically make a column sortable or not based on the data type.</p>

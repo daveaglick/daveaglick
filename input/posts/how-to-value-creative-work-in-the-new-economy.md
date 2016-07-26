@@ -7,7 +7,7 @@ Published: 11/7/2014
    
 <p>The reason I'm writing this blog post is because John Scalzi, and author who's work I've enjoyed immensely, posted this on Twitter:</p>
 
-<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>In general: Pay the people who create the things you love. Then they can afford to make more. It&#39;s pretty simple, actually.</p>&mdash; John Scalzi (@@scalzi) <a href="https://twitter.com/scalzi/status/530816806748184576">November 7, 2014</a></blockquote>
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>In general: Pay the people who create the things you love. Then they can afford to make more. It&#39;s pretty simple, actually.</p>&mdash; John Scalzi (@scalzi) <a href="https://twitter.com/scalzi/status/530816806748184576">November 7, 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <p>In trying to respond, I discovered two things:</p>

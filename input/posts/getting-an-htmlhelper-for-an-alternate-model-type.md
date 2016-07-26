@@ -56,8 +56,8 @@ Tags:
 
 <p>Once these extension methods are available you can write things like the following in your views:</p>
 
-<pre class="prettyprint">&lt;th&gt;@@(Html.For&lt;TableItemModel&gt;().DisplayNameFor(m => m.ThisColumnProperty))&lt;/th&gt;</pre>
+<pre class="prettyprint">&lt;th&gt;@(Html.For&lt;TableItemModel&gt;().DisplayNameFor(m => m.ThisColumnProperty))&lt;/th&gt;</pre>
 
-<pre class="prettyprint">&lt;td&gt;@@(Html.For(rowItem).TextBoxFor(m => m.ThisColumnProperty))&lt;/td&gt;</pre>
+<pre class="prettyprint">&lt;td&gt;@(Html.For(rowItem).TextBoxFor(m => m.ThisColumnProperty))&lt;/td&gt;</pre>
 
 <p>By itself this is already a powerful capability and opens up your views to additional model types easily. In my next post I'll detail how to use the non-extension versions with the MVC wrappers for KendoUI to automatically set the title of a bound grid column.</p>

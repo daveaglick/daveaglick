@@ -5,8 +5,6 @@ Tags:
   - fluent interfaces
   - method chaining
 ---
-@using FluentBootstrap;
-
 <p><a href="http://martinfowler.com/bliki/FluentInterface.html">Fluent interfaces</a> have become very popular in C# APIs recently. <a href="http://martinfowler.com/bliki/FluentInterface.html">Martin Fowler presumably coined the term in 2005</a> and at the time he wrote, “It's not a common style, but one we think should be better known”. Fluent interfaces are based on the older concepts of <a href="http://en.wikipedia.org/wiki/Method_chaining">method chaining</a> and <a href="http://en.wikipedia.org/wiki/Method_cascading">method cascading</a> (and the term has actually been misused quite a bit to refer to any type of method chaining), whereby the context of a call is passed through via method return values to the next method in the chain. This can result in a much more readable and concise API, particularly when many or a complex series of options or operations are available.</p>
 
 <p>The focus of this blog post is on a particular challenge of fluent interfaces and method chaining known as the “finishing problem.” To illustrate it, consider a logging framework. It might allow some number of chained methods such as <code>Severity()</code>, <code>Source()</code>, <code>User()</code>, <code>CallSite()</code>, etc.:</p>
@@ -72,7 +70,7 @@ Tags:
 
 <h1>Buffering</h1>
 
-<p>You may be able to buffer the result of the chained methods until some other action that you know is going to happen takes place. For example, in the log example, the methods <code>Message()</code>, <code>Severity()</code>, and <code>User()</code> could add their respective state information to the <code>Log</code> instance and then output the log message <em>on the next</em> call to <code>Log.Message()</code>. You obviously wouldn't want to do that for this specific example because your log messages would get delayed and possibly never sent, but hopefully you get the idea. As it turns out, I actually used a form of this approach to handle the fluent interfaces in @Bs.Link("FluentBootstrap", "http://fluentbootstrap.com").</p>
+<p>You may be able to buffer the result of the chained methods until some other action that you know is going to happen takes place. For example, in the log example, the methods <code>Message()</code>, <code>Severity()</code>, and <code>User()</code> could add their respective state information to the <code>Log</code> instance and then output the log message <em>on the next</em> call to <code>Log.Message()</code>. You obviously wouldn't want to do that for this specific example because your log messages would get delayed and possibly never sent, but hopefully you get the idea. As it turns out, I actually used a form of this approach to handle the fluent interfaces in <a href="http://fluentbootstrap.com">FluentBootstrap</a>.</p>
 
 <h1>Don’t Use a Fluent Interface</h1>
 

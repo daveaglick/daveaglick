@@ -10,9 +10,11 @@ Tags:
 
 <p>The magic is from a JavaScript library called <a href="http://qrohlf.com/trianglify/">Trianglify</a> (<a href="https://github.com/qrohlf/trianglify">GitHub</a>). It can create these sorts of patterns in any size with lots of customizations like polygon size, colors, etc. It then provides the final image as a data URI that can be applied to any CSS element. The GitHub readme actually has an example of setting a background using the library:</p>
 
-@Html.Code(@"var t = new Trianglify();
+```
+var t = new Trianglify();
     var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
-    document.body.setAttribute('style', 'background-image: '+pattern.dataUrl);")
+    document.body.setAttribute('style', 'background-image: '+pattern.dataUrl);
+```
 
 <p>The challenge for me was getting the background to look nice. I thought the default random palettes were a little too loud, so I set out to generate my own. I still wanted some randomness though, so I looked for libraries that could generate entire color schemes while allowing some control over things like saturation. I found <a href="http://www.checkman.io/please/">Please.js</a> (<a href="https://github.com/Fooidge/PleaseJS">GitHub</a>) which works perfectly. It returns an array of colors to your specifications including how many, what hue or saturation, and other settings.</p>
 
@@ -20,7 +22,8 @@ Tags:
 
 <p>My final code looks like this:</p>
 
-@Html.Code(@"var colors = Please.make_color({
+```
+var colors = Please.make_color({
         golden: false,
         colors_returned: 3,
         saturation: .4
@@ -30,4 +33,5 @@ Tags:
         y_gradient: [""#FFFFFF""]
     });
     var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
-    document.body.setAttribute('style', 'background-image: ' + pattern.dataUrl);")
+    document.body.setAttribute('style', 'background-image: ' + pattern.dataUrl);
+```

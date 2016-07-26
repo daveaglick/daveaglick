@@ -6,8 +6,6 @@ Tags:
   - GitHub
   - AppVeyor
 ---
-@using FluentBootstrap;
-
 <p>As I prepare to release my first NuGet package, I figured I would provide a walkthrough of how I set all this up. While I’ve used NuGet before (and even set up a private feed for internal libraries at my day job using <a href="http://inedo.com/proget">ProGet</a>, which is awesome), I’ve never published a public package to <a href="http://nuget.org">NuGet.org</a>. While there is <a href="http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package">ample help available</a>, it can be a little confusing how to rig everything up. I also wanted to enable continuous integration so that every time I committed a change to my library, it would automatically push a new NuGet package.</p>
 
 <p>The only assumption before we start this walkthrough is that you’ve got a class library that would be suitable for a standard NuGet package. That is, you don’t use any kind of exotic external libraries or require special packaging. I’m not going to discuss more advanced NuGet packages, but there should be ample resources available on the NuGet site to help you adapt this walkthrough if needed.</p>
@@ -16,7 +14,7 @@ Tags:
 
 <p>Most of you will already have an account on GitHub, and you may already have a repository for your library. If you don’t have a GitHub account, <a href="https://github.com/">go ahead and create one</a>. You’ll also need to make a repository for your library by clicking on the “Repositories” tab and then clicking “New”.</p>
 
-@Bs.Image("/Content/posts/github-new-repo.png").SetResponsive()
+<img src="/posts/images/github-new-repo.png" class="img-responsive"></img>
 
 <p>Pushing your code to the repository and general Git usage is mostly outside the scope of this walkthrough. However, <a href="https://help.github.com/">see the GitHub help pages if you need some guidance</a>. You don’t necessarily need to do your first push yet, but you will need to push everything a little later.</p>
 
@@ -24,7 +22,7 @@ Tags:
 
 <p>If you don’t already have one, go ahead and create a new <a href="http://www.nuget.org">NuGet.org</a> account as well. Once you've created an account, you need to get your API key which can be found on your account page.</p>
 
-@Bs.Image("/Content/posts/nuget-apikey.png").SetResponsive()
+<img src="/posts/images/nuget-apikey.png" class="img-responsive"></img>
 
 <h1>Create an AppVeyor Account and Project</h1>
 
@@ -62,27 +60,27 @@ Tags:
 
 <p>To turn this feature on, open up your AppVeyor project and click “Settings”. Then select “Build” and check “Package NuGet projects”. When it is enabled AppVeyor calls <code>nuget pack</code> for every project in the solution that has a <code>.nuspec</code> file in its root and then publishes NuGet package artifacts in both project and account feeds.</p>
 
-@Bs.Image("/Content/posts/appveyor-nuget-package.png").SetResponsive()
+<img src="/posts/images/appveyor-nuget-package.png" class="img-responsive"></img>
 
 <p>You'll probably also want to turn on <code>AssemblyInfo</code> patching. This will enable AppVeyor to modify your <code>AssemblyInfo.cs</code> file with an updated version number on each build. Since we told NuGet to use the version number from the assembly as well, this will also automatically update your NuGet package version. To turn on <code>AssemblyInfo</code> patching, go to "Settings" then "General" and the option is near the bottom of the page.</p>
 
-@Bs.Image("/Content/posts/appveyor-assemblyinfo-patching.png").SetResponsive()
+<img src="/posts/images/appveyor-assemblyinfo-patching.png" class="img-responsive"></img>
 
 <h1>Push Your Code to GitHub and Trigger a Build</h1>
 
 <p>If you haven't yet pushed your code to your GitHub repository, go ahead and do that now. When you commit code to the repository, AppVeyor will automatically kick-off a build. If you already had code in your repository, you can manually trigger a build from the AppVeyor "Latest Build" project page. In both cases, the build will be queued by AppVeyor and may take a minute or two to kick off. Once it does, you'll get an automatically updated console window with the build results on the "Latest Build" page in AppVeyor.</p>
 
-@Bs.Image("/Content/posts/appveyor-build.png").SetResponsive()
+<img src="/posts/images/appveyor-build.png" class="img-responsive"></img>
 
 <p>Once the build is done, you should be able to see your NuGet package in the "Artifacts" tab.</p>
 
-@Bs.Image("/Content/posts/appveyor-artifacts.png").SetResponsive()
+<img src="/posts/images/appveyor-artifacts.png" class="img-responsive"></img>
 
 <h1>Deploying Your NuGet Package</h1>
 
 <p>The last step is to deploy your NuGet package. This can be set up automatically using AppVeyor, just click "Settings", "Deployment", and then "Add deployment". Select ""NuGet" from the list and add your API key we fetched when setting up your NuGet.org account (you can leave the "NuGet server" and "Artifact(s)" fields empty). This will automatically push your NuGet package to NuGet.org on your next build.</p>
 
-@Bs.Image("/Content/posts/appveyor-deployment.png").SetResponsive()
+<img src="/posts/images/appveyor-deployment.png" class="img-responsive"></img>
 
 <h1>A Final Word, And More Control</h1>
 

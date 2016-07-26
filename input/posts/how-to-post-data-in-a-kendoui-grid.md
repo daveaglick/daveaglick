@@ -42,7 +42,7 @@ Tags:
 
 <p>The grid is declared like this (using KendoUI for ASP.NET MVC):</p>
 
-<pre class="prettyprint">@@(Html.Kendo().Grid(new List&lt;ContactInfoGridItem&gt;())
+<pre class="prettyprint">@(Html.Kendo().Grid(new List&lt;ContactInfoGridItem&gt;())
     .Name("grid")
     .DataSource(d =&gt; d.Ajax()
         .Read(r =&gt; r.Action(MVC.ContactList.Merge.ContactInfoGridRead()))

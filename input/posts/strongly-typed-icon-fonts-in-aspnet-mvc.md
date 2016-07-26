@@ -13,9 +13,9 @@ Tags:
 
 <p>Most icon fonts, including those from the services mentioned above, provide a CSS file with styles you can use to insert specific icons from the font using a friendly name. Most of these style sheets either use an HTML5 <code>data-</code> declaration and/or a CSS class with a <code>:before</code> selector to insert the requested character in the appropriate font face before the target element. For example, the top of the CSS file I get with the font I use from Fontastic looks like:</p>
 
-<pre class="prettyprint">@@charset "UTF-8";
+<pre class="prettyprint">@charset "UTF-8";
 
-@@font-face {
+@font-face {
   font-family: "back-office";
   src:url("fonts/back-office.eot");
   src:url("fonts/back-office.eot?#iefix") format("embedded-opentype"),
@@ -59,7 +59,7 @@ Tags:
   content: "b";
 }</pre>
 
-<p>Ignore the <code>@@font-face</code> declaration and the two blocks after it (the first sets up common styles when using a <code>data-icon</code> attribute and the second sets up common styles for <code>icon-</code> classes). The important thing is the last part of the file that declares the CSS classes <code>icon-address-book</code> and <code>icon-alert</code>. You typically use these in your HTML (or Razor) as:</p>
+<p>Ignore the <code>@font-face</code> declaration and the two blocks after it (the first sets up common styles when using a <code>data-icon</code> attribute and the second sets up common styles for <code>icon-</code> classes). The important thing is the last part of the file that declares the CSS classes <code>icon-address-book</code> and <code>icon-alert</code>. You typically use these in your HTML (or Razor) as:</p>
 
 <pre class="prettyprint">&lt;span&gt;
     &lt;i class="icon-alert"&gt;&lt;/i&gt; Oh, no! There's an alert icon preceding this text!
@@ -103,19 +103,19 @@ public static string Html(this Icon icon)
 <p>We can write the following in our view (this assumes Razor, but the technique should work in any view engine that exposes the <code><a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.htmlhelper(v=vs.118).aspx">HtmlHelper</a></code> class and supports extension methods):</p>
 
 <pre class="prettyprint">&lt;span&gt;
-    @@Html.Icon(Icon.Alert) Oh, no! There's an alert icon preceding this text!
+    @Html.Icon(Icon.Alert) Oh, no! There's an alert icon preceding this text!
 &lt;/span&gt;</pre>
 
 <p>This successfully eliminated our magic string. But we still have to create the <code>Icon</code> enum and manually match it to the CSS from the icon font. Luckily, there is an easy way to create the enum automatically using T4 templates. Generally I like to limit the number of T4 templates I have in my projects. They eat up time in the build cycle and can get out of sync with the current build causing some hard to diagnose and often frustrating bugs. But in cases like this, T4 is perfect. Just drop the following into your project and name it "Icons.tt".</p>
 
-<pre class="prettyprint">&lt;#@@ template language="C#" hostSpecific="true" #&gt;
-&lt;#@@ assembly name="System.Core" #&gt; 
-&lt;#@@ import namespace="System.Linq" #&gt;
-&lt;#@@ import namespace="System.Collections.Generic" #&gt;
-&lt;#@@ import namespace="System.Text.RegularExpressions" #&gt;
+<pre class="prettyprint">&lt;#@ template language="C#" hostSpecific="true" #&gt;
+&lt;#@ assembly name="System.Core" #&gt; 
+&lt;#@ import namespace="System.Linq" #&gt;
+&lt;#@ import namespace="System.Collections.Generic" #&gt;
+&lt;#@ import namespace="System.Text.RegularExpressions" #&gt;
 &lt;# Process(); #&gt;
 &lt;#+
-    readonly Regex regex = new Regex(@@"^\.icon-(.*)\:before \{$", RegexOptions.Compiled | RegexOptions.Multiline);
+    readonly Regex regex = new Regex(@"^\.icon-(.*)\:before \{$", RegexOptions.Compiled | RegexOptions.Multiline);
 
     public void Process()
     {
