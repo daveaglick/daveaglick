@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/daveaglick
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://daveaglick.com
+  * I am daveaglick (https://keybase.io/daveaglick) on keybase.
+  * I have a public key with fingerprint 20E2 FB65 377E D104 FD1C  CE61 E0DE 5630 92FE 2979
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010170f6f236a55f41c20665bc492e49728d830881ab0d099ca4594e4f36624cd9380a",
+            "fingerprint": "20e2fb65377ed104fd1cce61e0de563092fe2979",
+            "host": "keybase.io",
+            "key_id": "e0de563092fe2979",
+            "kid": "010170f6f236a55f41c20665bc492e49728d830881ab0d099ca4594e4f36624cd9380a",
+            "uid": "cba2ea9efaa7bc92ee8179d2bd22c019",
+            "username": "daveaglick"
+        },
+        "service": {
+            "hostname": "daveaglick.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1471464330,
+    "expire_in": 157680000,
+    "prev": "f086de005530a8c469c9ec2bd164eba5313c8098f377f08b830f864174c26682",
+    "seqno": 6,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.56
+Comment: https://keybase.io/crypto
+
+yMImAnicrVJbSBVBGD4nLW9EUVZUSLlRQanN7s7O7p4HhexmghQGnkA5zM7OHheP
+u8dzdk0Te4rES2QkBT5EPRRlgVFWdCPNoItZxwojKhLt8mK+FEGZ2azUUz02L8P8
+//d9//f/89+dm+RL938TR14F1y744B/o63R9ZT39LQ2cZuv1XKCBq6IzF43oNO6E
+qkydC3CAB7wMDGQIIsKSZECeCAAhSSNQFShUZUHRFREoCo81oANVJRhKKqTQEBES
+INFVUQGYy+EM0wrTWDRmWg6TFQAVDA1JoixTnQfQ0HlCKOIp0KmERKAKBhVUWWXE
+SjvuMZg5DcdpnmmzGHuEZuz9A/+ffbszckTDAsUqNTCWNcIUqMLLqi5ouiAQwHt1
+3TiNWbiaMrSOaykOR0xSxTXmcCxeaxLqjdbr5S9MHrGrGT8asx2b2BGWq3ScaMCj
+OvVRD7uHaqHfKiHNtHQ2SkaopbG4aVtcgGdI4pieLA9lHiIoiiCHo3VRM0ZDpoeQ
+ZKQAdrwytJZJGkBBOgVAkkSAFQKRSlRKWD88glTDksiLRAGqYrAfYliNzcpQEORl
+SASEFIHz+qqxbC6AmE0cZpJxM2xhx41RrvFOb3myz5/umzN7lrdivvS0+X8WrxSl
+TO9cvX1217vp88mtPdmbm3Q9M/C45eDpqefHP50uObCuomBeUXPxqqeFLcsOjP7c
+7R69uDXr/ZBquPsyEpu+lOUecic7Uk5UbMm4lz0SaR2bXO4s33X4g1jSnpF6qm3f
+tiDYWrpRjkpZvbc/f01fVDdZc2sJcLt7R9yrY9efZIMdo0PhcjJw/Oqb/Gdp6wdf
+/tgLfyQvpJuOPXAfXkZ3CvKl5pTA957C7urOsr4VRYmTw8GRweKPi6thonOOdeF9
+/7i/uzF3aXvzyfz2GxtAw9z8t6vOTI2dO7uypWP4JvFHrk0kPUp9vaZJ6lpfp3aU
+tJUGB4+82H+Ju5/InAjNv6LtGf8FCmE/8g==
+=wIM4
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/daveaglick
+
+==================================================================
