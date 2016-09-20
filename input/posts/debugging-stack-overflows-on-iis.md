@@ -39,7 +39,7 @@ A process serving application pool 'MyAppPool' suffered a fatal communication er
 
 <h2>Open The Dump In WinDbg</h2>
 
-<p>Now run your application until it crashes. You should get some large <code>.dmp</code> files in the folder you selected during the wizard. For the next part you'll need to obtain WinDbg. It's important to get the version that matches the build profile of your application, not your system. So if your ASP.NET application is built for x86, you should get the x86 WinDbg tool even if your server is x64. The raw installers can be obtained <a href="http://rxwen-blog-stuff.googlecode.com/files/windbg_6.12.0002.633_x86.zip">here for x86</a> and <a href="http://rxwen-blog-stuff.googlecode.com/files/windbg_6.12.0002.633_64_installer.zip">here for x64</a>.</p>
+<p>Now run your application until it crashes. You should get some large <code>.dmp</code> files in the folder you selected during the wizard. For the next part you'll need to obtain WinDbg. It's important to get the version that matches the build profile of your application, not your system. So if your ASP.NET application is built for x86, you should get the x86 WinDbg tool even if your server is x64. [The raw installers can be obtained here](http://codemachine.com/downloads.html).</p>
 
 <p>Once you install WinDbg, open it up and select Open Crash Dump from the File menu. Then you'll need to type the following two commands into the crash dump window:</p>
 
