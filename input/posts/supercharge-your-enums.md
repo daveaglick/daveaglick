@@ -26,7 +26,7 @@ public abstract class ClassEnum<T> where T : ClassEnum<T>
 Then you can use any class as your enum type. Note the private constructor below which ensures the only instances are the static fields exposed by the class.
 
 ```
-public class Color : ClassEnum<Colors>
+public class Color : ClassEnum<Color>
 {
     // Enum Values
     public static readonly Color Red = new Color("Red", 0);
