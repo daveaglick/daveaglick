@@ -1,6 +1,5 @@
 Title: Announcing Scripty
 Lead: An alternative to T4 for compile-time code generation using the power of Roslyn scripting
-Image: images/hero.jpg
 Published: 6/7/2016
 Tags:
   - open source
