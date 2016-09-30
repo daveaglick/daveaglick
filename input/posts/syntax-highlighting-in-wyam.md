@@ -37,7 +37,7 @@ Note the [Razor module](http://wyam.io/modules/razor) in there. It's optional, b
 
 In contrast to using a client-side JavaScript library to generate the necessary highlighting markup, you can create the markup as part of the generation process. This is a little trickier to set up but has a number of advantages including performance and compatibility. Since all the markup for the highlighting is added to the end result of generation, the client doesn't have to do anything.
 
-Let's assume for the remaining examples that we have a .NET library that can take a string containing source code and covert it to a string of HTML with the appropriate elements for syntax highlighting. [ColorCode](https://colorcode.codeplex.com/) is one such library, and there are others like [syntaxtame](https://github.com/shayanelhami/syntaxtame). You could even write your own using regular expressions, Roslyn, etc. That's outside the scope of this post though. What's important is that we have a library that we need to call to create the HTML that represents our highlighted code.
+Let's assume for the remaining examples that we have a .NET library that can take a string containing source code and convert it to a string of HTML with the appropriate elements for syntax highlighting. [ColorCode](https://colorcode.codeplex.com/) is one such library, and there are others like [syntaxtame](https://github.com/shayanelhami/syntaxtame). You could even write your own using regular expressions, Roslyn, etc. That's outside the scope of this post though. What's important is that we have a library that we need to call to create the HTML that represents our highlighted code.
 
 ## External Code Samples
 
