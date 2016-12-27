@@ -43,7 +43,6 @@ Task("Debug")
     });
 
 Task("Deploy")
-    .IsDependentOn("Build")
     .Does(() =>
     {
         string token = EnvironmentVariable("NETLIFY_DAVEAGLICK");
@@ -72,6 +71,7 @@ Task("Default")
     .IsDependentOn("Preview");    
     
 Task("AppVeyor")
+    .IsDependentOn("Build")
     .IsDependentOn("Deploy");
 
 //////////////////////////////////////////////////////////////////////
