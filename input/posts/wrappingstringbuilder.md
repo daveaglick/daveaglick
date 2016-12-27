@@ -5,7 +5,7 @@ Tags:
   - strings
   - algorithms
 ---
-I've been working on a Roslyn-powered documentation generator built on top of [Wyam](http://wyam.io) for a little while, but recently ran into an area that's taken a lot longer than I thought it would. I've been trying to generate syntax strings that look like the ones on the MSDN site.
+I've been working on a Roslyn-powered documentation generator built on top of [Wyam](https://wyam.io) for a little while, but recently ran into an area that's taken a lot longer than I thought it would. I've been trying to generate syntax strings that look like the ones on the MSDN site.
 
 <img src="/posts/images/syntax.png" alt="Syntax" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
 

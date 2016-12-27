@@ -3,7 +3,7 @@ Image: images/lightbulb.jpg
 ---
 
 ## Wyam
-* [Website (wyam.io)](http://wyam.io)
+* [Website (wyam.io)](https://wyam.io)
 * [Source Code (Wyamio/Wyam)](https://github.com/Wyamio/Wyam)
 
 A highly modular and extremely configurable static content generator and toolkit.

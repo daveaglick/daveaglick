@@ -5,7 +5,7 @@ Image: /images/chalk.jpg
 Tags:
 - Wyam
 ---
-I'm going to try and blog about [Wyam](http://wyam.io) a bit more. As more folks start using it, I'm getting some really interesting questions about how to do things. Given how flexible Wyam is there's almost always multiple answers too, which makes exploring these questions a great exercise in discovering various features. In today's post I'll look at how to add syntax highlighting to code blocks in generated content.
+I'm going to try and blog about [Wyam](https://wyam.io) a bit more. As more folks start using it, I'm getting some really interesting questions about how to do things. Given how flexible Wyam is there's almost always multiple answers too, which makes exploring these questions a great exercise in discovering various features. In today's post I'll look at how to add syntax highlighting to code blocks in generated content.
 
 # Client-Side
 
@@ -13,9 +13,9 @@ One of the most common ways to include syntax highlighting in web pages is to re
 
 ## Adding A CSS Class To Markdown Code Fences
 
-If you're using the [Markdown module](http://wyam.io/modules/markdown) to render Markdown documents, then you can use a "code fence" to indicate code blocks with three tick marks before and after the code. In most Markdown processors this will result in surrounding the code with `<pre><code>` elements. That's usually sufficient to make sure the code the properly monospaced, but it doesn't do anything for highlighting.
+If you're using the [Markdown module](https://wyam.io/modules/markdown) to render Markdown documents, then you can use a "code fence" to indicate code blocks with three tick marks before and after the code. In most Markdown processors this will result in surrounding the code with `<pre><code>` elements. That's usually sufficient to make sure the code the properly monospaced, but it doesn't do anything for highlighting.
 
-If we want to add highlighting to those `<pre><code>` blocks, we can use a JavaScript library like [Prettify](https://github.com/google/code-prettify). There are many such libraries available (Prettify is my personal favorite) and they all work in essentially the same way. Most key off of a CSS class to indicate which content needs to be transformed. Thankfully, adding such as class to the `<pre><code>` blocks from our Markdown results is easy thanks to the [Replace module](http://wyam.io/modules/replace). Here's an example `config.wyam` file:
+If we want to add highlighting to those `<pre><code>` blocks, we can use a JavaScript library like [Prettify](https://github.com/google/code-prettify). There are many such libraries available (Prettify is my personal favorite) and they all work in essentially the same way. Most key off of a CSS class to indicate which content needs to be transformed. Thankfully, adding such as class to the `<pre><code>` blocks from our Markdown results is easy thanks to the [Replace module](https://wyam.io/modules/replace). Here's an example `config.wyam` file:
 
 ```
 #n Wyam.Markdown
@@ -31,7 +31,7 @@ Pipelines.Add("Pages",
 );
 ```
 
-Note the [Razor module](http://wyam.io/modules/razor) in there. It's optional, but can be used to wrap your Markdown files in a standard layout using Razor conventions like a `_ViewStart.cshtml` file. Presumably, the layout is where you would include the actual Prettify script reference.
+Note the [Razor module](https://wyam.io/modules/razor) in there. It's optional, but can be used to wrap your Markdown files in a standard layout using Razor conventions like a `_ViewStart.cshtml` file. Presumably, the layout is where you would include the actual Prettify script reference.
 
 # Generated
 
@@ -126,7 +126,7 @@ int foo = 1 + 2;
 And that's my code!
 ~~~
 
-The Markdown processor will render the code block inside `<pre><code>` elements, so we just need to find them, process what's inside, and replace them with the result. Thankfully there's a great library called [AngleSharp](https://github.com/AngleSharp/AngleSharp) that makes this really easy. We can include the AngleSharp package in our config file and use a bit of custom code inside the [Execute](http://wyam.io/modules/execute) module to do the work:
+The Markdown processor will render the code block inside `<pre><code>` elements, so we just need to find them, process what's inside, and replace them with the result. Thankfully there's a great library called [AngleSharp](https://github.com/AngleSharp/AngleSharp) that makes this really easy. We can include the AngleSharp package in our config file and use a bit of custom code inside the [Execute](https://wyam.io/modules/execute) module to do the work:
 
 ```
 #n Wyam.Markdown
@@ -171,7 +171,7 @@ The output will be the same as above. Hopefully this also demonstrates the flexi
 
 # The Easy Way
 
-Now that we've gone over several approaches to doing this manually, there's actually a much easier way. The built-in [Blog recipe](http://wyam.io/recipes-themes/blog) does syntax highlighting by default. It uses the Prettify JavaScript library mentioned above to perform syntax highlighting on the client. The recipe is easy to use and doesn't require messing with config files (unless you want to!). This command scaffolds a new site:
+Now that we've gone over several approaches to doing this manually, there's actually a much easier way. The built-in [Blog recipe](https://wyam.io/recipes-themes/blog) does syntax highlighting by default. It uses the Prettify JavaScript library mentioned above to perform syntax highlighting on the client. The recipe is easy to use and doesn't require messing with config files (unless you want to!). This command scaffolds a new site:
 
 ```
 wyam new -r Blog
@@ -185,4 +185,4 @@ wyam -r Blog
 
 # Conclusion
 
-We've looked at three different ways (four if you count the recipe) of adding syntax highlighting. Between [all the modules](http://wyam.io/modules/), custom code, etc. there's certainly other ways you could accomplish this too. More than that, I hope this article has given you an appreciation for the flexibility in Wyam and how it can be used to satisfy niche static generation requirements.
+We've looked at three different ways (four if you count the recipe) of adding syntax highlighting. Between [all the modules](https://wyam.io/modules/), custom code, etc. there's certainly other ways you could accomplish this too. More than that, I hope this article has given you an appreciation for the flexibility in Wyam and how it can be used to satisfy niche static generation requirements.

@@ -79,7 +79,7 @@ public class ProjectContext : INuGetProjectContext
 
 # Projects
 
-While installing packages, the package manager (discussed below) attempts to install each package *into* a project. The project is then responsible for copying files, updating any metadata files (like `packages.config`), and otherwise reacting to the installation. You can create a custom project by deriving from `NuGetProject`. In most simple cases, you will probably just instantiate `FolderNuGetProject` which represents a project based on a packages folder. Note that you can also derive a custom project implementation from `FolderNuGetProject` if you want packages to be installed into a folder but also want a little bit of extra control. For example, [Wyam](http://wyam.io) has a custom `FolderNuGetProject` implementation so that it can record information about every installed package such as whether it has a content folder.
+While installing packages, the package manager (discussed below) attempts to install each package *into* a project. The project is then responsible for copying files, updating any metadata files (like `packages.config`), and otherwise reacting to the installation. You can create a custom project by deriving from `NuGetProject`. In most simple cases, you will probably just instantiate `FolderNuGetProject` which represents a project based on a packages folder. Note that you can also derive a custom project implementation from `FolderNuGetProject` if you want packages to be installed into a folder but also want a little bit of extra control. For example, [Wyam](https://wyam.io) has a custom `FolderNuGetProject` implementation so that it can record information about every installed package such as whether it has a content folder.
 
 # Settings
 

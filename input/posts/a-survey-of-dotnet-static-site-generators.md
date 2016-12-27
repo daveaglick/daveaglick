@@ -6,7 +6,7 @@ Tags:
   - static site generator
   - open source
 ---
-<div role="alert" class="alert alert-info">    <div><strong>Update June, 2015:</strong> Since writing this post, I've finally decided to act on my long-standing interest in static site generators and write the kind of one I want to use. If you're interested, <a href="http://wyam.io" class="alert-link">check out Wyam</a>! It has most of the features of the generators listed below and is configured via a flexible module-based approach.</div>
+<div role="alert" class="alert alert-info">    <div><strong>Update June, 2015:</strong> Since writing this post, I've finally decided to act on my long-standing interest in static site generators and write the kind of one I want to use. If you're interested, <a href="https://wyam.io" class="alert-link">check out Wyam</a>! It has most of the features of the generators listed below and is configured via a flexible module-based approach.</div>
 </div>
 
 There is a lot of demand and a lot of active development around static site generators. If you're not familiar with them, these tools take markup or other simplified content and turn those resources into a full static website (HTML, CSS, etc.). There are a number of great static site generators out there, and it seems like a new one is released nearly every week. However, for this survey I am going to focus on the state of static site generation in the .NET ecosystem.

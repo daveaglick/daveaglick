@@ -17,5 +17,5 @@ Tags:
 
 <p>In fact, this entire blog is built using RazorDatabase. Go ahead and check out <a href="https://github.com/daveaglick/daveaglick">the source code for this blog</a> to see how it all works. And when you're ready, it's <a href="https://github.com/daveaglick/RazorDatabase">available on GitHub</a> or <a href="https://www.nuget.org/packages/RazorDatabase/">as a NuGet package</a>. I'm very interested to hear if anyone else finds this as valuable as I have.</p>
 
-<div role="alert" class="alert alert-info">    <div><strong>Update June, 2015:</strong> Since writing this post, I've converted my blog over to the <a href="http://wyam.io" class="alert-link">Wyam static site generator</a> and it no longer uses RazorDatabase.</div>
+<div role="alert" class="alert alert-info">    <div><strong>Update June, 2015:</strong> Since writing this post, I've converted my blog over to the <a href="https://wyam.io" class="alert-link">Wyam static site generator</a> and it no longer uses RazorDatabase.</div>
 </div>

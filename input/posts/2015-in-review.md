@@ -40,7 +40,7 @@ In addition to my own open source projects, I set a goal for 2015 to actively co
   
 ## Wyam
 
-This all brings me to my most significant open source activity in 2015. In the summer [I released](/posts/announcing-wyam) a static content and site generation tool called [Wyam](http://wyam.io). Since that release (and leading up to it as well), the majority of my OSS time has been spent building it out. I have *so many* ideas that I expect I'll be working on it for a long time to come. I've also come to view it a little by as "my calling" in the OSS world. I believe strongly in the potential of static site generation and I think there are still a lack of really good tools for doing this in a controllable, extensible, and generic way.
+This all brings me to my most significant open source activity in 2015. In the summer [I released](/posts/announcing-wyam) a static content and site generation tool called [Wyam](https://wyam.io). Since that release (and leading up to it as well), the majority of my OSS time has been spent building it out. I have *so many* ideas that I expect I'll be working on it for a long time to come. I've also come to view it a little by as "my calling" in the OSS world. I believe strongly in the potential of static site generation and I think there are still a lack of really good tools for doing this in a controllable, extensible, and generic way.
 
 # Community
 ---

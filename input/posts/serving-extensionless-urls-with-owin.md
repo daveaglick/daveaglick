@@ -5,7 +5,7 @@ Tags:
   - OWIN
 ---
 
-[I recently](http://wyam.io) had a need for an embedded web server. In the past, I've used a variety of libraries for this purpose (including building my own kind-of standards-compliant HTTP server - don't do this), but have always had my eye on the [OWIN specification](http://owin.org/) and related projects. Specifically, the [Katana project](http://katanaproject.codeplex.com/documentation) from Microsoft looked interesting. Each previous time I investigated it, it looked like it was still pretty rough and needed a little more time. I was pleased to find what looked like a mature and easy to integrate library this time around though.
+[I recently](https://wyam.io) had a need for an embedded web server. In the past, I've used a variety of libraries for this purpose (including building my own kind-of standards-compliant HTTP server - don't do this), but have always had my eye on the [OWIN specification](http://owin.org/) and related projects. Specifically, the [Katana project](http://katanaproject.codeplex.com/documentation) from Microsoft looked interesting. Each previous time I investigated it, it looked like it was still pretty rough and needed a little more time. I was pleased to find what looked like a mature and easy to integrate library this time around though.
 
 There is lots of great documentation and many blog posts about what OWIN is and how it works so I won't go into detail here. In a nutshell, OWIN provides a standard interface to hook into the web serving pipeline and do whatever you need to do to the request and/or response. The idea is that you can easily change the behavior of your web host (be it embedded, on a server, etc.) by swapping out different "middleware".
 
