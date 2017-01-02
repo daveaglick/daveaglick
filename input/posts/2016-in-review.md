@@ -4,7 +4,7 @@ Published: 1/2/2017
 Tags:
   - personal
 ---
-This whole "Year in Review" blog post thing has gotten quite popular (or perhaps it always was). At the risk of being cliché, here is my own entry. Even if no one else finds this to be a fascinating and important historical record, I find it personally insightful. 
+This whole "Year in Review" blog post thing has gotten quite popular. At the risk of being cliché, here is my own entry. Even if no one else finds this to be a fascinating and important historical record, I find it personally insightful. 
 
 # Open Source
 ---
@@ -23,7 +23,7 @@ By far, most of my open source attention in 2016 was focused on my static genera
 
 That said, it's amazing what can be accomplished with sustained, focused effort. I managed to take Wyam from the germ of an idea to a robust production-ready tool (more on what's coming in 2017 further down). Near the end of the year I was even able to do some major work with it that proves in my mind (and hopefully in everyone else's) that it truly is one of the most flexible static generators available. When this work is announced (hopefully very, very soon) I think it will turn a number of heads.
 
-An speaking of turning heads, I received a wonderful December surprise when [Scott Hanselman wrote a detailed and positive review](http://www.hanselman.com/blog/ExploringWyamANETStaticSiteContentGenerator.aspx). As with any public endeavor, success is only half about the merits of the thing on their own (if that). It is just as much about eyeballs, luck, and word of mouth. When Scott blogs about something, it gets a lot of attention (to explain to my wife how significant this was, I told her to simply Google "Scott" and look at the top results). As a result of the post interest has greatly increased. Now it's up to me to sustain that interest.
+And speaking of turning heads, I received a wonderful December surprise when [Scott Hanselman wrote a detailed and positive review](http://www.hanselman.com/blog/ExploringWyamANETStaticSiteContentGenerator.aspx). As with any public endeavor, success is only half about the merits of the thing on their own (if that). It is just as much about eyeballs, luck, and word of mouth. When Scott blogs about something, it gets a lot of attention (to explain to my wife how significant this was, I told her to simply Google "Scott" and look at the top results). As a result of the post interest has greatly increased. Now it's up to me to sustain that interest.
 
 I also want to thank all the contributors to the project. I've been fortunate to have a large long-tail of support and there were 18 distinct contributors as of the end of the year. And beyond the contributors, many of the ideas and directions the project has taken have been suggested or inspired by feedback from the larger community.
 
@@ -31,7 +31,7 @@ I also want to thank all the contributors to the project. I've been fortunate to
 
 I also managed to release a new open source project last year called [Scripty](https://github.com/daveaglick/Scripty). This tool allows you to use Roslyn scripts for code generation. It's like T4 but with C# code.
 
-This project has also managed to garner quite a bit of interest, though it hasn't gotten as much attention as I would like to give it. I'm hoping to find a little more time to continue working on it in the next year.
+This project has also managed to garner quite a bit of interest, though it hasn't gotten as much development attention as I would like to give it. I'm hoping to find a little more time to continue working on it in the next year.
 
 ## @dotnetissues
 
@@ -48,7 +48,7 @@ I haven't been quite as involved in other open source projects in 2016 given my 
 # Community
 ---
 
-One of my goals from last year was to become more active within the community, both locally and more generally. As both shy and introverted, this can be a challenge for me. It's also rewarding though, and is pleased to report I had a great year in this respect.
+One of my goals from last year was to become more active within the community, both locally and more generally. As both shy and introverted, this can be a challenge for me. It's also rewarding though, and I'm pleased to report I had a great year in this respect.
 
 ## Speaking
 
@@ -62,7 +62,7 @@ This has been a banner year for me locally. I made an effort to attend even more
 
 I wasn't quite as active on my blog last year, but still managed to write 13 posts not counting last year's review. Most notable was [a three-part series on the NuGet APIs](https://daveaglick.com/posts/exploring-the-nuget-v3-libraries-part-1) that has served as one of the only resources on the topic. It's even linked from the NuGet documentation as the primary source of information until more exhaustive documentation can be written.
 
-## MVP
+## Microsoft MVP
 
 One of the best surprises at the beginning of last year was a notice that I had been selected for my first Microsoft MVP award. By far the highlight of that experience was attending the MVP Summit near the end of the year. It was amazing and I especially enjoyed meeting many of the community members and Microsoft staff that I had been interacting with only virtually until then.
 
