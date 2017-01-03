@@ -14,6 +14,7 @@ I enjoy giving talks at user groups, code camps, and conferences and have been f
 * 4/18/2015 - NoVa Code Camp
 
 ## Cutting Through The Static
+* 10/8/2016 - NoVa Code Camp
 * 4/9/2016 - Philly Code Camp
 
 ## Other Talks
