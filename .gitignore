@@ -4,3 +4,4 @@
 [Oo]utput/
 nuget.exe
 *.zip
+/debug.log
