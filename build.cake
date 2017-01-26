@@ -1,5 +1,5 @@
-#tool nuget:?package=Wyam&prerelease
-#addin nuget:?package=Cake.Wyam&prerelease
+#tool nuget:?package=Wyam
+#addin nuget:?package=Cake.Wyam
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
