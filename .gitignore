@@ -5,3 +5,4 @@
 nuget.exe
 *.zip
 /debug.log
+/packages.xml
