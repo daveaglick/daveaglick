@@ -5,6 +5,7 @@ Image: /images/servers.jpg
 Tags:
   - Azure
   - FTP
+  - devops
 ---
 I've recently been experimenting with Azure for static site hosting. While there are lots of great static site hosts ([my personal favorite](/posts/moving-to-netlify) still remains [Netlify](https://www.netlify.com)), [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) offer some attractive features to enterprises or organizations already invested in Azure. One would think that easily deploying a static site to Azure would be relatively straightforward. Unfortunately, I found that this wasn't the case at all. While Azure Web Apps have some advanced [deployment options](https://docs.microsoft.com/en-us/azure/app-service-web/web-sites-deploy) like [Kudu](https://github.com/projectkudu/kudu/wiki/Deployment) for git deployments and [Web Deploy](http://www.iis.net/learn/publish/using-web-deploy/introduction-to-web-deploy) for deployments from Visual Studio, both require some setup and configuration, are designed with "application" scenarios in mind, and aren't as straightforward as a simple [FTP upload](https://en.wikipedia.org/wiki/File_Transfer_Protocol). Unfortunately, even FTP uploads to Azure Web Apps have some issues that I'll discuss below. To address this scenario, I ended up writing a little bit of code to automatically synchronize a local static site with an Azure Web App FTP server that ignores unchanged files.
 
