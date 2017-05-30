@@ -1,14 +1,14 @@
 Title: Building A Cloud-Based Web App From Scratch
 Lead: Azure Cosmos DB + Azure Functions + Vue.js = Awesome
 Image: /images/clouds.jpg
-Published: 5/25/2017
+Published: 5/30/2017
 Tags:
   - Azure
   - Azure Cosmos DB
   - Azure Functions
   - Vue.js
 ---
-It seems like it's impossible to stay away from the hype surrounding cloud services recently. All the major providers are shipping updates at what seems like an insane pace and buzzwords like *serverless* and *NoSQL* are everywhere. It's been a while since I've done any major work on a public cloud with the last time being four or five years ago on AWS. While I've done a little hosting here and there on Azure, I figured I was overdue for a real deep-dive. Since I was starting from scratch with everything else, both implementation and knowledge-wise, it also seemed like a good opportunity to learn Vue.js, which I've had my eye on for a while. This blog series is my experience setting up a completely cloud-based web application using nothing but Azure services and open source libraries. In this first part, I'll introduce the project and we'll get the database set up. The next post will set up the Azure services for the API and front-end, and then following posts will build out the UI.
+It seems like it's impossible to stay away from the hype surrounding cloud services recently. All the major providers are shipping updates at what seems like an insane pace and buzzwords like *serverless* and *NoSQL* are everywhere. It's been a while since I've done any major work on a public cloud with the last time being four or five years ago on AWS. While I've done a little hosting here and there on Azure, I figured I was overdue for a real deep-dive. Since I was starting from scratch with everything else, both implementation and knowledge-wise, it also seemed like a good opportunity to learn Vue.js, which I've had my eye on for a while. This blog series is my experience setting up a completely cloud-based web application using nothing but Azure services and open source libraries. In this first part, I'll introduce the project and we'll get the database set up. In the next post we'll set up the Azure services for the API and front-end, and then in following posts we'll build out the UI.
 
 Note that I'm coming at this knowing almost nothing about any of the services or libraries we're going to make use of. I think that's important to point out because the way I do things may be pretty novice. That's okay, in fact it's kind of the point. This will be a learning experience for us both.
 
