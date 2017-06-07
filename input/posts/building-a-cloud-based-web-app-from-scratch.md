@@ -1,4 +1,4 @@
-Title: Building A Cloud-Based Web App From Scratch
+Title: Building A Cloud-Based Web App From Scratch, Part 1
 Lead: Azure Cosmos DB + Azure Functions + Vue.js = Awesome
 Image: /images/clouds.jpg
 Published: 5/30/2017
@@ -8,7 +8,7 @@ Tags:
   - Azure Functions
   - Vue.js
 ---
-It seems like it's impossible to stay away from the hype surrounding cloud services recently. All the major providers are shipping updates at what seems like an insane pace and buzzwords like *serverless* and *NoSQL* are everywhere. It's been a while since I've done any major work on a public cloud with the last time being four or five years ago on AWS. While I've done a little hosting here and there on Azure, I figured I was overdue for a real deep-dive. Since I was starting from scratch with everything else, both implementation and knowledge-wise, it also seemed like a good opportunity to learn Vue.js, which I've had my eye on for a while. This blog series is my experience setting up a completely cloud-based web application using nothing but Azure services and open source libraries. In this first part, I'll introduce the project and we'll get the database set up. In the next post we'll set up the Azure services for the API and front-end, and then in following posts we'll build out the UI.
+It seems like it's impossible to stay away from the hype surrounding cloud services recently. All the major providers are shipping updates at what seems like an insane pace and buzzwords like *serverless* and *NoSQL* are everywhere. It's been a while since I've done any major work on a public cloud with the last time being four or five years ago on AWS. While I've done a little hosting here and there on Azure, I figured I was overdue for a real deep-dive. Since I was starting from scratch with everything else, both implementation and knowledge-wise, it also seemed like a good opportunity to learn Vue.js, which I've had my eye on for a while. This blog series is my experience setting up a completely cloud-based web application using nothing but Azure services and open source libraries. In this first part, I'll introduce the project and we'll get the database set up. In [the next post](/posts/building-a-cloud-based-web-app-from-scratch-2) we'll set up the Azure services for the API and front-end, and then in following posts we'll build out the UI.
 
 Note that I'm coming at this knowing almost nothing about any of the services or libraries we're going to make use of. I think that's important to point out because the way I do things may be pretty novice. That's okay, in fact it's kind of the point. This will be a learning experience for us both.
 
@@ -61,6 +61,8 @@ Before we create any documents we need to [create a database]() and then [create
 <img src="/posts/images/cosmos4.png" class="img-responsive"></img>
 
 You need to give the collection and ID. Since this collection is going to be storing our customer documents I'm going to name it "customers". We also have to select a partitioning key that can be used for scaling the collection by distributing documents to other servers. I'm not that interested in this right now, so I'll just use "id" for my partitioning key as well as the document ID. And since we don't have a database yet (just a database *account* which can hold multiple *databases*) we'll also need to create one of those. I'm going to name the database the same as the account since it's the only database we'll need.
+
+Be careful with how you provision the account. If you want to control costs, make sure to change to a *Fixed* Storage Capacity and set the initial throughput to 400 RU/s. If yuo don't, you'll find your database costs are much higher than you would expect for a little experiment (ask me how I know).
 
 <img src="/posts/images/cosmos5.png" class="img-responsive"></img>
 
