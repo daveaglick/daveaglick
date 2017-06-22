@@ -106,3 +106,12 @@ UseNames<Foo>(x => nameof(x.Baz));
 
 And there you have it: a short, single method that will get the class and member name for both properties and methods without magic strings and with a minimum amount of redundancy.
 
+## Similar Approaches
+
+This technique is far from unique and folks have been using expression trees for similar purposes for a while. As pointed out by [vcsjones](https://twitter.com/vcsjones) there are even some [helpers built into ASP.NET MVC](https://github.com/aspnet/Mvc/blob/4bddb5ff1b42b353ab66c7bd31356d3353c79b7d/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/ExpressionHelper.cs#L22) that perform similar functionality (though not quite the same). That said, I've never seen an expression tree used this way in combination with a `nameof` inside the expression to get a method name without arguments from a lambda, so there's that.
+
+## Performance
+
+As has been [pointed out on Twitter by filip_woj](https://twitter.com/filip_woj/status/877905232272867328), expression trees are slow. Depending on what you're doing with them, they can add a large performance hit to your application. The code above shouldn't be *too* bad since we're not actually compiling the expressions, just inspecting them, but buyer beware. If you're running performance sensitive code, it's worth doing some benchmarks. It's up to you whether the convenience of using an expression tree to get the name for both the class and member without using two separate `nameof` operators is worth the performance hit.
+
+I'm planning on doing a benchmark between `UseNames(nameof(Foo), nameof(Foo.Baz))` and `UseNames<Foo>(x => nameof(x.Baz))` later today since those seem like the closest apples-to-apples comparison - come back later to see the results!
