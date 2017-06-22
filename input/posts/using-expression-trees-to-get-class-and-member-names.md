@@ -114,4 +114,19 @@ This technique is far from unique and folks have been using expression trees for
 
 As has been [pointed out on Twitter by filip_woj](https://twitter.com/filip_woj/status/877905232272867328), expression trees are slow. Depending on what you're doing with them, they can add a large performance hit to your application. The code above shouldn't be *too* bad since we're not actually compiling the expressions, just inspecting them, but buyer beware. If you're running performance sensitive code, it's worth doing some benchmarks. It's up to you whether the convenience of using an expression tree to get the name for both the class and member without using two separate `nameof` operators is worth the performance hit.
 
-I'm planning on doing a benchmark between `UseNames(nameof(Foo), nameof(Foo.Baz))` and `UseNames<Foo>(x => nameof(x.Baz))` later today since those seem like the closest apples-to-apples comparison - come back later to see the results!
+Thanks to [torn_hoof](https://twitter.com/torn_hoof), we have a benchmark for comparison. Based on [running all three possibilities through BenchmarkDotNet](https://gist.github.com/Tornhoof/2bb73db914a13825ec7c0eb89d8d6b6a) we can observe the following:
+
+```
+ |                    Method |          Mean |      Error |    StdDev |  Gen 0 | Allocated |
+ |-------------------------- |--------------:|-----------:|----------:|-------:|----------:|
+ |           NameOfBenchmark |     0.0002 ns |  0.0010 ns | 0.0009 ns |      - |       0 B |
+ |       ExpressionBenchmark | 1,394.7139 ns | 10.5833 ns | 9.8996 ns | 0.2117 |     888 B |
+ | ExpressionNameOfBenchmark |   824.3050 ns |  4.2835 ns | 4.0068 ns | 0.1335 |     560 B |
+```
+
+In other words:
+* `UseNames(nameof(Foo), nameof(Foo.Bar))` takes about 0 ns per call
+* `UseNames<Foo>(x => nameof(x.Bar))` takes about 820 ns per call
+* `UseNames<Foo>(x => x.Bar)` takes about 1,400 ns per call
+
+After getting some hard numbers, I wouldn't go using this approach over and over in a tight loop in performance critical methods, but I'd be comfortable using it in an average web or desktop application.
