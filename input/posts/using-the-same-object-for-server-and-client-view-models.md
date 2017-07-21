@@ -87,7 +87,7 @@ Then your form might look like:
 </div>
 ```
 
-The problem here is that I'm now duplicating the structure and date of my server-side C# view model inside JavaScript. What happens if I change the name of one of the C# view model properties but forget to change it in the JavaScript code? This is an example of [dreaded magic strings](/posts/eliminating-magic-strings) because I'm expecting the names in my JavaScript (essentially strings) are going to match my strongly-typed C# object when I post it back and bind. There has to be a better way...
+The problem here is that I'm now duplicating the structure and data of my server-side C# view model inside JavaScript. What happens if I change the name of one of the C# view model properties but forget to change it in the JavaScript code? This is an example of [dreaded magic strings](/posts/eliminating-magic-strings) because I'm expecting the names in my JavaScript (essentially strings) are going to match my strongly-typed C# object when I post it back and bind. There has to be a better way...
 
 # Generating The Client Object
 
