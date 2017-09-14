@@ -6,3 +6,5 @@ nuget.exe
 *.zip
 /debug.log
 /packages.xml
+/config.wyam.hash
+/config.wyam.dll
