@@ -7,7 +7,7 @@ Tags:
   - static site generator
   - open source
 ---
-After a little over two years of development, I'm thrilled to announce that Wyam 1.0 is now released! Wyam is a .NET static generator that unapologetically places an emphasis on flexibility and extensibility. It's the static generator *I* wanted two years ago and I'm thrilled that so many have also found it valuable and interesting along the way.
+After a little over two years of development, I'm thrilled to announce that Wyam 1.0 is now released! [Wyam is a .NET static generator](https://wyam.io) that unapologetically places an emphasis on flexibility and extensibility. It's the static generator *I* wanted two years ago and I'm thrilled that so many have also found it valuable and interesting along the way.
 
 Here are some numbers (as of the writing of this post):
 
