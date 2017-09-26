@@ -18,5 +18,6 @@ I enjoy giving talks at user groups, code camps, and conferences and have been f
 * 4/9/2016 - Philly Code Camp
 
 ## Other Talks
+* 6/5/2017: Wyam (Lightning Talk) - .NET Fringe
 * 7/11/2016: Giving Back: Your First Pull Request (Lightning Talk) - .NET Fringe
 * 10/26/2015: Wyam (Lightning Talk) - .NET Unboxed
