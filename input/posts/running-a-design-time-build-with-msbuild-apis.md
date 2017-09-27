@@ -410,16 +410,12 @@ This may raise the question, "why would I want this data?" It's valuable anytime
 
 # Introducing Buildalyzer
 
-If you've made it all the way to the end, congratulations. I hope you learned a lot. And now I'm going to tell you that you actually didn't need to read or understand any of that because I've written a little open source utility library called Buildalyzer that does this exact thing:
+If you've made it all the way to the end, congratulations. I hope you learned a lot. And now I'm going to tell you that you actually didn't need to read or understand any of that because I've written a little open source utility library called [Buildalyzer](https://github.com/daveaglick/Buildalyzer) ([NuGet package here](https://www.nuget.org/packages/Buildalyzer)) that does this exact thing:
 
 ```
-Analyzer analyzer = Analyzer.Analyze(@"C:\MyCode\MyProject.csproj");
+Analyzer analyzer = new Analyzer();
+IReadOnlyList<string> sourceFiles = analyzer.GetProject(@"C:\MyCode\MyProject.csproj").GetSourceFiles();
 ```
 
-The `Analyzer` class has three properties:
-* `Project` - the MSBuild project
-* `SourceFiles` - the source files passed to the compiler
-* `References` - the references passed to the compiler
-
-The project could probably use a little polish, which I'll add as I go, but it should be usable and working. Let me know if you hit any bugs or it doesn't work for some combination of runtime and project. Enjoy - pull requests accepted :).
+The project could probably use a little polish, which I'll add as I go, but it should be usable and working. Let me know if you hit any bugs or it doesn't work for some combination of runtime and project. It works on my machine and has tests for different combinations, but as you can see this is a complex process. Enjoy - pull requests accepted :).
 
