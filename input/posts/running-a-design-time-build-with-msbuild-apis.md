@@ -347,7 +347,7 @@ Copy copy = new Copy();
 I also ran into trouble in some situations with finding and loading the Roslyn tasks assembly. I was able to get around this by adding the following:
 
 ```
-Assembly.LoadFile(Path.GetFullPath(Path.Combine(pathHelper.RoslynTargetsPath, "Microsoft.Build.Tasks.CodeAnalysis.dll")));
+Assembly.LoadFile(Path.GetFullPath(Path.Combine(globalProperties["RoslynTargetsPath"], "Microsoft.Build.Tasks.CodeAnalysis.dll")));
 ```
 
 Finally, I hit some issues with the availability and binding of certain `netstandard` packages when using the MSBuild APIs from a .NET Framework console application. You may or may not need to add the [System.IO.FileSystem](https://www.nuget.org/packages/System.IO.FileSystem/) package and the following binding redirects:
