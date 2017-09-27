@@ -296,6 +296,8 @@ using (XmlReader reader = XmlReader.Create(projectPath))
 
 Note that even though we're reading the project as XML to determine if it uses the `Sdk` attribute, you still need to load it by file name into the MSBuild `Project` even though the `ProjectCollection.LoadProject()` method accepts an `XmlReader`. This is because loading it by file name sets some additional properties that MSBuild requires to properly locate targets files. If you loaded the XML directly, you'd need to identify and set all of those global properties yourself.
 
+Update: Andreas pointed out in the comments that SDK-style projects [can also be specified by directly importing the SDK props and targets](https://github.com/Microsoft/msbuild/issues/1493). If you want to identify any SDK-style project, you'll also need to scan for those `<Import>` elements in the project file if a SDK attribute wasn't found on the root project element.
+
 # Configuring A Design-Time Build
 
 Now that we can finally open any type of MSBuild project, let's figure out how to execute a [design-time build](https://github.com/dotnet/project-system/blob/master/docs/design-time-builds.md). Recall from the introduction that this special type of build will give us information about the project without actually compiling it. It turns out that triggering a design-time build is really easy compared to getting MSBuild to work. All it takes is a few extra global properties:
