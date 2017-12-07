@@ -4,7 +4,9 @@ Published: 1/26/2017
 Image: /images/code.jpg
 Tags:
   - Wyam
+  - static site generator
   - documentation
+  - open source
 ---
 # A Short Introduction
 

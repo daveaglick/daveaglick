@@ -38,15 +38,15 @@ Task("Preview")
 Task("Debug")
     .Does(() =>
     {
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p -w");
+        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
+            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
     });
 
 Task("Mono")
     .Does(() =>
     {
-        StartProcess(@"c:\Program Files\Mono\bin\mono.exe", "../Wyam/src/clients/Wyam/bin/Debug/wyam.exe " +
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p --verbose");
+        StartProcess(@"c:\Program Files\Mono\bin\mono.exe", "../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe " +
+            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p --verbose");
     });
 
 Task("Deploy")
