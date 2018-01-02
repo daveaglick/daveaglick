@@ -52,7 +52,7 @@ One of my goals from last year was to become more active within the community, b
 
 ## Speaking
 
-I [gave 5 talks last year](https://daveaglick.com/talks), mostly at user groups and code camps. I also had a good number of rejections for larger conferences, suggesting I need to work on my pitch skills. One challenge here is that I don't have the schedule freedom to just blanket every open call with a proposal. Due to other obligations I am forced to be selective and can only submit to those conferences that fit my schedule. A goal for 2017 is to get accepted to a larger conference for a full session.
+I [gave 5 talks last year](https://daveaglick.com/speaking), mostly at user groups and code camps. I also had a good number of rejections for larger conferences, suggesting I need to work on my pitch skills. One challenge here is that I don't have the schedule freedom to just blanket every open call with a proposal. Due to other obligations I am forced to be selective and can only submit to those conferences that fit my schedule. A goal for 2017 is to get accepted to a larger conference for a full session.
 
 ## Locally
 

@@ -25,14 +25,25 @@ Tools to let you use Roslyn-powered C# scripts for code generation.
 
 ---
 
-## FluentBootstrap
-* [Website (fluentbootstrap.com)](http://fluentbootstrap.com/)
-* [Source Code (daveaglick/FluentBootstrap)](https://github.com/daveaglick/FluentBootstrap)
+## Buildalyzer
+* [Source Code (daveaglick/Buildalyzer)](https://github.com/daveaglick/Buildalyzer)
 
-Extensions, helper classes, model binding, and other goodies to help you use the Bootstrap CSS framework from .NET code.
+A little utility to perform design-time builds of .NET projects without having to think too hard about it. 
 
 <p>
-    <a class="github-button" href="https://github.com/daveaglick/FluentBootstrap" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/FluentBootstrap/stargazers" data-count-api="/repos/daveaglick/FluentBootstrap#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/FluentBootstrap on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/FluentBootstrap" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/FluentBootstrap/watchers" data-count-api="/repos/daveaglick/FluentBootstrap#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/FluentBootstrap on GitHub">Watch</a>
+    <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/Buildalyzer/stargazers" data-count-api="/repos/daveaglick/Buildalyzer#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/Buildalyzer on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/Buildalyzer/watchers" data-count-api="/repos/daveaglick/Buildalyzer#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/Buildalyzer on GitHub">Watch</a>
+</p>
+
+---
+
+## NetlifySharp
+* [Website (netlifysharp.netlify.com)](http://netlifysharp.netlify.com/)
+* [Source Code (daveaglick/NetlifySharp)](https://github.com/daveaglick/NetlifySharp)
+
+A .NET API Client for Netlify.
+
+<p>
+    <a class="github-button" href="https://github.com/daveaglick/NetlifySharp" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/NetlifySharp/stargazers" data-count-api="/repos/daveaglick/NetlifySharp#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/NetlifySharp on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/NetlifySharp" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/NetlifySharp/watchers" data-count-api="/repos/daveaglick/NetlifySharp#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/NetlifySharp on GitHub">Watch</a>
 </p>
 
 ---
@@ -55,6 +66,18 @@ Twitter bot that tweets new issues from one or more GitHub repositories. Powers 
 
 ---
 # *Past Projects*
+---
+
+## FluentBootstrap
+* [Website (fluentbootstrap.com)](http://fluentbootstrap.com/)
+* [Source Code (daveaglick/FluentBootstrap)](https://github.com/daveaglick/FluentBootstrap)
+
+Extensions, helper classes, model binding, and other goodies to help you use the Bootstrap CSS framework from .NET code.
+
+<p>
+    <a class="github-button" href="https://github.com/daveaglick/FluentBootstrap" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/FluentBootstrap/stargazers" data-count-api="/repos/daveaglick/FluentBootstrap#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/FluentBootstrap on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/FluentBootstrap" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/FluentBootstrap/watchers" data-count-api="/repos/daveaglick/FluentBootstrap#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/FluentBootstrap on GitHub">Watch</a>
+</p>
+
 ---
 
 ## LINQPad.CodeAnalysis
