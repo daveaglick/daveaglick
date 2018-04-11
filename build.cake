@@ -1,5 +1,5 @@
-#tool nuget:?package=Wyam
-#addin nuget:?package=Cake.Wyam
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.4.1"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.4.1"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -31,7 +31,8 @@ Task("Preview")
             Theme = "CleanBlog",
             UpdatePackages = true,
             Preview = true,
-            Watch = true
+            Watch = true,
+            Verbose = true
         });        
     });
 
@@ -39,14 +40,7 @@ Task("Debug")
     .Does(() =>
     {
         StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
-    });
-
-Task("Mono")
-    .Does(() =>
-    {
-        StartProcess(@"c:\Program Files\Mono\bin\mono.exe", "../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe " +
-            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p --verbose");
+            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/net462/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
     });
 
 Task("Deploy")
