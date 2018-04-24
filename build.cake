@@ -31,8 +31,7 @@ Task("Preview")
             Theme = "CleanBlog",
             UpdatePackages = true,
             Preview = true,
-            Watch = true,
-            Verbose = true
+            Watch = true
         });        
     });
 

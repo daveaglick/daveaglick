@@ -1,6 +1,6 @@
 Param
 (
-    [String]$CakeVersion = "0.26.1",
+    [String]$CakeVersion = "0.27.1",
     [String]$ToolsDir = "$PSScriptRoot\tools",
     [String]$ToolsProj = "$ToolsDir\build.csproj",
     [String]$BuildFile = "$PSScriptRoot\build.cake",
