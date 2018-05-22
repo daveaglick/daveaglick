@@ -14,6 +14,13 @@ A highly modular and extremely configurable static content generator and toolkit
 
 ---
 
+## Discover .NET
+* [Website (discoverdot.net)](https://discoverdot.net)
+
+Awesome .NET open source and community resources.
+
+---
+
 ## Scripty
 * [Source Code (daveaglick/Scripty)](https://github.com/daveaglick/Scripty)
 

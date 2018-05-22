@@ -4,6 +4,20 @@ Image: images/microphone.jpg
 
 I enjoy giving talks at user groups, code camps, and conferences and have been fortunate enough to do so. Here's a list of the talks I've given and where I've given them. All the materials are available [on GitHub](https://github.com/daveaglick/Presentations).
 
+# 2018
+
+**.NET In Your Browser, A Preview Of The Future With Blazor and WebAssembly**  
+_NoVa Code Camp, 5/12/2018_
+
+**.NET In Your Browser, A Preview Of The Future With Blazor and WebAssembly**  
+_Microsoft Maniacs User Group, 4/25/2018_
+
+**Introduction to Vue.js**  
+_.NET DC User Group, 2/20/2018_
+
+**How To Select A Web Framework**  
+_NOVA Software Architecture Round Table assisting Steve Albers, 1/23/2018_
+
 # 2017
 
 **A Gentle Introduction To Vue.js**  
