@@ -9,7 +9,10 @@ Image: images/lightbulb.jpg
 A highly modular and extremely configurable static content generator and toolkit.
 
 <p>
-    <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-star" data-style="mega" data-count-href="/Wyamio/Wyam/stargazers" data-count-api="/repos/Wyamio/Wyam#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Wyamio/Wyam on GitHub">Star</a> <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-eye" data-style="mega" data-count-href="/Wyamio/Wyam/watchers" data-count-api="/repos/Wyamio/Wyam#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch Wyamio/Wyam on GitHub">Watch</a> <a href="https://twitter.com/wyamio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@wyamio</a>
+    <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-star" data-style="mega" data-count-href="/Wyamio/Wyam/stargazers" data-count-api="/repos/Wyamio/Wyam#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Wyamio/Wyam on GitHub">Star</a> <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-eye" data-style="mega" data-count-href="/Wyamio/Wyam/watchers" data-count-api="/repos/Wyamio/Wyam#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch Wyamio/Wyam on GitHub">Watch</a>
+</p>
+<p>
+    <a href="https://twitter.com/wyamio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@wyamio</a>
 </p>
 
 ---
@@ -18,6 +21,34 @@ A highly modular and extremely configurable static content generator and toolkit
 * [Website (discoverdot.net)](https://discoverdot.net)
 
 Awesome .NET open source and community resources.
+
+<p>
+    <a href="https://twitter.com/discover_dotnet" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@discover_dotnet</a>
+</p>
+
+---
+
+## Buildalyzer
+* [Website (buildalyzer.netlify.com)](https://buildalyzer.netlify.com/)
+* [Source Code (daveaglick/Buildalyzer)](https://github.com/daveaglick/Buildalyzer)
+
+A little utility to perform design-time builds of .NET projects without having to think too hard about it. 
+
+<p>
+    <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/Buildalyzer/stargazers" data-count-api="/repos/daveaglick/Buildalyzer#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/Buildalyzer on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/Buildalyzer/watchers" data-count-api="/repos/daveaglick/Buildalyzer#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/Buildalyzer on GitHub">Watch</a>
+</p>
+
+---
+
+## MsBuildPipeLogger
+* [Website (msbuildpipelogger.netlify.com)](https://msbuildpipelogger.netlify.com/)
+* [Source Code (daveaglick/MsBuildPipeLogger)](https://github.com/daveaglick/MsBuildPipeLogger)
+
+A logger for MSBuild that sends event data over anonymous or named pipes.
+
+<p>
+    <a class="github-button" href="https://github.com/daveaglick/MsBuildPipeLogger" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/Buildalyzer/stargazers" data-count-api="/repos/daveaglick/MsBuildPipeLogger#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/MsBuildPipeLogger on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/MsBuildPipeLogger" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/MsBuildPipeLogger/watchers" data-count-api="/repos/daveaglick/MsBuildPipeLogger#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/MsBuildPipeLogger on GitHub">Watch</a>
+</p>
 
 ---
 
@@ -28,17 +59,6 @@ Tools to let you use Roslyn-powered C# scripts for code generation.
 
 <p>
     <a class="github-button" href="https://github.com/daveaglick/Scripty" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/Scripty/stargazers" data-count-api="/repos/daveaglick/Scripty#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/Scripty on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/Scripty" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/Scripty/watchers" data-count-api="/repos/daveaglick/Scripty#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/Scripty on GitHub">Watch</a>
-</p>
-
----
-
-## Buildalyzer
-* [Source Code (daveaglick/Buildalyzer)](https://github.com/daveaglick/Buildalyzer)
-
-A little utility to perform design-time builds of .NET projects without having to think too hard about it. 
-
-<p>
-    <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-star" data-style="mega" data-count-href="/daveaglick/Buildalyzer/stargazers" data-count-api="/repos/daveaglick/Buildalyzer#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star daveaglick/Buildalyzer on GitHub">Star</a> <a class="github-button" href="https://github.com/daveaglick/Buildalyzer" data-icon="octicon-eye" data-style="mega" data-count-href="/daveaglick/Buildalyzer/watchers" data-count-api="/repos/daveaglick/Buildalyzer#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch daveaglick/Buildalyzer on GitHub">Watch</a>
 </p>
 
 ---
