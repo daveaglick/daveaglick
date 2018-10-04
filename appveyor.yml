@@ -3,7 +3,7 @@ branches:
     - master
     
 environment:
-  access_token:
+  NETLIFY_TOKEN:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
 # Temporarily needed until curl added to PATH
