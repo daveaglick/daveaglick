@@ -59,7 +59,7 @@ Task("Netlify")
 
         Information("Deploying output to Netlify");
         var client = new NetlifyClient(netlifyToken);
-        client.UpdateSite($"daveaglick.netlify.com", MakeAbsolute(Directory("/output")).FullPath).SendAsync().Wait();
+        client.UpdateSite($"daveaglick.netlify.com", MakeAbsolute(Directory("./output")).FullPath).SendAsync().Wait();
 
         string token = EnvironmentVariable("NETLIFY_DAVEAGLICK");
         if(string.IsNullOrEmpty(token))
