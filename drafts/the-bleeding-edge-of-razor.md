@@ -93,13 +93,119 @@ Finally, `RazorCodeDocument` contains the abstract representation of your templa
 
 ## Compiling The Code
 
-Now that we have some C# code, we need to compile it. The Razor language bits are done (at least for now) and we'll use Roslyn to compile our code.
+Now that we have some C# code, we need to compile it. We're done with the Razor language bits (at least for now) and we'll use Roslyn to compile our code:
+
+```
+SourceText sourceText = SourceText.From(cSharpDocument.GeneratedCode, Encoding.UTF8);SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceText);
+CSharpCompilationOptions compilationOptions =
+    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+        .WithSpecificDiagnosticOptions(
+            new Dictionary<string, ReportDiagnostic>
+            {
+                // Binding redirects
+                { "CS1701", ReportDiagnostic.Suppress },
+                { "CS1702", ReportDiagnostic.Suppress },                { "CS1705", ReportDiagnostic.Suppress },                { "CS8019", ReportDiagnostic.Suppress }
+            });CSharpCompilation compilation =
+    CSharpCompilation.Create(
+        "RazorTest",
+        options: compilationOptions,
+        references: GetMetadataReferences())
+    .AddSyntaxTrees(syntaxTree);
+```
+
+In the first step we're loading the code in `cSharpDocument.GeneratedCode` into a Roslyn `SourceText` and then constructing a Roslyn `SyntaxTree` from it (which is different than a Razor syntax tree).
+
+In the next statement, we're creating the options for our compilation. Specifically, we want to produce a library so we use `OutputKind.DynamicallyLinkedLibrary` and then turn off certain diagnostics that we know will be troublesome (you can adjust the list of suppressed diagnostics however you see fit).
+
+In the last statement we prepare the code for compilation by using a Roslyn `CSharpCompilation`. This uses a factory `.Create()` method that takes a variety of arguments. In the code above, we're passing the name of the assembly ("RazorTest"), the options we created in the statement above, and a list of references we got by calling `GetMetadataReferences()` (more on that in just a second). The last call to our new `CSharpCompilation` object adds the syntax tree we constructed earlier.
+
+As with any compiled code, the compiler needs to reference other libraries to find functionality. Some of these are in-the-box code libraries (like CoreFx) and others are your own assemblies that your Razor template uses. I separated this part into a `GetMetadataReferences()` method to keep the code clean:
+
+```
+private static List<MetadataReference> GetMetadataReferences() =>
+    new List<MetadataReference>()
+    {
+        GetMetadataReference(typeof(InputTagHelper)),
+        GetMetadataReference(typeof(UrlResolutionTagHelper)),
+        GetMetadataReference(typeof(RazorCompiledItemAttribute)),
+        GetMetadataReference(typeof(IModelExpressionProvider)),
+        GetMetadataReference(typeof(IUrlHelper)),
+        GetMetadataReference(typeof(object)),
+        GetMetadataReference(typeof(DynamicAttribute)),
+        GetMetadataReference(
+            "System.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+        GetMetadataReference(
+            "netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51")
+    };
+
+private static MetadataReference GetMetadataReference(Type type) =>
+    MetadataReference.CreateFromFile(type.GetTypeInfo().Assembly.Location);
+
+private static MetadataReference GetMetadataReference(string assemblyName) =>
+    MetadataReference.CreateFromFile(Assembly.Load(assemblyName).Location); 
+```
+
+This code either loads assembly references by using a type that we know to be in the assembly or using the full name of the assembly (assuming the assembly binder can find it). This set of references should support a minimal Razor template compilation, but you may need to add or adjust it depending on your own template.
 
 ## Loading The Assembly
+
+In the interest of full disclosure, the code in the previous section doesn't actually _compile_ our template, it just sets up the Razor compiler. The actual compilation happens in this phase at the same time we emit our new template assembly to memory:
+
+```
+Assembly assembly;
+EmitOptions emitOptions =
+    new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb);
+using (MemoryStream assemblyStream = new MemoryStream())
+{
+    using (MemoryStream pdbStream = new MemoryStream())
+    {
+        EmitResult result = compilation.Emit(
+            assemblyStream,
+            pdbStream,
+            options: emitOptions);
+
+        if (!result.Success)
+        {
+            List<Diagnostic> errorsDiagnostics = result.Diagnostics
+                .Where(d => d.IsWarningAsError || d.Severity == DiagnosticSeverity.Error)
+                .ToList();
+            foreach (Diagnostic diagnostic in errorsDiagnostics)
+            {
+                FileLinePositionSpan lineSpan =
+                    diagnostic.Location.SourceTree.GetMappedLineSpan(
+                        diagnostic.Location.SourceSpan);
+                string errorMessage = diagnostic.GetMessage();
+                string formattedMessage =
+                    "("
+                    + lineSpan.StartLinePosition.Line.ToString()
+                    + ":"
+                    + lineSpan.StartLinePosition.Character.ToString()
+                    + ") "
+                    + errorMessage;
+                Console.WriteLine(formattedMessage);
+            }
+            return;
+        }
+
+        assemblyStream.Seek(0, SeekOrigin.Begin);
+        pdbStream.Seek(0, SeekOrigin.Begin);
+
+        assembly = Assembly.Load(assemblyStream.ToArray(), pdbStream.ToArray());
+    }
+}
+```
+
+Most of the work here happens in the `compilation.Emit()` method. We pass it an options object that tells it we want to produce a portable PDB (which will get embedded in the in-memory assembly and can be used for debugging the template). This method compiles and serializes the assembly to a stream.
+
+The bulk of the code here deals with error reporting. Once the compilation and emit is done, the `EmitResult` object will contain a `Success` property that tells you if the compilation was successful. If it wasn't, you can get compilation errors by examining the `EmitResult.Diagnostics` property. The rest of the code above just formats a nice message using Roslyn line span information (normally, I'd create `formattedMessage` using string interpolation, but I used string concatenation instead to make it clearer what's going on for this post).
+
+Finally, we reset the assembly and PDF streams to the start (now that Roslyn has written to them) and pass them to `Assembly.Load()` to construct an in-memory assembly we can use in the next phase.
 
 ## Executing The Template
 
 # Bringing It All Together
+
+Now that we've walked through how to do this on your own, it's time to mention that there are already libraries that do this for you using the new ASP.NET Core Razor engine. Two of my favorites are [Gazorator](https://github.com/mholo65/gazorator) (by my friend [Martin Björkström](https://twitter.com/mholo65), without whom this post probably never would have happened) and [RazorLight](https://github.com/toddams/RazorLight). If you want to customize the process or have full control over the phases, the code above should get you started. However, if you just want to turn a Razor template into HTML I'd consider using one of these libraries to abstract all these details from your code.
 
 # But What About MVC
 
