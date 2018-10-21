@@ -1,6 +1,6 @@
 Title: The Bleeding Edge Of Razor
 Lead: Using the Razor view engine in your own code.
-Published: 10/4/2018
+Published: 10/22/2018
 Image: /images/blocks.jpg
 Tags:
   - ASP.NET
@@ -203,12 +203,40 @@ Finally, we reset the assembly and PDF streams to the start (now that Roslyn has
 
 ## Executing The Template
 
+At this point we have an assembly that contains the compiled version of our template. All we have to do now is run it:
+
+```
+RazorCompiledItemLoader loader = new RazorCompiledItemLoader();
+RazorCompiledItem item = loader.LoadItems(assembly).SingleOrDefault();
+RazorPage<dynamic> page = (RazorPage<dynamic>)Activator.CreateInstance(item.Type);
+TextWriter writer = new StringWriter();
+page.ViewContext = new ViewContext()
+{
+    Writer = writer
+};
+page.HtmlEncoder = HtmlEncoder.Default;
+page.ExecuteAsync().GetAwaiter().GetResult();
+Console.WriteLine(writer.ToString());
+```
+
+The `RazorCompiledItemLoader` knows how to use reflection to find the class that represents your template in the assembly. Information about that class gets returned as a `RazorCompiledItem` which, among other things, contains the type of your template class.
+
+We can create an instance of the class using `Activator` (though you can certainly use expression trees or some other mechanism to instantiate it via reflection). By default, Razor templates inherit from `RazorPage<TModel>` and the default model is `dynamic` so the instance we end up with is a `RazorPage<dynamic>` (also why we needed to make sure we loaded the assembly that contains `DynamicAttribute` when gathering `MetadataReference` objects, because that assembly is responsible for `dynamic` support).
+
+When a `RazorPage` is executed, it requires a few things like a `ViewContext` and a `HtmlEncoder`. The code above creates a minimal `ViewContext` and you'll need to populate it further if your template uses other view features like the `ViewBag`. Then we call `RazorPage.ExecuteAsync()` to execute the template and get rendered HTML (I call it synchronously above, but presumably you'd be calling it in an `async` method and would `await` the call).
+
 # Bringing It All Together
 
 Now that we've walked through how to do this on your own, it's time to mention that there are already libraries that do this for you using the new ASP.NET Core Razor engine. Two of my favorites are [Gazorator](https://github.com/mholo65/gazorator) (by my friend [Martin Björkström](https://twitter.com/mholo65), without whom this post probably never would have happened) and [RazorLight](https://github.com/toddams/RazorLight). If you want to customize the process or have full control over the phases, the code above should get you started. However, if you just want to turn a Razor template into HTML I'd consider using one of these libraries to abstract all these details from your code.
 
-# But What About MVC
+# But What About MVC?
 
 If you start adding MVC conventions to your templates, you'll notice they either result in failures or just plain don't work. For example, if you add a layout to your template:
 
-The layout simply won't be rendered. That's because...
+```
+@{
+    Layout = "_MyLayout.cshtml";
+}
+```
+
+The layout simply won't be rendered. That's because the Razor language bits discussed above are a little bit leaky with regards to MVC. For example, the default `RazorPage` does have a `Layout` property so setting it in your template won't cause the compilation to fail. However, the out-of-the-box Razor language engine we use above doesn't know anything about layouts or how to render them. I'm planning on following up this post in the near future with an even deeper dive into the Razor engine where I'll discuss how to light up the MVC version of Razor you know and love and the extensibility mechanisms that are used to do so.
