@@ -1,7 +1,7 @@
 Title: The Bleeding Edge Of Razor
 Lead: Using the Razor view engine in your own code.
 Published: 10/22/2018
-Image: /images/blocks.jpg
+Image: /images/razor.jpg
 Tags:
   - ASP.NET
   - ASP.NET MVC
@@ -96,7 +96,8 @@ Finally, `RazorCodeDocument` contains the abstract representation of your templa
 Now that we have some C# code, we need to compile it. We're done with the Razor language bits (at least for now) and we'll use Roslyn to compile our code:
 
 ```
-SourceText sourceText = SourceText.From(cSharpDocument.GeneratedCode, Encoding.UTF8);SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceText);
+SourceText sourceText = SourceText.From(cSharpDocument.GeneratedCode, Encoding.UTF8);
+SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceText);
 CSharpCompilationOptions compilationOptions =
     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
         .WithSpecificDiagnosticOptions(
@@ -104,8 +105,11 @@ CSharpCompilationOptions compilationOptions =
             {
                 // Binding redirects
                 { "CS1701", ReportDiagnostic.Suppress },
-                { "CS1702", ReportDiagnostic.Suppress },                { "CS1705", ReportDiagnostic.Suppress },                { "CS8019", ReportDiagnostic.Suppress }
-            });CSharpCompilation compilation =
+                { "CS1702", ReportDiagnostic.Suppress },
+                { "CS1705", ReportDiagnostic.Suppress },
+                { "CS8019", ReportDiagnostic.Suppress }
+            });
+CSharpCompilation compilation =
     CSharpCompilation.Create(
         "RazorTest",
         options: compilationOptions,
