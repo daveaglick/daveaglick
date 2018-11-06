@@ -1,8 +1,8 @@
 // The following environment variables need to be set for Publish target:
 // NETLIFY_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.6.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.6.0"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.7.1"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.7.1"
 #addin "NetlifySharp"
 
 using NetlifySharp;
