@@ -1,8 +1,8 @@
 // The following environment variables need to be set for Publish target:
 // NETLIFY_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.7.3"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.7.3"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.0.0"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.0.0"
 #addin "NetlifySharp"
 
 using NetlifySharp;
@@ -44,8 +44,9 @@ Task("Preview")
 Task("Debug")
     .Does(() =>
     {
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
-            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/net462/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
+        DotNetCoreBuild("../Wyam/tests/integration/Wyam.Examples.Tests/Wyam.Examples.Tests.csproj");        
+        DotNetCoreExecute("../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/Wyam.dll",
+            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
     });
 
 Task("Netlify")
@@ -60,12 +61,6 @@ Task("Netlify")
         Information("Deploying output to Netlify");
         var client = new NetlifyClient(netlifyToken);
         client.UpdateSite($"daveaglick.netlify.com", MakeAbsolute(Directory("./output")).FullPath).SendAsync().Wait();
-
-        string token = EnvironmentVariable("NETLIFY_DAVEAGLICK");
-        if(string.IsNullOrEmpty(token))
-        {
-            throw new Exception("Could not get NETLIFY_DAVEAGLICK environment variable");
-        }
     });
     
 //////////////////////////////////////////////////////////////////////
@@ -75,7 +70,7 @@ Task("Netlify")
 Task("Default")
     .IsDependentOn("Preview");    
     
-Task("AppVeyor")
+Task("BuildServer")
     .IsDependentOn("Build")
     .IsDependentOn("Netlify");
 
