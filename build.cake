@@ -1,8 +1,8 @@
 // The following environment variables need to be set for Publish target:
 // NETLIFY_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.0.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.0.0"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.2.4"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.2.4"
 #addin "NetlifySharp"
 
 using NetlifySharp;
@@ -46,7 +46,7 @@ Task("Debug")
     {
         DotNetCoreBuild("../Wyam/tests/integration/Wyam.Examples.Tests/Wyam.Examples.Tests.csproj");        
         DotNetCoreExecute("../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/Wyam.dll",
-            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -p");
+            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/**/*.dll\" -r \"blog -i\" -t \"../Wyam/themes/Blog/CleanBlog\" -pw --attach");
     });
 
 Task("Netlify")
