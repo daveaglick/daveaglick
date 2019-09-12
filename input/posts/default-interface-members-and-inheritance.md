@@ -13,12 +13,12 @@ Consider the following code:
 ```csharp
 interface ICar
 {
-	// Seems like a reasonable default
-	public int GetTopSpeed() => 150;
+    // Seems like a reasonable default
+    public int GetTopSpeed() => 150;
 }
 
 public class Elantra : ICar
-{	
+{
 }
 ```
 
@@ -41,18 +41,18 @@ At this point you might be thinking "well that seems silly," but there's a good 
 ```csharp
 interface ICar
 {
-	// Seems like a reasonable default
-	public int GetTopSpeed() => 150;
+    // Seems like a reasonable default
+    public int GetTopSpeed() => 150;
 }
 
 interface IMovable
 {
-	// Nothing moves faster than the speed of light
-	public int GetTopSpeed() => 671000000;
+    // Nothing moves faster than the speed of light
+    public int GetTopSpeed() => 671000000;
 }
 
 public class Elantra : ICar, IMovable
-{	
+{
 }
 ```
 
@@ -65,18 +65,18 @@ If you called `GetTopSpeed()` on an instance of `Elantra` what would the result 
 ```csharp
 interface ICar
 {
-	public string Make { get; }
-	public int Cylinders => 4;
+    public string Make { get; }
+    public int Cylinders => 4;
 }
 
 public abstract class Toyota : ICar
 {
-	public string Make => "Toyota";
+    public string Make => "Toyota";
 }
 
 public class Avalon : Toyota
 {
-	public int Cylinders => 6;
+    public int Cylinders => 6;
 }
 ```
 
@@ -98,25 +98,26 @@ The reason is because `Avalon.Cylinders` isn't actually implementing `ICar.Cylin
 ```csharp
 interface ICar
 {
-	public string Make { get; }
-	public int Cylinders { get; }
+    public string Make { get; }
+    public int Cylinders { get; }
 }
 
 public abstract class Toyota : ICar
 {
-	public string Make => "Toyota";
-	int ICar.Cylinders => 4;
+    public string Make => "Toyota";
+    int ICar.Cylinders => 4;
 }
 
 public class Avalon : Toyota
 {
-	public int Cylinders => 6;
+    public int Cylinders => 6;
 }
 ```
 
 I envision this being something I'll have to keep reminding myself about. I think the reason is that the semantics are different from what we're used to after a decade of working with `virtual` and `override` in class hierarchies.
 
 More specifically, up until default interface members we _had_ to provide an implementation within an implementing class because the interface simply couldn't contain one. That means in the code above for the abstract `Toyota` base class I would've had to write one of these:
+
 - `public int Cylinders => 4` to implement the interface property and provide a default value, forcing the property into the inheritance chain of `Toyota`.
 - `public abstract int Cylinders { get; }` to define the interface property as abstract and force derived classes to provide an implementation.
 - `int ICar.Cylinders => 4` to implement the interface property and provide a default value, but not place the property into the inheritance chain of `Toyota`.
@@ -128,20 +129,20 @@ Contrast that with the semantics of a default interface member. The equivalent `
 ```csharp
 interface ICar
 {
-	public string Make { get; }
-	public int Cylinders => 4;
+    public string Make { get; }
+    public int Cylinders => 4;
 }
 
 public abstract class Toyota : ICar
 {
-	public string Make => "Toyota";
-	public virtual int Cylinders =>
-		((ICar)this).Cylinders;
+    public string Make => "Toyota";
+    public virtual int Cylinders =>
+        ((ICar)this).Cylinders;
 }
 
 public class Avalon : Toyota
 {
-	public override int Cylinders => 6;
+    public override int Cylinders => 6;
 }
 ```
 
