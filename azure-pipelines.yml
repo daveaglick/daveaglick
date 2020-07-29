@@ -1,6 +1,0 @@
-trigger:
-- master
-steps:
-  - script: build -target BuildServer
-    env:
-      NETLIFY_TOKEN: $(NETLIFY_TOKEN)

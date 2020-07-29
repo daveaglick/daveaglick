@@ -4,7 +4,7 @@ Image: images/microphone.jpg
 
 I enjoy giving talks at user groups, code camps, and conferences and have been fortunate enough to do so. Here's a list of the talks I've given and where I've given them. All the materials are available [on GitHub](https://github.com/daveaglick/Presentations).
 
-# 2018
+# 2018 {.bg-dark .text-light .p-2}
 
 **.NET In Your Browser, A Preview Of The Future With Blazor and WebAssembly**  
 _NoVa Code Camp, 5/12/2018_
@@ -18,7 +18,7 @@ _.NET DC User Group, 2/20/2018_
 **How To Select A Web Framework**  
 _NOVA Software Architecture Round Table assisting Steve Albers, 1/23/2018_
 
-# 2017
+# 2017 {.bg-dark .text-light .p-2}
 
 **A Gentle Introduction To Vue.js**  
 _NoVa Code Camp, 10/7/2017_
@@ -26,7 +26,7 @@ _NoVa Code Camp, 10/7/2017_
 **Wyam Lightning Talk**  
 _.NET Fringe, 6/5/2017_
 
-# 2016
+# 2016 {.bg-dark .text-light .p-2}
 
 **Cutting Through The Static**  
 _NoVa Code Camp, 10/8/2016_
@@ -46,7 +46,7 @@ _NoVa Code Camp, 4/30/2016_
 **Cutting Through The Static**  
 _Philly Code Camp, 4/9/2016_
 
-# 2015
+# 2015 {.bg-dark .text-light .p-2}
 
 **Wyam Lightning Talk**  
 _.NET Unboxed, 10/26/2015_
