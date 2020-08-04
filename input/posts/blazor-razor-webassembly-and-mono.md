@@ -13,7 +13,7 @@ Tags:
 
 Before we start examining some of the more recent pieces of this puzzle, it’ll help to take a step back and look at what happens inside your browser when it loads and evaluates JavaScript code:
 
-<img src="/posts/images/js.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/js.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 Inside every browser is a _JavaScript runtime_ (or _engine_) that's responsible for turning your JavaScript into something that can be evaluated. It's often referred to as a _virtual machine_ since it presents a well-defined boundary in which the code is evaluated and isolates that evaluation to a specific sandboxed environment. This diagram is a gross oversimplification of modern JavaScript engines, but they all generally consist of three stages:
 
@@ -31,7 +31,7 @@ WebAssembly is described by the official site as:
 
 That’s not particularly helpful since it’s intentionally abstract to allow for future implementation changes. What’s important for our purposes is to understand how WebAssembly interacts with the existing JavaScript support that’s already in your browser. Here’s that chart again with the addition of WebAssembly bits:
 
-<img src="/posts/images/webassembly.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/webassembly.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 The thing to notice here is that the WebAssembly code is fed directly into the JIT compiler of the JavaScript runtime. That's because [WebAssembly modules](http://webassembly.org/docs/modules/) have already been compiled into a form of JavaScript bytecode that modern WebAssembly-supporting JavaScript engines can evaluate in their JIT component. The takeaway here is that WebAssembly is _related_ to JavaScript as it pertains to runtime evaluation, but isn't itself JavaScript. This is a common misconception. WebAssembly is not a transpiler like TypeScript, CoffeeScript, etc.
 
@@ -53,7 +53,7 @@ It's also important to note that this is a full .NET runtime that evaluates .NET
 
 All of this sets up the exciting work going on in Blazor itself. Blazor is the name of a project that includes both a runtime component and various tooling. The tooling helps produce the assemblies that the runtime bits know how to work with. What gets delivered to your browser looks like this:
 
-<img src="/posts/images/blazor.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/blazor.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 There's a lot going on here so let's examine each part:
 

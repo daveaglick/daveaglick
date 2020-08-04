@@ -44,37 +44,37 @@ Notice how Visual Studio isn't listed here at all. I still love and use Visual S
 
 The first thing we'll do is [create a document database account](https://docs.microsoft.com/en-us/azure/cosmos-db/create-documentdb-dotnet#create-a-database-account) in Cosmos DB. Find the *Azure Cosmos DB* service and open it:
 
-<img src="/posts/images/cosmos1.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos1.png" class="img-fluid"></img>
 
 Now create a new Cosmos DB account. I'm calling my app *TrapperKeeper* so that's what I'll call my Cosmos DB account, but you can call your app whatever you want. Select *SQL (DocumentDB)* for the API. You'll also need to select an Azure subscription, resource group, and location:
 
-<img src="/posts/images/cosmos2.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos2.png" class="img-fluid"></img>
 
 It'll take a minute or two to deploy and when it's done you should see your new Cosmos DB account listed (you may need to hit refresh):
 
-<img src="/posts/images/cosmos3.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos3.png" class="img-fluid"></img>
 
 # Creating The Document Database and Collection
 
 Before we create any documents we need to [create a database]() and then [create a collection](https://docs.microsoft.com/en-us/azure/cosmos-db/create-documentdb-dotnet#add-a-collection). A [Cosmos DB collection](https://docs.microsoft.com/en-us/azure/documentdb/documentdb-faq#what-is-a-collection) is a group of documents and their associated logic and is also used for billing purposes. To create the collection, go to the Overview blade of the Cosmos DB account and select "Add Collection":
 
-<img src="/posts/images/cosmos4.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos4.png" class="img-fluid"></img>
 
 You need to give the collection and ID. Since this collection is going to be storing our customer documents I'm going to name it "customers". We also have to select a partitioning key that can be used for scaling the collection by distributing documents to other servers. I'm not that interested in this right now, so I'll just use "id" for my partitioning key as well as the document ID. And since we don't have a database yet (just a database *account* which can hold multiple *databases*) we'll also need to create one of those. I'm going to name the database the same as the account since it's the only database we'll need.
 
 Be careful with how you provision the account. If you want to control costs, make sure to change to a *Fixed* Storage Capacity and set the initial throughput to 400 RU/s. If yuo don't, you'll find your database costs are much higher than you would expect for a little experiment (ask me how I know).
 
-<img src="/posts/images/cosmos5.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos5.png" class="img-fluid"></img>
 
 # Adding Some Documents
 
 Now we're going to go ahead and add some initial documents. This will make developing the API and frontend easier because we'll actually have some data to test against. Once the collection is finished provisioning, open the "Document Explorer" and then click "Create":
 
-<img src="/posts/images/cosmos6.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos6.png" class="img-fluid"></img>
 
 This will open a nice text window where we can type in (or paste) our initial document. There's even a template for the document that includes the required ID:
 
-<img src="/posts/images/cosmos7.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos7.png" class="img-fluid"></img>
 
 I'm going to give our customers GUID IDs, so you can generate those however you like. Here's my first customer document:
 
@@ -129,6 +129,6 @@ Note that your documents can have whatever formatting and structure you like. Th
 
 If you've followed along this far you should have a Cosmos DB database and collection with two customer documents. The next post in this series will set up our Azure Functions API and front-end Azure App Service. In the meantime, you can familiarize yourself with the [Cosmos DB DocumentDB SQL syntax](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-documentdb) for issuing queries. The easiest way to play around with this is by going to the "Query Explorer" in Azure Cosmos DB and trying out some queries:
 
-<img src="/posts/images/cosmos8.png" class="img-responsive"></img>
+<img src="/posts/images/cosmos8.png" class="img-fluid"></img>
 
 Until next time!

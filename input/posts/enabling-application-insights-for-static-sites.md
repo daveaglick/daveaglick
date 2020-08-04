@@ -12,23 +12,23 @@ Azure has a really cool service called [Application Insights](https://azure.micr
 
 The first step is to create an Application Insights account from the Azure Portal. Find the Application Insights service...
 
-<img src="/posts/images/appinsights1.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights1.png" class="img-fluid"></img>
 
  and then add a new Application Insights application.
 
-<img src="/posts/images/appinsights2.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights2.png" class="img-fluid"></img>
 
 # Connect Application Insights To Your App Service
 
 Next you'll need to connect your new Application Insights application to your App Service:
 
-<img src="/posts/images/appinsights3.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights3.png" class="img-fluid"></img>
 
 # Install The Application Insights Extension
 
 This is where things get a little tricky. If we were building and deploying a normal ASP.NET web site, there is [a very good guide](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net) on how to instrument the site with Application Insights. But we're not. Instead, we're going to instrument our live static site using an App Service Extension:
 
-<img src="/posts/images/appinsights4.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights4.png" class="img-fluid"></img>
 
 Once you've opened the extensions panel, select "Add" and then find the Application Insights extension. Once you've added the extension and it has time to install, it'll create a whole bunch of new folders and files within your App Service site.
 
@@ -38,15 +38,15 @@ A typical static site [will deploy](/posts/publishing-to-azure-using-cake-and-we
 
 To view all the files in your App Service without using FTPS (though you can also use FTPS for this part if you want), go to "Advanced Tools":
 
-<img src="/posts/images/appinsights5.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights5.png" class="img-fluid"></img>
 
 Then open the debug console:
 
-<img src="/posts/images/appinsights6.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights6.png" class="img-fluid"></img>
 
 It will show a listing of your entire App Service site. Using the file tree, browse to `/site/wwwroot`. From there you'll need to download `ApplicationInsights.config` and `web.config`:
 
-<img src="/posts/images/appinsights7.png" class="img-responsive"></img>
+<img src="/posts/images/appinsights7.png" class="img-fluid"></img>
 
 Copy both files into your static site (presumably you already have a `web.config`, just overwrite it since this one is a merge of what you previously deployed combined with the new Application Insights stuff the extension added).
 

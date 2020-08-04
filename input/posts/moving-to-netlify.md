@@ -26,7 +26,7 @@ Moving hosts for a static site is generally an easier process than changing host
 
 When you first set up a new site, there's a huge box right on their admin page that tells you to drag-and-drop your files.
 
-<img src="/posts/images/netlify.png" class="img-responsive"></img>
+<img src="/posts/images/netlify.png" class="img-fluid"></img>
 
 This works exactly as intended and gets you up and running quickly. Alternativly, if you'd like to make updating the site part of your build process, you can [upload a new version of your site as a zip file](https://www.netlify.com/docs/api/#deploying-to-netlify) to a particular endpoint and Netlify will automatically unzip it and deploy it for you. The upload can even be done in a single curl command. There's also a [Node-powered CLI tool](https://www.netlify.com/docs/cli/) that can be used to upload a site and perform other maintenance activities.
 

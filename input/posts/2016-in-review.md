@@ -11,7 +11,7 @@ This whole "Year in Review" blog post thing has gotten quite popular. At the ris
 
 I tried hard in 2015 to ramp up my open source involvement and am pleased that I was able to continue the momentum through 2016. I even managed to increase my yearly commit count by about ten percent. I don't find GitHub commit counts to be particularly indicative of anything on a comparative basis given that people have vastly different commit patterns (for example, small changes vs. large features), GitHub counts private and other work-related repositories, and not all projects are even on GitHub. However, as a personal yardstick for year-over-year open source involvement I think it serves pretty well. With that said, here is my 2016 commit chart:
 
-<img src="/posts/images/github-2016.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/github-2016.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 I'm particularly happy to have gotten in so much open source work given my hectic family life (I have 3 young children and have always had a family-first mentality).
 

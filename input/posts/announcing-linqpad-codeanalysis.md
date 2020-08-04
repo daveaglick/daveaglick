@@ -11,6 +11,6 @@ Tags:
 
 <p>The first feature (of what I plan to be many) is a syntax tree visualizer similar to the one available for Visual Studio 2015. It allows you to dump a syntax tree for your current query, other queries, or generated directly via the .NET Compiler Platform.</p>
 
-<img src="/posts/images/syntax-tree.png" class="img-responsive"></img>
+<img src="/posts/images/syntax-tree.png" class="img-fluid"></img>
 
 <p>More information including installation and usage instructions is available at <a href="https://github.com/daveaglick/LINQPad.CodeAnalysis">https://github.com/daveaglick/LINQPad.CodeAnalysis</a></p>

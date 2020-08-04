@@ -89,7 +89,7 @@ The rest of the page is bare-minimum Razor and HTML to display information about
 
 If you don't already have Wyam, [go download it](https://wyam.io/docs/usage/obtaining) and then run `wyam -p` from the directory where your `config.wyam` file is located. Once the build is done, you should be able to preview the site at `http://localhost:5080/`:
 
-<img src="/posts/images/github-wyam1.png" class="img-responsive"></img>
+<img src="/posts/images/github-wyam1.png" class="img-fluid"></img>
 
 # Making It Pretty
 
@@ -209,4 +209,4 @@ Now we need to take the code that's already in our `index.cshtml` file and inser
 
 And there you have it, your very own static GitHub about page:
 
-<img src="/posts/images/github-wyam2.png" class="img-responsive"></img>
+<img src="/posts/images/github-wyam2.png" class="img-fluid"></img>

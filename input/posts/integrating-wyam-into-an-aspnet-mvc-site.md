@@ -116,7 +116,7 @@ So let's recap:
 
 When you're done, you should have something that looks kind of like this:
 
-<img src="/posts/images/wyam-aspnet.png" alt="ASP.NET With Wyam" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/wyam-aspnet.png" alt="ASP.NET With Wyam" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 You can see all of this in action in the complete example at [https://github.com/Wyamio/Wyam/tree/develop/examples/AspNetMvc](https://github.com/Wyamio/Wyam/tree/develop/examples/AspNetMvc).
 

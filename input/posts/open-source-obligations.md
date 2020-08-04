@@ -20,7 +20,7 @@ Tags:
 
 <p>Keep in mind that most people will fall into multiple categories across different projects. You might be the creator of one open source library, contribute to four others, and use 30 more. If you visualize these different groups, they might look like this:</p>
 
-<img src="/posts/images/open-source-participants.png" class="img-responsive"></img>
+<img src="/posts/images/open-source-participants.png" class="img-fluid"></img>
 
 <p>Notice how the creators and contributors make up a small corner of the overall developer population whereas the consumers constitute the majority of developers. It's worth noting that this distribution is based only on anecdotal evidence and conjecture. I don't have any actual evidence to back it up. I actually tried to find some statistics on open source participant makeup but couldn't. If anyone knows of any sources or studies, I'd be interested to see them.</p>
 

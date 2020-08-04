@@ -28,12 +28,12 @@ A process serving application pool 'MyAppPool' suffered a fatal communication er
 
 <p>The next step is to enable debugging rules to generate crash dumps. You'll need the Debug Diagnostic Tool for this part, which <a href="http://www.microsoft.com/en-us/download/details.aspx?id=42933">can be obtained here</a>. Once you've installed it, you'll need to restart IIS with a <code>iisreset</code> command from the command prompt. Then launch the Debug Diagnostic Tool and walk through the wizard for setting up debugging rules. This essentially creates watchers for various events and then takes various actions (such as dumping logs) when they occur. Specifically you want to create a crash rule:</p>
 
-<img src="/posts/images/debug-diagnostic-1.png" class="img-responsive"></img>
-<img src="/posts/images/debug-diagnostic-2.png" class="img-responsive"></img>
+<img src="/posts/images/debug-diagnostic-1.png" class="img-fluid"></img>
+<img src="/posts/images/debug-diagnostic-2.png" class="img-fluid"></img>
 
 <p>Then when you get to the Advanced Configuration page, click on Exceptions and then Add Exception. This will let you select from a list of exceptions including Stack Overflow. Also make sure to change the Action Type to Full Userdump:</p>
 
-<img src="/posts/images/debug-diagnostic-3.png" class="img-responsive"></img>
+<img src="/posts/images/debug-diagnostic-3.png" class="img-fluid"></img>
 
 <p>Finally, select a location for the log files. Make sure it's got plenty of space because the files can get pretty big.</p>
 

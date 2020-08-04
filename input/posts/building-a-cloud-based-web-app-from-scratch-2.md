@@ -28,35 +28,35 @@ The first thing you need to do to get up and running with Azure Functions is to 
 
 To find the *Function App* service, search the marketplace:
 
-<img src="/posts/images/functions1.png" class="img-responsive"></img>
+<img src="/posts/images/functions1.png" class="img-fluid"></img>
 
 When you select the service, you'll be presented with a few options:
 
-<img src="/posts/images/functions2.png" class="img-responsive"></img>
+<img src="/posts/images/functions2.png" class="img-fluid"></img>
 
 Make sure you select the *Consumption Plan* so that you only get charged when your functions are actually executed.
 
 Once your new app is provisioned, you can create your first function. Expand the root node in the left-hand pane and click the blue plus sign next to *Functions*:
 
-<img src="/posts/images/functions3.png" class="img-responsive"></img>
+<img src="/posts/images/functions3.png" class="img-fluid"></img>
 
 When the wizard appears, click on *Custom function*:
 
-<img src="/posts/images/functions4.png" class="img-responsive"></img>
+<img src="/posts/images/functions4.png" class="img-fluid"></img>
 
 If you use the quick start, it'll create a default function with a generated name, but we want to have full control over our new function. When you select *Custom function* you'll be presented with a variety of function types across different languages and triggers. For this application, select *HttpTrigger-CSharp* so that our API will be available on an HTTP endpoint:
 
-<img src="/posts/images/functions5.png" class="img-responsive"></img>
+<img src="/posts/images/functions5.png" class="img-fluid"></img>
 
 You'll be asked to name your new function. The name you give the function will determine what it's endpoint will be. I named the first function *GetCustomers*. You'll also need to specify how callers will authorize to the endpoint. If you choose *Function* you'll need to pass a token in the query string to your endpoint in order to activate the function.
 
 Once the function is created, you'll be able to open it in the sidebar:
 
-<img src="/posts/images/functions6.png" class="img-responsive"></img>
+<img src="/posts/images/functions6.png" class="img-fluid"></img>
 
 A default function template is already added for you. We'll get to the actual API code in the next post. To get a feel for how it works, go ahead and run the example code and watch the Log output below the function code:
 
-<img src="/posts/images/functions7.png" class="img-responsive"></img>
+<img src="/posts/images/functions7.png" class="img-fluid"></img>
 
 You can also see what endpoint you should use for your function by clicking the *Get function URL* link in the upper-right corner.
 
@@ -64,11 +64,11 @@ There's one more thing we need to do before moving on. Azure Functions are autom
 
 Click on the top node in the left-hand sidebar for your new functions app and then select *Platform features* and *CORS*:
 
-<img src="/posts/images/functions8.png" class="img-responsive"></img>
+<img src="/posts/images/functions8.png" class="img-fluid"></img>
 
 Remove all the predefined origins and just leave a single one with a wildcard:
 
-<img src="/posts/images/functions9.png" class="img-responsive"></img>
+<img src="/posts/images/functions9.png" class="img-fluid"></img>
 
 # Creating the Azure Web App
 
@@ -76,15 +76,15 @@ The frontend for our app will have to be hosted somewhere. Since this is mostly 
 
 Create a new resource in the Azure Portal and search for "Web App". While creating the Web App, you'll also need to create or choose an App Service plan. I created a new one so that I could place it in the free pricing tier, which should be fine for our purposes.
 
-<img src="/posts/images/appservice1.png" class="img-responsive"></img>
+<img src="/posts/images/appservice1.png" class="img-fluid"></img>
 
 We'll create the HTML pages for the app in a later post, but for now let's add a default page to our new app. Once it's provisioned, open it in the portal and select *Advanced Tools*:
 
-<img src="/posts/images/appservice2.png" class="img-responsive"></img>
+<img src="/posts/images/appservice2.png" class="img-fluid"></img>
 
 Then once the Kudu environment is open, select the CMD debug console:
 
-<img src="/posts/images/appservice3.png" class="img-responsive"></img>
+<img src="/posts/images/appservice3.png" class="img-fluid"></img>
 
 This will open a nice web-based console and file browser that we can use to directly edit our web app.
 
@@ -92,7 +92,7 @@ When you created the Azure Web App, it automatically added an initial file named
 
 Inside the Kudu console, navigate to `/site/wwwroot` and click the "+" button and select "New file":
 
-<img src="/posts/images/appservice4.png" class="img-responsive"></img>
+<img src="/posts/images/appservice4.png" class="img-fluid"></img>
 
 Name the new file `index.html`. Now delete the existing `hostingstart.html` file by clicking the minus icon next to it and then edit your new `index.html` file by clicking the pencil next to it. This will open a web-based file editor where we can directly edit the file.
 

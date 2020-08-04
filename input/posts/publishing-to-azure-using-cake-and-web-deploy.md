@@ -13,7 +13,7 @@ When you publish a web application from inside Visual Studio, you're often using
 
 To use Web Deploy you'll need a couple bits of information including your publish endpoint (usually a URL), your username, and your password. This information is automatically downloaded into Visual Studio when you configure a publish profile, but we want to access it directly. To find it, click the "Get publish profile" link at the top of the Overview page for your Azure Web App:
 
-<img src="/posts/images/get-publish-profile.png" alt="Get publish profile" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/get-publish-profile.png" alt="Get publish profile" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 This will download an XML file with the information you need (even though it's named `[sitename].PublishSettings`). The file will look something like this:
 

@@ -11,7 +11,7 @@ Tags:
 
 While I had several good periods of productivity, in general I didn't quite match my output from 2016. My GitHub commit count was down to 768 contributions from 1,065 contributions in 2016. For the first time in a while I started to struggle from burn-out late in the summer and into the fall (you can totally see it creeping in on my commit graph). Then work got intense near the later part of the year and I lost a lot of my lunch break OSS time. I feel like I'm getting back on track though, so hopefully I can resume a higher level of contributions in 2018.
 
-<img src="/posts/images/github-2017.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/github-2017.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 ## Wyam
 

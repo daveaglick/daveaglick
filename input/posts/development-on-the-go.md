@@ -16,7 +16,7 @@ Fitting your open source side hustle into a busy schedule can be really hard. It
 * [Web Site](https://workingcopyapp.com)
 * [App Store](https://itunes.apple.com/us/app/working-copy-powerful-git-client/id896694807)
 
-<img src="/posts/images/working-copy.png" class="img-responsive"></img>
+<img src="/posts/images/working-copy.png" class="img-fluid"></img>
 
 Working Copy is my number one go-to development app. It allows you to clone any git repository and provides everything you might expect including clone, push/pull, merge, rebase, and log. It includes an integrated folder browser and file editor that has syntax editing and preview for a number of different formats including Markdown and C#. I've found the experience of creating or editing a Markdown file on my phone and then pushing it into a repository that's rigged for CI/CD to be magical. It also works great on both my phone and my tablet.
 
@@ -35,7 +35,7 @@ I've experimented with Clone which works similarly to Working Copy. In my early 
 * [Web Site](http://codehub-app.com)
 * [App Store](https://itunes.apple.com/us/app/codehub-a-client-for-github/id707173885)
 
-<img src="/posts/images/codehub.png" class="img-responsive"></img>
+<img src="/posts/images/codehub.png" class="img-fluid"></img>
 
 While Working Copy is my go-to app for working with repository content, CodeHub is equally as important for working with all the other stuff that goes along with a GitHub repository. It's great at things like managing issues, reviewing pull requests, and commenting. As a bonus, it's also [open source and written in C#](https://github.com/thedillonb/CodeHub).
 
@@ -54,7 +54,7 @@ iOctocat is another excellent GitHub client. It does basically everything CodeHu
 * [Web Site](https://www.textasticapp.com)
 * [App Store](https://itunes.apple.com/us/app/textastic-code-editor-6/id1049254261)
 
-<img src="/posts/images/textastic.png" class="img-responsive"></img>
+<img src="/posts/images/textastic.png" class="img-fluid"></img>
 
 While Working Copy already has a fantastic editor, sometimes you need a little more power. Textastic provides format-specific interfaces for editing a variety of file types. It's Markdown support is great and includes a cool little special character selector mechanism that makes writing code blocks and other Markdown syntax really easy. It integrates with other apps, so it's easy to open a repository in Working Copy, send a file to Textastic for editing, and then save it back into the repository.
 
@@ -73,7 +73,7 @@ Coda is an interesting app. It started out mostly as a text editor geared toward
 * [Web Site](http://continuous.codes)
 * [App Store](https://itunes.apple.com/us/app/continuous-net-c-and-f-ide/id1095213378)
 
-<img src="/posts/images/continuous.png" class="img-responsive"></img>
+<img src="/posts/images/continuous.png" class="img-fluid"></img>
 
 Continuous is something of a miracle. Frank Krueger essentially forked Roslyn and changed it so that code could be compiled within the strict restrictions of an iOS app. The result is an amazing C# and F# IDE that works great on phones and really shines on tablets. It's got features you might expect from a desktop IDE like auto-completion and it's hard to explain how awesome it feels when that little suggestion window pops up on your phone.
 

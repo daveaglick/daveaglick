@@ -14,7 +14,7 @@ Tags:
 
 <p>Most of you will already have an account on GitHub, and you may already have a repository for your library. If you don’t have a GitHub account, <a href="https://github.com/">go ahead and create one</a>. You’ll also need to make a repository for your library by clicking on the “Repositories” tab and then clicking “New”.</p>
 
-<img src="/posts/images/github-new-repo.png" class="img-responsive"></img>
+<img src="/posts/images/github-new-repo.png" class="img-fluid"></img>
 
 <p>Pushing your code to the repository and general Git usage is mostly outside the scope of this walkthrough. However, <a href="https://help.github.com/">see the GitHub help pages if you need some guidance</a>. You don’t necessarily need to do your first push yet, but you will need to push everything a little later.</p>
 
@@ -22,7 +22,7 @@ Tags:
 
 <p>If you don’t already have one, go ahead and create a new <a href="http://www.nuget.org">NuGet.org</a> account as well. Once you've created an account, you need to get your API key which can be found on your account page.</p>
 
-<img src="/posts/images/nuget-apikey.png" class="img-responsive"></img>
+<img src="/posts/images/nuget-apikey.png" class="img-fluid"></img>
 
 <h1>Create an AppVeyor Account and Project</h1>
 
@@ -60,27 +60,27 @@ Tags:
 
 <p>To turn this feature on, open up your AppVeyor project and click “Settings”. Then select “Build” and check “Package NuGet projects”. When it is enabled AppVeyor calls <code>nuget pack</code> for every project in the solution that has a <code>.nuspec</code> file in its root and then publishes NuGet package artifacts in both project and account feeds.</p>
 
-<img src="/posts/images/appveyor-nuget-package.png" class="img-responsive"></img>
+<img src="/posts/images/appveyor-nuget-package.png" class="img-fluid"></img>
 
 <p>You'll probably also want to turn on <code>AssemblyInfo</code> patching. This will enable AppVeyor to modify your <code>AssemblyInfo.cs</code> file with an updated version number on each build. Since we told NuGet to use the version number from the assembly as well, this will also automatically update your NuGet package version. To turn on <code>AssemblyInfo</code> patching, go to "Settings" then "General" and the option is near the bottom of the page.</p>
 
-<img src="/posts/images/appveyor-assemblyinfo-patching.png" class="img-responsive"></img>
+<img src="/posts/images/appveyor-assemblyinfo-patching.png" class="img-fluid"></img>
 
 <h1>Push Your Code to GitHub and Trigger a Build</h1>
 
 <p>If you haven't yet pushed your code to your GitHub repository, go ahead and do that now. When you commit code to the repository, AppVeyor will automatically kick-off a build. If you already had code in your repository, you can manually trigger a build from the AppVeyor "Latest Build" project page. In both cases, the build will be queued by AppVeyor and may take a minute or two to kick off. Once it does, you'll get an automatically updated console window with the build results on the "Latest Build" page in AppVeyor.</p>
 
-<img src="/posts/images/appveyor-build.png" class="img-responsive"></img>
+<img src="/posts/images/appveyor-build.png" class="img-fluid"></img>
 
 <p>Once the build is done, you should be able to see your NuGet package in the "Artifacts" tab.</p>
 
-<img src="/posts/images/appveyor-artifacts.png" class="img-responsive"></img>
+<img src="/posts/images/appveyor-artifacts.png" class="img-fluid"></img>
 
 <h1>Deploying Your NuGet Package</h1>
 
 <p>The last step is to deploy your NuGet package. This can be set up automatically using AppVeyor, just click "Settings", "Deployment", and then "Add deployment". Select ""NuGet" from the list and add your API key we fetched when setting up your NuGet.org account (you can leave the "NuGet server" and "Artifact(s)" fields empty). This will automatically push your NuGet package to NuGet.org on your next build.</p>
 
-<img src="/posts/images/appveyor-deployment.png" class="img-responsive"></img>
+<img src="/posts/images/appveyor-deployment.png" class="img-fluid"></img>
 
 <h1>A Final Word, And More Control</h1>
 

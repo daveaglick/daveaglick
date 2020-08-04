@@ -11,7 +11,7 @@ A lot happened in 2015, both in terms of global news stories and in our little w
 
 I've been involved in open source for a long time. My first project was published on a service called Assembla before GitHub took over the open source world. Even so, I was never extremely prolific. Inspired by Microsoft's moves in this direction near the end of 2014, I decided that 2015 was going to be the year that I really engaged the OSS community. I'd say I did pretty well:
 
-<img src="/posts/images/github-2015.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/github-2015.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 ## FluentBootstrap
 
@@ -21,7 +21,7 @@ I released [FluentBootstrap](/posts/introducing-fluentbootstrap) near the end of
 
 I was so enthusiastic about Roslyn that I wanted to play around with it well before the official releases were complete. I was especially excited about the visualization that Visual Studio 2015 provided for Roslyn syntax trees. Unfortunately, VS 2015 wasn't released yet and I wasn't able to upgrade (work policies, etc.) I also wasn't thrilled about needing Visual Studio just to play around. The result was an [open source library that added similar syntax tree visualization to LINQPad](/posts/announcing-linqpad-codeanalysis). It was (and still is) offered as an open source addin that you can download via NuGet to add syntax tree visualization to your LINQPad projects. However, shortly before LINQPad 5 was release, I got a message from Joe Albahari asking if he could include it out of the box. He did some great cleanup work using APIs that aren't available to addin developers, but if you click the "Tree" tab after running a LINQPad query in version 5, that's mostly my library under the hood.
 
-<img src="/posts/images/linqpad-about.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/linqpad-about.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 ## @dotnetissues
 
@@ -34,9 +34,9 @@ In addition to my own open source projects, I set a goal for 2015 to actively co
 - Helped move RazorGenerator from CodePlex to [GitHub](https://github.com/RazorGenerator).
 - Did lots of work on the excellent [DelegateDecompiler](https://github.com/hazzik/DelegateDecompiler) library.
 - Redesigned the [Up For Grabs](http://up-for-grabs.net/) website (I hope to do more with them in the coming year).
-  <img src="/posts/images/up-for-grabs.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+  <img src="/posts/images/up-for-grabs.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 - Submitted pull requests to Microsoft guided projects like [Roslyn](https://github.com/dotnet/roslyn), [automatic-graph-layout](https://github.com/Microsoft/automatic-graph-layout), and [corefxlab](https://github.com/dotnet/corefxlab) (and got myself an awesome Cup<T> mug for that first one)!
-  <img src="/posts/images/cup-t.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+  <img src="/posts/images/cup-t.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
   
 ## Wyam
 
@@ -86,6 +86,6 @@ Other than all that, I plan to savor the ride. Coding is fun. Community is fun. 
 ---
 As I was waiting for AppVeyor to build my site, I got this in my email:
 
-<img src="/posts/images/mvp.png" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/mvp.png" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 I am still in a bit of shock. I've worked very hard this last year on open source and community efforts, and am extremely humbled and grateful for this recognition. One of my biggest goals for 2016 will be to live up to the trust placed in me by Microsoft and the community and to help continue to share my code and my knowledge with .NET developers everywhere. Thank you!

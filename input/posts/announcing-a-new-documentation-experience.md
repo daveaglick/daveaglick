@@ -34,7 +34,7 @@ wyam -r Docs
 
 Wikis and blogs are cool, but what really makes this recipe special is that it has full support for API documentation from .NET source files and assemblies. By default the recipe will look in a `src` folder adjacent to your `input` folder (the actual default [globbing pattern](https://wyam.io/docs/concepts/io#globbing) for locating source files is "src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs"). This can be easily changed [along with many other settings](https://wyam.io/recipes/docs/settings). Once the recipe knows where to look for your source files, you'll see a special "API" section in your documentation with really nice looking API pages.
 
-<img src="/posts/images/api-docs.png" class="img-responsive"></img>
+<img src="/posts/images/api-docs.png" class="img-fluid"></img>
 
 Some of the other features of the recipe include:
 
@@ -62,7 +62,7 @@ A good example is the [modules](https://wyam.io/modules) section on the Wyam web
 
 I need to take a moment here and thank the [Cake team](https://github.com/orgs/cake-build/people) for their support of this project. For the last several months, I've been working closely with them to convert their existing ASP.NET powered documentation site (which was already one of the best open source doc sites out there, at least in the .NET ecosystem) to a fully-static site powered by the new Wyam Docs recipe. It was a great use case requiring both built-in functionality and site-specific customization and helped mould this initial release of the Docs recipe. I couldn't have asked for better team mates. The result is [a beautiful, fast, and robust documentation site](http://cakebuild.net). The source code for the new Cake site is [available on GitHub](https://github.com/cake-build/website) and serves as a great example of Wyam Docs recipe deployment with some additional customization.
 
-<img src="/posts/images/cake-docs.png" class="img-responsive"></img>
+<img src="/posts/images/cake-docs.png" class="img-fluid"></img>
 
 # Go Forth And Build
 

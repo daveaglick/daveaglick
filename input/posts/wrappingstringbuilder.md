@@ -7,7 +7,7 @@ Tags:
 ---
 I've been working on a Roslyn-powered documentation generator built on top of [Wyam](https://wyam.io) for a little while, but recently ran into an area that's taken a lot longer than I thought it would. I've been trying to generate syntax strings that look like the ones on the MSDN site.
 
-<img src="/posts/images/syntax.png" alt="Syntax" class="img-responsive" style="margin-top: 6px; margin-bottom: 6px;">
+<img src="/posts/images/syntax.png" alt="Syntax" class="img-fluid" style="margin-top: 6px; margin-bottom: 6px;">
 
 It turns out this is really hard. Roslyn doesn't quite do this in the box (though it gets close). This means you have to rely on parsing out the different segments of the definition yourself (this part of the process is for a future blog post). Getting the formatting to look good with wrapping and indents once you bring it all together is a challenge.
 
