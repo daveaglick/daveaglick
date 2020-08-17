@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.2" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.3" />
   </ItemGroup>
+
+  <!--
+  <ItemGroup>
+    <ProjectReference Include="..\..\statiqdev\Statiq.Web\src\Statiq.Web\Statiq.Web.csproj" />
+  </ItemGroup>
+  -->
 
 </Project>
