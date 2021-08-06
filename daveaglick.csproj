@@ -13,7 +13,7 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="Statiq.Web" Version="1.0.0-beta.3" />
+        <PackageReference Include="Statiq.Web" Version="1.0.0-beta.33" />
       </ItemGroup>      
     </Otherwise>
   </Choose>

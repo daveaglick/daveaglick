@@ -36,5 +36,6 @@ TestResult.xml
 *.ncrunch*
 .*crunch*.local.xml
 /_NCrunch_Statiq.Framework
-.vscode
+/.vscode
 *.pfx
+/cache
