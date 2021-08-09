@@ -12,7 +12,7 @@ namespace daveaglick
             await Bootstrapper
                 .Factory
                 .CreateWeb(args)
-                .DeployToGitHubPagesBranch("daveaglick", "daveaglick", Config.FromSetting<string>("GITHUB_TOKEN"), "main")
+                .DeployToNetlify("daveaglick", Config.FromSetting<string>("NETLIFY_TOKEN"))
                 .RunAsync();
     }
 }
