@@ -6,10 +6,6 @@ Tags:
 ---
 It's been a while since I've posted anything about open source communities, but that doesn't mean I haven't continued to think about them. It's an issue that's near and dear to me and I spend a lot of time considering different aspects of open source. I'd like to take a moment to talk about one of those in particular: feelings. More specifically, why they matter in open source and some ideas on how best to incorporate them into our open source interactions.
 
-First let's rewind just a bit. This blog post was triggered by a Twitter exchange, though I've been thinking about this for a while:
-
-<?# Twitter 1105086028975624192 /?>
-
 I want to be clear: while the Twitter exchange was essentially subtweeting a particular blog post, the rest of what I write below is more general. I don't want there to be confusion about what the blog post in question does or doesn't say, or how it does or doesn't present it's arguments in contrast with what I write below. I think this issue is more general than that and so I'm not going to link to the other blog post to avoid distraction.
 
 In the Twitter thread I used an analogy of building a bird house. If I want to assemble a simple bird house by joining sides together with nails, I have a whole toolbox at my disposal. I could use a screwdriver and drive the nails with the handle. I could pull out a rubber mallet and use that. Or I could select a hammer and get the job done efficiently and quickly. It seems obvious that everyone should choose the hammer. But what if I really like screwdrivers? What if I've never even seen a hammer but I'm really good at driving nails with a handle. Maybe I simply don't feel like learning about hammers right now?

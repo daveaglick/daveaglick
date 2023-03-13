@@ -5,17 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <Choose>
-    <When Condition=" '$(Configuration)' == 'Debug'">  
-      <ItemGroup>
-        <ProjectReference Include="..\..\statiqdev\Statiq.Web\src\Statiq.Web\Statiq.Web.csproj" />
-      </ItemGroup>      
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Statiq.Web" Version="1.0.0-beta.33" />
-      </ItemGroup>      
-    </Otherwise>
-  </Choose>
+  <!--
+  <ItemGroup>
+    <ProjectReference Include="..\..\statiqdev\Statiq\Statiq.Web\src\Statiq.Web\Statiq.Web.csproj" />
+  </ItemGroup>
+  -->
+
+  <ItemGroup>
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.54" />
+  </ItemGroup>
 
 </Project>
